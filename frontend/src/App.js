@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import './App.css';
+
+import FlightSearch from './containers/FlightSearch/FlightSearch';
+
+import 'antd/dist/antd.css';
 
 class App extends Component {
-  render() {
-    return (
-      <div>
-        Something
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div>
+                <FlightSearch />
+            </div>
+        );
+    }
 }
 
 export default App;
