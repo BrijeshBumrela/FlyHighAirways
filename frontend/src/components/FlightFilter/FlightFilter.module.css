@@ -1,0 +1,17 @@
+.FilterColumn {
+    height: 100%;
+    background: lightblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.FlightType {
+    height: 6rem;
+    background: white;
+}
+
+li {
+    list-style: none;
+}
