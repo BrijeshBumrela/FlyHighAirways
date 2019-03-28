@@ -1,16 +1,25 @@
-.FilterColumn {
-    height: 100%;
-    background: lightblue;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
+
 
 .FlightType {
-    height: 6rem;
+    min-height: 6rem;
     background: white;
+    padding-left: 1rem;
 }
+
+.FlightOptions {
+    margin-left: 2rem;
+}
+
+.FlightOptions * {
+    font-size: 1.1rem;
+}
+
+.TypeHeader {
+    margin-bottom: 1rem !important;
+}
+
+
+
 
 li {
     list-style: none;
