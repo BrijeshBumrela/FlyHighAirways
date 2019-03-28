@@ -18,6 +18,13 @@ h1,h2,h3,h4,h5,h6 {
     align-items: center;
 }
 
+.RemainingSeats {
+    background: #1890ff;
+    padding: 0.4rem;
+    border-radius: 15px;
+    color: #fff;
+}
+
 .ClassPrice {
     font-weight: 700;
     font-size: 1.2rem;
@@ -25,7 +32,8 @@ h1,h2,h3,h4,h5,h6 {
 
 .Flight {
     background: #eee;
-    height: 4rem;
+    height: 5rem;
+    box-shadow: 0 0 16px #ccc;
 }
 
 .BookNow {

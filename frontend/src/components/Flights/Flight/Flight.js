@@ -23,13 +23,13 @@ const flight = (props) => (
         </Col>
         <Col lg={4}>
             <div className={classes.Class}>
-                <h4>3 seats remaining</h4>
+                <h4 className={classes.RemainingSeats}>3 seats remaining</h4>
                 <h4>INR <span className={classes.ClassPrice}>3589</span></h4>
             </div>
         </Col>
         <Col lg={4}>
             <div className={classes.Class}>
-                <h4>3 seats remaining</h4>
+                <h4 className={classes.RemainingSeats}>3 seats remaining</h4>
                 <h4>INR <span className={classes.ClassPrice}>7117</span></h4>
             </div>
         </Col>
