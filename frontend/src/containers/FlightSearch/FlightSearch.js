@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
 
-import { Row, Col, Skeleton } from 'antd';
+import { Row, Col } from 'antd';
 
 import Flights from '../../components/Flights/Flights';
 import FlightFilter from '../../components/FlightFilter/FlightFilter';
+
+import CustomSkeleton from '../../components/UI/Skeleton/Skeleton';
 
 import classes from './FlightSearch.module.css';
 
 
 class FlightSearch extends Component {
     state = {  
-        flights: (
-            <React.Fragment>
-                <Skeleton />
-            </React.Fragment>
-        )
+        flights: (<CustomSkeleton />)
     }
 
     componentDidMount() {
