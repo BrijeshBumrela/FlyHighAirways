@@ -4,7 +4,8 @@
   "description": "A flight management system for dbms 1 project",
   "main": "server.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "node test.js",
+    "syncdb": "node utils/syncdb.js"
   },
   "repository": {
     "type": "git",
