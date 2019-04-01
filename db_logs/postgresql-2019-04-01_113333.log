@@ -1,0 +1,8 @@
+2019-04-01 11:33:33.940 UTC [24] LOG:  database system was shut down at 2019-04-01 11:33:26 UTC
+2019-04-01 11:33:34.011 UTC [1] LOG:  database system is ready to accept connections
+2019-04-01 11:33:39.265 UTC [43] LOG:  statement: select 4+4;
+2019-04-01 11:45:37.226 UTC [144] LOG:  statement: SET client_min_messages TO warning;SET TIME ZONE INTERVAL '+00:00' HOUR TO MINUTE;
+2019-04-01 11:45:37.278 UTC [144] LOG:  statement: WITH ranges AS (  SELECT pg_range.rngtypid, pg_type.typname AS rngtypname,         pg_type.typarray AS rngtyparray, pg_range.rngsubtype    FROM pg_range LEFT OUTER JOIN pg_type ON pg_type.oid = pg_range.rngtypid)SELECT pg_type.typname, pg_type.typtype, pg_type.oid, pg_type.typarray,       ranges.rngtypname, ranges.rngtypid, ranges.rngtyparray  FROM pg_type LEFT OUTER JOIN ranges ON pg_type.oid = ranges.rngsubtype WHERE (pg_type.typtype IN('b', 'e'));
+2019-04-01 11:45:37.498 UTC [144] LOG:  statement: SHOW SERVER_VERSION
+2019-04-01 11:45:37.513 UTC [145] LOG:  statement: SET client_min_messages TO warning;SET TIME ZONE INTERVAL '+00:00' HOUR TO MINUTE;
+2019-04-01 11:45:37.516 UTC [145] LOG:  statement: SELECT 1+1 AS result
