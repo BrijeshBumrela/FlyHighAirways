@@ -35,3 +35,4 @@
 2019-04-01 15:37:03.320 UTC [4239] LOG:  invalid record length at 0/1654DD0: wanted 24, got 0
 2019-04-01 15:37:03.320 UTC [4239] LOG:  redo done at 0/1654D98
 2019-04-01 15:37:03.548 UTC [1] LOG:  database system is ready to accept connections
+2019-04-01 15:46:35.978 UTC [4397] LOG:  statement: select 5+5;
