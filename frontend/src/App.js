@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 import FlightSearch from './containers/FlightSearch/FlightSearch';
+import HomePage from './containers/Homepage/Hompage';
 
 import 'antd/dist/antd.css';
 
@@ -18,9 +19,9 @@ class App extends Component {
             <Provider store={store}>
                 <BrowserRouter>
                     <Switch>
-                        <Route path="/" exact render={() => <h1>Home</h1>} />
+                        <Route path="/" exact component={HomePage} />
                         <Route path="/flights" component={FlightSearch} />
-                        <Route path="/book-flight" render={() => <h1>Book Flight Page</h1>}/>
+                        {/* <Route path="/book-flight" /> */}
                     </Switch>
                 </BrowserRouter>
             </Provider>
