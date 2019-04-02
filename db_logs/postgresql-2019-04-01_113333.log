@@ -1,0 +1,38 @@
+2019-04-01 11:33:33.940 UTC [24] LOG:  database system was shut down at 2019-04-01 11:33:26 UTC
+2019-04-01 11:33:34.011 UTC [1] LOG:  database system is ready to accept connections
+2019-04-01 11:33:39.265 UTC [43] LOG:  statement: select 4+4;
+2019-04-01 11:45:37.226 UTC [144] LOG:  statement: SET client_min_messages TO warning;SET TIME ZONE INTERVAL '+00:00' HOUR TO MINUTE;
+2019-04-01 11:45:37.278 UTC [144] LOG:  statement: WITH ranges AS (  SELECT pg_range.rngtypid, pg_type.typname AS rngtypname,         pg_type.typarray AS rngtyparray, pg_range.rngsubtype    FROM pg_range LEFT OUTER JOIN pg_type ON pg_type.oid = pg_range.rngtypid)SELECT pg_type.typname, pg_type.typtype, pg_type.oid, pg_type.typarray,       ranges.rngtypname, ranges.rngtypid, ranges.rngtyparray  FROM pg_type LEFT OUTER JOIN ranges ON pg_type.oid = ranges.rngsubtype WHERE (pg_type.typtype IN('b', 'e'));
+2019-04-01 11:45:37.498 UTC [144] LOG:  statement: SHOW SERVER_VERSION
+2019-04-01 11:45:37.513 UTC [145] LOG:  statement: SET client_min_messages TO warning;SET TIME ZONE INTERVAL '+00:00' HOUR TO MINUTE;
+2019-04-01 11:45:37.516 UTC [145] LOG:  statement: SELECT 1+1 AS result
+2019-04-01 15:15:10.480 UTC [3918] LOG:  statement: select 1+1 as Result;
+2019-04-01 15:29:51.443 UTC [1] LOG:  server process (PID 3955) was terminated by signal 15: Terminated
+2019-04-01 15:29:51.443 UTC [1] LOG:  terminating any other active server processes
+2019-04-01 15:29:51.443 UTC [28] WARNING:  terminating connection because of crash of another server process
+2019-04-01 15:29:51.443 UTC [28] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2019-04-01 15:29:51.443 UTC [28] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2019-04-01 15:29:51.446 UTC [1] LOG:  all server processes terminated; reinitializing
+2019-04-01 15:29:51.533 UTC [4031] LOG:  database system was interrupted; last known up at 2019-04-01 11:38:34 UTC
+2019-04-01 15:29:51.749 UTC [4031] LOG:  database system was not properly shut down; automatic recovery in progress
+2019-04-01 15:29:51.807 UTC [4031] LOG:  redo starts at 0/1654C48
+2019-04-01 15:29:51.807 UTC [4031] LOG:  invalid record length at 0/1654D28: wanted 24, got 0
+2019-04-01 15:29:51.807 UTC [4031] LOG:  redo done at 0/1654CF0
+2019-04-01 15:29:52.087 UTC [1] LOG:  database system is ready to accept connections
+2019-04-01 15:33:37.932 UTC [4118] LOG:  statement: select 1+1 as Result;
+2019-04-01 15:37:03.013 UTC [1] LOG:  server process (PID 4056) was terminated by signal 15: Terminated
+2019-04-01 15:37:03.013 UTC [1] LOG:  terminating any other active server processes
+2019-04-01 15:37:03.013 UTC [4118] WARNING:  terminating connection because of crash of another server process
+2019-04-01 15:37:03.013 UTC [4118] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2019-04-01 15:37:03.013 UTC [4118] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2019-04-01 15:37:03.013 UTC [4077] WARNING:  terminating connection because of crash of another server process
+2019-04-01 15:37:03.013 UTC [4077] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2019-04-01 15:37:03.013 UTC [4077] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2019-04-01 15:37:03.016 UTC [1] LOG:  all server processes terminated; reinitializing
+2019-04-01 15:37:03.071 UTC [4239] LOG:  database system was interrupted; last known up at 2019-04-01 15:29:52 UTC
+2019-04-01 15:37:03.274 UTC [4239] LOG:  database system was not properly shut down; automatic recovery in progress
+2019-04-01 15:37:03.320 UTC [4239] LOG:  redo starts at 0/1654D98
+2019-04-01 15:37:03.320 UTC [4239] LOG:  invalid record length at 0/1654DD0: wanted 24, got 0
+2019-04-01 15:37:03.320 UTC [4239] LOG:  redo done at 0/1654D98
+2019-04-01 15:37:03.548 UTC [1] LOG:  database system is ready to accept connections
+2019-04-01 15:46:35.978 UTC [4397] LOG:  statement: select 5+5;
