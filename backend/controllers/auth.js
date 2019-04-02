@@ -8,7 +8,7 @@ const {validationResult} = require('express-validator/check');
 
 const {auth: {User}} = require('../models');
 
-exports.register = (req, res, next) => {
+exports.register = async (req, res, next) => {
     console.log("here");
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -21,7 +21,15 @@ exports.register = (req, res, next) => {
     const {email, password, first_name, last_name} = req.body;
     const tableName = User.getTableName();
 
-    const wrappedValues = queryWrappers.wrapAllValues({email:email, password:password, first_name:first_name,
+    let hashedPassword;
+
+    try {
+        hashedPassword = await bcrypt.hash(password, 9);
+    }catch (err){
+        next(err);
+    }
+
+    const wrappedValues = queryWrappers.wrapAllValues({email:email, password:hashedPassword, first_name:first_name,
         last_name: last_name});
 
     const query = `INSERT INTO ${tableName} ("email","password","first_name","last_name")
@@ -35,9 +43,7 @@ exports.register = (req, res, next) => {
     console.log(query);
 
     sequelize.query(query).then(([result, metaData])=>{
-        console.log("RESULT",result);
-        console.log("META", metaData);
-        res.status(201).json({message: "Ha Ha!"});
+        res.status(201).json({message: "User Created"});
     }).catch(err=>{
 
         const data = sequelizeErrors(err);
