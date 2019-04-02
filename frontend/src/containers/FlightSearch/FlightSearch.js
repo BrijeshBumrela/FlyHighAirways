@@ -24,7 +24,6 @@ class FlightSearch extends Component {
 
     render() { 
 
-        console.log('infine');
         return ( 
             <React.Fragment> 
                 <Row type="flex" className={classes.FlightSearch}>

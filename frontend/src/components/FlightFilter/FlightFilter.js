@@ -11,7 +11,7 @@ const flightFilter = (props) => {
         <div className={classes.FilterColumn}>
             <div className={classes.FlightType}>
                 <h2 className={classes.TypeHeader}>Flight Type</h2>
-                <RadioGroup className={classes.FlightOptions}>
+                <RadioGroup className={classes.FlightOptions} value={1}>
                     <Radio value={1}>Non-Stop</Radio><br />
                     <Radio value={2}>Stop</Radio>
                 </RadioGroup>            
@@ -64,21 +64,18 @@ const flightFilter = (props) => {
                 </p>
                 <p>
                     <Checkbox 
-                        checked
                         disabled={false}
                     />
                     <span>Afternoon</span>
                 </p>
                 <p>
                     <Checkbox 
-                        checked
                         disabled={false}
                     />
                     <span>Evening</span>
                 </p>
                 <p>
                     <Checkbox 
-                        checked
                         disabled={false}
                     />
                     <span>Night</span>
