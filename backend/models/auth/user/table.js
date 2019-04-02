@@ -6,10 +6,10 @@ module.exports = {
             password VARCHAR(500) NOT NULL,
             first_name VARCHAR(50),
             last_name VARCHAR(50),
-            last_login TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+            last_login TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
             has_password BOOLEAN NOT NULL DEFAULT TRUE,
-            created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
-            updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
+            created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+            updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
             )
             `,
     exists: `

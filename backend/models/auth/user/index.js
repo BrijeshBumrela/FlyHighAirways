@@ -21,17 +21,21 @@ User.createTable = async function (options) {
     let queryResult;
     try {
         if (force) {
+            console.log(table.dropCascade);
             queryResult = await sequelize.query(table.dropCascade);
         } else {
+            console.log(table.drop);
             queryResult = await sequelize.query(table.drop);
         }
+
         queryResult = await sequelize.query(table.exists);
+
         if (queryResult[0].length > 0) {
             throw new Error("Drop Failed!. force was set to " + force);
         }
 
-        queryResult = await sequelize.query(table.create);
         console.log(table.create);
+        queryResult = await sequelize.query(table.create);
         // console.log(queryResult);
     } catch (error) {
         console.log(error);
@@ -52,15 +56,14 @@ User.createConstraints = async function (options) {
             console.log(q);
         }
     } catch (error){
-        console.log(queryResult);
         console.log(error);
 
     }
 };
 
-User.createAll = async function (){
-  await this.createTable();
-  await this.createConstraints();
+User.createAll = async function (options){
+  await this.createTable(options);
+  await this.createConstraints(options);
 };
 /* Set all method prototypes */
 // User.prototype.x = methods.x;

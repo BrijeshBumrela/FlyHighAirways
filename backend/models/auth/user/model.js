@@ -32,7 +32,7 @@ User.init({
     },
     last_login:{
         type:Sequelize.DATE,
-        allowNull:false
+        allowNull:false,
     },
     has_password:{
         type:Sequelize.BOOLEAN,
@@ -44,6 +44,7 @@ User.init({
 // Associations
 
 //export
+
 
 module.exports = User;
 
