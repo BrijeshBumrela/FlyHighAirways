@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "node test.js",
-    "syncdb": "node utils/syncdb.js"
+    "syncdb": "node utils/syncdb.js",
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
