@@ -8,6 +8,8 @@ const {validationResult} = require('express-validator/check');
 
 const {auth: {User}} = require('../models');
 
+const serverSecret = require('../utils/server-secret');
+
 exports.register = async (req, res, next) => {
     console.log("here");
     const errors = validationResult(req);
@@ -68,7 +70,7 @@ exports.login = async (req, res, next) => {
 
         const users = await sequelize.query(query, {type: sequelize.QueryTypes.SELECT, model: User});
 
-        if(users.length<=0){
+        if (users.length <= 0) {
             const error = new Error("The given email does not exist!");
             error.statusCode = 401;
             throw error;
@@ -87,16 +89,19 @@ exports.login = async (req, res, next) => {
         const accessToken = jwt.sign({
             email: user.email,
             type: "access",
-            keywoard: "bearer"
-        }, 'server_secret', {expiresIn: 60 * 15});
+            keywoard: "Bearer"
+        }, serverSecret, {expiresIn: 60 * 15});
 
 
+
+        const outstandingRefreshToken = parseInt(new Date() * user.id / 1000000);
         const refreshToken = jwt.sign({
-            email:user.email,
-            type:"refresh",
-        }, 'server_secret', {expiresIn: 60*60*24*7*15});
+            email: user.email,
+            type: "refresh",
+            outstandingToken: outstandingRefreshToken
+        }, serverSecret, {expiresIn: 60 * 60 * 24 * 7 * 15});
 
-        res.status(200).json({tokens:{access:accessToken, refresh:refreshToken}})
+        res.status(200).json({tokens: {access: accessToken, refresh: refreshToken}})
     } catch (err) {
         next(err);
     }
