@@ -13,7 +13,7 @@ import Auth from "./containers/Auth/Auth";
 import "antd/dist/antd.css";
 
 import reducer from "./store/reducers/reducer";
-import FlightBook from "./containers/FlightBook/FlightBook";
+// import FlightBook from "./containers/FlightBook/FlightBook";
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -28,7 +28,7 @@ class App extends Component {
           <Switch>
             <Route path="/" exact component={HomePage} />
             <Route path="/flights" component={FlightSearch} />
-            <Route path="/book-flight" component={FlightBook} />
+            {/* <Route path="/book-flight" component={FlightBook} /> */}
             {/* <Route path="/book-flight" /> */}
             <Route path="/authenticate" component={Auth} />
           </Switch>

@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules
-./src/Keys
+src/Keys
 /.pnp
 .pnp.js
 
