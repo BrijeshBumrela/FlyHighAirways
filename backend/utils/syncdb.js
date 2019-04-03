@@ -10,4 +10,7 @@ const sequelize = require('./database');
 //     console.log("Sync Failed!");
 // });
 
-models.auth.User.createAll({"force":true});
+
+models.auth.User.createAll({"force":true}).then(result=>{
+    models.auth.OutstandingToken.createAll({"force":true});
+});
