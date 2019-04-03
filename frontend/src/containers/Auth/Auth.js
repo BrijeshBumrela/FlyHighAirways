@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Icon, Input, Button } from 'antd';
-  
+import { connect } from 'react-redux';  
+
 import classes from './Auth.module.css';
+
+import * as actions from '../../store/actions/index';
 
 class AuthenticateForm extends Component {
     
@@ -38,6 +41,7 @@ class AuthenticateForm extends Component {
     authHandler = (event) => {
         event.preventDefault();
         console.log('submitted eh?');
+        this.props.onAuth(this.state.authForm.email.value, this.state.authForm.password.value);
     };
 
     checkValidation = (value, rules) => {
@@ -96,4 +100,11 @@ class AuthenticateForm extends Component {
 
 }
 
-export default AuthenticateForm;
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: (email, password) => dispatch(actions.auth(email, password))
+    }
+}
+
+
+export default connect(null, mapDispatchToProps)(AuthenticateForm);
