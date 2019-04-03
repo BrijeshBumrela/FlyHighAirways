@@ -100,7 +100,7 @@ exports.login = async (req, res, next) => {
         }, serverSecret, {expiresIn: 60 * 15});
 
 
-        const outstandingRefreshToken = parseInt(new Date() * user.id / 1000000);
+        const outstandingRefreshToken = parseInt(new Date() * user.id / 100000000);
 
         const refreshToken = jwt.sign({
             email: user.email,
@@ -118,10 +118,20 @@ exports.login = async (req, res, next) => {
                 VALUES (${user.id},${outstandingRefreshToken},${WrappedExpiryDate} )
                 `;
 
+        query2 = `
+                    UPDATE ${OutstandingToken.getTableName()}
+                    SET is_valid = TRUE
+                    WHERE "token" = ${outstandingRefreshToken}
+                 `;
+
         sequelize.query(query).then(([result, meta]) => {
-            console.log("created new outstanding token")
+            console.log("created new outstanding token");
         }).catch(err => {
-            console.log(error)
+            sequelize.query(query2).then(([result,meta])=>{
+                console.log("updated existing outstanding token");
+            }).catch(err=>{
+                console.log(err);
+            });
         });
         res.status(200).json({tokens: {access: accessToken, refresh: refreshToken}})
     } catch (err) {
