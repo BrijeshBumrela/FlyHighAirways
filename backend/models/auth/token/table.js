@@ -1,22 +1,22 @@
 module.exports = {
     create: `
-            CREATE TABLE IF NOT EXISTS tokens (
-            "token" varchar(100) PRIMARY KEY,
+            CREATE TABLE IF NOT EXISTS outstanding_tokens (
+            "token" BIGINT PRIMARY KEY,
             user_id INT
             )
             `,
     exists: `
             SELECT * FROM information_schema.tables 
             WHERE table_schema='public' 
-            AND table_name='tokens'
+            AND table_name='outstanding_tokens'
             `,
     drop:`
-            DROP TABLE IF EXISTS tokens RESTRICT
+            DROP TABLE IF EXISTS outstanding_tokens RESTRICT
             `,
     dropCascade:`
-            DROP TABLE IF EXISTS tokens CASCADE
+            DROP TABLE IF EXISTS outstanding_tokens CASCADE
             `,
     findAll:`
-            SELECT * FROM tokens
+            SELECT * FROM outstanding_tokens
             `
 };

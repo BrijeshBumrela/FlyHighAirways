@@ -9,7 +9,7 @@ class OutstandingToken extends Sequelize.Model {
 OutstandingToken.init({
 
     token:{
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey:true
     }
