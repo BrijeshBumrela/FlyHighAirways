@@ -14,6 +14,18 @@ router.post(
     authControllers.register
 );
 
-router.post('/login', authControllers.login);
+router.post(
+    '/login',
+    [
+      bodyValidator('email').not().isEmpty(),
+      bodyValidator('password').not().isEmpty()
+    ],
+    authControllers.login);
 
+router.post(
+    '/refresh',
+    [
+      bodyValidator('token').not().isEmpty()
+    ],
+    authControllers.refresh);
 module.exports = router;
