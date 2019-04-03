@@ -61,9 +61,22 @@ OutstandingToken.createConstraints = async function (options) {
     }
 };
 
+OutstandingToken.createTriggers = async function(options){
+    const {triggers} = this.sqlCommands;
+    Object.keys(triggers).map(async key=>{
+
+        console.log(triggers[key].procedure);
+        let result = await sequelize.query(triggers[key].procedure);
+
+        console.log(triggers[key].trigger);
+        result = await sequelize.query(triggers[key].trigger);
+    });
+};
+
 OutstandingToken.createAll = async function (options){
   await this.createTable(options);
   await this.createConstraints(options);
+  await this.createTriggers(options);
 };
 /* Set all method prototypes */
 // OutstandingToken.prototype.x = methods.x;
