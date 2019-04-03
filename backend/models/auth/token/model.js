@@ -12,6 +12,15 @@ OutstandingToken.init({
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey:true
+    },
+    is_valid:{
+        type:Sequelize.BOOLEAN,
+        allowNull:false,
+        defaultValue:true
+    },
+    expires_on:{
+        type:Sequelize.DATE,
+        allowNull:false
     }
 }, {sequelize, underscored:true});
 

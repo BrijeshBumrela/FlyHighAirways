@@ -100,12 +100,17 @@ exports.login = async (req, res, next) => {
             email: user.email,
             type: "refresh",
             outstandingToken: outstandingRefreshToken
-        }, serverSecret, {expiresIn: 60 * 60 * 24 * 7 * 15});
+        }, serverSecret, {expiresIn: 60 * 60 * 24 * 30});
 
+        const refreshTokenExpiryDate = new Date(new Date()*1 + (1000 * 60 * 60 * 24 * 30));
 
         // add outstanding token to db
         // kept async to end response faster
-        query = `INSERT INTO ${OutstandingToken.getTableName()} ("user_id","token") VALUES (${user.id},${outstandingRefreshToken})`;
+        const WrappedExpiryDate = queryWrappers.wrapValue(refreshTokenExpiryDate.toISOString());
+        query = `INSERT INTO ${OutstandingToken.getTableName()} 
+                ("user_id","token", "expires_on") 
+                VALUES (${user.id},${outstandingRefreshToken},${WrappedExpiryDate} )
+                `;
 
         sequelize.query(query).then(([result,meta])=>{console.log("created new outstanding token")}).catch(err=>{console.log(error)});
         res.status(200).json({tokens: {access: accessToken, refresh: refreshToken}})
