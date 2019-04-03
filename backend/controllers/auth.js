@@ -6,7 +6,7 @@ const sequelizeErrors = require('../utils/sequelize-errors');
 const parseError = require('../utils/parse-error');
 const {validationResult} = require('express-validator/check');
 
-const {auth: {User}} = require('../models');
+const {auth: {User,OutstandingToken}} = require('../models');
 
 const serverSecret = require('../utils/server-secret');
 
@@ -66,7 +66,7 @@ exports.login = async (req, res, next) => {
     try {
         const {email, password} = req.body;
 
-        query = `select * from ${User.getTableName()} where "email"=${queryWrappers.wrapValue(email)}`;
+        let query = `select * from ${User.getTableName()} where "email"=${queryWrappers.wrapValue(email)}`;
 
         const users = await sequelize.query(query, {type: sequelize.QueryTypes.SELECT, model: User});
 
@@ -95,12 +95,19 @@ exports.login = async (req, res, next) => {
 
 
         const outstandingRefreshToken = parseInt(new Date() * user.id / 1000000);
+
         const refreshToken = jwt.sign({
             email: user.email,
             type: "refresh",
             outstandingToken: outstandingRefreshToken
         }, serverSecret, {expiresIn: 60 * 60 * 24 * 7 * 15});
 
+
+        // add outstanding token to db
+        // kept async to end response faster
+        query = `INSERT INTO ${OutstandingToken.getTableName()} ("user_id","token") VALUES (${user.id},${outstandingRefreshToken})`;
+
+        sequelize.query(query).then(([result,meta])=>{console.log("created new outstanding token")}).catch(err=>{console.log(error)});
         res.status(200).json({tokens: {access: accessToken, refresh: refreshToken}})
     } catch (err) {
         next(err);
