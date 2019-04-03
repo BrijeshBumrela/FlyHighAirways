@@ -13,7 +13,11 @@ class AuthenticateForm extends Component {
                     type: 'email',
                     placeholder: 'Enter Your Email'
                 },
-                value: ''
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false
             },
             password: {
                 elementType: 'input',
@@ -21,28 +25,59 @@ class AuthenticateForm extends Component {
                     type: 'password',
                     placeholder: 'Enter Your Password'
                 },
-                value: ''
+                value: '',
+                validation: {
+                    required: true,
+                    minLength: 8
+                },
+                valid: false
             },
         }
     }
 
-    onFormDataChanged = () => {
-        return 5;
-    }
+    authHandler = (event) => {
+        event.preventDefault();
+        console.log('submitted eh?');
+    };
+
+    checkValidation = (value, rules) => {
+        let isValid = false;
+
+        if (rules.required) {
+            isValid = value.trim() !== '';
+        }
+
+        if (rules.minLength) {
+            isValid = isValid && value.length >= rules.minLength 
+        }
+
+        return isValid;
+    };
+
+    inputChangedHandler = (event, inputIdentifier) => {
+        
+        const updatedForm = { ...this.state.authForm };
+        const updatedFormElement = { ...updatedForm[inputIdentifier] }
+        updatedFormElement.value = event.target.value;
+        updatedForm[inputIdentifier] = updatedFormElement;
+
+        updatedForm[inputIdentifier].valid = this.checkValidation(event.target.value, updatedForm[inputIdentifier].validation)
+        this.setState({ authForm:updatedForm });
+    };
     
     render() {
 
         const { authForm } = this.state;
 
         return (
-            <form className={classes.container}>
+            <form className={classes.container} onSubmit={(e) => this.authHandler(e)}>
                 <Input 
                     className={classes.InputElement} 
                     prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} 
                     type={authForm.email.elementConfig.type} 
                     placeholder={authForm.email.elementConfig.placeholder} 
                     value={authForm.email.value}
-                    onChange={() => this.onFormDataChanged()}
+                    onChange={(e) => this.inputChangedHandler(e, authForm.email.elementConfig.type)}
                 />
                 
                 <Input
@@ -51,9 +86,10 @@ class AuthenticateForm extends Component {
                     type="password" 
                     placeholder="Password" 
                     value={authForm.password.value}
-                    onChange={() => this.onFormDataChanged()}
+                    onChange={(e) => this.inputChangedHandler(e, authForm.password.elementConfig.type)}
                 />
-                <Button>Log In</Button>
+
+                <Button htmlType="submit">Log In</Button>
             </form>
         )
     }
