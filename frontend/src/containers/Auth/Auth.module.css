@@ -1,9 +1,58 @@
 .container {
-    width: 30%;
+    width: 50%;
+    height: 100%;
     margin: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.container form > * {
+    margin-top: 1rem;
+}
+
+.ant-input {
+    border-radius: 45px;
+}
+
+.InputElement {
+    height: 2.5rem;
 }
 
 .InputElement:focus {
     outline: none;
     background-color: #ccc; 
 }
+
+.LoginCard {
+    width: 85%;
+    height: 100%;
+    margin: auto;
+    background-image: linear-gradient(to right, #FFFFFF, #00FFFF);
+}
+
+.BigDiv {
+    height: 100vh;
+    width: 100%;
+    padding: 2rem;
+    background-image: linear-gradient(to right top, #FF00FF, #7B68EE);
+}
+
+.FormText {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: brown;
+}
+
+.makeHeightFull {
+    height: 100%;
+}
+
+
+.switchBtn {
+    width: 60%;
+    margin-left: 20%;
+    margin-top: 2rem;
+}
+

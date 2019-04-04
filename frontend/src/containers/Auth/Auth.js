@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Icon, Input, Button } from 'antd';
+import { Icon, Input, Button, Row, Col } from 'antd';
 import { connect } from 'react-redux';  
 
 import classes from './Auth.module.css';
@@ -81,33 +81,50 @@ class AuthenticateForm extends Component {
         const { authForm } = this.state;
 
         return (
-            <div className={classes.container}>
-                <form onSubmit={(e) => this.authHandler(e)}>
-                    <Input 
-                        className={classes.InputElement} 
-                        prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} 
-                        type={authForm.email.elementConfig.type} 
-                        placeholder={authForm.email.elementConfig.placeholder} 
-                        value={authForm.email.value}
-                        onChange={(e) => this.inputChangedHandler(e, authForm.email.elementConfig.type)}
-                    />
-                    
-                    <Input
-                        className={classes.InputElement} 
-                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} 
-                        type="password" 
-                        placeholder="Password" 
-                        value={authForm.password.value}
-                        onChange={(e) => this.inputChangedHandler(e, authForm.password.elementConfig.type)}
-                    />
+            <div className={classes.BigDiv}>
+                <div className={classes.LoginCard}>
+                    <Row style={{height: '100%'}}>
 
-                    <Button htmlType="submit">
-                        { this.state.isSignUp ? 'Sign Up' : 'Log In' }
-                    </Button>
-                </form>
-                <Button type="ghost" onClick={this.switchAuthModeHandler}>
-                    { this.state.isSignUp ? 'Click Here To SignUp' : 'Click Here To LogIn' }
-                </Button>
+                        <Col lg={12} className={classes.makeHeightFull}>
+    
+                        </Col>
+                        
+                        <Col lg={12} className={classes.makeHeightFull}>
+                            <div className={classes.container}>
+
+                                <h4 className={classes.FormText}>Login TO Proceed</h4>
+
+                                <form onSubmit={(e) => this.authHandler(e)}>
+                                    <Input 
+                                        className={classes.InputElement} 
+                                        prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} 
+                                        type={authForm.email.elementConfig.type} 
+                                        placeholder={authForm.email.elementConfig.placeholder} 
+                                        value={authForm.email.value}
+                                        onChange={(e) => this.inputChangedHandler(e, authForm.email.elementConfig.type)}
+                                    />
+                                    
+                                    <Input
+                                        className={classes.InputElement} 
+                                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} 
+                                        type="password" 
+                                        placeholder="Password" 
+                                        value={authForm.password.value}
+                                        onChange={(e) => this.inputChangedHandler(e, authForm.password.elementConfig.type)}
+                                    />
+
+                                    <Button htmlType="submit" size="large" style={{backgroundColor: '#6A5ACD'}} block shape="round">
+                                        { this.state.isSignUp ? 'Sign Up' : 'Log In' }
+                                    </Button>
+                                </form>
+                                <Button size="small" className={classes.switchBtn} onClick={this.switchAuthModeHandler}>
+                                    { this.state.isSignUp ? 'Click Here To LogIn' : 'Click Here To Sign Up' }
+                                </Button>
+                            </div>
+                        </Col>
+
+                    </Row>
+                </div>
             </div>
         )
     }

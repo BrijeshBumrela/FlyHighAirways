@@ -8,6 +8,7 @@ const flights = (props) => {
     return (  
         <div className={classes.FlightList}>
             <Flight />
+            <Flight />
         </div>
     );
 }

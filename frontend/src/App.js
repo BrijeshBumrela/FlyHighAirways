@@ -16,7 +16,7 @@ import Auth from "./containers/Auth/Auth";
 class App extends Component {
 
     componentDidMount() {
-        // this.props.autoSignUpHandler();
+        this.props.autoSignUpHandler();
     }
   
     render() {
