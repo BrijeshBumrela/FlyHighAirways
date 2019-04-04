@@ -72,7 +72,6 @@ class AuthenticateForm extends Component {
         const updatedFormElement = { ...updatedForm[inputIdentifier] }
         updatedFormElement.value = event.target.value;
         updatedForm[inputIdentifier] = updatedFormElement;
-
         updatedForm[inputIdentifier].valid = this.checkValidation(event.target.value, updatedForm[inputIdentifier].validation)
         this.setState({ authForm:updatedForm });
     };
@@ -112,7 +111,6 @@ class AuthenticateForm extends Component {
             </div>
         )
     }
-
 }
 
 const mapDispatchToProps = dispatch => {
@@ -120,6 +118,5 @@ const mapDispatchToProps = dispatch => {
         onAuth: (email, password, method) => dispatch(actions.auth(email, password, method))
     }
 }
-
 
 export default connect(null, mapDispatchToProps)(AuthenticateForm);
