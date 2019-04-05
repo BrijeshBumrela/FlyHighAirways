@@ -85,8 +85,8 @@ class AuthenticateForm extends Component {
                 <div className={classes.LoginCard}>
                     <Row style={{height: '100%'}}>
 
-                        <Col lg={12} className={classes.makeHeightFull}>
-    
+                        <Col lg={12} className={[classes.makeHeightFull, classes.planeImg].join(' ')}>
+                            
                         </Col>
                         
                         <Col lg={12} className={classes.makeHeightFull}>
@@ -113,8 +113,8 @@ class AuthenticateForm extends Component {
                                         onChange={(e) => this.inputChangedHandler(e, authForm.password.elementConfig.type)}
                                     />
 
-                                    <Button htmlType="submit" size="large" style={{backgroundColor: '#6A5ACD'}} block shape="round">
-                                        { this.state.isSignUp ? 'Sign Up' : 'Log In' }
+                                    <Button htmlType="submit" size="default" style={{backgroundColor: '#6A5ACD', border:'none'}} block shape="round">
+                                        { this.state.isSignUp ? 'SIGN UP' : 'LOG IN' }
                                     </Button>
                                 </form>
                                 <Button size="small" className={classes.switchBtn} onClick={this.switchAuthModeHandler}>
