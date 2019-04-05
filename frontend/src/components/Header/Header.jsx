@@ -5,7 +5,7 @@ import { enquireScreen } from "enquire-js";
 import "./Header.css";
 
 const LOGO_URL =
-  "https://gw.alipayobjects.com/zos/rmsportal/gVAKqIsuJCepKNbgbSwE.svg";
+  "https://www.svgimages.com/svg-image/s5/plane-icon1-256x256.png";
 
 class Header extends React.Component {
   state = {
