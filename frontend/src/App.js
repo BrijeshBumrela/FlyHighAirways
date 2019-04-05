@@ -11,7 +11,7 @@ import { authCheckStatus } from "./store/actions/index";
 import FlightSearch from "./containers/FlightSearch/FlightSearch";
 import HomePage from "./containers/Homepage/Hompage";
 import Auth from "./containers/Auth/Auth";
-
+import CheckIn from "./containers/CheckIn/CheckIn";
 
 class App extends Component {
 
@@ -27,6 +27,7 @@ class App extends Component {
                 {/* <Route path="/book-flight" component={FlightBook} /> */}
                 {/* <Route path="/book-flight" /> */}
                 <Route path="/authenticate" component={Auth} />
+                <Route path="/checkin" component={CheckIn} />
             </Switch>
         );
     }
