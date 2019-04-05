@@ -7946,7 +7946,7 @@
   }
   .header-meta {
     zoom: 1;
-    padding-right: 40px;
+    padding-right: 100px;
   }
   .header-meta:before,
   .header-meta:after {
@@ -7972,7 +7972,7 @@
     border-bottom: none;
   }
   #menu .ant-menu-horizontal > .ant-menu-item {
-    border-top: 2px solid transparent;
+    border-top: 3px solid transparent;
     background: rgba(0, 0, 0, 0.25);
 
   }

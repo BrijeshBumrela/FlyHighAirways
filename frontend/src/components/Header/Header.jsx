@@ -1,7 +1,5 @@
 import React from "react";
-import { Row, Col, Icon, Menu, Button, Popover } from "antd";
-// @import "./default.less";
-// @import "~antd/lib/style/mixins/clearfix.less";
+import { Row, Col, Icon, Menu, Button, Popover, Badge } from "antd";
 
 import { enquireScreen } from "enquire-js";
 import "./Header.css";
@@ -36,24 +34,21 @@ class Header extends React.Component {
 
     const menu = (
       <Menu mode={menuMode} id="nav" key="nav">
-        <Menu.Item key="home">
-          <a>aircraft</a>
-        </Menu.Item>
-        <Menu.Item key="docs">
-          <a>
-            <span>Home</span>
-          </a>
-        </Menu.Item>
-        <Menu.Item key="components">
-          <a>Flights</a>
-        </Menu.Item>
-        {menuMode === "inline" && (
+        {/* <Menu.Item key="home">aircraft</Menu.Item> */}
+        <Menu.Item key="home">Home</Menu.Item>
+        <Menu.Item key="docs/spec">a</Menu.Item>
+        <Menu.Item key="docs/react">b</Menu.Item>
+        <Menu.Item key="docs/pattern">c</Menu.Item>
+        <Menu.Item key="docs/resource">d</Menu.Item>
+        <Menu.Item key="docs">Home</Menu.Item>
+        <Menu.Item key="components">Flights</Menu.Item>
+        {/* {menuMode === "inline" && (
           <Menu.Item key="preview">
             <a target="_blank" href="#" rel="noopener noreferrer">
               Fare
             </a>
           </Menu.Item>
-        )}
+        )} */}
       </Menu>
     );
 
@@ -80,7 +75,7 @@ class Header extends React.Component {
           <Col xxl={4} xl={5} lg={8} md={8} sm={24} xs={24}>
             <div id="logo" to="/">
               <img src={LOGO_URL} alt="logo" />
-              <span>ANT DESIGN PRO</span>
+              <span>Fly High Airways</span>
             </div>
           </Col>
           <Col xxl={20} xl={19} lg={16} md={16} sm={0} xs={0}>
