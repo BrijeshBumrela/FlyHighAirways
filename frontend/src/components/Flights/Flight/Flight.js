@@ -8,29 +8,29 @@ const flight = (props) => (
         <Col lg={12}>
             <div className={classes.TimingBoxHeader}>
                 <div className={classes.ToCenter}>
-                    <h2>07:00</h2>
+                    <h2>{props.startTime}</h2>
                     <h4>MAA</h4>
                 </div>
                 <div className={classes.ToCenter}>
-                    <Icon style={{fontSize: '2rem'}} type="dingding" />
+                    <h3>{props.nonStop ? 'NON STOP' : '1 STOP'}</h3>
                     <h5>1h 55m</h5>
                 </div>
                 <div className={classes.ToCenter}>
-                    <h2>07:00</h2>
+                    <h2>{props.endTime}</h2>
                     <h4>BOM</h4>
                 </div>
             </div>
         </Col>
         <Col lg={4}>
             <div className={classes.Class}>
-                <h4 className={classes.RemainingSeats}>3 seats remaining</h4>
-                <h4>INR <span className={classes.ClassPrice}>3589</span></h4>
+                <h4 className={classes.RemainingSeats}>{props.economy.seats_remaining} seats remaining</h4>
+                <h4>INR <span className={classes.ClassPrice}>{props.economy.fare}</span></h4>
             </div>
         </Col>
         <Col lg={4}>
             <div className={classes.Class}>
-                <h4 className={classes.RemainingSeats}>3 seats remaining</h4>
-                <h4>INR <span className={classes.ClassPrice}>7117</span></h4>
+                <h4 className={classes.RemainingSeats}>{props.business.seats_remaining} seats remaining</h4>
+                <h4>INR <span className={classes.ClassPrice}>{props.business.fare}</span></h4>
             </div>
         </Col>
         <Col lg={4}>

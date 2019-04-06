@@ -7,7 +7,7 @@ import classes from './Flights.module.css';
 const flights = (props) => {
     return (  
         <div className={classes.FlightList}>
-            <Flight />
+            <Flight {...props}/>
         </div>
     );
 }
