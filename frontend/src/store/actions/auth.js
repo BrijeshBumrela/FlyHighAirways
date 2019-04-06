@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { APIKEY } from '../../Keys/GoogleApiKey';
+// import { APIKEY } from '../../Keys/GoogleApiKey';
 
 import * as actionTypes from './actionTypes';
 
@@ -56,7 +56,7 @@ export const auth = (email, password, isSignUp) => {
             url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=';
         }
 
-        axios.post(`${url}${APIKEY}`, authData)
+        /*axios.post(`${url}${APIKEY}`, authData)
             .then(response => {
                 
                 const expirationTime = new Date( new Date().getTime() + response.data.expiresIn * 1000);
@@ -71,7 +71,7 @@ export const auth = (email, password, isSignUp) => {
             .catch(err => {
                 console.log(err);
                 dispatch(authFailure(err));
-            });
+            });*/
     };
 };
 
