@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Icon, Input, Button, Row, Col } from 'antd';
 import { connect } from 'react-redux';  
+import axios from 'axios';
 
 import classes from './Auth.module.css';
-
-import axios from 'axios';
 
 import * as actions from '../../store/actions/index';
 
@@ -40,31 +39,33 @@ class AuthenticateForm extends Component {
         isSignUp: true
     }
 
-    componentDidMount() {
-
-        const flight = {
-            start_time: '7.00',
-            end_time: '8.55',
-            logo: 'some string 1',
-            business: {
-                fare: 7650,
-                seats_remaining: 3
-            },
-            economy: {
-                fare: 3456,
-                seats_remaining: 7
-            }
-        }
-
-        // axios.post('https://flyhighairways-2cfb4.firebaseio.com/flight.json', flight)
-        //     .then(res => console.log(res))
-        //     .catch(err => console.log('there was an ', err));
-    }
+    
 
     authHandler = (event) => {
         event.preventDefault();
         this.props.onAuth(this.state.authForm.email.value, this.state.authForm.password.value, this.state.isSignUp);
     };
+
+    componentDidMount() {
+        const flight = {
+            start_time: '7.00',
+            end_time: '8.55',
+            logo: 'some string 1',
+            business: {
+                fare: 6650,
+                seats_remaining: 1
+            },
+            economy: {
+                fare: 2456,
+                seats_remaining: 12
+            },
+            nonStop: true
+        }
+
+        axios.post('https://flyhighairways-2cfb4.firebaseio.com/flight.json', flight)
+            .then(res => console.log(res))
+            .catch(err => console.log('there was an ', err));
+    }
 
     switchAuthModeHandler = () => {
         this.setState(prevState => { 
