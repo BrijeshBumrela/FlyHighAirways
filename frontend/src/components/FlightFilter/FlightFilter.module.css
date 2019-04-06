@@ -1,4 +1,6 @@
-
+.FilterColumn {
+    border-right: 2px solid #eee;
+}
 
 .FlightType {
     min-height: 6rem;
