@@ -12,21 +12,45 @@ import classes from "./FlightSearch.module.css";
 
 class FlightSearch extends Component {
     state = {
-        loading: true
+        loading: true,
+        flights: null
     };
   
     componentDidMount() {
         axios.get('https://flyhighairways-2cfb4.firebaseio.com/flight.json')
-            .then(res => console.log(res))
+            .then(res => {
+                this.setState({ loading: false, flights: res.data })
+            })
             .catch(err => console.log('there was an ', err));
     }
 
     render() {
 
-        let flightList = <CustomSkeleton />
+        const { flights } = this.state;
 
-        if (!this.state.loading) {
-          flightList = <Flights />
+        let flightList = <CustomSkeleton />
+        let flightListArray = [];
+
+        if (!this.state.loading && flights) {
+            for (let flight in flights) {
+                flightListArray.push(flights[flight])
+            }
+        }
+
+        if (flightListArray.length > 0) {
+            flightList = [];
+            flightList = flightListArray.map((flight, index) => {
+                return (
+                    <Flights 
+                        key={index}
+                        startTime={flight.start_time}
+                        endTime={flight.end_time}
+                        nonStop={flight.nonStop}
+                        business={flight.business}
+                        economy={flight.economy}
+                    />
+                )  
+            })
         }
 
         return (
