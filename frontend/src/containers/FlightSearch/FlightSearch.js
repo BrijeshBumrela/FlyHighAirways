@@ -13,7 +13,9 @@ import classes from "./FlightSearch.module.css";
 class FlightSearch extends Component {
     state = {
         loading: true,
-        flights: null
+        flights: null,
+
+        
     };
   
     componentDidMount() {
