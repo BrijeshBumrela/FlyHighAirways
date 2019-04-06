@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { APIKEY } from '../../Keys/GoogleApiKey';
+ import { APIKEY } from '../../Keys/GoogleApiKey';
 
 import * as actionTypes from './actionTypes';
 
