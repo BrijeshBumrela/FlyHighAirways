@@ -26,7 +26,6 @@ class Navbar extends Component {
   render() {
     return (
       <nav className={classes.menuBar}>
-        {/* <Header style={{ background: "#fff" }}> */}
         <div className={classes.logo}>
           <a href="">LOGO</a>
         </div>
@@ -36,19 +35,9 @@ class Navbar extends Component {
             <Menu
               theme="light"
               mode="horizontal"
-              // defaultSelectedKeys={["2"]}
               overflowedIndicator={<Icon type="bars" />}
               style={{ lineHeight: "66px", borderBottom: "0" }}
             >
-              {/* <Menu.Item key="0" disbled>
-              <img
-                alt="logo"
-                src="https://t.alipayobjects.com/images/rmsweb/T1B9hfXcdvXXXXXXXX.svg"
-                height="64px"
-                style={{ display: "inline" }}
-              />
-            </Menu.Item> */}
-
               <Menu.Item key="1">nav 1</Menu.Item>
               <Menu.Item key="2">nav 2</Menu.Item>
               <Menu.Item key="3">nav 3</Menu.Item>
@@ -71,14 +60,10 @@ class Navbar extends Component {
               </Menu.Item>
             </Menu>
           </div>
-          <div
-            className={classes.rightMenu}
-            // style={{ display: "inline-block", float: "right" }}
-          >
+          <div className={classes.rightMenu}>
             <Menu
               theme="light"
               mode="horizontal"
-              // defaultSelectedKeys={["2"]}
               overflowedIndicator={<Icon type="bars" />}
               style={{ lineHeight: "66px", borderBottom: "0" }}
             >
@@ -106,37 +91,17 @@ class Navbar extends Component {
             className={classes.barsMenu}
             type="primary"
             onClick={this.showDrawer}
-            // style={{
-            //   float: "right",
-            //   display: "none",
-            //   background: "none"
-            // }}
           >
             <span className={classes.barsBtn} />
           </Button>
           <Drawer
-            title="Basic Drawer"
+            title="side bar"
             placement="right"
             closable={false}
             onClose={this.onClose}
             visible={this.state.visible}
           >
-            <Menu
-            // theme="light"
-            // mode="horizontal"
-            // // defaultSelectedKeys={["2"]}
-            // overflowedIndicator={<Icon type="bars" />}
-            // style={{ lineHeight: "64px" }}
-            >
-              {/* <Menu.Item key="0" disbled>
-              <img
-                alt="logo"
-                src="https://t.alipayobjects.com/images/rmsweb/T1B9hfXcdvXXXXXXXX.svg"
-                height="64px"
-                style={{ display: "inline" }}
-              />
-            </Menu.Item> */}
-
+            <Menu>
               <Menu.Item key="1">nav 1</Menu.Item>
               <Menu.Item key="2">nav 2</Menu.Item>
               <Menu.Item key="3">nav 3</Menu.Item>
@@ -157,16 +122,7 @@ class Navbar extends Component {
               <Menu.Item key="alipay">
                 <a href="#">Contact Us</a>
               </Menu.Item>
-              {/* </Menu>
-          </div>
-          <div style={{ display: "inline-block", float: "right" }}>
-            <Menu
-              theme="light"
-              mode="hori0 50pxzontal"
-              // defaultSelectedKeys={["2"]}
-              overflowedIndicator={<Icon type="bars" />}
-              style={{ lineHeight: "64px" }}
-            > */}
+
               <SubMenu
                 style={{ float: "right" }}
                 title={
@@ -188,7 +144,6 @@ class Navbar extends Component {
             </Menu>
           </Drawer>
         </div>
-        {/* </Header> */}
       </nav>
     );
   }
