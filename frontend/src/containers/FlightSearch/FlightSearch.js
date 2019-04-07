@@ -42,14 +42,11 @@ class FlightSearch extends Component {
     }
 
     onFlightTimeChangeHandler = (timeSlot) => {
-        console.log(timeSlot);
-
 
         const updatedFilterInfo = { ...this.state.filterInfo };
 
         const updatedFlightTime = { ...this.state.filterInfo.flightTime };
         updatedFlightTime[timeSlot] = !updatedFlightTime[timeSlot];
-
         updatedFilterInfo.flightTime = updatedFlightTime;
 
         this.setState({ filterInfo: updatedFilterInfo });
@@ -64,7 +61,11 @@ class FlightSearch extends Component {
             .catch(err => console.log('there was an ', err));
     }
 
+    
+
     render() {
+
+
         const { flights } = this.state;
 
         let flightList = <CustomSkeleton />

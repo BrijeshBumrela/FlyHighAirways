@@ -65,13 +65,14 @@ const flightFilter = (props) => {
             <div className={classes.FlightType}>
                 <h2 className={classes.TypeHeader}>Flight Time</h2>
 
-                {Object.keys(props.filterInfo.flightTime).map(time => {
+                {Object.keys(props.filterInfo.flightTime).map((time,index) => {
                     return (
-                        <p>
+                        <p key={index}>
                             <Checkbox 
-                                onChange={() => props.flightTimeType('morning')}
+                                checked={props.filterInfo.flightTime[time]}
+                                onChange={() => props.flightTimeType(time)}
                             />
-                        <span>Morning</span>
+                            <span>{time}</span>
                         </p>
                     )
                 })}
