@@ -61,6 +61,8 @@ class FlightSearch extends Component {
                         nonStop={flight.nonStop}
                         business={flight.business}
                         economy={flight.economy}
+                        source={flight.source}
+                        destination={flight.destination}
                     />
                 )  
             })

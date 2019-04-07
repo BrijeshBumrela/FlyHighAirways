@@ -48,8 +48,10 @@ class AuthenticateForm extends Component {
 
     componentDidMount() {
         const flight = {
-            start_time: '7.00',
-            end_time: '8.55',
+            source: 'chennai',
+            destination: 'mumbai',
+            start_time: '7:00',
+            end_time: '8:55',
             logo: 'some string 1',
             business: {
                 fare: 6650,
