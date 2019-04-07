@@ -18,7 +18,12 @@ class FlightSearch extends Component {
         filterInfo: {
             flightType: 3,
             priceRange: 9000,
-            flightTime: []
+            flightTime: {
+                morning: true,
+                afternoon: true,
+                evening: true,
+                night: true
+            }
         }
     };
 
@@ -35,6 +40,21 @@ class FlightSearch extends Component {
         updatedFilterInfo.priceRange = event.target.value;
         this.setState({ filterInfo: updatedFilterInfo });
     }
+
+    onFlightTimeChangeHandler = (timeSlot) => {
+        console.log(timeSlot);
+
+
+        const updatedFilterInfo = { ...this.state.filterInfo };
+
+        const updatedFlightTime = { ...this.state.filterInfo.flightTime };
+        updatedFlightTime[timeSlot] = !updatedFlightTime[timeSlot];
+
+        updatedFilterInfo.flightTime = updatedFlightTime;
+
+        this.setState({ filterInfo: updatedFilterInfo });
+
+    }
   
     componentDidMount() {
         axios.get('https://flyhighairways-2cfb4.firebaseio.com/flight.json')
@@ -45,7 +65,6 @@ class FlightSearch extends Component {
     }
 
     render() {
-
         const { flights } = this.state;
 
         let flightList = <CustomSkeleton />
@@ -74,14 +93,14 @@ class FlightSearch extends Component {
                 )  
             })
         }
-        console.log('state', this.state);
         return (
             <React.Fragment>
                 <Row type="flex" className={classes.FlightSearch}>
                     <Col md={5}>
                         <FlightFilter 
-                            flightTimeType={this.onFlightTypeChangeHandler}
+                            flightStopType={this.onFlightTypeChangeHandler}
                             flightPriceType={this.onFlightPriceChangeHandler}
+                            flightTimeType={this.onFlightTimeChangeHandler}
                             filterInfo={this.state.filterInfo}
                         />
                     </Col>

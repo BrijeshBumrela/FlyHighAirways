@@ -7,6 +7,9 @@ import classes from './FlightFilter.module.css';
 const RadioGroup = Radio.Group;
 
 const flightFilter = (props) => {
+
+    console.log();
+
     return (  
         <div className={classes.FilterColumn}>
             <div className={classes.FlightType}>
@@ -14,9 +17,8 @@ const flightFilter = (props) => {
                 <RadioGroup 
                     className={classes.FlightOptions} 
                     value={props.filterInfo.flightType}
-                    onChange={(e) => props.flightTimeType(e)}
+                    onChange={(e) => props.flightStopType(e)}
                 >
-                    
                     
                     <Radio value={1}>Non-Stop</Radio><br />
                     <Radio value={2}>Stop</Radio><br />
@@ -62,30 +64,18 @@ const flightFilter = (props) => {
 
             <div className={classes.FlightType}>
                 <h2 className={classes.TypeHeader}>Flight Time</h2>
-                <p>
-                    <Checkbox 
-                        disabled={false}
-                    />
-                    <span>Morning</span>
-                </p>
-                <p>
-                    <Checkbox 
-                        disabled={false}
-                    />
-                    <span>Afternoon</span>
-                </p>
-                <p>
-                    <Checkbox 
-                        disabled={false}
-                    />
-                    <span>Evening</span>
-                </p>
-                <p>
-                    <Checkbox 
-                        disabled={false}
-                    />
-                    <span>Night</span>
-                </p>
+
+                {Object.keys(props.filterInfo.flightTime).map(time => {
+                    return (
+                        <p>
+                            <Checkbox 
+                                onChange={() => props.flightTimeType('morning')}
+                            />
+                        <span>Morning</span>
+                        </p>
+                    )
+                })}
+
             </div>
         </div>
     );
