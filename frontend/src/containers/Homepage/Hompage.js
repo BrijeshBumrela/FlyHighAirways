@@ -17,8 +17,8 @@ class HomePage extends Component {
       <div>
         <Navbar />
 
-        <FlightForm />
-        <CarouselComponent />
+        {/* <FlightForm /> */}
+        {/* <CarouselComponent /> */}
       </div>
     );
   }

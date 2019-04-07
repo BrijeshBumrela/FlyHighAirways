@@ -3,7 +3,7 @@ import { Form, Input, Icon, Button } from "antd";
 
 let id = 0;
 
-class DynamicFieldSet extends React.Component {
+class DynamicFieldSet extends Component {
   remove = k => {
     const { form } = this.props;
     // can use data-binding to get
