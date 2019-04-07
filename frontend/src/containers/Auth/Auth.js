@@ -39,8 +39,6 @@ class AuthenticateForm extends Component {
         isSignUp: true
     }
 
-    
-
     authHandler = (event) => {
         event.preventDefault();
         this.props.onAuth(this.state.authForm.email.value, this.state.authForm.password.value, this.state.isSignUp);
@@ -48,18 +46,20 @@ class AuthenticateForm extends Component {
 
     componentDidMount() {
         const flight = {
-            start_time: '7.00',
-            end_time: '8.55',
-            logo: 'some string 1',
+            source: 'Tiruvanantapuram',
+            destination: 'Guwahati',
+            start_time: '00:00',
+            end_time: '2:45',
+            logo: 'some 2',
             business: {
-                fare: 6650,
-                seats_remaining: 1
+                fare: 10550,
+                seats_remaining: 0
             },
             economy: {
-                fare: 2456,
-                seats_remaining: 12
+                fare: 6056,
+                seats_remaining: 6
             },
-            nonStop: true
+            nonStop: false
         }
 
         axios.post('https://flyhighairways-2cfb4.firebaseio.com/flight.json', flight)
