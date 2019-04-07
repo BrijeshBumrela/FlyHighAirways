@@ -28,6 +28,13 @@ class FlightSearch extends Component {
         updatedFilterInfo.flightType = event.target.value;
         this.setState({ filterInfo: updatedFilterInfo });
     }
+
+    onFlightPriceChangeHandler = (event) => {
+        const updatedFilterInfo = { ...this.state.filterInfo };
+        
+        updatedFilterInfo.priceRange = event.target.value;
+        this.setState({ filterInfo: updatedFilterInfo });
+    }
   
     componentDidMount() {
         axios.get('https://flyhighairways-2cfb4.firebaseio.com/flight.json')
@@ -74,6 +81,7 @@ class FlightSearch extends Component {
                     <Col md={5}>
                         <FlightFilter 
                             flightTimeType={this.onFlightTypeChangeHandler}
+                            flightPriceType={this.onFlightPriceChangeHandler}
                             filterInfo={this.state.filterInfo}
                         />
                     </Col>
