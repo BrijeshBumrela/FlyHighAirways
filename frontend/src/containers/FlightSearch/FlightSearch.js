@@ -46,6 +46,10 @@ class FlightSearch extends Component {
         return flightList
     }
 
+    filterPrice = (flightList, price) => {
+        return flightList.filter(flight => flight.economy.fare < price)
+    }
+
     filterFlights = filterInfo => {
         const { flights } = this.state;
         
@@ -56,13 +60,13 @@ class FlightSearch extends Component {
         }
 
         // Filter Non-Stop, Stop
-        flightArray = this.filterType(flightArray, filterInfo.flightType)
+        flightArray = this.filterType(flightArray, filterInfo.flightType);
         
         // Filter By Price
-        
+        flightArray = this.filterPrice(flightArray, filterInfo.priceRange);
 
         console.log(flightArray);
-
+        return flightArray;
     }
 
     onFlightPriceChangeHandler = (event) => {
@@ -103,9 +107,7 @@ class FlightSearch extends Component {
         let flightListArray = [];
 
         if (!this.state.loading && flights) {
-            for (let flight in flights) {
-                flightListArray.push(flights[flight])
-            }
+            flightListArray = this.filterFlights(this.state.filterInfo);
         }
 
         if (flightListArray.length > 0) {
