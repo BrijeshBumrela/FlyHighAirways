@@ -1,102 +1,101 @@
-// import React from "react";
-// import { Row, Col, Icon, Menu, Button, Popover, Badge } from "antd";
+import React, { Component } from "react";
+import { Layout, Menu, Icon } from "antd";
 
-// import { enquireScreen } from "enquire-js";
-// import "./Header.css";
+const { Header, Content, Footer, Sider } = Layout;
+const SubMenu = Menu.SubMenu;
+const MenuItemGroup = Menu.ItemGroup;
+class Navbar extends Component {
+  render() {
+    return (
+      <nav
+        style={{
+          padding: "0 20px",
+          borderBottom: " solid 1px #e8e8e8",
+          overflow: "auto",
+          boxShadow: " 0 0 30px #f3f1f1"
+        }}
+      >
+        <Header style={{ background: "#fff", display: "inline" }}>
+          <div className="logo" style={{ display: "inline" }}>
+            <a href="">
+              <img
+                alt="logo"
+                src="https://t.alipayobjects.com/images/rmsweb/T1B9hfXcdvXXXXXXXX.svg"
+                height="64px"
+                style={{ display: "inline" }}
+              />
+            </a>
+            <div style={{ display: "inline-block" }}>
+              <Menu
+                theme="light"
+                mode="horizontal"
+                // defaultSelectedKeys={["2"]}
+                overflowedIndicator={<Icon type="bars" />}
+                style={{ lineHeight: "64px" }}
+              >
+                {/* <Menu.Item key="0" disbled>
+              <img
+                alt="logo"
+                src="https://t.alipayobjects.com/images/rmsweb/T1B9hfXcdvXXXXXXXX.svg"
+                height="64px"
+                style={{ display: "inline" }}
+              />
+            </Menu.Item> */}
 
-// const LOGO_URL =
-//   "https://www.svgimages.com/svg-image/s5/plane-icon1-256x256.png";
+                <Menu.Item key="1">nav 1</Menu.Item>
+                <Menu.Item key="2">nav 2</Menu.Item>
+                <Menu.Item key="3">nav 3</Menu.Item>
 
-// class Header extends React.Component {
-//   state = {
-//     menuVisible: false,
-//     menuMode: "horizontal"
-//   };
-
-//   componentDidMount() {
-//     enquireScreen(b => {
-//       this.setState({ menuMode: b ? "inline" : "horizontal" });
-//     });
-//   }
-
-//   handleShowMenu = () => {
-//     this.setState({
-//       menuVisible: true
-//     });
-//   };
-
-//   onMenuVisibleChange = menuVisible => {
-//     this.setState({ menuVisible });
-//   };
-
-//   render() {
-//     const { menuMode, menuVisible } = this.state;
-
-//     const menu = (
-//       <Menu mode={menuMode} id="nav" key="nav">
-//         {/* <Menu.Item key="home">aircraft</Menu.Item> */}
-//         <Menu.Item key="home">Home</Menu.Item>
-//         <Menu.Item key="docs/spec">a</Menu.Item>
-//         <Menu.Item key="docs/react">b</Menu.Item>
-//         <Menu.Item key="docs/pattern">c</Menu.Item>
-//         <Menu.Item key="docs/resource">d</Menu.Item>
-//         <Menu.Item key="docs">Home</Menu.Item>
-//         <Menu.Item key="components">Flights</Menu.Item>
-//         {/* {menuMode === "inline" && (
-//           <Menu.Item key="preview">
-//             <a target="_blank" href="#" rel="noopener noreferrer">
-//               Fare
-//             </a>
-//           </Menu.Item>
-//         )} */}
-//       </Menu>
-//     );
-
-//     return (
-//       <div id="header" className="header">
-//         {menuMode === "inline" ? (
-//           <Popover
-//             overlayClassName="popover-menu"
-//             placement="bottomRight"
-//             content={menu}
-//             trigger="click"
-//             visible={menuVisible}
-//             arrowPointAtCenter
-//             onVisibleChange={this.onMenuVisibleChange}
-//           >
-//             <Icon
-//               className="nav-phone-icon"
-//               type="menu"
-//               onClick={this.handleShowMenu}
-//             />
-//           </Popover>
-//         ) : null}
-//         <Row>
-//           <Col xxl={4} xl={5} lg={8} md={8} sm={24} xs={24}>
-//             <div id="logo" to="/">
-//               <img src={LOGO_URL} alt="logo" />
-//               <span>Fly High Airways</span>
-//             </div>
-//           </Col>
-//           <Col xxl={20} xl={19} lg={16} md={16} sm={0} xs={0}>
-//             <div className="header-meta">
-//               {/* <div id="preview">
-//                 <a
-//                   id="preview-button"
-//                   target="_blank"
-//                   href="https://www.facebook.com"
-//                   rel="noopener noreferrer"
-//                 >
-//                   <Button icon="eye-o">Login</Button>
-//                 </a>
-//               </div> */}
-//               {menuMode === "horizontal" ? <div id="menu">{menu}</div> : null}
-//             </div>
-//           </Col>
-//         </Row>
-//       </div>
-//     );
-//   }
-// }
-
-// export default Header;
+                <Menu.Item key="mail">
+                  <a href="">Home</a>
+                </Menu.Item>
+                <SubMenu title={<span>Blogs</span>}>
+                  <MenuItemGroup title="Item 1">
+                    <Menu.Item key="setting:1">Option 1</Menu.Item>
+                    <Menu.Item key="setting:2">Option 2</Menu.Item>
+                  </MenuItemGroup>
+                  <MenuItemGroup title="Item 2">
+                    <Menu.Item key="setting:3">Option 3</Menu.Item>
+                    <Menu.Item key="setting:4">Option 4</Menu.Item>
+                  </MenuItemGroup>
+                </SubMenu>
+                <Menu.Item key="alipay">
+                  <a href="#">Contact Us</a>
+                </Menu.Item>
+              </Menu>
+            </div>
+            <div style={{ display: "inline-block", float: "right" }}>
+              <Menu
+                theme="light"
+                mode="horizontal"
+                // defaultSelectedKeys={["2"]}
+                overflowedIndicator={<Icon type="bars" />}
+                style={{ lineHeight: "64px" }}
+              >
+                <SubMenu
+                  style={{ float: "right" }}
+                  title={
+                    <span>
+                      <Icon type="setting" />
+                      Navigation Three - Submenu
+                    </span>
+                  }
+                >
+                  <MenuItemGroup title="Item 1">
+                    <Menu.Item key="setting:1">Option 1</Menu.Item>
+                    <Menu.Item key="setting:2">Option 2</Menu.Item>
+                  </MenuItemGroup>
+                  <MenuItemGroup title="Item 2">
+                    <Menu.Item key="setting:3">Option 3</Menu.Item>
+                    <Menu.Item key="setting:4">Option 4</Menu.Item>
+                  </MenuItemGroup>
+                </SubMenu>
+              </Menu>
+            </div>
+          </div>
+        </Header>
+      </nav>
+    );
+  }
+}
+export default Navbar;
