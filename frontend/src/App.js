@@ -13,7 +13,7 @@ import "antd/dist/antd.css";
 // import reducer from "./store/reducers/reducer";
 import FlightBook from "./containers/FlightBook/FlightBook";
 import CheckIn from "./containers/CheckIn/CheckIn";
-// import HomePage from "./containers/Homepage/Hompage";
+import HomePage from "./containers/Homepage/Hompage";
 
 class App extends Component {
   componentDidMount() {
@@ -23,7 +23,7 @@ class App extends Component {
   render() {
     return (
       <Switch>
-        {/* <Route path="/" exact component={HomePage} /> */}
+        <Route path="/" exact component={HomePage} />
         {/* <Route path="/home" exact component={Home} /> */}
         <Route path="/flights" component={FlightSearch} />
         <Route path="/book-flight" component={FlightBook} />
