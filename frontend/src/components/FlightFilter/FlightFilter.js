@@ -7,13 +7,22 @@ import classes from './FlightFilter.module.css';
 const RadioGroup = Radio.Group;
 
 const flightFilter = (props) => {
+    console.log(props.filterInfo)
+    console.log('inside the props')
     return (  
         <div className={classes.FilterColumn}>
             <div className={classes.FlightType}>
                 <h2 className={classes.TypeHeader}>Flight Type</h2>
-                <RadioGroup className={classes.FlightOptions} value={1}>
+                <RadioGroup 
+                    className={classes.FlightOptions} 
+                    value={props.filterInfo.flightType}
+                    onChange={(e) => props.flightTimeType(e)}
+                >
+                    
+                    
                     <Radio value={1}>Non-Stop</Radio><br />
-                    <Radio value={2}>Stop</Radio>
+                    <Radio value={2}>Stop</Radio><br />
+                    <Radio value={3}>All</Radio>
                 </RadioGroup>            
             </div>
 
@@ -21,34 +30,30 @@ const flightFilter = (props) => {
 
             <div className={classes.FlightType}>
                 <h2 className={classes.TypeHeader}>Price Range</h2>
-                <p>
-                    <Checkbox 
-                        checked
-                        disabled={false}
-                    />
-                    <span>&lt; 3000</span>
-                </p>
-                <p>
-                    <Checkbox 
-                        checked
-                        disabled={false}
-                    />
-                    <span>&lt; 5000</span>
-                </p>
-                <p>
-                    <Checkbox 
-                        checked
-                        disabled={false}
-                    />
-                    <span>&lt; 10000</span>
-                </p>
-                <p>
-                    <Checkbox 
-                        checked
-                        disabled={false}
-                    />
-                    <span>&gt; 10000</span>
-                </p>
+
+                <RadioGroup className={classes.FlightOptions} value={9000}>
+                    
+                    <Radio value={3000}>
+                            <span>&lt; 3000</span>
+                    </Radio>
+                    <br />
+                    
+                    <Radio value={5000}>
+                            <span>&lt; 5000</span>
+                    </Radio>
+                    <br />
+
+                    <Radio value={7000}>
+                            <span>&lt; 7000</span>
+                    </Radio>
+                    <br />
+
+                    <Radio value={9000}>
+                            <span>&lt; 9000</span>
+                    </Radio>
+                    <br />
+
+                </RadioGroup>                 
             </div>
 
             <Divider />
@@ -57,7 +62,6 @@ const flightFilter = (props) => {
                 <h2 className={classes.TypeHeader}>Flight Time</h2>
                 <p>
                     <Checkbox 
-                        checked
                         disabled={false}
                     />
                     <span>Morning</span>

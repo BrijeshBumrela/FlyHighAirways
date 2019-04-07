@@ -7,9 +7,9 @@ import { authCheckStatus } from "./store/actions/index";
 
 // import FlightBook from "./containers/FlightBook/FlightBook";
 import FlightSearch from "./containers/FlightSearch/FlightSearch";
-import HomePage from "./containers/Homepage/Hompage";
+// import HomePage from "./containers/Homepage/Hompage";
 import Auth from "./containers/Auth/Auth";
-import Home from "./containers/Homepage/LandingPage";
+// import Home from "./containers/Homepage/LandingPage";
 import "antd/dist/antd.css";
 
 // import reducer from "./store/reducers/reducer";
@@ -24,13 +24,12 @@ class App extends Component {
   render() {
     return (
       <Switch>
-        <Route path="/" exact component={HomePage} />
-        <Route path="/home" exact component={Home} />
+        {/* <Route path="/" exact component={HomePage} /> */}
+        {/* <Route path="/home" exact component={Home} /> */}
         <Route path="/flights" component={FlightSearch} />
         <Route path="/book-flight" component={FlightBook} />
         <Route path="/checkin" component={CheckIn} />
 
-        {/* <Route path="/book-flight" /> */}
         <Route path="/authenticate" component={Auth} />
       </Switch>
     );

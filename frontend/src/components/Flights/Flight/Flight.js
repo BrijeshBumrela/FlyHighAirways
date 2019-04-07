@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Col, Row, Icon, Button } from 'antd';
+import { Col, Row, Button } from 'antd';
 import classes from './Flight.module.css';
 
 const flight = (props) => (

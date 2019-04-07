@@ -15,8 +15,19 @@ class FlightSearch extends Component {
         loading: true,
         flights: null,
 
-        
+        filterInfo: {
+            flightType: 3,
+            priceRange: 9000,
+            flightTime: []
+        }
     };
+
+    onFlightTypeChangeHandler = (event) => {
+        const updatedFilterInfo = { ...this.state.filterInfo };
+        
+        updatedFilterInfo.flightType = event.target.value;
+        this.setState({ filterInfo: updatedFilterInfo });
+    }
   
     componentDidMount() {
         axios.get('https://flyhighairways-2cfb4.firebaseio.com/flight.json')
@@ -54,12 +65,15 @@ class FlightSearch extends Component {
                 )  
             })
         }
-
+        console.log('state', this.state);
         return (
             <React.Fragment>
                 <Row type="flex" className={classes.FlightSearch}>
                     <Col md={5}>
-                        <FlightFilter />
+                        <FlightFilter 
+                            flightTimeType={this.onFlightTypeChangeHandler}
+                            filterInfo={this.state.filterInfo}
+                        />
                     </Col>
                     <Col md={19}>{flightList}</Col>
                 </Row>
