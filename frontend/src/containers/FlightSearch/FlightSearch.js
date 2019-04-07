@@ -27,11 +27,42 @@ class FlightSearch extends Component {
         }
     };
 
-    onFlightTypeChangeHandler = (event) => {
+    // Check If user has clicked any of 1)Non-Stop 2)Stop
+    onFlightTypeChangeHandler = event => {
         const updatedFilterInfo = { ...this.state.filterInfo };
         
         updatedFilterInfo.flightType = event.target.value;
         this.setState({ filterInfo: updatedFilterInfo });
+    }
+
+    // Utility function to filter Flight Type
+    filterType = (flightList, value) => {
+        if (value === 1) {
+            return flightList.filter(flight => flight.nonStop)          
+        }
+        else if (value === 2) {
+            return flightList.filter(flight => !flight.nonStop)          
+        }
+        return flightList
+    }
+
+    filterFlights = filterInfo => {
+        const { flights } = this.state;
+        
+        let flightArray = []
+
+        for (let flight in flights) {
+            flightArray.push(flights[flight]);
+        }
+
+        // Filter Non-Stop, Stop
+        flightArray = this.filterType(flightArray, filterInfo.flightType)
+        
+        // Filter By Price
+        
+
+        console.log(flightArray);
+
     }
 
     onFlightPriceChangeHandler = (event) => {
@@ -61,13 +92,13 @@ class FlightSearch extends Component {
             .catch(err => console.log('there was an ', err));
     }
 
-    
+
 
     render() {
 
 
         const { flights } = this.state;
-
+        this.filterFlights(this.state.filterInfo);
         let flightList = <CustomSkeleton />
         let flightListArray = [];
 

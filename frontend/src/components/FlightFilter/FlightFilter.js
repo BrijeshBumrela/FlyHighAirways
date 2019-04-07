@@ -53,7 +53,7 @@ const flightFilter = (props) => {
                     <br />
 
                     <Radio value={9000}>
-                        <span>&lt; 9000</span>
+                        <span>&gt; 9000</span>
                     </Radio>
                     <br />
 
