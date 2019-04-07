@@ -7,6 +7,7 @@ import Flights from "../../components/Flights/Flights";
 import FlightFilter from "../../components/FlightFilter/FlightFilter";
 
 import CustomSkeleton from "../../components/UI/Skeleton/Skeleton";
+import { getTimeSlot } from './utils';
 
 import classes from "./FlightSearch.module.css";
 
@@ -46,8 +47,19 @@ class FlightSearch extends Component {
         return flightList
     }
 
+    // Utility function to filter by price range
     filterPrice = (flightList, price) => {
         return flightList.filter(flight => flight.economy.fare < price)
+    }
+
+    // Utility function to filter by flight time
+    filterTime = (flightList, timeListObject) => {
+
+        return flightList.filter(flight => {
+            const time = getTimeSlot(flight.start_time.split(':')[0]);
+            return timeListObject[time] ? true : false;
+        });
+
     }
 
     filterFlights = filterInfo => {
@@ -65,7 +77,8 @@ class FlightSearch extends Component {
         // Filter By Price
         flightArray = this.filterPrice(flightArray, filterInfo.priceRange);
 
-        console.log(flightArray);
+        // Filter By Time of the Day
+        flightArray = this.filterTime(flightArray, filterInfo.flightTime)
         return flightArray;
     }
 

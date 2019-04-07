@@ -44,5 +44,5 @@ const checkIn = (props) => {
         </div>
     );
 }
- 
+
 export default checkIn;
