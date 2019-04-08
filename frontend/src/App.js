@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
+import "font-awesome/css/font-awesome.min.css";
 
 import { authCheckStatus } from "./store/actions/index";
 
