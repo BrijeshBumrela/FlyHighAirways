@@ -22,8 +22,9 @@ class HomePage extends Component {
     return (
       <div>
         <Navbar />
-        <div>hello</div>
-        <MenuBar />
+        <div style={styles}>
+          <MenuBar />
+        </div>
         {/* <FlightForm /> */}
         {/* <CarouselComponent /> */}
       </div>

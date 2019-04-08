@@ -3,6 +3,7 @@ import ComponentSlider from "@kapost/react-component-slider";
 import "./customstyle.css";
 const renderLeftArrow = () => <i className="fa fa-caret-left" />;
 const renderRightArrow = () => <i className="fa fa-caret-right" />;
+
 class MenuBar extends React.Component {
   render() {
     return (
