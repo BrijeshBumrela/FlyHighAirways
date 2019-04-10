@@ -20,9 +20,11 @@ class AuthenticateForm extends Component {
                 },
                 value: '',
                 validation: {
-                    required: true
+                    required: true,
+                    shouldContain: '@'
                 },
-                valid: false
+                valid: false,
+                touched: false
             },
             password: {
                 elementType: 'input',
@@ -35,7 +37,8 @@ class AuthenticateForm extends Component {
                     required: true,
                     minLength: 8
                 },
-                valid: false
+                valid: false,
+                touched: false
             },
             firstName: {
                 elementType: 'input',
@@ -49,7 +52,8 @@ class AuthenticateForm extends Component {
                     minLength: 8,
                     nameOnly: true
                 },
-                valid: false
+                valid: false,
+                touched: false
             },
             lastName: {
                 elementType: 'input',
@@ -62,7 +66,8 @@ class AuthenticateForm extends Component {
                     required: false,
                     minLength: 8,
                 },
-                valid: false
+                valid: false,
+                touched: false
             }
             
         },
@@ -113,12 +118,20 @@ class AuthenticateForm extends Component {
         }
 
         if (rules.minLength) {
-            isValid = isValid && value.length >= rules.minLength 
+            isValid = isValid && value.length >= rules.minLength;
+        }
+
+        if (rules.shouldContain) {
+            isValid = isValid && value.includes(rules.shouldContain);
         }
 
         return isValid;
     };
 
+    // Function to use ternary operator and find which one of the two (cross/tick) to use
+    validSignHandler = () => {
+
+    }
 
 
     inputChangedHandler = (event, inputIdentifier) => {
@@ -128,13 +141,38 @@ class AuthenticateForm extends Component {
         updatedFormElement.value = event.target.value;
         updatedForm[inputIdentifier] = updatedFormElement;
         updatedForm[inputIdentifier].valid = this.checkValidation(event.target.value, updatedForm[inputIdentifier].validation)
-        this.setState({ authForm:updatedForm });
+        updatedForm[inputIdentifier].touched = true;
+
+        this.setState({ authForm : updatedForm });
     };
     
     render() {
 
         const { authForm } = this.state;
 
+        const inValidIcon = (
+            <Icon type="close-circle" 
+                theme="twoTone" 
+                twoToneColor="#eb2f96"
+                className={classes.validateIcon}
+            />
+        )
+
+        const blankIcon = (
+            <Icon type="close-circle" 
+                theme="twoTone" 
+                twoToneColor="#fff"
+                className={classes.validateIcon}
+            />
+        )
+
+        const validIcon = (
+            <Icon type="check-circle" 
+                className={classes.validateIcon}
+                theme="twoTone"
+                twoToneColor="#52c41a"
+            />
+        )
 
         // LOGIN FORM
         let form = (
@@ -143,27 +181,39 @@ class AuthenticateForm extends Component {
                 <h4 className={classes.FormText}>Login TO Proceed</h4>
 
                 <form onSubmit={(e) => this.authHandler(e)}>
-                    <Input 
-                        className={classes.InputElement} 
-                        prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} 
-                        type={authForm.email.elementConfig.type} 
-                        placeholder={authForm.email.elementConfig.placeholder} 
-                        value={authForm.email.value}
-                        onChange={(e) => this.inputChangedHandler(e, authForm.email.elementConfig.type)}
-                    />
-                    
-                    <Input
-                        className={classes.InputElement} 
-                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} 
-                        type="password" 
-                        placeholder="Password" 
-                        value={authForm.password.value}
-                        onChange={(e) => this.inputChangedHandler(e, authForm.password.elementConfig.type)}
-                    />
+                    <div className={classes.formDiv}>
+                        <Input 
+                            className={classes.InputElement} 
+                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} 
+                            type={authForm.email.elementConfig.type} 
+                            placeholder={authForm.email.elementConfig.placeholder} 
+                            value={authForm.email.value}
+                            onChange={(e) => this.inputChangedHandler(e, authForm.email.elementConfig.type)}
+                        />
+                        {
+                            !authForm.email.touched ? validIcon : authForm.email.valid ? validIcon : inValidIcon
+                        }
+                    </div>
 
-                    <Button htmlType="submit" size="default" style={{backgroundColor: '#6A5ACD', border:'none'}} block shape="round">
-                        { this.state.isSignUp ? 'SIGN UP' : 'LOG IN' }
-                    </Button>
+                    <div className={classes.formDiv}>
+                        <Input
+                            className={classes.InputElement} 
+                            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} 
+                            type="password" 
+                            placeholder="Password" 
+                            value={authForm.password.value}
+                            onChange={(e) => this.inputChangedHandler(e, authForm.password.elementConfig.type)}
+                        />
+                        {
+                            !this.state.authForm.email.valid && this.state.authForm.email.touched ? 
+                            inValidIcon : validIcon
+                        }
+                    </div>
+                    <div style={{width: '90%'}}>
+                        <Button htmlType="submit" size="default" style={{backgroundColor: '#6A5ACD', border:'none'}} block shape="round">
+                            { this.state.isSignUp ? 'SIGN UP' : 'LOG IN' }
+                        </Button>
+                    </div>
                 </form>
 
                 <Button size="small" className={classes.switchBtn} onClick={this.switchAuthModeHandler}>
@@ -173,7 +223,7 @@ class AuthenticateForm extends Component {
         )
 
         if (this.state.isSignUp) {
-
+            // Sign Up Form
             form = (
 
                 <div className={classes.container}>
@@ -181,45 +231,73 @@ class AuthenticateForm extends Component {
                     <h4 className={classes.FormText}>Login TO Proceed</h4>
 
                     <form onSubmit={(e) => this.authHandler(e)}>
-                        <Input 
-                            className={classes.InputElement} 
-                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} 
-                            type={authForm.email.elementConfig.type} 
-                            placeholder={authForm.email.elementConfig.placeholder} 
-                            value={authForm.email.value}
-                            onChange={(e) => this.inputChangedHandler(e, authForm.email.elementConfig.type)}
-                        />
+                        <div className={classes.formDiv}>
+                            <Input 
+                                className={classes.InputElement} 
+                                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} 
+                                type={authForm.email.elementConfig.type} 
+                                placeholder={authForm.email.elementConfig.placeholder} 
+                                value={authForm.email.value}
+                                onChange={(e) => this.inputChangedHandler(e, authForm.email.elementConfig.type)}
+                            />
+                            {
+                                !authForm.email.valid && authForm.email.touched ? 
+                                inValidIcon : validIcon
+                            }
+                        </div>
 
-                        <Input 
-                            className={classes.InputElement} 
-                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} 
-                            type={authForm.firstName.elementConfig.type} 
-                            placeholder={authForm.email.elementConfig.placeholder} 
-                            value={authForm.email.value}
-                            onChange={(e) => this.inputChangedHandler(e, authForm.email.elementConfig.type)}
-                        />
+                        <div className={classes.formDiv}>
+                            <Input 
+                                className={classes.InputElement} 
+                                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} 
+                                type={authForm.firstName.elementConfig.type} 
+                                placeholder={authForm.firstName.elementConfig.placeholder} 
+                                value={authForm.firstName.value}
+                                onChange={(e) => this.inputChangedHandler(e, 'firstName')}
+                            />
+                            {
+                                !authForm.firstName.valid && authForm.firstName.touched ? 
+                                inValidIcon : validIcon
+                            }
+                        </div>
 
-                        <Input 
-                            className={classes.InputElement} 
-                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} 
-                            type={authForm.lastName.elementConfig.type} 
-                            placeholder={authForm.email.elementConfig.placeholder} 
-                            value={authForm.email.value}
-                            onChange={(e) => this.inputChangedHandler(e, authForm.email.elementConfig.type)}
-                        />
-                        
-                        <Input
-                            className={classes.InputElement} 
-                            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} 
-                            type="password" 
-                            placeholder="Password" 
-                            value={authForm.password.value}
-                            onChange={(e) => this.inputChangedHandler(e, authForm.password.elementConfig.type)}
-                        />
+                        <div className={classes.formDiv}>
+                            <Input 
+                                className={classes.InputElement} 
+                                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} 
+                                type={authForm.lastName.elementConfig.type} 
+                                placeholder={authForm.lastName.elementConfig.placeholder} 
+                                value={authForm.lastName.value}
+                                onChange={(e) => this.inputChangedHandler(e, 'lastName')}
+                            />
+                            {
+                                !authForm.lastName.valid && authForm.lastName.touched ? 
+                                inValidIcon : validIcon
+                            }
+                        </div>
 
-                        <Button htmlType="submit" size="default" style={{backgroundColor: '#6A5ACD', border:'none'}} block shape="round">
-                            { this.state.isSignUp ? 'SIGN UP' : 'LOG IN' }
-                        </Button>
+
+                        <div className={classes.formDiv}>
+
+                            <Input
+                                className={classes.InputElement} 
+                                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} 
+                                type="password" 
+                                placeholder="Password" 
+                                value={authForm.password.value}
+                                onChange={(e) => this.inputChangedHandler(e, authForm.password.elementConfig.type)}
+                            />
+                            {
+                                !authForm.password.valid && authForm.password.touched ? 
+                                inValidIcon : validIcon
+                            }
+                        </div>
+
+                        <div style={{width: '90%'}}>
+                            <Button htmlType="submit" size="default" style={{backgroundColor: '#6A5ACD', border:'none'}} block shape="round">
+                                { this.state.isSignUp ? 'SIGN UP' : 'LOG IN' }
+                            </Button>
+                        </div>
                     </form>
 
                     <Button size="small" className={classes.switchBtn} onClick={this.switchAuthModeHandler}>

@@ -1,8 +1,7 @@
 .Page {
-    background: #eee;
     height: 100vh;
-
     position: relative;
+    background: #eee;
 }
 
 .Plane {
@@ -11,8 +10,12 @@
     margin: auto;
 }
 
+.Cockpit {
+    height: 100px;
+}
+
 .Body {
-    padding: 0 1rem;
+    padding: 1rem 1rem;
     height: 80%;
     background: #fff;
 }
