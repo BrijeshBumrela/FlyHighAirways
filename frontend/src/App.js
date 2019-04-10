@@ -14,8 +14,8 @@ import Auth from "./containers/Auth/Auth";
 import "antd/dist/antd.css";
 
 import FlightBook from "./containers/FlightBook/FlightBook";
-
 import HomePage from "./containers/Homepage/Hompage";
+
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -38,7 +38,6 @@ class App extends Component {
               <Route path="/" exact component={HomePage} />
               <Route path="/flights" component={FlightSearch} />
               <Route path="/book-flight" component={FlightBook} />
-              {/* <Route path="/book-flight" /> */}
               <Route path="/authenticate" component={Auth} />
             </Switch>
           </BrowserRouter>
@@ -47,26 +46,6 @@ class App extends Component {
     );
   }
 }
-
-// class App extends Component {
-//   render() {
-//     return (
-//       <Provider store={store}>
-//         <BrowserRouter>
-//           <Switch>
-//             <Route path="/" exact component={HomePage} />
-//             <Route path="/home" exact component={Home} />
-//             <Route path="/flights" component={FlightSearch} />
-//             <Route path="/book-flight" component={FlightBook} />
-//             <Route path="/checkin" component={CheckIn} />
-
-//             {/* <Route path="/book-flight" /> */}
-//             <Route path="/authenticate" component={Auth} />
-//           </Switch>
-//         </BrowserRouter>
-//       </Provider>
-//     );
-//   }
 
 const mapDispatchToProps = dispatch => {
   return {

@@ -11,17 +11,17 @@ function Footer() {
             <div className="footer-center">
               <h2>G2</h2>
               <div>
-                <a target="_blank " href="#">
+                <a target="_blank " href="/">
                   Abc
                 </a>
               </div>
               <div>
-                <a target="_blank " href="#">
+                <a target="_blank " href="/">
                   API Abc
                 </a>
               </div>
               <div>
-                <a href="#">Abc</a>
+                <a href="/">Abc</a>
               </div>
             </div>
           </Col>
@@ -29,15 +29,15 @@ function Footer() {
             <div className="footer-center">
               <h2>G6</h2>
               <div>
-                <a href="#">Abc</a>
+                <a href="/">Abc</a>
               </div>
               <div>
-                <a target="_blank" rel="noopener" href="#">
+                <a target="_blank" rel="noopener" href="/">
                   API Abc
                 </a>
               </div>
               <div>
-                <a target="_blank" rel="noopener" href="#">
+                <a target="_blank" rel="noopener" href="/">
                   Abc
                 </a>
               </div>
@@ -47,15 +47,15 @@ function Footer() {
             <div className="footer-center">
               <h2>F2</h2>
               <div>
-                <a href="#">Abc</a>
+                <a href="/">Abc</a>
               </div>
               <div>
-                <a target="_blank" rel="noopener" href="#">
+                <a target="_blank" rel="noopener" href="/">
                   API Abc
                 </a>
               </div>
               <div>
-                <a target="_blank" rel="noopener" href="#">
+                <a target="_blank" rel="noopener" href="/">
                   Abc
                 </a>
               </div>
@@ -65,20 +65,20 @@ function Footer() {
             <div className="footer-center">
               <h2>Abc</h2>
               <div>
-                <a href="#">Abc</a>
+                <a href="/">Abc</a>
               </div>
               <div>
-                <a target="_blank" rel="noopener" href="#">
+                <a target="_blank" rel="noopener" href="/">
                   Abc
                 </a>
               </div>
               <div>
-                <a target="_blank" rel="noopener" href="#">
+                <a target="_blank" rel="noopener" href="/">
                   Abc
                 </a>
               </div>
               <div>
-                <a target="_blank" rel="noopener" href="#">
+                <a target="_blank" rel="noopener" href="/">
                   Abc
                 </a>
               </div>
@@ -88,14 +88,14 @@ function Footer() {
             <div className="footer-center">
               <h2>Abc</h2>
               <div>
-                <a target="_blank" rel="noopener" href="http://ant.design/">
+                <a target="_blank" rel="noopener noreferrer" href="http://ant.design/">
                   Ant Design
                 </a>
                 <span> - </span>
                 <span>Abc UI Abc</span>
               </div>
               <div>
-                <a target="_blank" rel="noopener" href="https://eggjs.org/">
+                <a target="_blank" rel="noopener noreferrer" href="https://eggjs.org/">
                   Egg
                 </a>
                 <span> - </span>

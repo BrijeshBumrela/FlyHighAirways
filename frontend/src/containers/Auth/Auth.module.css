@@ -1,6 +1,6 @@
 .container {
     width: 60%;
-    height: 60%;
+    min-height: 60%;
     margin: auto;
     margin-top: 5rem;
     display: flex;
@@ -67,4 +67,14 @@
     background-image: url('https://images.unsplash.com/photo-1519666336592-e225a99dcd2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80');
     background-size: cover;
     background-position: center;
+}
+
+.formDiv {
+    display: flex;
+    align-items: center;
+}
+
+.validateIcon {
+    font-size: 1.5rem;
+    padding-left: 0.2rem;
 }

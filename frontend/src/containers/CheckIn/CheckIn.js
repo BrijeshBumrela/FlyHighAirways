@@ -11,7 +11,7 @@ const checkIn = (props) => {
             <div className={classes.Plane}>
     
                 <div className={classes.Cockpit}>
-
+                    &nbsp;
                 </div>
 
                 <div className={classes.Body}>

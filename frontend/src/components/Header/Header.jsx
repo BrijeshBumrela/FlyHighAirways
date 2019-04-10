@@ -26,7 +26,7 @@ class Navbar extends Component {
     return (
       <nav className={classes.menuBar}>
         <div className={classes.logo}>
-          <a href="javascript:void(0)">LOGO</a>
+          <a href="/">LOGO</a>
         </div>
 
         <div className={classes.menuCon}>
@@ -51,7 +51,7 @@ class Navbar extends Component {
                 </MenuItemGroup>
               </SubMenu>
               <Menu.Item key="alipay">
-                <a href="#">Contact Us</a>
+                <a href="/">Contact Us</a>
               </Menu.Item>
             </Menu>
           </div>
@@ -102,7 +102,7 @@ class Navbar extends Component {
               <Menu.Item key="3">nav 3</Menu.Item>
 
               <Menu.Item key="mail">
-                <a href="">Home</a>
+                <a href="/">Home</a>
               </Menu.Item>
               <SubMenu title={<span>Blogs</span>}>
                 <MenuItemGroup title="Item 1">
@@ -115,7 +115,7 @@ class Navbar extends Component {
                 </MenuItemGroup>
               </SubMenu>
               <Menu.Item key="alipay">
-                <a href="#">Contact Us</a>
+                <a href="/">Contact Us</a>
               </Menu.Item>
 
               <SubMenu

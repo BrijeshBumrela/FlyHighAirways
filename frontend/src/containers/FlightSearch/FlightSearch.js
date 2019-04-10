@@ -11,6 +11,8 @@ import { getTimeSlot } from './utils';
 
 import classes from "./FlightSearch.module.css";
 
+import Paypal from "../../components/Paypal/Paypal";
+
 class FlightSearch extends Component {
     state = {
         loading: true,
@@ -153,6 +155,12 @@ class FlightSearch extends Component {
                     </Col>
                     <Col md={19}>{flightList}</Col>
                 </Row>
+                <Paypal 
+                    toPay={5}
+                    transactionError={(err) => this.transactionError(err)}
+                    transactionCancelled={(data) => this.transactionCancelled(data)}
+                    transactionSuccess={(payment) => this.transactionSuccess(payment)}
+                />
             </React.Fragment>
         );
       }
