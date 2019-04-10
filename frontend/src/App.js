@@ -5,14 +5,13 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import { connect } from "react-redux";
+import "font-awesome/css/font-awesome.min.css";
 
 import { authCheckStatus } from "./store/actions/index";
 
-// import FlightBook from "./containers/FlightBook/FlightBook";
 import FlightSearch from "./containers/FlightSearch/FlightSearch";
-import HomePage from "./containers/Homepage/Hompage";
 import Auth from "./containers/Auth/Auth";
-import Home from "./containers/Homepage/LandingPage";
+// import Home from "./containers/Homepage/LandingPage";
 import "antd/dist/antd.css";
 
 // import reducer from "./store/reducers/reducer";
@@ -20,6 +19,7 @@ import FlightBook from "./containers/FlightBook/FlightBook";
 import NavBar from "./components/UI/Navbar/navbar";
 
 import CheckIn from "./containers/CheckIn/CheckIn";
+import HomePage from "./containers/Homepage/Hompage";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -73,6 +73,7 @@ class App extends Component {
 //       </Provider>
 //     );
 //   }
+
 const mapDispatchToProps = dispatch => {
   return {
     autoSignUpHandler: () => dispatch(authCheckStatus())

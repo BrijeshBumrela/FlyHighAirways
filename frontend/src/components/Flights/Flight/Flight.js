@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Col, Row, Icon, Button } from 'antd';
+import { Col, Row, Button } from 'antd';
 import classes from './Flight.module.css';
 
 const flight = (props) => (
@@ -9,7 +9,7 @@ const flight = (props) => (
             <div className={classes.TimingBoxHeader}>
                 <div className={classes.ToCenter}>
                     <h2>{props.startTime}</h2>
-                    <h4>MAA</h4>
+                    <h4>{props.source.toUpperCase()}</h4>
                 </div>
                 <div className={classes.ToCenter}>
                     <h3>{props.nonStop ? 'NON STOP' : '1 STOP'}</h3>
@@ -17,7 +17,7 @@ const flight = (props) => (
                 </div>
                 <div className={classes.ToCenter}>
                     <h2>{props.endTime}</h2>
-                    <h4>BOM</h4>
+                    <h4>{props.destination.toUpperCase()}</h4>
                 </div>
             </div>
         </Col>
