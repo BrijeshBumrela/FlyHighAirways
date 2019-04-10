@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Carousel, Icon } from "antd";
+import FlightForm from "../FlightForm/FlightForm";
+import classes from "./CarouselCustom.module.css";
 
 export default class CarouselComponent extends Component {
   constructor(props) {
@@ -25,34 +27,49 @@ export default class CarouselComponent extends Component {
     };
     return (
       <div style={{ position: "relative" }}>
+        =
         <Icon
           type="left-circle"
+          theme="filled"
           onClick={this.previous}
-          style={{ position: "absolute", zIndex: "190", top: "109px" }}
+          style={{
+            position: "absolute",
+            zIndex: "190",
+            top: "280px",
+            left: "45%",
+            fontSize: "40px"
+          }}
         />
-        <Carousel
-          ref={node => (this.carousel = node)}
-          {...props}
-          style={{ position: "absolute" }}
-        >
-          <div>
-            <img src="http://wowslider.com/sliders/demo-93/data1/images/lake.jpg" />
-          </div>
-          <div>
-            <img src="http://wowslider.com/sliders/demo-93/data1/images/sunset.jpg" />
-          </div>
-          <div>
-            <img src="http://wowslider.com/sliders/demo-93/data1/images/lake.jpg" />
-          </div>
-        </Carousel>
+        <div className={classes.parentDiv}>
+          <Carousel
+            ref={node => (this.carousel = node)}
+            {...props}
+            style={{ position: "absolute", height: "400px" }}
+          >
+            <div className={classes.antCarousel}>
+              <img src="https://reviewkar.com/wp-content/uploads/2018/06/Skardu.jpg" />
+            </div>
+            <div className={classes.antCarousel}>
+              <img src="http://www.liveenhanced.com/wp-content/uploads/2018/03/B-Ocean-Resort-most-beautiful-places-To-visit-In-florida.jpg" />
+            </div>
+            <div className={classes.antCarousel}>
+              <img src="http://www.jetwayz.com/wp-content/uploads/2012/11/Tourist-Attractions-in-Italy.jpg" />
+            </div>
+          </Carousel>
+        </div>
+        <h1 className={classes.childDiv}>
+          <FlightForm />
+        </h1>
         <Icon
           type="right-circle"
+          theme="filled"
           onClick={this.next}
           style={{
             position: "absolute",
             zIndex: "190",
-            top: "10px",
-            left: "99%"
+            top: "280px",
+            left: "96%",
+            fontSize: "40px"
           }}
         />
       </div>

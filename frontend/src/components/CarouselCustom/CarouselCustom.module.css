@@ -1,0 +1,13 @@
+.parentDiv {
+  position: relative;
+}
+
+.childDiv {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+}
+.antCarousel {
+  height: 500px;
+  overflow: hidden;
+}

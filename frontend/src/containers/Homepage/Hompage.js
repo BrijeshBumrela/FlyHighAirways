@@ -22,6 +22,7 @@ class HomePage extends Component {
     return (
       <div>
         <Navbar />
+        <CarouselComponent />
         <div style={styles}>
           <MenuBar />
         </div>
@@ -29,7 +30,6 @@ class HomePage extends Component {
         {/* <Carousal /> */}
         {/* <Carousal /> */}
         {/* <FlightForm /> */}
-        <CarouselComponent />
       </div>
     );
   }
