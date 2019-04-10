@@ -36,13 +36,22 @@ export default class CarouselComponent extends Component {
           style={{ position: "absolute" }}
         >
           <div>
-            <img src="http://wowslider.com/sliders/demo-93/data1/images/lake.jpg" />
+            <img
+              alt="img"
+              src="http://wowslider.com/sliders/demo-93/data1/images/lake.jpg"
+            />
           </div>
           <div>
-            <img src="http://wowslider.com/sliders/demo-93/data1/images/sunset.jpg" />
+            <img
+              alt="img"
+              src="http://wowslider.com/sliders/demo-93/data1/images/sunset.jpg"
+            />
           </div>
           <div>
-            <img src="http://wowslider.com/sliders/demo-93/data1/images/lake.jpg" />
+            <img
+              alt="img"
+              src="http://wowslider.com/sliders/demo-93/data1/images/lake.jpg"
+            />
           </div>
         </Carousel>
         <Icon
