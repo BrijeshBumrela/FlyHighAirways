@@ -26,3 +26,13 @@ img {
   top: 10%;
   left: 10%;
 }
+.childDiv1 {
+  position: absolute;
+  top: 40%;
+  left: 10%;
+}
+.childDiv2 {
+  position: absolute;
+  top: 20%;
+  left: 10%;
+}

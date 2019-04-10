@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@brainhubeu/react-carousel": "^1.10.17",
     "@kapost/react-component-slider": "^1.0.5",
     "antd": "^3.15.2",
     "axios": "^0.18.0",

@@ -24,9 +24,17 @@ export default class CarouselComponent extends Component {
       slidesToScroll: 1
     };
     return (
-      <div>
-        <Icon type="left-circle" onClick={this.previous} />
-        <Carousel ref={node => (this.carousel = node)} {...props}>
+      <div style={{ position: "relative" }}>
+        <Icon
+          type="left-circle"
+          onClick={this.previous}
+          style={{ position: "absolute", zIndex: "190", top: "109px" }}
+        />
+        <Carousel
+          ref={node => (this.carousel = node)}
+          {...props}
+          style={{ position: "absolute" }}
+        >
           <div>
             <img src="http://wowslider.com/sliders/demo-93/data1/images/lake.jpg" />
           </div>
@@ -37,7 +45,16 @@ export default class CarouselComponent extends Component {
             <img src="http://wowslider.com/sliders/demo-93/data1/images/lake.jpg" />
           </div>
         </Carousel>
-        <Icon type="right-circle" onClick={this.next} />
+        <Icon
+          type="right-circle"
+          onClick={this.next}
+          style={{
+            position: "absolute",
+            zIndex: "190",
+            top: "10px",
+            left: "99%"
+          }}
+        />
       </div>
     );
   }
