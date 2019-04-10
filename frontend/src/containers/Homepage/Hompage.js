@@ -1,15 +1,11 @@
 import React, { Component } from "react";
 
-import FlightForm from "../../components/FlightForm/FlightForm";
-// import Navbar from "../../components/Header/Header";
+import "font-awesome/css/font-awesome.css";
 import CarouselComponent from "../../components/CarouselCustom/CarouselCustom";
-import { Layout, Menu, Icon } from "antd";
 import Navbar from "../../components/Header/Header";
 import MenuBar from "../../components/HorizontalScrollBar/ScrollBar";
-const { Header, Content, Footer, Sider } = Layout;
-// import { Menu, Icon } from "antd";
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
+import Footer from "../../components/Footer/Footer";
+
 const styles = {
   fontFamily: "sans-serif",
   textAlign: "center",
@@ -22,11 +18,16 @@ class HomePage extends Component {
     return (
       <div>
         <Navbar />
+        <CarouselComponent />
         <div style={styles}>
           <MenuBar />
         </div>
+
+        {/* <Carousal /> */}
+        {/* <Carousal /> */}
         {/* <FlightForm /> */}
-        {/* <CarouselComponent /> */}
+
+        <Footer />
       </div>
     );
   }

@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Layout, Menu, Icon, Button, Drawer } from "antd";
+import { Menu, Icon, Button, Drawer } from "antd";
 import classes from "./Header.module.css";
 
-const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
@@ -27,7 +26,7 @@ class Navbar extends Component {
     return (
       <nav className={classes.menuBar}>
         <div className={classes.logo}>
-          <a href="">LOGO</a>
+          <a href="/">LOGO</a>
         </div>
 
         <div className={classes.menuCon}>
@@ -40,11 +39,7 @@ class Navbar extends Component {
             >
               <Menu.Item key="1">nav 1</Menu.Item>
               <Menu.Item key="2">nav 2</Menu.Item>
-              <Menu.Item key="3">nav 3</Menu.Item>
 
-              <Menu.Item key="mail">
-                <a href="">Home</a>
-              </Menu.Item>
               <SubMenu title={<span>Blogs</span>}>
                 <MenuItemGroup title="Item 1">
                   <Menu.Item key="setting:1">Option 1</Menu.Item>
@@ -56,7 +51,7 @@ class Navbar extends Component {
                 </MenuItemGroup>
               </SubMenu>
               <Menu.Item key="alipay">
-                <a href="#">Contact Us</a>
+                <a href="/">Contact Us</a>
               </Menu.Item>
             </Menu>
           </div>
@@ -107,7 +102,7 @@ class Navbar extends Component {
               <Menu.Item key="3">nav 3</Menu.Item>
 
               <Menu.Item key="mail">
-                <a href="">Home</a>
+                <a href="/">Home</a>
               </Menu.Item>
               <SubMenu title={<span>Blogs</span>}>
                 <MenuItemGroup title="Item 1">
@@ -120,7 +115,7 @@ class Navbar extends Component {
                 </MenuItemGroup>
               </SubMenu>
               <Menu.Item key="alipay">
-                <a href="#">Contact Us</a>
+                <a href="/">Contact Us</a>
               </Menu.Item>
 
               <SubMenu

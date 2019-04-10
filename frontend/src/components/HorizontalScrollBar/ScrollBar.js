@@ -12,17 +12,13 @@ class MenuBar extends React.Component {
           renderLeftArrow={renderLeftArrow}
           renderRightArrow={renderRightArrow}
         >
-          <div className="menu-item">The</div>
-          <div className="menu-item">Quick</div>
-          <div className="menu-item">Brown</div>
-          <div className="menu-item">
-            <i className="fa fa-firefox" aria-hidden="true" /> Firefox
-          </div>
-          <div className="menu-item">Jumps</div>
-          <div className="menu-item">Over</div>
-          <div className="menu-item">The</div>
-          <div className="menu-item">Lazy</div>
-          <div className="menu-item">Dog</div>
+          <div className="menu-item">Web check in </div>
+          <div className="menu-item">Book a Flight</div>
+          <div className="menu-item">Edit a booking</div>
+
+          <div className="menu-item">Group Booking</div>
+          <div className="menu-item">Plan B</div>
+          <div className="menu-item">Flight Status</div>
         </ComponentSlider>
       </div>
     );
