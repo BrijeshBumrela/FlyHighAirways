@@ -6,7 +6,7 @@ import DynamicFieldSet from "../../components/Form/dynamic";
 import { Form } from "antd";
 const { SubMenu } = Menu;
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Footer, Sider } = Layout;
 
 const WrappedDynamicFieldSet = Form.create({ name: "dynamic_form_item" })(
   DynamicFieldSet

@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Layout, Menu, Icon, Button, Drawer } from "antd";
+import { Menu, Icon, Button, Drawer } from "antd";
 import classes from "./Header.module.css";
 
-const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
@@ -27,7 +26,7 @@ class Navbar extends Component {
     return (
       <nav className={classes.menuBar}>
         <div className={classes.logo}>
-          <a href="">LOGO</a>
+          <a href="javascript:void(0)">LOGO</a>
         </div>
 
         <div className={classes.menuCon}>
