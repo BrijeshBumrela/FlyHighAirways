@@ -50,7 +50,6 @@ class AuthenticateForm extends Component {
                 validation: {
                     required: false,
                     minLength: 8,
-                    nameOnly: true
                 },
                 valid: false,
                 touched: false
@@ -71,7 +70,8 @@ class AuthenticateForm extends Component {
             }
             
         },
-        isSignUp: true
+        isSignUp: true,
+        valid: false
     }
 
     authHandler = (event) => {
@@ -108,17 +108,38 @@ class AuthenticateForm extends Component {
                 isSignUp: !prevState.isSignUp
             };    
         });
+
+        // Making all values empty
+
+        const updatedAuthForm = { ...this.state.authForm };
+        
+        const updatedEmailForm = { ...this.state.authForm.email };
+        updatedEmailForm.value = '';
+        updatedEmailForm.touched = false;
+        
+        updatedAuthForm.email = updatedEmailForm;
+
+
+        const updatedPassForm = { ...this.state.authForm.password };
+        updatedPassForm.value = '';
+        updatedPassForm.touched = false;
+
+        updatedAuthForm.password = updatedPassForm;
+
+        this.setState({ authForm: updatedAuthForm });
     }
 
     checkValidation = (value, rules) => {
-        let isValid = false;
+        let isValid = true;
 
         if (rules.required) {
-            isValid = value.trim() !== '';
+            isValid = isValid && value.trim() !== '';
+            console.log('[REQUIRED]', isValid);
         }
 
         if (rules.minLength) {
             isValid = isValid && value.length >= rules.minLength;
+            console.log('[MINLENGTH]', isValid);
         }
 
         if (rules.shouldContain) {
@@ -129,8 +150,30 @@ class AuthenticateForm extends Component {
     };
 
     // Function to use ternary operator and find which one of the two (cross/tick) to use
-    validSignHandler = () => {
-
+    validSignHandler = (inputField) => {
+        return !this.state.authForm[inputField].touched ?
+            (
+                <Icon 
+                type="check-circle"
+                theme="twoTone" 
+                twoToneColor="#fff"
+                className={classes.validateIcon}
+                />
+            ) : this.state.authForm[inputField].valid ?  
+                (
+                    <Icon type="check-circle" 
+                        theme="twoTone" 
+                        twoToneColor="#52c41a"
+                        className={classes.validateIcon}
+                    />
+                )
+                :   (
+                    <Icon type="close-circle" 
+                        theme="twoTone"
+                        twoToneColor="#eb2f96"
+                        className={classes.validateIcon}
+                    />
+                )
     }
 
 
@@ -150,30 +193,6 @@ class AuthenticateForm extends Component {
 
         const { authForm } = this.state;
 
-        const inValidIcon = (
-            <Icon type="close-circle" 
-                theme="twoTone" 
-                twoToneColor="#eb2f96"
-                className={classes.validateIcon}
-            />
-        )
-
-        const blankIcon = (
-            <Icon type="close-circle" 
-                theme="twoTone" 
-                twoToneColor="#fff"
-                className={classes.validateIcon}
-            />
-        )
-
-        const validIcon = (
-            <Icon type="check-circle" 
-                className={classes.validateIcon}
-                theme="twoTone"
-                twoToneColor="#52c41a"
-            />
-        )
-
         // LOGIN FORM
         let form = (
             <div className={classes.container}>
@@ -191,7 +210,7 @@ class AuthenticateForm extends Component {
                             onChange={(e) => this.inputChangedHandler(e, authForm.email.elementConfig.type)}
                         />
                         {
-                            !authForm.email.touched ? validIcon : authForm.email.valid ? validIcon : inValidIcon
+                            this.validSignHandler('email')
                         }
                     </div>
 
@@ -205,8 +224,7 @@ class AuthenticateForm extends Component {
                             onChange={(e) => this.inputChangedHandler(e, authForm.password.elementConfig.type)}
                         />
                         {
-                            !this.state.authForm.email.valid && this.state.authForm.email.touched ? 
-                            inValidIcon : validIcon
+                            this.validSignHandler('password')
                         }
                     </div>
                     <div style={{width: '90%'}}>
@@ -241,8 +259,7 @@ class AuthenticateForm extends Component {
                                 onChange={(e) => this.inputChangedHandler(e, authForm.email.elementConfig.type)}
                             />
                             {
-                                !authForm.email.valid && authForm.email.touched ? 
-                                inValidIcon : validIcon
+                                this.validSignHandler('email')
                             }
                         </div>
 
@@ -256,8 +273,7 @@ class AuthenticateForm extends Component {
                                 onChange={(e) => this.inputChangedHandler(e, 'firstName')}
                             />
                             {
-                                !authForm.firstName.valid && authForm.firstName.touched ? 
-                                inValidIcon : validIcon
+                                this.validSignHandler('firstName')
                             }
                         </div>
 
@@ -271,8 +287,7 @@ class AuthenticateForm extends Component {
                                 onChange={(e) => this.inputChangedHandler(e, 'lastName')}
                             />
                             {
-                                !authForm.lastName.valid && authForm.lastName.touched ? 
-                                inValidIcon : validIcon
+                                this.validSignHandler('lastName')
                             }
                         </div>
 
@@ -288,8 +303,7 @@ class AuthenticateForm extends Component {
                                 onChange={(e) => this.inputChangedHandler(e, authForm.password.elementConfig.type)}
                             />
                             {
-                                !authForm.password.valid && authForm.password.touched ? 
-                                inValidIcon : validIcon
+                                this.validSignHandler('password')
                             }
                         </div>
 
