@@ -26,7 +26,7 @@ class HomePage extends Component {
         {/* <Carousal /> */}
         {/* <Carousal /> */}
         {/* <FlightForm /> */}
-        <CarouselComponent />
+
         <Footer />
       </div>
     );
