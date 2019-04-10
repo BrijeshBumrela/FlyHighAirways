@@ -37,8 +37,6 @@ class App extends Component {
     return (
       <React.Fragment>
         <Provider store={store}>
-          <NavBar />
-
           <BrowserRouter>
             <Switch>
               <Route path="/" exact component={HomePage} />
