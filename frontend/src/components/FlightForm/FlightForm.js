@@ -2,26 +2,28 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 
-import { Select, Popover, Button, Calendar } from "antd";
+import { Select, Popover, Button, Calendar, Input } from "antd";
 
 import classes from './FlightForm.module.css';
 
 const Option = Select.Option;
 
 class flightForm extends Component {
-  state = {
-    calendarPopUp: false,
-    formData: {
-      source: "",
-      destination: "",
-      time: ""
-    }
-  };
+    state = {
+        calendarPopUp: false,
+        formData: {
+          source: "",
+          destination: "",
+          time: ""
+        },
+        isValid: false
+    };
 
+  // Whether to display the calendar
   onVisibleHandler = () => {
-    this.setState(prevState => {
-      return { calendarPopUp: !prevState.calendarPopUp };
-    });
+      this.setState(prevState => {
+          return { calendarPopUp: !prevState.calendarPopUp };
+      });
   };
 
   // location ==> Source or destination
@@ -33,17 +35,18 @@ class flightForm extends Component {
     this.setState({ formData: updatedFormData });
   };
 
-  inputChangedHandler = (e, typeOfOption) => {
-      console.log(e.target.value);
-  }
-
+  // After selecting the date
   onDateSelectHandler = data => {
     this.onVisibleHandler();
+
+    const updatedFormData = { ...this.state.formData };
+    updatedFormData.time = data.format('L');
+    this.setState({ formData: updatedFormData });
   };
 
   onSubmitHandler = event => {
-    event.preventDefault();
-    this.props.onFlightFormAdded(this.state.formData);
+      event.preventDefault();
+      this.props.onFlightFormAdded(this.state.formData);
   };
 
   render() {
@@ -61,46 +64,55 @@ class flightForm extends Component {
             <div>   
                 <div className={classes.optionWrapper}>
 
-                <Select
-                    showSearch
-                    style={{ width: 200 }}
-                    placeholder="Source Airport"
-                    optionFilterProp="children"
-                    // onChange={handleChange}
-                    filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                  >
-                    <Option value="chennai">Chennai</Option>
-                    <Option value="kolkata">Kolkata</Option>
-                    <Option value="mumbai">Mumbai</Option>
-                    <Option value="pune">Pune</Option>
-                    <Option value="indore">Indore</Option>
-                    <Option value="delhi">Delhi</Option>
-                </Select>
+                    <Select
+                        showSearch
+                        style={{ width: 200 }}
+                        placeholder="Source Airport"
+                        optionFilterProp="children"
+                        // onChange={handleChange}
+                        filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                      >
+                        <Option value="chennai">Chennai</Option>
+                        <Option value="kolkata">Kolkata</Option>
+                        <Option value="mumbai">Mumbai</Option>
+                        <Option value="pune">Pune</Option>
+                        <Option value="indore">Indore</Option>
+                        <Option value="delhi">Delhi</Option>
+                    </Select> 
 
                 </div>
-                <Select
-                    showSearch
-                    style={{ width: 200 }}
-                    placeholder="Destination Airport"
-                    optionFilterProp="children"
-                    // onChange={handleChange}
-                    filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                  >
-                    <Option value="chennai">Chennai</Option>
-                    <Option value="kolkata">Kolkata</Option>
-                    <Option value="mumbai">Mumbai</Option>
-                    <Option value="pune">Pune</Option>
-                    <Option value="indore">Indore</Option>
-                    <Option value="delhi">Delhi</Option>
-                </Select>
-                <Popover
-                    content={popUpCalendar}
-                    title="Title"
-                    trigger="click"
-                    visible={this.state.calendarPopUp}
-                >
-                    <Button type="primary" onClick={this.onVisibleHandler}>Click me</Button>
-                </Popover>
+
+                <div className={classes.optionWrapper}>
+                    <Select
+                        showSearch
+                        style={{ width: 200 }}
+                        placeholder="Destination Airport"
+                        optionFilterProp="children"
+                        // onChange={handleChange}
+                        filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                      >
+                        <Option value="chennai">Chennai</Option>
+                        <Option value="kolkata">Kolkata</Option>
+                        <Option value="mumbai">Mumbai</Option>
+                        <Option value="pune">Pune</Option>
+                        <Option value="indore">Indore</Option>
+                        <Option value="delhi">Delhi</Option>
+                    </Select>
+                </div>
+
+                <div className={classes.dateWrapper}>
+                    <Input type="text" value={this.state.formData.time}/>
+                    <Popover
+                        content={popUpCalendar}
+                        title="Please Select the date of flight"
+                        trigger="click"
+                        visible={this.state.calendarPopUp}
+                    >
+                        <Button type="primary" onClick={this.onVisibleHandler}>Click me</Button>
+                    </Popover>
+                </div>
+
+                
             </div>
 
             <Button type="primary" htmlType="submit">
