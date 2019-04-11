@@ -12,9 +12,14 @@ class flightForm extends Component {
     state = {
         calendarPopUp: false,
         formData: {
-          source: "",
-          destination: "",
-          time: ""
+            source: "",
+            destination: "",
+            time: ""
+        },
+        validity: {
+            source: false,
+            destination: false,
+            time: false
         },
         isValid: false
     };
@@ -28,23 +33,21 @@ class flightForm extends Component {
 
   // location ==> Source or destination
   onCitySelectHandler = (cityData, location) => {
-    console.log(cityData, location);
-
-    const updatedFormData = { ...this.state.formData };
-    updatedFormData[location] = cityData;
-    this.setState({ formData: updatedFormData });
+      const updatedFormData = { ...this.state.formData };
+      updatedFormData[location] = cityData;
+      this.setState({ formData: updatedFormData });
   };
 
   // After selecting the date
   onDateSelectHandler = data => {
-    this.onVisibleHandler();
+      this.onVisibleHandler();
 
-    const updatedFormData = { ...this.state.formData };
-    updatedFormData.time = data.format('L');
-    this.setState({ formData: updatedFormData });
+      const updatedFormData = { ...this.state.formData };
+      updatedFormData.time = data.format('L');
+      this.setState({ formData: updatedFormData });
   };
 
-  onSubmitHandler = event => {
+  onSubmitHandler = (event) => {
       event.preventDefault();
       this.props.onFlightFormAdded(this.state.formData);
   };
@@ -108,14 +111,18 @@ class flightForm extends Component {
                         trigger="click"
                         visible={this.state.calendarPopUp}
                     >
-                        <Button type="primary" onClick={this.onVisibleHandler}>Click me</Button>
+                        <Button type="primary" onClick={this.onVisibleHandler}>Select A Date</Button>
                     </Popover>
                 </div>
 
                 
             </div>
 
-            <Button type="primary" htmlType="submit">
+            <Button 
+                type="primary" 
+                htmlType="submit"
+                onClick={(e) => this.onSubmitHandler(e)}    
+            >
                 Search Flights
             </Button>
         </form>
