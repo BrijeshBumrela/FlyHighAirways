@@ -27,7 +27,6 @@ export default class CarouselComponent extends Component {
     };
     return (
       <div style={{ position: "relative" }}>
-        
         <Icon
           type="left-circle"
           theme="filled"
@@ -41,21 +40,30 @@ export default class CarouselComponent extends Component {
           }}
         />
         <div className={classes.parentDiv}>
-            <Carousel
-              ref={node => (this.carousel = node)}
-              {...props}
-              style={{ position: "absolute", height: "400px" }}
-            >
-              <div className={classes.antCarousel}>
-                  <img alt="<temporary>" src="https://reviewkar.com/wp-content/uploads/2018/06/Skardu.jpg" />
-              </div>
-              <div className={classes.antCarousel}>
-                  <img alt="<temporary>" src="http://www.liveenhanced.com/wp-content/uploads/2018/03/B-Ocean-Resort-most-beautiful-places-To-visit-In-florida.jpg" />
-              </div>
-              <div className={classes.antCarousel}>
-                  <img alt="<temporary>" src="http://www.jetwayz.com/wp-content/uploads/2012/11/Tourist-Attractions-in-Italy.jpg" />
-              </div>
-            </Carousel>
+          <Carousel
+            ref={node => (this.carousel = node)}
+            {...props}
+            style={{ position: "absolute", height: "400px" }}
+          >
+            <div className={classes.antCarousel}>
+              <img
+                alt="<temporary>"
+                src="https://reviewkar.com/wp-content/uploads/2018/06/Skardu.jpg"
+              />
+            </div>
+            <div className={classes.antCarousel}>
+              <img
+                alt="<temporary>"
+                src="http://www.liveenhanced.com/wp-content/uploads/2018/03/B-Ocean-Resort-most-beautiful-places-To-visit-In-florida.jpg"
+              />
+            </div>
+            <div className={classes.antCarousel}>
+              <img
+                alt="<temporary>"
+                src="http://www.jetwayz.com/wp-content/uploads/2012/11/Tourist-Attractions-in-Italy.jpg"
+              />
+            </div>
+          </Carousel>
         </div>
         <h1 className={classes.childDiv}>
             <FlightForm />
@@ -75,4 +83,32 @@ export default class CarouselComponent extends Component {
       </div>
     );
   }
+}
+{
+  /* <Card className="menu-bar">
+  <ComponentSlider
+    renderLeftArrow={renderLeftArrow}
+    renderRightArrow={renderRightArrow}
+  >
+    <div className="menu-item">
+      <Card.Grid style={gridStyle}>Content</Card.Grid>
+    </div>
+    <div className="menu-item">
+      <Card.Grid style={gridStyle}>Content</Card.Grid>
+    </div>
+    <div className="menu-item">
+      <Card.Grid style={gridStyle}>Content</Card.Grid>
+    </div>
+
+    <div className="menu-item">
+      <Card.Grid style={gridStyle}>Content</Card.Grid>
+    </div>
+    <div className="menu-item">
+      <Card.Grid style={gridStyle}>Content</Card.Grid>
+    </div>
+    <div className="menu-item">
+      <Card.Grid style={gridStyle}>Content</Card.Grid>
+    </div>
+  </ComponentSlider>
+</Card>; */
 }
