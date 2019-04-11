@@ -66,7 +66,7 @@ export default class CarouselComponent extends Component {
           </Carousel>
         </div>
         <h1 className={classes.childDiv}>
-          <FlightForm />
+            <FlightForm />
         </h1>
         <Icon
           type="right-circle"
