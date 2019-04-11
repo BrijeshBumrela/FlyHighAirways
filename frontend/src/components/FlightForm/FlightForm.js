@@ -24,31 +24,50 @@ class flightForm extends Component {
         isValid: false
     };
 
-  // Whether to display the calendar
-  onVisibleHandler = () => {
-      this.setState(prevState => {
-          return { calendarPopUp: !prevState.calendarPopUp };
-      });
-  };
+    // Whether to display the calendar
+    onVisibleHandler = () => {
+        this.setState(prevState => {
+            return { calendarPopUp: !prevState.calendarPopUp };
+        });
+    };
 
-  // location ==> Source or destination
-  onCitySelectHandler = (cityData, location) => {
-      const updatedFormData = { ...this.state.formData };
-      updatedFormData[location] = cityData;
-      this.setState({ formData: updatedFormData });
-  };
+    // location ==> Source or destination
+    onCitySelectHandler = (cityData, location) => {
 
-  // After selecting the date
-  onDateSelectHandler = data => {
-      this.onVisibleHandler();
+        const updatedFormData = { ...this.state.formData };
+        updatedFormData[location] = cityData;
 
-      const updatedFormData = { ...this.state.formData };
-      updatedFormData.time = data.format('L');
-      this.setState({ formData: updatedFormData });
-  };
+        const updatedValidity = { ...this.state.validity };
+        updatedValidity[location] = cityData == '' ? false : true;
+
+        this.setState({ formData: updatedFormData, validity: updatedValidity });
+    };
+
+    // After selecting the date
+    onDateSelectHandler = data => {
+        this.onVisibleHandler();
+
+        const updatedFormData = { ...this.state.formData };
+        updatedFormData.time = data.format('L');
+
+        const updatedValidity = { ...this.state.validity };
+        updatedValidity.time = true;
+
+        if (data == '') {
+            updatedValidity.time = false;
+        }
+
+        this.setState({ formData: updatedFormData, validity: updatedValidity });
+    };
 
   onSubmitHandler = (event) => {
       event.preventDefault();
+
+      if (!(this.state.validity.time && this.state.validity.source && this.state.validity.destination)){
+          console.log('error');
+          return;  
+      }
+
       this.props.onFlightFormAdded(this.state.formData);
   };
 
@@ -62,18 +81,20 @@ class flightForm extends Component {
       </div>
     );
 
+    console.log(this.state.formData);
+
     return (
         <form onSubmit={e => this.onSubmitHandler(e)}>
             <div>   
                 <div className={classes.optionWrapper}>
 
                     <Select
-                        showSearch
-                        style={{ width: 200 }}
-                        placeholder="Source Airport"
-                        optionFilterProp="children"
-                        // onChange={handleChange}
-                        filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                          showSearch
+                          style={{ width: 200 }}
+                          placeholder="Source Airport"
+                          optionFilterProp="children"
+                          onSelect={cityName => this.onCitySelectHandler(cityName, 'source')}
+                          filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                       >
                         <Option value="chennai">Chennai</Option>
                         <Option value="kolkata">Kolkata</Option>
@@ -91,9 +112,9 @@ class flightForm extends Component {
                         style={{ width: 200 }}
                         placeholder="Destination Airport"
                         optionFilterProp="children"
-                        // onChange={handleChange}
+                        onSelect={cityName => this.onCitySelectHandler(cityName, 'destination')}
                         filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                      >
+                    >
                         <Option value="chennai">Chennai</Option>
                         <Option value="kolkata">Kolkata</Option>
                         <Option value="mumbai">Mumbai</Option>

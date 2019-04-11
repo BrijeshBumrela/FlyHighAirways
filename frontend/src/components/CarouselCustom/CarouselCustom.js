@@ -27,7 +27,7 @@ export default class CarouselComponent extends Component {
     };
     return (
       <div style={{ position: "relative" }}>
-        =
+        
         <Icon
           type="left-circle"
           theme="filled"
