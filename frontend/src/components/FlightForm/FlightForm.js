@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 
 import { Select, Popover, Button, Calendar } from "antd";
 
+import classes from './FlightForm.module.css';
+
 const Option = Select.Option;
 
 class flightForm extends Component {
@@ -31,6 +33,10 @@ class flightForm extends Component {
     this.setState({ formData: updatedFormData });
   };
 
+  inputChangedHandler = (e, typeOfOption) => {
+      console.log(e.target.value);
+  }
+
   onDateSelectHandler = data => {
     this.onVisibleHandler();
   };
@@ -51,43 +57,56 @@ class flightForm extends Component {
     );
 
     return (
-      <form onSubmit={e => this.onSubmitHandler(e)}>
-        <div>
-          <Select
-            placeholder="Source Airport"
-            style={{ width: 120 }}
-            onSelect={value => this.onCitySelectHandler(value, "source")}
-            value={this.state.formData.source}
-          >
-            <Option value="jack">Jack</Option>
-            <Option value="lucica">Lucy</Option>
-            <Option value="disabled">Disabled</Option>
-            <Option value="Yiminghe">yiminghe</Option>
-          </Select>
-          <Select
-            placeholder="Destination Airport"
-            style={{ width: 120 }}
-            onSelect={value => this.onCitySelectHandler(value, "destination")}
-            value={this.state.formData.destination}
-          >
-            <Option value="jack">Jack</Option>
-            <Option value="lucica">Lucy</Option>
-            <Option value="disabled">Disabled</Option>
-            <Option value="Yiminghe">yiminghe</Option>
-          </Select>
-          <Popover
-            content={popUpCalendar}
-            title="Title"
-            trigger="click"
-            visible={this.state.calendarPopUp}
-          >
-            {/* <Button type="primary" onClick={this.onVisibleHandler}>Click me</Button> */}
-          </Popover>
-        </div>
-        <Button type="primary" htmlType="submit">
-          Search Flights
-        </Button>
-      </form>
+        <form onSubmit={e => this.onSubmitHandler(e)}>
+            <div>   
+                <div className={classes.optionWrapper}>
+
+                <Select
+                    showSearch
+                    style={{ width: 200 }}
+                    placeholder="Source Airport"
+                    optionFilterProp="children"
+                    // onChange={handleChange}
+                    filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                  >
+                    <Option value="chennai">Chennai</Option>
+                    <Option value="kolkata">Kolkata</Option>
+                    <Option value="mumbai">Mumbai</Option>
+                    <Option value="pune">Pune</Option>
+                    <Option value="indore">Indore</Option>
+                    <Option value="delhi">Delhi</Option>
+                </Select>
+
+                </div>
+                <Select
+                    showSearch
+                    style={{ width: 200 }}
+                    placeholder="Destination Airport"
+                    optionFilterProp="children"
+                    // onChange={handleChange}
+                    filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                  >
+                    <Option value="chennai">Chennai</Option>
+                    <Option value="kolkata">Kolkata</Option>
+                    <Option value="mumbai">Mumbai</Option>
+                    <Option value="pune">Pune</Option>
+                    <Option value="indore">Indore</Option>
+                    <Option value="delhi">Delhi</Option>
+                </Select>
+                <Popover
+                    content={popUpCalendar}
+                    title="Title"
+                    trigger="click"
+                    visible={this.state.calendarPopUp}
+                >
+                    <Button type="primary" onClick={this.onVisibleHandler}>Click me</Button>
+                </Popover>
+            </div>
+
+            <Button type="primary" htmlType="submit">
+                Search Flights
+            </Button>
+        </form>
     );
   }
 }
