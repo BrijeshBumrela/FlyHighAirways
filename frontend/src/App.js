@@ -5,7 +5,6 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import { connect } from "react-redux";
-import "font-awesome/css/font-awesome.min.css";
 
 import { authCheckStatus } from "./store/actions/index";
 
@@ -16,7 +15,6 @@ import "antd/dist/antd.css";
 import FlightBook from "./containers/FlightBook/FlightBook";
 import HomePage from "./containers/Homepage/Hompage";
 
-import "bootstrap/dist/css/bootstrap.css";
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
