@@ -9,7 +9,7 @@ const renderRightArrow = () => <i className="fa fa-caret-right" />;
 class MenuBar extends React.Component {
   render() {
     return (
-      <Card className="menu-bar">
+      <Card className="menu-bar" style={{ lineHeight: "1.5" }}>
         <div>
           <ComponentSlider
             renderLeftArrow={renderLeftArrow}
