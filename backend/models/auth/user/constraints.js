@@ -1,21 +1,36 @@
 module.exports = {
     unique: {
         email:`
-                  ALTER TABLE aircraftmodels
+                  ALTER TABLE users
                   ADD CONSTRAINT unique_email
                   UNIQUE(email)
                   `
     },
     check:{
-        max_weight: `
-                    ALTER TABLE aircraftmodels
-                    ADD CONSTRAINT max_weight_not_0
-                    CHECK (max_weight > 0)
+        password: `
+                    ALTER TABLE users
+                    ADD CONSTRAINT check_password_length_gte_8
+                    CHECK ( LENGTH(password) >=8 )
                     `,
-        no_of_seats: `
-                    ALTER TABLE aircraftmodels
-                    ADD CONSTRAINT no_of_seats_not_0
-                    CHECK (no_of_seats > 0)
+        email: `
+                    ALTER TABLE users
+                    ADD CONSTRAINT check_email_format
+                    CHECK (
+                        email = lower(email) AND
+                        email LIKE '%@%.%'
+                        )
                     `
     },
+    index:{
+        email:`
+                    CREATE UNIQUE INDEX email_btree ON users 
+                    USING btree
+                    ( email ASC NULLS FIRST)
+                    WITH (FILLFACTOR = 80)
+                `
+        /* NULLS FIRST puts all nulls at the start of the tree. (doesnt matter here as email is NOT NULL)
+        FILLFACTOR determines till what percentage each leaf
+         of btree is filled before split operation is performed (
+         */
+    }
 };
