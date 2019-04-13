@@ -50,41 +50,64 @@ class FlightBook extends React.Component {
         }}
       >
         <Content style={{ padding: "0 50px" }}>
-          <Layout style={{ padding: "24px 0", background: "#fff" }}>
-            <Content
+          <Row style={{ padding: "24px 0", background: "rgb(240, 242, 245)" }}>
+            <Col
+              sm={14}
               style={{
                 padding: "0 24px",
                 minHeight: 280,
-                maxWidth: "75%",
-                background: "rgb(240, 242, 245)"
+                maxWidth: "75%"
+                // background: "rgb(240, 242, 245)"
               }}
             >
-              <div style={{ border: " 1px solid #ebedf0" }}>
+              <div
+                style={{ border: " 1px solid #ebedf0", background: "white" }}
+              >
                 <Row
                   style={{ borderBottom: "1px solid #ebedf0", padding: "10px" }}
                 >
                   <Col sm={2}>
-                    <Avatar size={64} icon="user" />
+                    <div>
+                      <Avatar size={64} icon="user" />
+                    </div>
                   </Col>
-                  <h1 style={{ padding: "16px", fontSize: "22px" }}>
+                  <Col>
                     {" "}
-                    Aaquib Niaz
-                  </h1>
+                    <h1
+                      style={{
+                        padding: "16px",
+                        fontSize: "22px",
+                        paddingLeft: "70px"
+                      }}
+                    >
+                      Aaquib Niaz
+                    </h1>
+                  </Col>
                   {/* <Col>Name of the passenger</Col> */}
                 </Row>
 
                 <Row>
-                  <Col lg={17} sm={24} xs={24} style={{ padding: "15px 85px" }}>
+                  <Col
+                    lg={14}
+                    // sm={24}
+                    // xs={24}
+                    style={{
+                      padding: "15px 15px",
+                      borderRight: "1px solid #ebedf0"
+                    }}
+                  >
                     <WrappedDynamicFieldSet onAdd={this.handleClick} />
                   </Col>
-                  <Col>hello</Col>
+                  <Col sm={10} style={{ padding: "15px 15px" }}>
+                    <WrappedDynamicFieldSet onAdd={this.handleClick} />
+                  </Col>
                 </Row>
               </div>
-            </Content>
-            <Sider style={{ background: "#fff" }}>
+            </Col>
+            <Col sm={5} style={{ background: "#fff" }}>
               <div>{this.state.counts}</div>
-            </Sider>
-          </Layout>
+            </Col>
+          </Row>
         </Content>
         <Footer style={{ textAlign: "center" }}>FlyHigh Airways ©2018</Footer>
       </Layout>
