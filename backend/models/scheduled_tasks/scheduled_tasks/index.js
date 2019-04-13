@@ -1,22 +1,23 @@
+const ScheduledTask = require('./model');
+
 const sequelize = require('../../../utils/database/connect');
 
-const User = require('./model');
-const table = require('./table');
-const constraints = require('./constraints');
-const triggers = require('./triggers');
+const tasks = require('../../../utils/database/scheduled_tasks/tasks');
+
 const procedures = require('./procedures');
-const methods = require('./methods');
 
+const seed = require('./seed');
+const table = require('./table');
 
-User.sqlCommands = {
+ScheduledTask.sqlCommands = {
     table: table,
-    constraints: constraints,
-    triggers: triggers,
+    // constraints: constraints,
+    // triggers: triggers,
     procedures: procedures,
 };
 
-User.createTable = async function (options) {
-    const {table} = this.sqlCommands;
+ScheduledTask.createTable = async function (options) {
+    const { table } = this.sqlCommands;
     const force = (options && options.force) || false;
     let queryResult;
     try {
@@ -42,7 +43,8 @@ User.createTable = async function (options) {
     }
 };
 
-User.createConstraints = async function (options) {
+/*
+ScheduledTask.createConstraints = async function (options) {
     const {constraints} = this.sqlCommands;
     const all_queries = [];
     for (type in constraints){
@@ -63,7 +65,7 @@ User.createConstraints = async function (options) {
 
 
 
-User.createTriggers = async function(options){
+ScheduledTask.createTriggers = async function(options){
     const {triggers} = this.sqlCommands;
     Object.keys(triggers).map(async key=>{
 
@@ -74,13 +76,30 @@ User.createTriggers = async function(options){
         result = await sequelize.query(triggers[key].trigger);
     });
 };
+*/
 
-User.createAll = async function (options){
-  await this.createTable(options);
-  await this.createConstraints(options);
-  await this.createTriggers(options);
+ScheduledTask.seed = async function (options) {
+    await seed.createFunctions();
+    await seed.createScheduleEntries();
+};
+
+ScheduledTask.createProcedures = async function (options) {
+    console.log(this.sqlCommands.procedures.cronProcedure.drop);
+    let result = await sequelize.query(this.sqlCommands.procedures.cronProcedure.drop);
+
+    console.log(this.sqlCommands.procedures.cronProcedure.create);
+    result = await sequelize.query(this.sqlCommands.procedures.cronProcedure.create);
+};
+
+ScheduledTask.createAll = async function (options) {
+    await this.createTable(options);
+    await this.seed(options);
+    await this.createProcedures(options);
+    // await this.createConstraints(options);
+    // await this.createTriggers(options);
 };
 /* Set all method prototypes */
 // User.prototype.x = methods.x;
 
-module.exports = User;
+
+module.exports = ScheduledTask;

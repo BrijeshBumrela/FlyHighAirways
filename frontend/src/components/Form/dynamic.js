@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Form, Input, Icon, Button } from "antd";
+import { Form, Input, InputNumber, Icon, Button } from "antd";
 
 let id = 0;
 
-class DynamicFieldSet extends Component {
+class DynamicFieldSet extends React.Component {
   remove = k => {
     const { form } = this.props;
     // can use data-binding to get
@@ -17,6 +17,8 @@ class DynamicFieldSet extends Component {
     form.setFieldsValue({
       keys: keys.filter(key => key !== k)
     });
+
+    this.props.onAdd(keys.length - 1);
   };
 
   add = () => {
@@ -29,6 +31,7 @@ class DynamicFieldSet extends Component {
     form.setFieldsValue({
       keys: nextKeys
     });
+    this.props.onAdd(keys.length + 1);
   };
 
   handleSubmit = e => {
@@ -101,6 +104,12 @@ class DynamicFieldSet extends Component {
           <Button type="dashed" onClick={this.add} style={{ width: "60%" }}>
             <Icon type="plus" /> Add field
           </Button>
+        </Form.Item>
+        <Form.Item label="InputNumber">
+          {getFieldDecorator("input-number", { initialValue: 3 })(
+            <InputNumber min={1} max={10} />
+          )}
+          <span className="ant-form-text"> machines</span>
         </Form.Item>
         <Form.Item {...formItemLayoutWithOutLabel}>
           <Button type="primary" htmlType="submit">
