@@ -74,7 +74,7 @@ export default class CarouselComponent extends Component {
         </div>
         <h1 className={classes.childDiv}>
             <FlightForm 
-                formSubmit={() => this.onFormSubmitHandler()}
+                {...this.props}
             />
         </h1>
         <Icon
@@ -93,7 +93,7 @@ export default class CarouselComponent extends Component {
     );
   }
 }
-{
+
   /* <Card className="menu-bar">
   <ComponentSlider
     renderLeftArrow={renderLeftArrow}
@@ -120,4 +120,4 @@ export default class CarouselComponent extends Component {
     </div>
   </ComponentSlider>
 </Card>; */
-}
+

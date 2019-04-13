@@ -5,7 +5,6 @@ import CarouselComponent from "../../components/CarouselCustom/CarouselCustom";
 import MenuBar from "../../components/HorizontalScrollBar/ScrollBar";
 import Footer from "../../components/Footer/Footer";
 import Cards from "../../components/UI/Cards/cards";
-import Navbar from "../../components/UI/Navbar/navbar";
 
 const styles = {
   fontFamily: "sans-serif",
@@ -18,7 +17,7 @@ class HomePage extends Component {
   render() {
     return (
       <div>
-        <CarouselComponent />
+        <CarouselComponent {...this.props}/>
         <div style={styles}>
           <MenuBar />
           <Cards />

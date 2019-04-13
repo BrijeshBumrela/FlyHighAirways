@@ -79,7 +79,7 @@ class AuthenticateForm extends Component {
         event.preventDefault();
         console.log('is anything happening');
         this.props.onAuth(this.state.authForm.email.value, this.state.authForm.password.value, this.state.isSignUp);
-        
+        this.props.history.push('/');
     };
 
     componentDidMount() {

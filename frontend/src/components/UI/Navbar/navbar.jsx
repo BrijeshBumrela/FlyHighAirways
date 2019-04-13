@@ -18,7 +18,6 @@ class NavBar extends Component {
 
   render() {
   
-    console.log('AUTH', this.props.isAuth);
 
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -70,7 +69,6 @@ class NavBar extends Component {
                       </NavLink>
                   )    
               }
-              
             </li>
           </ul>
         </div>
@@ -80,11 +78,6 @@ class NavBar extends Component {
   }
 };
 
-const mapStateToProps = state => {
-  return {
-    // isAuthenticated: state.auth.token !== null
-  }
-}
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -93,4 +86,4 @@ const mapDispatchToProps = dispatch => {
 };
 
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar));
+export default withRouter(connect(null, mapDispatchToProps)(NavBar));

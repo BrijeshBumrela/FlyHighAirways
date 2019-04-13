@@ -9,6 +9,9 @@ import FlightFilter from "../../components/FlightFilter/FlightFilter";
 import CustomSkeleton from "../../components/UI/Skeleton/Skeleton";
 import { getTimeSlot } from './utils';
 
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 import classes from "./FlightSearch.module.css";
 
 import Paypal from "../../components/Paypal/Paypal";
@@ -115,7 +118,7 @@ class FlightSearch extends Component {
 
     render() {
 
-
+        console.log('Flight Info', this.props.flightInfo)
         const { flights } = this.state;
         this.filterFlights(this.state.filterInfo);
         let flightList = <CustomSkeleton />
@@ -142,6 +145,7 @@ class FlightSearch extends Component {
                 )  
             })
         }
+
         return (
             <React.Fragment>
                 <Row type="flex" className={classes.FlightSearch}>
@@ -166,4 +170,10 @@ class FlightSearch extends Component {
       }
 }
 
-export default FlightSearch;
+const mapStateToProps = state => {
+    return {
+        // flightInfo: state.flightSearch.source,        
+    }
+}
+
+export default withRouter(connect(mapStateToProps)(FlightSearch));

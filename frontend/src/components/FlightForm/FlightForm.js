@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import { connect } from "react-redux";
-
+import { withRouter } from 'react-router'
 import { Select, Popover, Button, Calendar, Input } from "antd";
 
 import classes from './FlightForm.module.css';
@@ -14,7 +14,7 @@ class flightForm extends Component {
         formData: {
             source: "",
             destination: "",
-            time: ""
+            date: ""
         },
         validity: {
             source: false,
@@ -60,16 +60,18 @@ class flightForm extends Component {
         this.setState({ formData: updatedFormData, validity: updatedValidity });
     };
 
-  onSubmitHandler = (event) => {
-      event.preventDefault();
+    onSubmitHandler = (event, data) => {
+        event.preventDefault();
 
-      if (!(this.state.validity.time && this.state.validity.source && this.state.validity.destination)){
-          console.log('error');
-          return;  
-      }
+        if (!(this.state.validity.time && this.state.validity.source && this.state.validity.destination)){
+            console.log('error');
+            return;  
+        }
 
-      this.props.onFlightFormAdded(this.state.formData);
-  };
+        // this.props.onFlightFormAdded(this.state.formData);
+        this.props.formFill(data)
+        this.props.history.push('/flights');
+    };
 
   render() {
     const popUpCalendar = (
@@ -81,14 +83,12 @@ class flightForm extends Component {
       </div>
     );
 
-    console.log(this.state.formData);
-
     const data = {
         ...this.state.formData
     }
 
     return (
-        <form>
+        <form onSubmit={(e) => this.onSubmitHandler(e, data)}>
             <div>   
                 <div className={classes.optionWrapper}>
 
@@ -146,7 +146,6 @@ class flightForm extends Component {
             <Button 
                 type="primary" 
                 htmlType="submit"
-                onClick={e => this.props.formSubmit(e)}    
             >
                 Search Flights
             </Button>
@@ -157,12 +156,11 @@ class flightForm extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFlightFormAdded: flightData =>
-      dispatch({ type: "ADD_FLIGHT_FORM", flightData })
+    onFlightFormAdded: flightData => dispatch({ type: "ADD_FLIGHT_FORM", flightData })
   };
 };
 
-export default connect(
+export default withRouter(connect(
   null,
   mapDispatchToProps
-)(flightForm);
+)(flightForm));
