@@ -9,6 +9,9 @@ import FlightFilter from "../../components/FlightFilter/FlightFilter";
 import CustomSkeleton from "../../components/UI/Skeleton/Skeleton";
 import { getTimeSlot } from './utils';
 
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 import classes from "./FlightSearch.module.css";
 
 import Paypal from "../../components/Paypal/Paypal";
@@ -64,6 +67,15 @@ class FlightSearch extends Component {
 
     }
 
+    // Utility function to filter by location props
+    filterByLocation = (flightList, locations) => {
+        return flightList.filter(flight => {
+            return (
+                (flight.source.toLowerCase() === locations.source.toLowerCase() && flight.destination.toLowerCase() === locations.destination.toLowerCase()) || locations.source === ''
+            )
+        })
+    }
+
     filterFlights = filterInfo => {
         const { flights } = this.state;
         
@@ -72,6 +84,9 @@ class FlightSearch extends Component {
         for (let flight in flights) {
             flightArray.push(flights[flight]);
         }
+
+        // Fliter by location
+        flightArray = this.filterByLocation(flightArray, this.props.flightInfo)
 
         // Filter Non-Stop, Stop
         flightArray = this.filterType(flightArray, filterInfo.flightType);
@@ -117,7 +132,8 @@ class FlightSearch extends Component {
 
 
         const { flights } = this.state;
-        this.filterFlights(this.state.filterInfo);
+
+ 
         let flightList = <CustomSkeleton />
         let flightListArray = [];
 
@@ -138,10 +154,12 @@ class FlightSearch extends Component {
                         economy={flight.economy}
                         source={flight.source}
                         destination={flight.destination}
+                        onFlightSelect={this.props.flightSelect}
                     />
                 )  
             })
         }
+
         return (
             <React.Fragment>
                 <Row type="flex" className={classes.FlightSearch}>
@@ -166,4 +184,10 @@ class FlightSearch extends Component {
       }
 }
 
-export default FlightSearch;
+const mapStateToProps = state => {
+    return {
+        // flightInfo: state.flightSearch.source,        
+    }
+}
+
+export default withRouter(connect(mapStateToProps)(FlightSearch));

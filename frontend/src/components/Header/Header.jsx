@@ -1,15 +1,23 @@
 import React, { Component } from "react";
 import { Menu, Icon, Button, Drawer } from "antd";
 import classes from "./Header.module.css";
+import { NavLink } from 'react-router-dom';
+
+import { withRouter } from 'react-router-dom';
+
+import { connect } from 'react-redux';
+import { logout } from "../../store/actions/index";
 
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
 class Navbar extends Component {
+
   state = {
     current: "mail",
     visible: false
   };
+
   showDrawer = () => {
     this.setState({
       visible: true
@@ -23,13 +31,16 @@ class Navbar extends Component {
   };
 
   render() {
+
+    console.log('AUTH from NAV', this.props.isAuth);
+
     return (
       <nav className={classes.menuBar}>
         <div className="container">
           <div className={classes.logo}>
-            <a href="/" style={{ textDecoration: "none" }}>
-              LOGO
-            </a>
+            <NavLink to="/">
+              FlyHigh
+            </NavLink>
           </div>
 
           <div className={classes.menuCon}>
@@ -40,8 +51,28 @@ class Navbar extends Component {
                 overflowedIndicator={<Icon type="bars" />}
                 style={{ lineHeight: "66px", borderBottom: "0" }}
               >
-                <Menu.Item key="1">nav 1</Menu.Item>
-                <Menu.Item key="2">nav 2</Menu.Item>
+                <Menu.Item key="1">
+                    <NavLink className="nav-link" to="/checkIn">
+                        CheckIN
+                    </NavLink>
+                </Menu.Item>
+                <Menu.Item key="2">
+                  {this.props.isAuth 
+                  ? (
+                      <NavLink 
+                        className="nav-link" 
+                        to="/logout"
+                        onClick={this.onLogoutHandler}>
+                        LogOut
+                      </NavLink>
+                  )
+                  : (
+                      <NavLink className="nav-link" to="/flights">
+                        Flights
+                      </NavLink>
+                  )    
+                  }
+                </Menu.Item>
 
                 <SubMenu title={<span>Blogs</span>}>
                   <MenuItemGroup title="Item 1">
@@ -54,7 +85,9 @@ class Navbar extends Component {
                   </MenuItemGroup>
                 </SubMenu>
                 <Menu.Item key="alipay">
-                  <a href="/">Contact Us</a>
+                    <NavLink to="/authenticate">
+                        Login
+                    </NavLink>
                 </Menu.Item>
               </Menu>
             </div>
@@ -147,4 +180,13 @@ class Navbar extends Component {
     );
   }
 }
-export default Navbar;
+
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onLogout: () => dispatch(logout())
+  };
+};
+
+
+export default withRouter(connect(null, mapDispatchToProps)(Navbar));

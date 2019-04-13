@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Icon, Input, Button, Row, Col } from 'antd';
 import { connect } from 'react-redux';  
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 import classes from './Auth.module.css';
@@ -40,34 +41,34 @@ class AuthenticateForm extends Component {
                 valid: false,
                 touched: false
             },
-            firstName: {
-                elementType: 'input',
-                elementConfig: {
-                    type: 'text',
-                    placeholder: 'Enter Your First Name'
-                },
-                value: '',
-                validation: {
-                    required: false,
-                    minLength: 8,
-                },
-                valid: false,
-                touched: false
-            },
-            lastName: {
-                elementType: 'input',
-                elementConfig: {
-                    type: 'text',
-                    placeholder: 'Enter Your Last Name'
-                },
-                value: '',
-                validation: {
-                    required: false,
-                    minLength: 8,
-                },
-                valid: false,
-                touched: false
-            }
+            // firstName: {
+            //     elementType: 'input',
+            //     elementConfig: {
+            //         type: 'text',
+            //         placeholder: 'Enter Your First Name'
+            //     },
+            //     value: '',
+            //     validation: {
+            //         required: false,
+            //         minLength: 8,
+            //     },
+            //     valid: false,
+            //     touched: false
+            // },
+            // lastName: {
+            //     elementType: 'input',
+            //     elementConfig: {
+            //         type: 'text',
+            //         placeholder: 'Enter Your Last Name'
+            //     },
+            //     value: '',
+            //     validation: {
+            //         required: false,
+            //         minLength: 8,
+            //     },
+            //     valid: false,
+            //     touched: false
+            // }
             
         },
         isSignUp: true,
@@ -76,25 +77,29 @@ class AuthenticateForm extends Component {
 
     authHandler = (event) => {
         event.preventDefault();
+        console.log('is anything happening');
         this.props.onAuth(this.state.authForm.email.value, this.state.authForm.password.value, this.state.isSignUp);
+        this.props.history.push('/');
     };
 
     componentDidMount() {
+
         const flight = {
-            source: 'Tiruvanantapuram',
-            destination: 'Guwahati',
-            start_time: '00:00',
-            end_time: '2:45',
+            source: 'Chennai',
+            destination: 'Mumbai',
+            start_time: '02:00',
+            end_time: '03:45',
+            date: '21/04/2019',
             logo: 'some 2',
             business: {
-                fare: 10550,
+                fare: 8756,
                 seats_remaining: 0
             },
             economy: {
-                fare: 6056,
+                fare: 4563,
                 seats_remaining: 6
             },
-            nonStop: false
+            nonStop: true
         }
 
         // axios.post('https://flyhighairways-2cfb4.firebaseio.com/flight.json', flight)
@@ -134,12 +139,10 @@ class AuthenticateForm extends Component {
 
         if (rules.required) {
             isValid = isValid && value.trim() !== '';
-            console.log('[REQUIRED]', isValid);
         }
 
         if (rules.minLength) {
             isValid = isValid && value.length >= rules.minLength;
-            console.log('[MINLENGTH]', isValid);
         }
 
         if (rules.shouldContain) {
@@ -228,7 +231,13 @@ class AuthenticateForm extends Component {
                         }
                     </div>
                     <div style={{width: '90%'}}>
-                        <Button htmlType="submit" size="default" style={{backgroundColor: '#6A5ACD', border:'none'}} block shape="round">
+                        <Button 
+                            htmlType="submit" 
+                            size="default" 
+                            style={{backgroundColor: '#6A5ACD', border:'none'}} 
+                            block 
+                            shape="round"
+                        >
                             { this.state.isSignUp ? 'SIGN UP' : 'LOG IN' }
                         </Button>
                     </div>
@@ -240,102 +249,19 @@ class AuthenticateForm extends Component {
             </div>
         )
 
-        if (this.state.isSignUp) {
-            // Sign Up Form
-            form = (
-
-                <div className={classes.container}>
-
-                    <h4 className={classes.FormText}>Login TO Proceed</h4>
-
-                    <form onSubmit={(e) => this.authHandler(e)}>
-                        <div className={classes.formDiv}>
-                            <Input 
-                                className={classes.InputElement} 
-                                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} 
-                                type={authForm.email.elementConfig.type} 
-                                placeholder={authForm.email.elementConfig.placeholder} 
-                                value={authForm.email.value}
-                                onChange={(e) => this.inputChangedHandler(e, authForm.email.elementConfig.type)}
-                            />
-                            {
-                                this.validSignHandler('email')
-                            }
-                        </div>
-
-                        <div className={classes.formDiv}>
-                            <Input 
-                                className={classes.InputElement} 
-                                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} 
-                                type={authForm.firstName.elementConfig.type} 
-                                placeholder={authForm.firstName.elementConfig.placeholder} 
-                                value={authForm.firstName.value}
-                                onChange={(e) => this.inputChangedHandler(e, 'firstName')}
-                            />
-                            {
-                                this.validSignHandler('firstName')
-                            }
-                        </div>
-
-                        <div className={classes.formDiv}>
-                            <Input 
-                                className={classes.InputElement} 
-                                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} 
-                                type={authForm.lastName.elementConfig.type} 
-                                placeholder={authForm.lastName.elementConfig.placeholder} 
-                                value={authForm.lastName.value}
-                                onChange={(e) => this.inputChangedHandler(e, 'lastName')}
-                            />
-                            {
-                                this.validSignHandler('lastName')
-                            }
-                        </div>
-
-
-                        <div className={classes.formDiv}>
-
-                            <Input
-                                className={classes.InputElement} 
-                                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} 
-                                type="password" 
-                                placeholder="Password" 
-                                value={authForm.password.value}
-                                onChange={(e) => this.inputChangedHandler(e, authForm.password.elementConfig.type)}
-                            />
-                            {
-                                this.validSignHandler('password')
-                            }
-                        </div>
-
-                        <div style={{width: '90%'}}>
-                            <Button htmlType="submit" size="default" style={{backgroundColor: '#6A5ACD', border:'none'}} block shape="round">
-                                { this.state.isSignUp ? 'SIGN UP' : 'LOG IN' }
-                            </Button>
-                        </div>
-                    </form>
-
-                    <Button size="small" className={classes.switchBtn} onClick={this.switchAuthModeHandler}>
-                        { this.state.isSignUp ? 'Click Here To LogIn' : 'Click Here To Sign Up' }
-                    </Button>
-                </div>
-            )
-        }
 
         return (
             <div className={classes.BigDiv}>
                 <div className={classes.LoginCard}>
                     <Row style={{height: '100%'}}>
-
                         <Col lg={12} className={classes.makeHeightFull}>
                             <div className={[classes.makeHeightFull, classes.planeImg].join(' ')}>
 
                             </div>
                         </Col>
-                        
                         <Col lg={12} className={classes.makeHeightFull}>
                             {form}
                         </Col>
-
                     </Row>
                 </div>
             </div>

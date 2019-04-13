@@ -11,12 +11,19 @@ export default class CarouselComponent extends Component {
     this.previous = this.previous.bind(this);
     this.carousel = React.createRef();
   }
+
   next() {
     this.carousel.next();
   }
+
   previous() {
     this.carousel.prev();
   }
+
+  onFormSubmitHandler = e => {
+    e.preventDefault();
+    console.log("hi there");
+  };
 
   render() {
     const props = {
@@ -99,8 +106,8 @@ export default class CarouselComponent extends Component {
     );
   }
 }
-{
-  /* <Card className="menu-bar">
+
+/* <Card className="menu-bar">
   <ComponentSlider
     renderLeftArrow={renderLeftArrow}
     renderRightArrow={renderRightArrow}
@@ -126,4 +133,3 @@ export default class CarouselComponent extends Component {
     </div>
   </ComponentSlider>
 </Card>; */
-}
