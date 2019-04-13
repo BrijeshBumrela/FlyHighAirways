@@ -24,7 +24,8 @@ class HomePage extends Component {
         <div style={styles}>
           <MenuBar />
 
-          <NewsHeaderCard />
+          <NewsHeaderCard title="Travel with our Airlines" />
+          <NewsHeaderCard title="Popular Flights" />
         </div>
 
         {/* <Carousal /> */}
