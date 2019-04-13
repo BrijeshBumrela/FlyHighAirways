@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Icon, Input, Button, Row, Col } from 'antd';
 import { connect } from 'react-redux';  
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 import classes from './Auth.module.css';
@@ -76,11 +77,13 @@ class AuthenticateForm extends Component {
 
     authHandler = (event) => {
         event.preventDefault();
-        console.log(this.state.authForm.email.value, this.state.authForm.password.value, this.state.isSignUp);
+        console.log('is anything happening');
         this.props.onAuth(this.state.authForm.email.value, this.state.authForm.password.value, this.state.isSignUp);
+        
     };
 
     componentDidMount() {
+
         const flight = {
             source: 'Tiruvanantapuram',
             destination: 'Guwahati',

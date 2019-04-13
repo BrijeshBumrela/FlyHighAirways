@@ -28,7 +28,6 @@ export const logout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("expirationTime");
   localStorage.removeItem("userId");
-
   return {
     type: actionTypes.AUTH_LOGOUT
   };
@@ -36,7 +35,7 @@ export const logout = () => {
 
 export const authCheckTimeout = expirationTime => {
   return dispatch => {
-    setTimeout(() => dispatch(logout()), expirationTime * 1000);
+    setTimeout(() => dispatch(logout()), expirationTime);
   };
 };
 
@@ -63,11 +62,10 @@ export const auth = (email, password, isSignUp) => {
         const expirationTime = new Date(
           new Date().getTime() + response.data.expiresIn * 1000
         );
-
+        
         localStorage.setItem("token", response.data.idToken);
         localStorage.setItem("expirationTime", expirationTime);
         localStorage.setItem("userId", response.data.localId);
-        console.log('ja na idhar');
         dispatch(authSuccess(response.data.idToken, response.data.localId));
         dispatch(authCheckTimeout(response.data.expiresIn));
       })
