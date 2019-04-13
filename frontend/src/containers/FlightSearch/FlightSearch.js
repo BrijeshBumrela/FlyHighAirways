@@ -67,6 +67,17 @@ class FlightSearch extends Component {
 
     }
 
+    // Utility function to filter by location props
+    filterByLocation = (flightList, locations) => {
+        return flightList.filter(flight => {
+            console.log(locations);
+            console.log(flight);
+            return (
+                (flight.source.toLowerCase() === locations.source.toLowerCase() && flight.destination.toLowerCase() === locations.destination.toLowerCase()) || locations.source === ''
+            )
+        })
+    }
+
     filterFlights = filterInfo => {
         const { flights } = this.state;
         
@@ -75,6 +86,9 @@ class FlightSearch extends Component {
         for (let flight in flights) {
             flightArray.push(flights[flight]);
         }
+
+        // Fliter by location
+        flightArray = this.filterByLocation(flightArray, this.props.flightInfo)
 
         // Filter Non-Stop, Stop
         flightArray = this.filterType(flightArray, filterInfo.flightType);
@@ -118,9 +132,10 @@ class FlightSearch extends Component {
 
     render() {
 
-        console.log('Flight Info', this.props.flightInfo)
+
         const { flights } = this.state;
-        this.filterFlights(this.state.filterInfo);
+
+ 
         let flightList = <CustomSkeleton />
         let flightListArray = [];
 

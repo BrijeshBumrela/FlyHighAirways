@@ -85,21 +85,21 @@ class AuthenticateForm extends Component {
     componentDidMount() {
 
         const flight = {
-            source: 'Tiruvanantapuram',
-            destination: 'Guwahati',
-            start_time: '00:00',
-            end_time: '2:45',
-            date: '21/04/2017',
+            source: 'Chennai',
+            destination: 'Mumbai',
+            start_time: '02:00',
+            end_time: '03:45',
+            date: '21/04/2019',
             logo: 'some 2',
             business: {
-                fare: 10550,
+                fare: 8756,
                 seats_remaining: 0
             },
             economy: {
-                fare: 6056,
+                fare: 4563,
                 seats_remaining: 6
             },
-            nonStop: false
+            nonStop: true
         }
 
         // axios.post('https://flyhighairways-2cfb4.firebaseio.com/flight.json', flight)
