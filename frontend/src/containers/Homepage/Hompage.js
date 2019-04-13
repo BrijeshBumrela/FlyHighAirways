@@ -5,6 +5,7 @@ import CarouselComponent from "../../components/CarouselCustom/CarouselCustom";
 import MenuBar from "../../components/HorizontalScrollBar/ScrollBar";
 import Footer from "../../components/Footer/Footer";
 import Cards from "../../components/UI/Cards/cards";
+import NewsHeaderCard from "./../../components/UI/NewsHeaderCard/index";
 
 const styles = {
   fontFamily: "sans-serif",
@@ -21,6 +22,7 @@ class HomePage extends Component {
         <div style={styles}>
           <MenuBar />
           <Cards />
+          <NewsHeaderCard />
         </div>
 
         {/* <Carousal /> */}
