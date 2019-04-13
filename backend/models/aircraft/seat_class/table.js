@@ -8,15 +8,15 @@ module.exports = {
     exists: `
             SELECT * FROM information_schema.tables 
             WHERE table_schema='public' 
-            AND table_name='aircraftmodels'
+            AND table_name='seat_classes'
             `,
     drop:`
-            DROP TABLE IF EXISTS aircraftmodels RESTRICT
+            DROP TABLE IF EXISTS seat_classes RESTRICT
             `,
     dropCascade:`
-            DROP TABLE IF EXISTS aircraftmodels CASCADE
+            DROP TABLE IF EXISTS seat_classes CASCADE
             `,
     findAll:`
-            SELECT * FROM aircraftmodels
+            SELECT * FROM seat_classes
             `
 };
