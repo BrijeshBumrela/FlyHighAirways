@@ -7,7 +7,6 @@
     "@kapost/react-component-slider": "^1.0.5",
     "antd": "^3.15.2",
     "axios": "^0.18.0",
-    "bootstrap": "^4.3.1",
     "enquire-js": "^0.2.1",
     "font-awesome": "^4.7.0",
     "react": "^16.8.6",
