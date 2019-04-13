@@ -1,4 +1,4 @@
-const sequelize = require('../../../utils/database');
+const sequelize = require('../../../utils/database/connect');
 
 const OutstandingToken = require('./model');
 const table = require('./table');
