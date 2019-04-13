@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const serverSecret = require('../utils/server-secret');
 const queryWrappers = require('../utils/query-wrappers');
 const {auth:{User}} = require('../models/');
-const sequelize = require('../utils/database');
+const sequelize = require('../utils/database/connect');
 
 module.exports = async (req,res,next)=>{
     try {
