@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const sequelize = require('../utils/database');
+const sequelize = require('../utils/database/connect');
 const queryWrappers = require('../utils/query-wrappers');
 const sequelizeErrors = require('../utils/sequelize-errors');
 const parseError = require('../utils/parse-error');
@@ -17,7 +17,7 @@ exports.register = async (req, res, next) => {
         const err = new Error("Validation Failed!");
         err.statusCode = 422;
         err.data = errors.array();
-        throw err;
+        next(err);
     }
 
     const {email, password, first_name, last_name} = req.body;
