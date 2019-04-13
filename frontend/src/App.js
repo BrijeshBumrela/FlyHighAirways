@@ -52,6 +52,8 @@ class App extends Component {
 
   render() {
 
+    console.log('[STATE]', this.state);
+
     const HomePageWithProps = (props) => {
         return (
             <HomePage 
@@ -68,8 +70,6 @@ class App extends Component {
             />
         )
     }
-
-
 
     return (
       <React.Fragment>

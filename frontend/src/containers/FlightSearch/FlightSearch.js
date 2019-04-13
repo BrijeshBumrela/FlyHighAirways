@@ -70,8 +70,6 @@ class FlightSearch extends Component {
     // Utility function to filter by location props
     filterByLocation = (flightList, locations) => {
         return flightList.filter(flight => {
-            console.log(locations);
-            console.log(flight);
             return (
                 (flight.source.toLowerCase() === locations.source.toLowerCase() && flight.destination.toLowerCase() === locations.destination.toLowerCase()) || locations.source === ''
             )
