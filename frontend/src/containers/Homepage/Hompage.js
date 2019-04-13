@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import "font-awesome/css/font-awesome.css";
 import CarouselComponent from "../../components/CarouselCustom/CarouselCustom";
-import Navbar from "../../components/Header/Header";
 import MenuBar from "../../components/HorizontalScrollBar/ScrollBar";
 import Footer from "../../components/Footer/Footer";
 import Cards from "../../components/UI/Cards/cards";
@@ -18,7 +17,6 @@ class HomePage extends Component {
   render() {
     return (
       <div>
-        <Navbar />
         <CarouselComponent />
         <div style={styles}>
           <MenuBar />

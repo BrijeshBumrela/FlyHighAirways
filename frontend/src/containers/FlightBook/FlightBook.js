@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import { Row, Col, Button, Layout, Sider } from "antd";
-import { Layout, Menu, Icon } from "antd";
+import { Layout, Menu, Icon, Row, Col, Avatar } from "antd";
 // import Form from "../../components/Form/form";
 import DynamicFieldSet from "../../components/Form/dynamic";
 import { Form } from "antd";
@@ -43,38 +43,45 @@ class FlightBook extends React.Component {
 
   render() {
     return (
-      <Layout>
-        {/* <Header className="header">
-          <div className="logo" />
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={["1"]}
-            style={{ lineHeight: "64px" }}
-          >
-            <Menu.Item key="1">nav 1</Menu.Item>
-            <Menu.Item key="2">nav 2</Menu.Item>
-            <Menu.Item key="3">nav 3</Menu.Item>
-          </Menu>
-        </Header> */}
+      <Layout
+        style={{
+          background: "#f0f2f5",
+          paddingTop: "38px"
+        }}
+      >
         <Content style={{ padding: "0 50px" }}>
-          {/* <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
-          </Breadcrumb> */}
-
           <Layout style={{ padding: "24px 0", background: "#fff" }}>
-            <Content style={{ padding: "0 24px", minHeight: 280 }}>
-              {/* <Form /> */}
-              {/* <Form>
-                {" "} */}
-              {/* <DynamicFieldSet /> */}
-              <WrappedDynamicFieldSet onAdd={this.handleClick} />
-              {/* <DynamicFieldSet form={Form} /> */}
-              {/* </Form> */}
+            <Content
+              style={{
+                padding: "0 24px",
+                minHeight: 280,
+                maxWidth: "75%",
+                background: "rgb(240, 242, 245)"
+              }}
+            >
+              <div style={{ border: " 1px solid #ebedf0" }}>
+                <Row
+                  style={{ borderBottom: "1px solid #ebedf0", padding: "10px" }}
+                >
+                  <Col sm={2}>
+                    <Avatar size={64} icon="user" />
+                  </Col>
+                  <h1 style={{ padding: "16px", fontSize: "22px" }}>
+                    {" "}
+                    Aaquib Niaz
+                  </h1>
+                  {/* <Col>Name of the passenger</Col> */}
+                </Row>
+
+                <Row>
+                  <Col lg={17} sm={24} xs={24} style={{ padding: "15px 85px" }}>
+                    <WrappedDynamicFieldSet onAdd={this.handleClick} />
+                  </Col>
+                  <Col>hello</Col>
+                </Row>
+              </div>
             </Content>
-            <Sider width={400} style={{ background: "#fff" }}>
+            <Sider style={{ background: "#fff" }}>
               <div>{this.state.counts}</div>
             </Sider>
           </Layout>
