@@ -10,20 +10,27 @@ export default class CarouselComponent extends Component {
     this.previous = this.previous.bind(this);
     this.carousel = React.createRef();
   }
+
   next() {
-    this.carousel.next();
+      this.carousel.next();
   }
+
   previous() {
-    this.carousel.prev();
+      this.carousel.prev();
+  }
+
+  onFormSubmitHandler = (e) => {
+      e.preventDefault();
+      console.log('hi there');
   }
 
   render() {
     const props = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
     };
     return (
       <div style={{ position: "relative" }}>
@@ -66,7 +73,9 @@ export default class CarouselComponent extends Component {
           </Carousel>
         </div>
         <h1 className={classes.childDiv}>
-            <FlightForm />
+            <FlightForm 
+                formSubmit={() => this.onFormSubmitHandler()}
+            />
         </h1>
         <Icon
           type="right-circle"

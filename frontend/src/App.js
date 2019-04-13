@@ -14,6 +14,7 @@ import "antd/dist/antd.css";
 
 import FlightBook from "./containers/FlightBook/FlightBook";
 import HomePage from "./containers/Homepage/Hompage";
+import Navbar from "./components/UI/Navbar/navbar";;
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -32,6 +33,8 @@ class App extends Component {
       <React.Fragment>
         <Provider store={store}>
           <BrowserRouter>
+            
+            <Navbar />
             <Switch>
               <Route path="/" exact component={HomePage} />
               <Route path="/flights" component={FlightSearch} />

@@ -83,8 +83,12 @@ class flightForm extends Component {
 
     console.log(this.state.formData);
 
+    const data = {
+        ...this.state.formData
+    }
+
     return (
-        <form onSubmit={e => this.onSubmitHandler(e)}>
+        <form>
             <div>   
                 <div className={classes.optionWrapper}>
 
@@ -142,7 +146,7 @@ class flightForm extends Component {
             <Button 
                 type="primary" 
                 htmlType="submit"
-                onClick={(e) => this.onSubmitHandler(e)}    
+                onClick={e => this.props.formSubmit(e)}    
             >
                 Search Flights
             </Button>

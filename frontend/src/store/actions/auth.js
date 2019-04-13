@@ -57,8 +57,8 @@ export const auth = (email, password, isSignUp) => {
         "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=";
     }
 
-    axios
-      .post(`${url}${APIKEY}`, authData)
+
+    axios.post(`${url}${APIKEY}`, authData)
       .then(response => {
         const expirationTime = new Date(
           new Date().getTime() + response.data.expiresIn * 1000
@@ -67,12 +67,12 @@ export const auth = (email, password, isSignUp) => {
         localStorage.setItem("token", response.data.idToken);
         localStorage.setItem("expirationTime", expirationTime);
         localStorage.setItem("userId", response.data.localId);
-
+        console.log('ja na idhar');
         dispatch(authSuccess(response.data.idToken, response.data.localId));
         dispatch(authCheckTimeout(response.data.expiresIn));
       })
       .catch(err => {
-        console.log(err);
+        console.log(err.response);
         dispatch(authFailure(err));
       });
   };
