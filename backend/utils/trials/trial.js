@@ -1,5 +1,5 @@
 const user = require('../../models/auth/user');
-const sequelize = require('../database');
+const sequelize = require('../database/connect');
 //
 sequelize.query(user.sqlCommands.constraints.index.email).then(([results, metadata])=>{
     console.log(user.sqlCommands.constraints.index.email);

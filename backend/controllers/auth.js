@@ -6,7 +6,9 @@ const sequelizeErrors = require('../utils/sequelize-errors');
 const parseError = require('../utils/parse-error');
 const {validationResult} = require('express-validator/check');
 
-const {auth: {User}} = require('../models');
+const {auth: {User, OutstandingToken}} = require('../models');
+
+const serverSecret = require('../utils/server-secret');
 
 exports.register = async (req, res, next) => {
     console.log("here");
@@ -62,13 +64,20 @@ exports.register = async (req, res, next) => {
 
 exports.login = async (req, res, next) => {
     try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            const err = new Error("Validation Failed!");
+            err.statusCode = 422;
+            err.data = errors.array();
+            throw err;
+        }
         const {email, password} = req.body;
 
-        query = `select * from ${User.getTableName()} where "email"=${queryWrappers.wrapValue(email)}`;
+        let query = `select * from ${User.getTableName()} where "email"=${queryWrappers.wrapValue(email)}`;
 
         const users = await sequelize.query(query, {type: sequelize.QueryTypes.SELECT, model: User});
 
-        if(users.length<=0){
+        if (users.length <= 0) {
             const error = new Error("The given email does not exist!");
             error.statusCode = 401;
             throw error;
@@ -87,16 +96,104 @@ exports.login = async (req, res, next) => {
         const accessToken = jwt.sign({
             email: user.email,
             type: "access",
-            keywoard: "bearer"
-        }, 'server_secret', {expiresIn: 60 * 15});
+            keywoard: "Bearer"
+        }, serverSecret, {expiresIn: 60 * 15});
 
+
+        const outstandingRefreshToken = parseInt(new Date() * user.id / 100000000);
 
         const refreshToken = jwt.sign({
-            email:user.email,
-            type:"refresh",
-        }, 'server_secret', {expiresIn: 60*60*24*7*15});
+            email: user.email,
+            type: "refresh",
+            outstandingToken: outstandingRefreshToken
+        }, serverSecret, {expiresIn: 60 * 60 * 24 * 30});
 
-        res.status(200).json({tokens:{access:accessToken, refresh:refreshToken}})
+        const refreshTokenExpiryDate = new Date(new Date() * 1 + (1000 * 60 * 60 * 24 * 30));
+
+        // add outstanding token to db
+        // kept async to end response faster
+        const WrappedExpiryDate = queryWrappers.wrapValue(refreshTokenExpiryDate.toISOString());
+        query = `INSERT INTO ${OutstandingToken.getTableName()} 
+                ("user_id","token", "expires_on") 
+                VALUES (${user.id},${outstandingRefreshToken},${WrappedExpiryDate} )
+                `;
+
+        query2 = `
+                    UPDATE ${OutstandingToken.getTableName()}
+                    SET is_valid = TRUE
+                    WHERE "token" = ${outstandingRefreshToken}
+                 `;
+
+        sequelize.query(query).then(([result, meta]) => {
+            console.log("created new outstanding token");
+        }).catch(err => {
+            sequelize.query(query2).then(([result,meta])=>{
+                console.log("updated existing outstanding token");
+            }).catch(err=>{
+                console.log(err);
+            });
+        });
+        res.status(200).json({tokens: {access: accessToken, refresh: refreshToken}})
+    } catch (err) {
+        next(err);
+    }
+};
+
+exports.refresh = async (req,res,next) => {
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            const err = new Error("Validation Failed!");
+            err.statusCode = 422;
+            err.data = errors.array();
+            throw err;
+        }
+        const {token} = req.body;
+
+        let decodedToken;
+        try {
+            decodedToken = jwt.verify(token, serverSecret);
+        }catch(err){
+            err.statusCode = 401;
+            err.data = {"token":"invalid token"};
+            throw err;
+        }
+
+        const decodedOutstandingToken = decodedToken.outstandingToken;
+        const wrapedDecodedEmail = queryWrappers.wrapValue(decodedToken.email);
+
+        const user_table = User.getTableName();
+        const ot_table = OutstandingToken.getTableName();
+        const query = `
+                        SELECT is_valid, "token", user_id FROM ${ot_table}
+                        INNER JOIN ${user_table}
+                        ON ${user_table}.id = ${ot_table}.user_id
+                        WHERE "email"=${wrapedDecodedEmail} AND 
+                              "token"=${decodedOutstandingToken} AND
+                              "is_valid"=TRUE AND
+                              "expires_on" > NOW() 
+                    `;
+
+        const ot_instances = await sequelize.query(query, {type:sequelize.QueryTypes.SELECT, model: OutstandingToken});
+
+        if (ot_instances.length <= 0){
+            // invalid refresh token
+            const err = new Error("this refresh token is either invalid, expired or revoked!");
+            err.statusCode = 422;
+            err.data = errors.array();
+            throw err;
+        }
+
+        // valid refresh token. generate new access token and send
+
+        let user = await User.findByPk(ot_instances[0].dataValues.user_id);
+        const newAccessToken = jwt.sign({
+            email: user.email,
+            type: "access",
+            keywoard: "Bearer"
+        }, serverSecret, {expiresIn: 60 * 15});
+
+        res.status(200).json({tokens: {access: newAccessToken}})
     } catch (err) {
         next(err);
     }

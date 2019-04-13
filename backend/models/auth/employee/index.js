@@ -1,6 +1,6 @@
 const sequelize = require('../../../utils/database/connect');
 
-const User = require('./model');
+const Employee = require('./model');
 const table = require('./table');
 const constraints = require('./constraints');
 const triggers = require('./triggers');
@@ -8,14 +8,14 @@ const procedures = require('./procedures');
 const methods = require('./methods');
 
 
-User.sqlCommands = {
+Employee.sqlCommands = {
     table: table,
     constraints: constraints,
     triggers: triggers,
     procedures: procedures,
 };
 
-User.createTable = async function (options) {
+Employee.createTable = async function (options) {
     const {table} = this.sqlCommands;
     const force = (options && options.force) || false;
     let queryResult;
@@ -42,7 +42,7 @@ User.createTable = async function (options) {
     }
 };
 
-User.createConstraints = async function (options) {
+Employee.createConstraints = async function (options) {
     const {constraints} = this.sqlCommands;
     const all_queries = [];
     for (type in constraints){
@@ -63,7 +63,7 @@ User.createConstraints = async function (options) {
 
 
 
-User.createTriggers = async function(options){
+Employee.createTriggers = async function(options){
     const {triggers} = this.sqlCommands;
     Object.keys(triggers).map(async key=>{
 
@@ -75,12 +75,12 @@ User.createTriggers = async function(options){
     });
 };
 
-User.createAll = async function (options){
+Employee.createAll = async function (options){
   await this.createTable(options);
   await this.createConstraints(options);
   await this.createTriggers(options);
 };
 /* Set all method prototypes */
-// User.prototype.x = methods.x;
+// Employee.prototype.x = methods.x;
 
-module.exports = User;
+module.exports = Employee;
