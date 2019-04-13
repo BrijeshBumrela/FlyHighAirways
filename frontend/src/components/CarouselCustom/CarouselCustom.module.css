@@ -1,0 +1,17 @@
+.parentDiv {
+  position: relative;
+  text-align: center;
+  color: white;
+  max-height: 500px;
+  overflow: hidden;
+}
+
+.childDiv {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+}
+.antCarousel {
+  height: 500px;
+  overflow: hidden;
+}
