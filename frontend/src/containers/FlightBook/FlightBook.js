@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import { Row, Col, Button, Layout, Sider } from "antd";
-import { Layout, Menu, Icon } from "antd";
+import { Layout, Menu, Icon, Row, Col, Avatar } from "antd";
 // import Form from "../../components/Form/form";
 import DynamicFieldSet from "../../components/Form/dynamic";
 import { Form } from "antd";
@@ -14,92 +14,100 @@ const WrappedDynamicFieldSet = Form.create({ name: "dynamic_form_item" })(
 
 // ReactDOM.render(, mountNode);
 
-class FlightBook extends Component {
-  state = {};
+class FlightBook extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handler = this.handler.bind(this);
+    // this.state = {
+    //   messageShown: false,
+    //   id: -1 // initialize new state property with a value
+    // };
+  }
+
+  state = { counts: 0 };
+
+  handler(id) {
+    this.setState({
+      messageShown: true,
+      id: id
+    });
+  }
+
+  handleClick = e => {
+    console.log(e);
+    this.setState({
+      counts: e
+    });
+  };
+
   render() {
     return (
-      <Layout>
-        {/* <Header className="header">
-          <div className="logo" />
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={["1"]}
-            style={{ lineHeight: "64px" }}
-          >
-            <Menu.Item key="1">nav 1</Menu.Item>
-            <Menu.Item key="2">nav 2</Menu.Item>
-            <Menu.Item key="3">nav 3</Menu.Item>
-          </Menu>
-        </Header> */}
+      <Layout
+        style={{
+          background: "#f0f2f5",
+          paddingTop: "38px"
+        }}
+      >
         <Content style={{ padding: "0 50px" }}>
-          {/* <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
-          </Breadcrumb> */}
-
-          <Layout style={{ padding: "24px 0", background: "#fff" }}>
-            <Content style={{ padding: "0 24px", minHeight: 280 }}>
-              {/* <Form /> */}
-              {/* <Form>
-                {" "} */}
-              <WrappedDynamicFieldSet />
-              {/* <DynamicFieldSet form={Form} /> */}
-              {/* </Form> */}
-            </Content>
-            <Sider width={400} style={{ background: "#fff" }}>
-              <Menu
-                mode="inline"
-                defaultSelectedKeys={["1"]}
-                defaultOpenKeys={["sub1"]}
-                style={{ height: "100%" }}
+          <Row style={{ padding: "24px 0", background: "rgb(240, 242, 245)" }}>
+            <Col
+              sm={14}
+              style={{
+                padding: "0 24px",
+                minHeight: 280,
+                maxWidth: "75%"
+                // background: "rgb(240, 242, 245)"
+              }}
+            >
+              <div
+                style={{ border: " 1px solid #ebedf0", background: "white" }}
               >
-                <SubMenu
-                  key="sub1"
-                  title={
-                    <span>
-                      <Icon type="user" />
-                      subnav 1
-                    </span>
-                  }
+                <Row
+                  style={{ borderBottom: "1px solid #ebedf0", padding: "10px" }}
                 >
-                  <Menu.Item key="1">option1</Menu.Item>
-                  <Menu.Item key="2">option2</Menu.Item>
-                  <Menu.Item key="3">option3</Menu.Item>
-                  <Menu.Item key="4">option4</Menu.Item>
-                </SubMenu>
-                <SubMenu
-                  key="sub2"
-                  title={
-                    <span>
-                      <Icon type="laptop" />
-                      subnav 2
-                    </span>
-                  }
-                >
-                  <Menu.Item key="5">option5</Menu.Item>
-                  <Menu.Item key="6">option6</Menu.Item>
-                  <Menu.Item key="7">option7</Menu.Item>
-                  <Menu.Item key="8">option8</Menu.Item>
-                </SubMenu>
-                <SubMenu
-                  key="sub3"
-                  title={
-                    <span>
-                      <Icon type="notification" />
-                      subnav 3
-                    </span>
-                  }
-                >
-                  <Menu.Item key="9">option9</Menu.Item>
-                  <Menu.Item key="10">option10</Menu.Item>
-                  <Menu.Item key="11">option11</Menu.Item>
-                  <Menu.Item key="12">option12</Menu.Item>
-                </SubMenu>
-              </Menu>
-            </Sider>
-          </Layout>
+                  <Col sm={2}>
+                    <div>
+                      <Avatar size={64} icon="user" />
+                    </div>
+                  </Col>
+                  <Col>
+                    {" "}
+                    <h1
+                      style={{
+                        padding: "16px",
+                        fontSize: "22px",
+                        paddingLeft: "70px"
+                      }}
+                    >
+                      Aaquib Niaz
+                    </h1>
+                  </Col>
+                  {/* <Col>Name of the passenger</Col> */}
+                </Row>
+
+                <Row>
+                  <Col
+                    lg={14}
+                    // sm={24}
+                    // xs={24}
+                    style={{
+                      padding: "15px 15px",
+                      borderRight: "1px solid #ebedf0"
+                    }}
+                  >
+                    <WrappedDynamicFieldSet onAdd={this.handleClick} />
+                  </Col>
+                  <Col sm={10} style={{ padding: "15px 15px" }}>
+                    <WrappedDynamicFieldSet onAdd={this.handleClick} />
+                  </Col>
+                </Row>
+              </div>
+            </Col>
+            <Col sm={5} style={{ background: "#fff" }}>
+              <div>{this.state.counts}</div>
+            </Col>
+          </Row>
         </Content>
         <Footer style={{ textAlign: "center" }}>FlyHigh Airways ©2018</Footer>
       </Layout>

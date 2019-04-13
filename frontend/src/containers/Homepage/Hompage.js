@@ -5,6 +5,7 @@ import CarouselComponent from "../../components/CarouselCustom/CarouselCustom";
 import MenuBar from "../../components/HorizontalScrollBar/ScrollBar";
 import Footer from "../../components/Footer/Footer";
 import Cards from "../../components/UI/Cards/cards";
+import NewsHeaderCard from "../../components/UI/NewsHeaderCard";
 
 const styles = {
   fontFamily: "sans-serif",
@@ -20,7 +21,9 @@ class HomePage extends Component {
         <CarouselComponent {...this.props}/>
         <div style={styles}>
           <MenuBar />
-          <Cards />
+
+          <NewsHeaderCard title="Travel with our Airlines" />
+          <NewsHeaderCard title="Popular Flights" />
         </div>
 
         {/* <Carousal /> */}

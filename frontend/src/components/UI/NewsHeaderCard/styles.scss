@@ -1,0 +1,22 @@
+.card1 {
+  padding: 30px;
+  height: 100%;
+}
+.news-header-card {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  width: 450px;
+  height: 100%;
+  box-shadow: 0 10px 30px rgba(black, 0.7);
+
+  .news-header-background {
+    z-index: 1;
+  }
+
+  .news-header {
+    position: absolute;
+    z-index: 2;
+    text-decoration: none;
+  }
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col } from "antd";
-import classes from "./Footer.module.css";
+// import classes from "./Footer.module.css";
 import "./footer.css";
 function Footer() {
   return (
@@ -88,14 +88,22 @@ function Footer() {
             <div className="footer-center">
               <h2>Abc</h2>
               <div>
-                <a target="_blank" rel="noopener noreferrer" href="http://ant.design/">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="http://ant.design/"
+                >
                   Ant Design
                 </a>
                 <span> - </span>
                 <span>Abc UI Abc</span>
               </div>
               <div>
-                <a target="_blank" rel="noopener noreferrer" href="https://eggjs.org/">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://eggjs.org/"
+                >
                   Egg
                 </a>
                 <span> - </span>

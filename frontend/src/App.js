@@ -16,6 +16,7 @@ import Auth from "./containers/Auth/Auth";
 import CheckIn from './containers/CheckIn/CheckIn';
 import FlightBook from "./containers/FlightBook/FlightBook";
 import HomePage from "./containers/Homepage/Hompage";
+import Navbar from "./components/Header/Header";
 
 // import Navbar from "./components/UI/Navbar/navbar";
 import Navbar from "./components/Header/Header";
