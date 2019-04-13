@@ -52,6 +52,7 @@ class FlightBook extends React.Component {
         <Content style={{ padding: "0 50px" }}>
           <Row style={{ padding: "24px 0", background: "rgb(240, 242, 245)" }}>
             <Col
+              lg={19}
               sm={14}
               style={{
                 padding: "0 24px",
@@ -72,7 +73,6 @@ class FlightBook extends React.Component {
                     </div>
                   </Col>
                   <Col>
-                    {" "}
                     <h1
                       style={{
                         padding: "16px",
@@ -83,28 +83,25 @@ class FlightBook extends React.Component {
                       Aaquib Niaz
                     </h1>
                   </Col>
-                  {/* <Col>Name of the passenger</Col> */}
                 </Row>
 
                 <Row>
                   <Col
-                    lg={14}
+                    sm={24}
+                    lg={20}
                     // sm={24}
                     // xs={24}
                     style={{
-                      padding: "15px 15px",
+                      padding: "15px 85px",
                       borderRight: "1px solid #ebedf0"
                     }}
                   >
                     <WrappedDynamicFieldSet onAdd={this.handleClick} />
                   </Col>
-                  <Col sm={10} style={{ padding: "15px 15px" }}>
-                    <WrappedDynamicFieldSet onAdd={this.handleClick} />
-                  </Col>
                 </Row>
               </div>
             </Col>
-            <Col sm={5} style={{ background: "#fff" }}>
+            <Col lg={3} sm={3} style={{ background: "#fff" }}>
               <div>{this.state.counts}</div>
             </Col>
           </Row>

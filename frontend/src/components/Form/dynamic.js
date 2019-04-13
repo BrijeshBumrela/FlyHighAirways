@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Form, Input, InputNumber, Icon, Button } from "antd";
+import { Form, Input, InputNumber, Icon, Button, Select, Row, Col } from "antd";
+const { Option } = Select;
 
 let id = 0;
 
@@ -49,53 +50,103 @@ class DynamicFieldSet extends React.Component {
     const { getFieldDecorator, getFieldValue } = this.props.form;
     const formItemLayout = {
       labelCol: {
-        xs: { span: 24 },
-        sm: { span: 4 }
+        // xs: { span: 4 },
+        // sm: { span: 4 }
       },
       wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 20 }
+        // xs: { span: 24 },
+        // sm: { span: 20 }
       }
     };
     const formItemLayoutWithOutLabel = {
       wrapperCol: {
-        xs: { span: 24, offset: 0 },
-        sm: { span: 20, offset: 4 }
+        // xs: { span: 24, offset: 0 },
+        // sm: { span: 20, offset: 4 }
       }
     };
     getFieldDecorator("keys", { initialValue: [] });
     const keys = getFieldValue("keys");
     const formItems = keys.map((k, index) => (
-      <Form.Item
-        {...(index === 0 ? formItemLayout : formItemLayoutWithOutLabel)}
-        label={index === 0 ? "Passengers" : ""}
-        required={false}
-        key={k}
-      >
-        {getFieldDecorator(`names[${k}]`, {
-          validateTrigger: ["onChange", "onBlur"],
-          rules: [
-            {
-              required: true,
-              whitespace: true,
-              message: "Please input passenger's name or delete this field."
-            }
-          ]
-        })(
-          <Input
-            placeholder="passenger name"
-            style={{ width: "60%", marginRight: 8 }}
-          />
-        )}
-        {keys.length > 1 ? (
-          <Icon
-            className="dynamic-delete-button"
-            type="minus-circle-o"
-            disabled={keys.length === 1}
-            onClick={() => this.remove(k)}
-          />
-        ) : null}
-      </Form.Item>
+      //   <Form.Item {...formItemLayout} label="Name">
+      //   {getFieldDecorator("username", {
+      //     rules: [
+      //       {
+      //         required: true,
+      //         message: "Please input your name"
+      //       }
+      //     ]
+      //   })(<Input placeholder="Please input your name" />)}
+      // </Form.Item>
+      <React.Fragment>
+        <Row>
+          <Col lg={10}>
+            <Form.Item
+              {...(index === 0 ? formItemLayout : formItemLayoutWithOutLabel)}
+              label={index === 0 ? "Passengers" : ""}
+              required={false}
+              key={`${k}-name`}
+            >
+              {getFieldDecorator(`passengers[${k}].name`, {
+                validateTrigger: ["onChange", "onBlur"],
+                rules: [
+                  {
+                    required: true,
+                    whitespace: true,
+                    message:
+                      "Please input passenger's name or delete this field."
+                  }
+                ]
+              })(
+                <Input
+                  placeholder="passenger name"
+                  style={{ width: "40%", marginRight: 8 }}
+                />
+              )}
+              {keys.length > 1 ? (
+                <Icon
+                  className="dynamic-delete-button"
+                  type="minus-circle-o"
+                  disabled={keys.length === 1}
+                  onClick={() => this.remove(k)}
+                />
+              ) : null}
+            </Form.Item>
+          </Col>
+          <Col lg={10}>
+            <Form.Item
+              {...(index === 0 ? formItemLayout : formItemLayoutWithOutLabel)}
+              label={index === 0 ? "Passengers" : ""}
+              required={false}
+              key={`${k}-email`}
+            >
+              {getFieldDecorator(`passengers[${k}].email`, {
+                validateTrigger: ["onChange", "onBlur"],
+                rules: [
+                  {
+                    required: true,
+                    whitespace: true,
+                    message:
+                      "Please input passenger's email or delete this field."
+                  }
+                ]
+              })(
+                <Input
+                  placeholder="passenger Email"
+                  style={{ width: "40%", marginRight: 8 }}
+                />
+              )}
+              {/* {keys.length > 1 ? (
+            <Icon
+              className="dynamic-delete-button"
+              type="minus-circle-o"
+              disabled={keys.length === 1}
+              onClick={() => this.remove(k)}
+            />
+          ) : null} */}
+            </Form.Item>
+          </Col>
+        </Row>
+      </React.Fragment>
     ));
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -105,12 +156,7 @@ class DynamicFieldSet extends React.Component {
             <Icon type="plus" /> Add field
           </Button>
         </Form.Item>
-        <Form.Item label="InputNumber">
-          {getFieldDecorator("input-number", { initialValue: 3 })(
-            <InputNumber min={1} max={10} />
-          )}
-          <span className="ant-form-text"> machines</span>
-        </Form.Item>
+
         <Form.Item {...formItemLayoutWithOutLabel}>
           <Button type="primary" htmlType="submit">
             Submit
