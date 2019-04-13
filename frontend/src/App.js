@@ -34,7 +34,8 @@ class App extends Component {
           source: '',
           destination: '',
           date: ''
-      }
+      },
+      selectedFlight: null
   }
 
   componentDidMount() {
@@ -43,6 +44,10 @@ class App extends Component {
 
   onFormSubmit = (data) => {
     this.setState({ flightInfo: data });
+  }
+
+  onFlightSelect = (data) => {
+    this.setState({ selectedFlight: data })
   }
 
   render() {
@@ -59,6 +64,7 @@ class App extends Component {
         return (
             <FlightSearch 
                 flightInfo={this.state.flightInfo}
+                flightSelect={this.onFlightSelect}
             />
         )
     }

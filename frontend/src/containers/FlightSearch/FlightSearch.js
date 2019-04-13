@@ -156,6 +156,7 @@ class FlightSearch extends Component {
                         economy={flight.economy}
                         source={flight.source}
                         destination={flight.destination}
+                        onFlightSelect={this.props.flightSelect}
                     />
                 )  
             })
