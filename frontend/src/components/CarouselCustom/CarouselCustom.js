@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Carousel, Icon } from "antd";
 import FlightForm from "../FlightForm/FlightForm";
 import classes from "./CarouselCustom.module.css";
+import button from "./../UI/button/button";
 
 export default class CarouselComponent extends Component {
   constructor(props) {
@@ -10,12 +11,19 @@ export default class CarouselComponent extends Component {
     this.previous = this.previous.bind(this);
     this.carousel = React.createRef();
   }
+
   next() {
     this.carousel.next();
   }
+
   previous() {
     this.carousel.prev();
   }
+
+  onFormSubmitHandler = e => {
+    e.preventDefault();
+    console.log("hi there");
+  };
 
   render() {
     const props = {
@@ -34,24 +42,28 @@ export default class CarouselComponent extends Component {
           style={{
             position: "absolute",
             zIndex: "190",
-            top: "280px",
+            top: "50%",
             left: "45%",
             fontSize: "40px"
           }}
         />
-        <div className={classes.parentDiv}>
+        <div>
           <Carousel
             ref={node => (this.carousel = node)}
             {...props}
+            autoplay
             style={{ position: "absolute", height: "400px" }}
           >
             <div className={classes.antCarousel}>
               <img
                 alt="<temporary>"
-                src="https://reviewkar.com/wp-content/uploads/2018/06/Skardu.jpg"
+                src="https://us-east.manta.joyent.com/condenast/public/cnt-services/production/2015/11/24/5654d90d5e7aeb7a6e217ebf_cappadocia-turkey-hot-air-balloons-cr-getty.jpg"
               />
             </div>
-            <div className={classes.antCarousel}>
+            <div
+              style={{ position: "relative" }}
+              className={classes.antCarousel}
+            >
               <img
                 alt="<temporary>"
                 src="http://www.liveenhanced.com/wp-content/uploads/2018/03/B-Ocean-Resort-most-beautiful-places-To-visit-In-florida.jpg"
@@ -64,9 +76,19 @@ export default class CarouselComponent extends Component {
               />
             </div>
           </Carousel>
+          <div className={classes.rightChild}>
+            <h1>Flyhigh to Delhi </h1>
+
+            <h5>
+              Introducing daily, non-stop flights between Kolkata and Mumbai,
+            </h5>
+            <h5>W.E.F 5 June 2019.</h5>
+            <h5>Starting from 4590 Rs</h5>
+            <button className={classes.but1}>Book Now</button>
+          </div>
         </div>
         <h1 className={classes.childDiv}>
-            <FlightForm />
+          <FlightForm />
         </h1>
         <Icon
           type="right-circle"
@@ -75,7 +97,7 @@ export default class CarouselComponent extends Component {
           style={{
             position: "absolute",
             zIndex: "190",
-            top: "280px",
+            top: "50%",
             left: "96%",
             fontSize: "40px"
           }}
@@ -84,8 +106,8 @@ export default class CarouselComponent extends Component {
     );
   }
 }
-{
-  /* <Card className="menu-bar">
+
+/* <Card className="menu-bar">
   <ComponentSlider
     renderLeftArrow={renderLeftArrow}
     renderRightArrow={renderRightArrow}
@@ -111,4 +133,3 @@ export default class CarouselComponent extends Component {
     </div>
   </ComponentSlider>
 </Card>; */
-}

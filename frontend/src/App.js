@@ -8,14 +8,18 @@ import { connect } from "react-redux";
 
 import { authCheckStatus } from "./store/actions/index";
 
-import FlightSearch from "./containers/FlightSearch/FlightSearch";
-import Auth from "./containers/Auth/Auth";
 import "antd/dist/antd.css";
 
+import FlightSearch from "./containers/FlightSearch/FlightSearch";
+import Auth from "./containers/Auth/Auth";
+import CheckIn from "./containers/CheckIn/CheckIn";
 import FlightBook from "./containers/FlightBook/FlightBook";
 import HomePage from "./containers/Homepage/Hompage";
 import Navbar from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+
+// import Navbar from "./components/UI/Navbar/navbar";
+// import Navbar from "./components/Header/Header";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -25,22 +29,54 @@ const store = createStore(
 );
 
 class App extends Component {
+  state = {
+    flightInfo: {
+      source: "",
+      destination: "",
+      date: ""
+    },
+    selectedFlight: null
+  };
+
   componentDidMount() {
     this.props.autoSignUpHandler();
   }
 
+  onFormSubmit = data => {
+    this.setState({ flightInfo: data });
+  };
+
+  onFlightSelect = data => {
+    this.setState({ selectedFlight: data });
+  };
+
   render() {
+    console.log("[STATE]", this.state);
+
+    const HomePageWithProps = props => {
+      return <HomePage formFill={this.onFormSubmit} />;
+    };
+
+    const FlightSearchWithProps = props => {
+      return (
+        <FlightSearch
+          flightInfo={this.state.flightInfo}
+          flightSelect={this.onFlightSelect}
+        />
+      );
+    };
+
     return (
       <React.Fragment>
         <Provider store={store}>
           <BrowserRouter>
-            <Navbar />
-
+            <Navbar isAuth={this.props.isAuthenticated} />
             <Switch>
-              <Route path="/" exact component={HomePage} />
-              <Route path="/flights" component={FlightSearch} />
+              <Route path="/" exact render={HomePageWithProps} />
+              <Route path="/flights" render={FlightSearchWithProps} />
               <Route path="/book-flight" component={FlightBook} />
               <Route path="/authenticate" component={Auth} />
+              <Route path="/checkIn" component={CheckIn} />
             </Switch>
             <Footer />
           </BrowserRouter>
@@ -56,9 +92,15 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.token !== null
+  };
+};
+
 export default withRouter(
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )(App)
 );

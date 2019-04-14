@@ -15,3 +15,23 @@
   height: 500px;
   overflow: hidden;
 }
+
+.rightChild {
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  font-weight: bolder;
+  text-align: center;
+  font-style: oblique;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+
+  z-index: 1000;
+  font-size: 2rem;
+}
+.but1 {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bolder;
+  margin-top: 2rem;
+  color: black;
+  cursor: pointer;
+}

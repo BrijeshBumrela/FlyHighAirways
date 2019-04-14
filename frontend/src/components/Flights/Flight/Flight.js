@@ -35,7 +35,10 @@ const flight = (props) => (
         </Col>
         <Col lg={4}>
             <div className={classes.BookNow}>
-                <Button type="primary">Book Now</Button>
+                <Button 
+                    type="primary"
+                    onClick={() => props.onFlightSelect(props)}
+                >Book Now</Button>
             </div>
         </Col>
     </Row>

@@ -25,66 +25,31 @@ class NewsHeaderCard extends React.Component {
           {this.props.title}
         </h1>
         <Row gutter={16}>
-          <Col span={6}>
-            <Card className="news-header-card">
-              <NewsHeaderBackground
-                thumbnail={thumbnail}
-                imgUrl="http://alldatmatterz.com/img/article/764/%E0%A4%95%E0%A5%81%E0%A4%B2%E0%A5%8D%E0%A4%B2%E0%A5%82%20%E0%A4%AE%E0%A4%A8%E0%A4%BE%E0%A4%B2%E0%A5%80.jpg"
-              />
+          {this.props.flightList.map(flight => {
+            return (
+              <Col span={6}>
+                <Card className="news-header-card">
+                  <NewsHeaderBackground
+                    thumbnail={thumbnail}
+                    imgUrl={
+                      flight.source == null ? `${flight.img}` : `${flight.img1}`
+                    }
+                  />
 
-              <NewsHeader
-                title="Manali"
-                author={author}
-                date={date}
-                tags={tags}
-              />
-            </Card>
-          </Col>
-          <Col span={6}>
-            <Card className="news-header-card">
-              <NewsHeaderBackground
-                thumbnail={thumbnail}
-                imgUrl="https://scoutmytrip.com/blog/wp-content/uploads/2018/04/Places-to-visit-in-Darjeeling-Featured.jpg"
-              />
-
-              <NewsHeader
-                title="Darjeeling"
-                author={author}
-                date={date}
-                tags={tags}
-              />
-            </Card>
-          </Col>
-          <Col span={6}>
-            <Card className="news-header-card">
-              <NewsHeaderBackground
-                thumbnail={thumbnail}
-                imgUrl="https://i.pinimg.com/originals/71/41/ff/7141fff9e2dfc82f159c9496dac3747b.jpg"
-              />
-
-              <NewsHeader
-                title="Rajasthan"
-                author={author}
-                date={date}
-                tags={tags}
-              />
-            </Card>
-          </Col>
-          <Col span={6}>
-            <Card className="news-header-card">
-              <NewsHeaderBackground
-                thumbnail={thumbnail}
-                imgUrl="https://scoutmytrip.com/blog/wp-content/uploads/2018/05/Hill-stations-in-India-Featured.jpg"
-              />
-
-              <NewsHeader
-                title="Shillong"
-                author={author}
-                date={date}
-                tags={tags}
-              />
-            </Card>
-          </Col>
+                  <NewsHeader
+                    title={
+                      flight.source == null
+                        ? `${flight.destination}`
+                        : `${flight.source} - ${flight.destination}`
+                    }
+                    author={author}
+                    date={date}
+                    tags={tags}
+                  />
+                </Card>
+              </Col>
+            );
+          })}
         </Row>
       </div>
     );
