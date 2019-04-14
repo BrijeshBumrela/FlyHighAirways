@@ -35,6 +35,12 @@ class FlightBook extends  Component {
     visible: false
   };
 
+  componentDidMount() {
+    if (this.props.selectedFlight) {
+      this.setState({ baseFare: this.props.selectedFlight.economy.fare })
+    }
+  }
+
   totalPriceCalculate = () => {
       let sum = 0;
       sum += this.state.counts * this.state.baseFare;
@@ -42,10 +48,6 @@ class FlightBook extends  Component {
       const sumWithoutGST = sum * this.state.gst / 100;
       sum += sum * this.state.gst/100;
       return [sum, sumWithoutGST];
-  }
-
-  transactionSuccess = (payment) => {
-
   }
 
   handler(id) {
@@ -225,14 +227,14 @@ class FlightBook extends  Component {
                   { this.props.selectedFlight ? (
                     <div className={classes.pricebox}>
                       Base Fare = Rs <span>
-                          {this.state.counts === 0 ? 0 : this.state.counts * this.state.baseFare}
+                          <b>{this.state.counts === 0 ? 0 : this.state.counts * this.state.baseFare}</b>
                       </span>
                       <br />
-                      Luggage Charge = Rs {this.state.luggage}
+                      Luggage Charge = Rs <b>{this.state.luggage}</b>
                       <br />
-                      GST = Rs {this.totalPriceCalculate()[1]}
+                      GST = Rs <b>{this.totalPriceCalculate()[1]}</b>
                       <div className={classes.hr}>&nbsp;</div>
-                      Total Fare= Rs {this.totalPriceCalculate()[0]}
+                      Total Fare= Rs <b>{this.totalPriceCalculate()[0]}</b>
                     </div>
                   ) : (null)}
 
