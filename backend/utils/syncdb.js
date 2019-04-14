@@ -19,6 +19,10 @@ models.auth.User.createAll({ "force": true }).then(result => {
     return models.scheduledTask.ScheduledTask.createAll({ "force": true });
 }).then(result => {
     return models.scheduledTask.CronLog.createAll({ "force": true });
+}).then(result => {
+    return models.aircraft.AircraftModel.createAll({"force":true});
+}).then(result=>{
+    return models.aircraft.Aircraft.createAll({"force": true});
 }).catch(err => {
     console.log(err, "\nERRORED!")
 });
