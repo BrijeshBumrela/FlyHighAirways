@@ -25,9 +25,9 @@ class NewsHeaderCard extends React.Component {
           {this.props.title}
         </h1>
         <Row gutter={16}>
-          {this.props.flightList.map(flight => {
+          {this.props.flightList.map((flight, index) => {
             return (
-              <Col span={6}>
+              <Col span={6} key={index}>
                 <Card className="news-header-card">
                   <NewsHeaderBackground
                     thumbnail={thumbnail}

@@ -37,16 +37,18 @@ class DynamicFieldSet extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    this.props.onSubmit()
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        const { keys, names } = values;
-        console.log("Received values of form: ", values);
-        console.log("Merged values:", keys.map(key => names[key]));
+        // const { keys, names } = values;
+        // console.log("Received values of form: ", values);
+        // console.log("Merged values:", keys.map(key => names[key]));
       }
     });
   };
 
   render() {
+
     const { getFieldDecorator, getFieldValue } = this.props.form;
     const formItemLayout = {
       labelCol: {
@@ -77,14 +79,14 @@ class DynamicFieldSet extends React.Component {
       //     ]
       //   })(<Input placeholder="Please input your name" />)}
       // </Form.Item>
-      <React.Fragment>
+      <React.Fragment key={`${k}-name`}>
         <Row>
           <Col lg={10}>
             <Form.Item
               {...(index === 0 ? formItemLayout : formItemLayoutWithOutLabel)}
               label={index === 0 ? "Passengers" : ""}
               required={false}
-              key={`${k}-name`}
+              
             >
               {getFieldDecorator(`passengers[${k}].name`, {
                 validateTrigger: ["onChange", "onBlur"],
@@ -158,7 +160,11 @@ class DynamicFieldSet extends React.Component {
         </Form.Item>
 
         <Form.Item {...formItemLayoutWithOutLabel}>
-          <Button type="primary" htmlType="submit">
+          <Button 
+              type="primary" 
+              htmlType="submit"
+              disabled={!(this.props.isFlightSelected[0] !== null && this.props.isFlightSelected[1] > 0)}    
+          >
             Submit
           </Button>
         </Form.Item>

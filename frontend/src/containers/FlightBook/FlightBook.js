@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-// import { Row, Col, Button, Layout, Sider } from "antd";
 import { Layout, Menu, Icon, Row, Col, Avatar } from "antd";
-// import Form from "../../components/Form/form";
 import DynamicFieldSet from "../../components/Form/dynamic";
-import { Form } from "antd";
+import { Form, Modal, Button } from "antd";
+import Paypal from "../../components/Paypal/Paypal";
+
+import classes from './FlightBook.module.css';
+
 const { SubMenu } = Menu;
 
 const { Content, Footer, Sider } = Layout;
@@ -14,7 +16,7 @@ const WrappedDynamicFieldSet = Form.create({ name: "dynamic_form_item" })(
 
 // ReactDOM.render(, mountNode);
 
-class FlightBook extends React.Component {
+class FlightBook extends  Component {
   constructor(props) {
     super(props);
 
@@ -25,12 +27,51 @@ class FlightBook extends React.Component {
     // };
   }
 
-  state = { counts: 0 };
+  state = { 
+    counts: 0,
+    baseFare: 4500,
+    luggage: 500,
+    gst: 18,
+    visible: false
+  };
+
+  totalPriceCalculate = () => {
+      let sum = 0;
+      sum += this.state.counts * this.state.baseFare;
+      sum += this.state.luggage;
+      const sumWithoutGST = sum * this.state.gst / 100;
+      sum += sum * this.state.gst/100;
+      return [sum, sumWithoutGST];
+  }
+
+  transactionSuccess = (payment) => {
+
+  }
 
   handler(id) {
     this.setState({
       messageShown: true,
       id: id
+    });
+  }
+
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  }
+
+  handleOk = (e) => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  }
+
+  handleCancel = (e) => {
+    console.log(e);
+    this.setState({
+      visible: false,
     });
   }
 
@@ -44,6 +85,27 @@ class FlightBook extends React.Component {
   render() {
     return (
       <React.Fragment>
+
+        {/* Modal */}
+        <div>
+          <Modal
+            title="Basic Modal"
+            visible={this.state.visible}
+            onOk={this.handleOk}
+            onCancel={this.handleCancel}
+          >
+
+            <h1>Your Total Amount is {this.totalPriceCalculate()[0]}</h1>
+            <Paypal
+                toPay={this.totalPriceCalculate()[0]}
+                transactionError={err => this.transactionError(err)}
+                transactionCancelled={data => this.transactionCancelled(data)}
+                transactionSuccess={payment => this.transactionSuccess(payment)}
+            />
+          </Modal>
+        </div>
+
+
         <Row
           style={{
             width: "80%",
@@ -111,7 +173,11 @@ class FlightBook extends React.Component {
                         padding: "15px 85px"
                       }}
                     >
-                      <WrappedDynamicFieldSet onAdd={this.handleClick} />
+                      <WrappedDynamicFieldSet 
+                        onAdd={this.handleClick} 
+                        onSubmit={this.showModal}
+                        isFlightSelected={[this.props.selectedFlight, this.state.counts]}  
+                      />
                     </Col>
                   </Row>
                   <Row>
@@ -150,15 +216,31 @@ class FlightBook extends React.Component {
                   Pricing Summary
                 </div>
                 <div style={{ padding: "10px" }}>
-                  <h3 style={{ color: "red" }}>Chennai to Mumbai</h3>
-                  Ticket Cost = Rs 4500
-                  <br />
-                  Extra charges for Luggage = Rs 500 -/
-                  <br />
-                  Total Fare ={" "}
-                  {this.state.counts === 0 ? 0 : this.state.counts * 4500 + 500}
+                  <div className={classes.location}>
+                    <h1>{this.props.selectedFlight ? this.props.selectedFlight.source : 'Select'}</h1>
+                    <h1>{this.props.selectedFlight ? 'TO' : 'The'}</h1>
+                    <h1>{this.props.selectedFlight ? this.props.selectedFlight.destination : 'Locations'}</h1>
+                  </div>
+                  
+                  { this.props.selectedFlight ? (
+                    <div className={classes.pricebox}>
+                      Base Fare = Rs <span>
+                          {this.state.counts === 0 ? 0 : this.state.counts * this.state.baseFare}
+                      </span>
+                      <br />
+                      Luggage Charge = Rs {this.state.luggage}
+                      <br />
+                      GST = Rs {this.totalPriceCalculate()[1]}
+                      <div className={classes.hr}>&nbsp;</div>
+                      Total Fare= Rs {this.totalPriceCalculate()[0]}
+                    </div>
+                  ) : (null)}
+
+                  
                 </div>
               </Col>
+
+              
             </Row>
           </Content>
         </Row>

@@ -66,6 +66,14 @@ class App extends Component {
       );
     };
 
+    const FlightFormWithProps = props => {
+      return (
+        <FlightBook
+          selectedFlight={this.state.selectedFlight}
+        />
+      );
+    }
+
     return (
       <React.Fragment>
         <Provider store={store}>
@@ -74,7 +82,7 @@ class App extends Component {
             <Switch>
               <Route path="/" exact render={HomePageWithProps} />
               <Route path="/flights" render={FlightSearchWithProps} />
-              <Route path="/book-flight" component={FlightBook} />
+              <Route path="/book-flight" render={FlightFormWithProps} />
               <Route path="/authenticate" component={Auth} />
               <Route path="/checkIn" component={CheckIn} />
             </Switch>

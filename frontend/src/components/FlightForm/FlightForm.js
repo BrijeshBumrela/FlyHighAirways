@@ -88,13 +88,13 @@ class flightForm extends Component {
     }
 
     return (
-        <form onSubmit={(e) => this.onSubmitHandler(e, data)}>
+        <form className={classes.FormDiv} onSubmit={(e) => this.onSubmitHandler(e, data)}>
             <div>   
                 <div className={classes.optionWrapper}>
-
+                    <h6>Select Source: </h6>
                     <Select
                           showSearch
-                          style={{ width: 200 }}
+                          style={{ width: 200, marginLeft:'20px' }}
                           placeholder="Source Airport"
                           optionFilterProp="children"
                           onSelect={cityName => this.onCitySelectHandler(cityName, 'source')}
@@ -111,6 +111,7 @@ class flightForm extends Component {
                 </div>
 
                 <div className={classes.optionWrapper}>
+                    <h6>Select Destination: </h6>
                     <Select
                         showSearch
                         style={{ width: 200 }}
@@ -136,19 +137,28 @@ class flightForm extends Component {
                         trigger="click"
                         visible={this.state.calendarPopUp}
                     >
-                        <Button type="primary" onClick={this.onVisibleHandler}>Select A Date</Button>
+                        <Button 
+                            type="primary" 
+                            onClick={this.onVisibleHandler}
+                            style={{ marginLeft: '20px' }}                        
+                        >
+                            Select A Date
+                        </Button>
                     </Popover>
                 </div>
 
                 
             </div>
 
-            <Button 
-                type="primary" 
-                htmlType="submit"
-            >
-                Search Flights
-            </Button>
+            <div className={classes.SearchBtn}>
+                <Button 
+                    type="primary" 
+                    htmlType="submit"
+                    size="large"
+                >
+                    Search Flights
+                </Button>
+            </div>
         </form>
     );
   }

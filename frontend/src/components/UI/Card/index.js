@@ -4,8 +4,8 @@ import classnames from 'classnames';
 import './styles.scss';
 
 class Card extends React.Component {
-  constructor(props) {
-    super(props);
+  state = {
+    
   }
   
   render() {
