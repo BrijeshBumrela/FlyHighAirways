@@ -9,12 +9,12 @@ module.exports = {
     check:{
         max_weight: `
                     ALTER TABLE aircraft_models
-                    ADD CONSTRAINT max_weight_not_0
+                    ADD CONSTRAINT max_weight_gt_0
                     CHECK (max_weight > 0)
                     `,
         no_of_seats: `
                     ALTER TABLE aircraft_models
-                    ADD CONSTRAINT no_of_seats_not_0
+                    ADD CONSTRAINT no_of_seats_gt_0
                     CHECK (no_of_seats > 0)
                     `
     },
