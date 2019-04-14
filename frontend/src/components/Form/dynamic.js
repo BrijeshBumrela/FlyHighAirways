@@ -99,17 +99,17 @@ class DynamicFieldSet extends React.Component {
               })(
                 <Input
                   placeholder="passenger name"
-                  style={{ width: "40%", marginRight: 8 }}
+                  style={{ width: "80%", marginRight: 8 }}
                 />
               )}
-              {keys.length > 1 ? (
+              {/* {keys.length > 1 ? (
                 <Icon
                   className="dynamic-delete-button"
                   type="minus-circle-o"
                   disabled={keys.length === 1}
                   onClick={() => this.remove(k)}
                 />
-              ) : null}
+              ) : null} */}
             </Form.Item>
           </Col>
           <Col lg={10}>
@@ -132,17 +132,17 @@ class DynamicFieldSet extends React.Component {
               })(
                 <Input
                   placeholder="passenger Email"
-                  style={{ width: "40%", marginRight: 8 }}
+                  style={{ width: "90%", marginRight: 8 }}
                 />
               )}
-              {/* {keys.length > 1 ? (
-            <Icon
-              className="dynamic-delete-button"
-              type="minus-circle-o"
-              disabled={keys.length === 1}
-              onClick={() => this.remove(k)}
-            />
-          ) : null} */}
+              {keys.length > 1 ? (
+                <Icon
+                  className="dynamic-delete-button"
+                  type="minus-circle-o"
+                  disabled={keys.length === 1}
+                  onClick={() => this.remove(k)}
+                />
+              ) : null}
             </Form.Item>
           </Col>
         </Row>
