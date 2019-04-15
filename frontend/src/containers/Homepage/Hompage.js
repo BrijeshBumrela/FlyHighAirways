@@ -66,7 +66,7 @@ class HomePage extends Component {
     ];
 
     return (
-      <div>
+      <React.Fragment>
         <CarouselComponent {...this.props} />
         <div style={styles}>
           <MenuBar />
@@ -83,7 +83,7 @@ class HomePage extends Component {
         {/* <FlightForm /> */}
 
         {/* <Footer /> */}
-      </div>
+      </React.Fragment>
     );
   }
 }

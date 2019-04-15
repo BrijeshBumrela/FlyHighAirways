@@ -134,7 +134,7 @@ class FlightBook extends React.Component {
                       padding: "10px 85px"
                     }}
                   >
-                    There is limit of 25 kg luggage
+                    There is limit of 25 kg luggage per person
                   </Row>
                 </div>
               </Col>
@@ -150,7 +150,7 @@ class FlightBook extends React.Component {
                   Pricing Summary
                 </div>
                 <div style={{ padding: "10px" }}>
-                  <h3 style={{ color: "red" }}>Chennai to Mumbai</h3>
+                  <h3 style={{ color: "red" }}>Kolkata to Mumbai</h3>
                   Ticket Cost = Rs 4500
                   <br />
                   Extra charges for Luggage = Rs 500 -/
