@@ -22,7 +22,8 @@ class NewsHeaderCard extends React.Component {
             fontWeight: "bolder",
             paddingTop: "100px",
             paddingBottom: "30px",
-
+            paddingLeft: "60px",
+            paddingRight: "30px",
             fontSize: "40px"
           }}
         >
