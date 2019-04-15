@@ -22,13 +22,13 @@ class NewsHeaderCard extends React.Component {
             fontWeight: "bolder",
             paddingTop: "100px",
             paddingBottom: "30px",
-            paddingLeft: "90px",
-            fontSize: "50px"
+
+            fontSize: "40px"
           }}
         >
           {this.props.title}
         </h1>
-        <Row gutter={10}>
+        <Row gutter={40}>
           {this.props.flightList.map(flight => {
             return (
               <div className="space">
