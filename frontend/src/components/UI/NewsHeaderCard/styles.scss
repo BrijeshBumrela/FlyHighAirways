@@ -8,7 +8,8 @@
   flex-flow: column;
   width: 450px;
   height: 100%;
-  box-shadow: 0 10px 30px rgba(black, 0.7);
+  box-shadow: 0 10px 30px rgba(black, 0.9);
+  padding: 5%;
 
   .news-header-background {
     z-index: 1;
@@ -19,4 +20,8 @@
     z-index: 2;
     text-decoration: none;
   }
+}
+.space {
+  padding-left: 10%;
+  padding-right: 10%;
 }
