@@ -66,11 +66,7 @@ class HomePage extends Component {
     ];
 
     return (
-<<<<<<< HEAD
-      <div>
-=======
       <React.Fragment>
->>>>>>> 7dd038c8419d9e367fbfeea12191cedb31613baf
         <CarouselComponent {...this.props} />
         <div style={styles}>
           <MenuBar />

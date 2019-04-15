@@ -18,12 +18,9 @@ import HomePage from "./containers/Homepage/Hompage";
 import Navbar from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 
-<<<<<<< HEAD
-=======
 // import Navbar from "./components/UI/Navbar/navbar";
 // import Navbar from "./components/Header/Header";
 
->>>>>>> 7dd038c8419d9e367fbfeea12191cedb31613baf
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
