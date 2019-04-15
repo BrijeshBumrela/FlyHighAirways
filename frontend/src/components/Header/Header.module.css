@@ -1,8 +1,9 @@
 .menuBar {
   padding: 0 20px;
   /* border-bottom: solid 1px #e8e8e8; */
-  overflow: auto;
-  box-shadow: 0 0 30px #f3f1f1;
+  overflow: hidden;
+
+  /* box-shadow: 0 0 30px #f3f1f1; */
 
   /* for overlay */
   position: fixed;
@@ -14,7 +15,8 @@
   bottom: 0;
   z-index: 2;
   cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.5);
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
 }
 
 .logo {
