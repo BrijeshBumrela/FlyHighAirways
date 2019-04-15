@@ -48,12 +48,7 @@ export default class CarouselComponent extends Component {
           }}
         />
         <div>
-          <Carousel
-            ref={node => (this.carousel = node)}
-            {...props}
-            autoplay
-            style={{ position: "absolute", height: "400px" }}
-          >
+          <Carousel ref={node => (this.carousel = node)} {...props} autoplay>
             <div className={classes.antCarousel}>
               <img
                 alt="<temporary>"
@@ -106,30 +101,3 @@ export default class CarouselComponent extends Component {
     );
   }
 }
-
-/* <Card className="menu-bar">
-  <ComponentSlider
-    renderLeftArrow={renderLeftArrow}
-    renderRightArrow={renderRightArrow}
-  >
-    <div className="menu-item">
-      <Card.Grid style={gridStyle}>Content</Card.Grid>
-    </div>
-    <div className="menu-item">
-      <Card.Grid style={gridStyle}>Content</Card.Grid>
-    </div>
-    <div className="menu-item">
-      <Card.Grid style={gridStyle}>Content</Card.Grid>
-    </div>
-
-    <div className="menu-item">
-      <Card.Grid style={gridStyle}>Content</Card.Grid>
-    </div>
-    <div className="menu-item">
-      <Card.Grid style={gridStyle}>Content</Card.Grid>
-    </div>
-    <div className="menu-item">
-      <Card.Grid style={gridStyle}>Content</Card.Grid>
-    </div>
-  </ComponentSlider>
-</Card>; */

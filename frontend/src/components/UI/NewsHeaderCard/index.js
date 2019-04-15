@@ -19,35 +19,43 @@ class NewsHeaderCard extends React.Component {
           style={{
             textAlign: "left",
             fontFamily: "Sans",
-            fontWeight: "bolder"
+            fontWeight: "bolder",
+            paddingTop: "100px",
+            paddingBottom: "30px",
+            paddingLeft: "90px",
+            fontSize: "50px"
           }}
         >
           {this.props.title}
         </h1>
-        <Row gutter={16}>
+        <Row gutter={10}>
           {this.props.flightList.map(flight => {
             return (
-              <Col span={6}>
-                <Card className="news-header-card">
-                  <NewsHeaderBackground
-                    thumbnail={thumbnail}
-                    imgUrl={
-                      flight.source == null ? `${flight.img}` : `${flight.img1}`
-                    }
-                  />
+              <div className="space">
+                <Col span={6}>
+                  <Card className="news-header-card">
+                    <NewsHeaderBackground
+                      thumbnail={thumbnail}
+                      imgUrl={
+                        flight.source == null
+                          ? `${flight.img}`
+                          : `${flight.img1}`
+                      }
+                    />
 
-                  <NewsHeader
-                    title={
-                      flight.source == null
-                        ? `${flight.destination}`
-                        : `${flight.source} - ${flight.destination}`
-                    }
-                    author={author}
-                    date={date}
-                    tags={tags}
-                  />
-                </Card>
-              </Col>
+                    <NewsHeader
+                      title={
+                        flight.source == null
+                          ? `${flight.destination}`
+                          : `${flight.source} - ${flight.destination}`
+                      }
+                      author={author}
+                      date={date}
+                      tags={tags}
+                    />
+                  </Card>
+                </Col>
+              </div>
             );
           })}
         </Row>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import classes from "./homepage.module.css";
 import "font-awesome/css/font-awesome.css";
 import CarouselComponent from "../../components/CarouselCustom/CarouselCustom";
 import MenuBar from "../../components/HorizontalScrollBar/ScrollBar";
