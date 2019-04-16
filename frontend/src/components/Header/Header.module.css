@@ -16,7 +16,7 @@
   z-index: 2;
   cursor: pointer;
   /* background-color: rgba(0, 0, 0, 0.5); */
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  background: var(--navbar-background-color);
   font-weight: bolder;
 }
 

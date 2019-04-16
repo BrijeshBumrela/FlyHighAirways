@@ -7,6 +7,7 @@ import { withRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { logout } from "../../store/actions/index";
+import styles from "./Header.module.css";
 
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
@@ -16,6 +17,33 @@ class Navbar extends Component {
     current: "mail",
     visible: false
   };
+
+  documentStyle = document.documentElement.style;
+  initalNavbarBackground =
+    "linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0))";
+  scrolledNavbarBackground = "rgba(95, 108, 255, .7)";
+
+  handleScroll = () => {
+    if (window.scrollY === 0) {
+      this.documentStyle.setProperty(
+        "--navbar-background-color",
+        this.initalNavbarBackground
+      );
+    } else {
+      this.documentStyle.setProperty(
+        "--navbar-background-color",
+        this.scrolledNavbarBackground
+      );
+    }
+  };
+
+  componentDidMount() {
+    window.addEventListener("scroll", this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
+  }
 
   showDrawer = () => {
     this.setState({
@@ -33,7 +61,7 @@ class Navbar extends Component {
     console.log("AUTH from NAV", this.props.isAuth);
 
     return (
-      <nav className={classes.menuBar}>
+      <nav className={classes.menuBar} style={{ transition: "2s" }}>
         <div className="container">
           <div className={classes.logo}>
             <NavLink to="/">FlyHigh</NavLink>
