@@ -21,7 +21,7 @@ class Navbar extends Component {
   documentStyle = document.documentElement.style;
   initalNavbarBackground =
     "linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0))";
-  scrolledNavbarBackground = "rgba(95, 108, 255, .7)";
+  scrolledNavbarBackground = "white";
 
   handleScroll = () => {
     if (window.scrollY === 0) {
@@ -61,7 +61,7 @@ class Navbar extends Component {
     console.log("AUTH from NAV", this.props.isAuth);
 
     return (
-      <nav className={classes.menuBar} style={{ transition: "2s" }}>
+      <nav className={classes.menuBar} style={{ transition: "1s" }}>
         <div className="container">
           <div className={classes.logo}>
             <NavLink to="/">FlyHigh</NavLink>
