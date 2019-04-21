@@ -18,6 +18,9 @@ import HomePage from "./containers/Homepage/Hompage";
 import Navbar from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 
+import { APIKEY } from "./Keys/GoogleApiKey";
+import axios from 'axios';
+
 // import Navbar from "./components/UI/Navbar/navbar";
 // import Navbar from "./components/Header/Header";
 
@@ -56,6 +59,27 @@ class App extends Component {
 
   onAuthSubmit = data => {
     console.log(data);
+
+    let url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=";
+
+    if (data.isSignUp) {
+      url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=";
+    }
+
+
+    axios.post(`${url}${APIKEY}`, data.auth)
+      .then(response => {
+        const expirationTime = new Date(
+          new Date().getTime() + response.data.expiresIn * 1000
+        );
+        
+        // localStorage.setItem("token", response.data.idToken);
+        // localStorage.setItem("expirationTime", expirationTime);
+        // localStorage.setItem("userId", response.data.localId);
+      })
+      .catch(err => {
+        console.log(err.response);
+      });
   }
 
   render() {
