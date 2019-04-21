@@ -82,7 +82,18 @@ class AuthenticateForm extends Component {
     //   this.state.isSignUp
     // );
 
-    this.props.onAuthSubmit('hi');
+    let data = {};
+
+    for (const formElement in this.state.authForm) {
+      if ( this.state.authForm[formElement].valid === false ) {
+        alert('form can\'t be submitted!');
+        return;
+      }
+      data[formElement] = this.state.authForm[formElement];
+    }
+
+
+    this.props.onAuthSubmit(data);
 
 
     // this.props.history.push("/");
