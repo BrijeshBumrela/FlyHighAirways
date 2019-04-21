@@ -41,7 +41,7 @@ class App extends Component {
     selectedFlight: null,
     auth: {
         tokenId: null,
-        name: null
+        email: null
     }
   };
 
@@ -72,7 +72,15 @@ class App extends Component {
         const expirationTime = new Date(
           new Date().getTime() + response.data.expiresIn * 1000
         );
-        console.log('yipeee');
+        console.log(response.data);
+
+        const authData = {
+            idToken: response.data.idToken,
+            email: response.data.email
+        }
+
+        this.setState({ auth: authData });
+
         // localStorage.setItem("token", response.data.idToken);
         // localStorage.setItem("expirationTime", expirationTime);
         // localStorage.setItem("userId", response.data.localId);
