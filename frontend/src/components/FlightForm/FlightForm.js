@@ -74,14 +74,14 @@ class flightForm extends Component {
     };
 
   render() {
-    const popUpCalendar = (
-      <div style={{ width: 300, border: "1px solid #d9d9d9", borderRadius: 4 }}>
-        <Calendar
-          fullscreen={false}
-          onSelect={date => this.onDateSelectHandler(date)}
-        />
-      </div>
-    );
+        const popUpCalendar = (
+            <div style={{ width: 300, border: "1px solid #d9d9d9", borderRadius: 4 }}>
+                <Calendar
+                    fullscreen={false}
+                    onSelect={date => this.onDateSelectHandler(date)}
+                />
+            </div>
+        );
 
     const data = {
         ...this.state.formData

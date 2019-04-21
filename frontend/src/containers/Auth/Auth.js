@@ -85,18 +85,18 @@ class AuthenticateForm extends Component {
     componentDidMount() {
 
         const flight = {
-            source: 'Chennai',
-            destination: 'Mumbai',
-            start_time: '02:00',
-            end_time: '03:45',
-            date: '21/04/2019',
+            source: 'Indore',
+            destination: 'Chennai',
+            start_time: '08:00',
+            end_time: '10:05',
+            date: '22/04/2019',
             logo: 'some 2',
             business: {
-                fare: 8756,
+                fare: 3956,
                 seats_remaining: 0
             },
             economy: {
-                fare: 4563,
+                fare: 4963,
                 seats_remaining: 6
             },
             nonStop: true

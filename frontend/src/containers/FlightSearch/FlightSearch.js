@@ -165,14 +165,12 @@ class FlightSearch extends Component {
               filterInfo={this.state.filterInfo}
             />
           </Col>
-          <Col md={19}>{flightList}</Col>
+          <Col md={19}>
+              <div style={{ height: '80vh', overflow:'auto' }}>
+                {flightList}
+              </div>
+          </Col>
         </Row>
-        <Paypal
-          toPay={5}
-          transactionError={err => this.transactionError(err)}
-          transactionCancelled={data => this.transactionCancelled(data)}
-          transactionSuccess={payment => this.transactionSuccess(payment)}
-        />
       </React.Fragment>
     );
   }
