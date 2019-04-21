@@ -7,6 +7,7 @@ const triggers = require('./triggers');
 const procedures = require('./procedures');
 const methods = require('./methods');
 
+const seeds = require('./seeds');
 
 OutstandingToken.sqlCommands = {
     table: table,
@@ -14,6 +15,8 @@ OutstandingToken.sqlCommands = {
     triggers: triggers,
     procedures: procedures,
 };
+
+OutstandingToken.seeds = seeds;
 
 OutstandingToken.createTable = async function (options) {
     const {table} = this.sqlCommands;
@@ -63,22 +66,48 @@ OutstandingToken.createConstraints = async function (options) {
 
 OutstandingToken.createTriggers = async function(options){
     const {triggers} = this.sqlCommands;
-    Object.keys(triggers).map(async key=>{
 
+    let keys = Object.keys(triggers);
+    for(key of keys) {
         console.log(triggers[key].procedure);
         let result = await sequelize.query(triggers[key].procedure);
 
         console.log(triggers[key].trigger);
         result = await sequelize.query(triggers[key].trigger);
-    });
+    }
 };
 
 OutstandingToken.createAll = async function (options){
   await this.createTable(options);
   await this.createConstraints(options);
   await this.createTriggers(options);
+
 };
 /* Set all method prototypes */
 // OutstandingToken.prototype.x = methods.x;
 
+OutstandingToken.seedTable = async function (options) {
+    for (record of this.seeds) {
+        let keys = Object.keys(record);
+        let fields = keys.map(key => queryWrappers.wrapField(key));
+        fieldsString = fields.join(',');
+
+        let values = keys.map(key => {
+            let val = record[key];
+            if (typeof (val) === "string") return queryWrappers.wrapValue(val);
+            else return val;
+        });
+
+        valuesString = values.join(',');
+
+        insertQuery = `INSERT INTO ${this.getTableName()} (${fieldsString}) VALUES (${valuesString})`;
+        console.log(insertQuery);
+        await sequelize.query(insertQuery).then(result=>{
+
+        }).catch(err=>{
+            console.log(err);
+            console.log(`Insert Failed for fields: ${fieldsString} values: ${valuesString}`);
+        })
+    }
+};
 module.exports = OutstandingToken;

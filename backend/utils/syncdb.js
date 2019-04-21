@@ -12,18 +12,45 @@ sequelize.sync({ "force": true }).then(result => {
 });
 */
 
+const orderedModels = [
+    models.auth.User,
+    models.auth.OutstandingToken,
 
-models.auth.User.createAll({ "force": true }).then(result => {
-    return models.auth.OutstandingToken.createAll({ "force": true });
-}).then(result => {
-    return models.scheduledTask.ScheduledTask.createAll({ "force": true });
-}).then(result => {
-    return models.scheduledTask.CronLog.createAll({ "force": true });
-}).then(result => {
-    return models.aircraft.AircraftModel.createAll({"force":true});
-}).then(result=>{
-    return models.aircraft.Aircraft.createAll({"force": true});
-}).catch(err => {
-    console.log(err, "\nERRORED!")
-});
+    models.scheduledTask.ScheduledTask,
+    models.scheduledTask.CronLog,
 
+    models.aircraft.AircraftModel,
+    models.aircraft.Aircraft,
+
+    models.others.City,
+
+    models.schedule.Schedule,
+    models.schedule.FlightLog,
+    models.schedule.UpcomingFlight
+
+];
+
+async function createAndSeedAllTables(options) {
+    try {
+        let result;
+
+        for (let model of orderedModels) {
+            console.log("\n\n\n\n Creating ", model.getTableName(), "\n\n\n");
+            result = await model.createAll(options);
+        }
+
+        for (let model of orderedModels) {
+            console.log("\n\n\n\n Seeding", model.getTableName(), "\n\n\n");
+            result = await model.seedTable(options);
+        }
+
+        // await models.aircraft.AircraftModel.seedTable({});
+        // await models.aircraft.Aircraft.seedTable({});
+
+    } catch (err) {
+        console.log(err);
+        console.log("Errored!");
+    }
+}
+
+createAndSeedAllTables({"force": true});

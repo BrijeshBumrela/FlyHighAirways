@@ -1,17 +1,22 @@
-const ScheduledTask = require('./model');
+const CronLog = require('./model');
 
 const sequelize = require('../../../utils/database/connect');
 
 const table = require('./table');
 
-ScheduledTask.sqlCommands = {
+CronLog.sqlCommands = {
     table: table,
     // constraints: constraints,
     // triggers: triggers,
     // procedures: procedures,
 };
 
-ScheduledTask.createTable = async function (options) {
+const seeds = require('./seeds');
+CronLog.seeds = seeds;
+
+
+
+CronLog.createTable = async function (options) {
     const { table } = this.sqlCommands;
     const force = (options && options.force) || false;
     let queryResult;
@@ -39,7 +44,7 @@ ScheduledTask.createTable = async function (options) {
 };
 
 /*
-ScheduledTask.createConstraints = async function (options) {
+CronLog.createConstraints = async function (options) {
     const {constraints} = this.sqlCommands;
     const all_queries = [];
     for (type in constraints){
@@ -60,7 +65,7 @@ ScheduledTask.createConstraints = async function (options) {
 
 
 
-ScheduledTask.createTriggers = async function(options){
+CronLog.createTriggers = async function(options){
     const {triggers} = this.sqlCommands;
     Object.keys(triggers).map(async key=>{
 
@@ -74,7 +79,8 @@ ScheduledTask.createTriggers = async function(options){
 */
 
 
-ScheduledTask.createAll = async function (options) {
+
+CronLog.createAll = async function (options) {
     await this.createTable(options);
     // await this.createConstraints(options);
     // await this.createTriggers(options);
@@ -82,5 +88,28 @@ ScheduledTask.createAll = async function (options) {
 /* Set all method prototypes */
 // User.prototype.x = methods.x;
 
+CronLog.seedTable = async function (options) {
+    for (record of this.seeds) {
+        let keys = Object.keys(record);
+        let fields = keys.map(key => queryWrappers.wrapField(key));
+        fieldsString = fields.join(',');
 
-module.exports = ScheduledTask;
+        let values = keys.map(key => {
+            let val = record[key];
+            if (typeof (val) === "string") return queryWrappers.wrapValue(val);
+            else return val;
+        });
+
+        valuesString = values.join(',');
+
+        insertQuery = `INSERT INTO ${this.getTableName()} (${fieldsString}) VALUES (${valuesString})`;
+        console.log(insertQuery);
+        await sequelize.query(insertQuery).then(result=>{
+
+        }).catch(err=>{
+            console.log(err);
+            console.log(`Insert Failed for fields: ${fieldsString} values: ${valuesString}`);
+        })
+    }
+};
+module.exports = CronLog;

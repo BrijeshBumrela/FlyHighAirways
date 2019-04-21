@@ -1,22 +1,22 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../../../utils/database/connect');
 
-class Aircraft extends Sequelize.Model {
+class City extends Sequelize.Model {
 }
 
-Aircraft.init({
+City.init({
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
-}, {sequelize, underscored:true, tableName:'aircrafts'});
+}, {sequelize, underscored:true});
 
 // Associations
 
 //export
 
 
-module.exports = Aircraft;
+module.exports = City;
 

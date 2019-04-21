@@ -2,8 +2,8 @@ module.exports = {
     create: `
             CREATE TABLE IF NOT EXISTS aircraft_models (
             id SERIAL PRIMARY KEY,
-            manufacturer_id VARCHAR(50),
-            model_no VARCHAR(50) NOT NULL,
+            manufacturer_name VARCHAR(50),
+            model_name VARCHAR(50) NOT NULL,
             no_of_seats INT NOT NULL,
             name VARCHAR(50),
             max_weight FLOAT,

@@ -6,6 +6,9 @@ const constraints = require('./constraints');
 // const triggers = require('./triggers');
 // const procedures = require('./procedures');
 const methods = require('./methods');
+const seeds = require('./seeds');
+
+const queryWrappers = require('../../../utils/query-wrappers');
 
 
 AircraftModel.sqlCommands = {
@@ -14,6 +17,8 @@ AircraftModel.sqlCommands = {
     // triggers: triggers,
     // procedures: procedures,
 };
+
+AircraftModel.seeds = seeds;
 
 AircraftModel.createTable = async function (options) {
     const {table} = this.sqlCommands;
@@ -45,7 +50,7 @@ AircraftModel.createTable = async function (options) {
 AircraftModel.createConstraints = async function (options) {
     const {constraints} = this.sqlCommands;
     const all_queries = [];
-    for (type in constraints){
+    for (type in constraints) {
         all_queries.push(...Object.values(constraints[type]))
     }
 
@@ -55,7 +60,7 @@ AircraftModel.createConstraints = async function (options) {
             queryResult = await sequelize.query(q);
             console.log(q);
         }
-    } catch (error){
+    } catch (error) {
         console.log(error);
 
     }
@@ -77,12 +82,37 @@ AircraftModel.createTriggers = async function(options){
 };
 */
 
-AircraftModel.createAll = async function (options){
+AircraftModel.createAll = async function (options) {
     await this.createTable(options);
     await this.createConstraints(options);
     // await this.createTriggers(options);
 };
 /* Set all method prototypes */
 // AircraftModel.prototype.x = methods.x;
+
+AircraftModel.seedTable = async function (options) {
+    for (record of this.seeds) {
+        let keys = Object.keys(record);
+        let fields = keys.map(key => queryWrappers.wrapField(key));
+        fieldsString = fields.join(',');
+
+        let values = keys.map(key => {
+            let val = record[key];
+            if (typeof (val) === "string") return queryWrappers.wrapValue(val);
+            else return val;
+        });
+
+        valuesString = values.join(',');
+
+        insertQuery = `INSERT INTO ${this.getTableName()} (${fieldsString}) VALUES (${valuesString})`;
+        console.log(insertQuery);
+        await sequelize.query(insertQuery).then(result=>{
+
+        }).catch(err=>{
+            console.log(err);
+            console.log(`Insert Failed for fields: ${fieldsString} values: ${valuesString}`);
+        })
+    }
+};
 
 module.exports = AircraftModel;

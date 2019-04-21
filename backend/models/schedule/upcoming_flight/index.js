@@ -1,26 +1,24 @@
 const sequelize = require('../../../utils/database/connect');
 
-const Aircraft = require('./model');
+const UpcomingFlight = require('./model');
 const table = require('./table');
 const constraints = require('./constraints');
-// const triggers = require('./triggers');
+const triggers = require('./triggers');
 // const procedures = require('./procedures');
-const seeds = require('./seeds');
 const methods = require('./methods');
 
-const queryWrappers = require('../../../utils/query-wrappers');
 
-Aircraft.sqlCommands = {
+UpcomingFlight.sqlCommands = {
     table: table,
     constraints: constraints,
-    // triggers: triggers,
+    triggers: triggers,
     // procedures: procedures,
 };
+const seeds = require('./seeds');
+UpcomingFlight.seeds = seeds;
 
-Aircraft.seeds = seeds;
 
-
-Aircraft.createTable = async function (options) {
+UpcomingFlight.createTable = async function (options) {
     const {table} = this.sqlCommands;
     const force = (options && options.force) || false;
     let queryResult;
@@ -47,7 +45,20 @@ Aircraft.createTable = async function (options) {
     }
 };
 
-Aircraft.createConstraints = async function (options) {
+UpcomingFlight.createTriggers = async function(options){
+    const {triggers} = this.sqlCommands;
+
+    let keys = Object.keys(triggers);
+    for(key of keys) {
+        console.log(triggers[key].procedure);
+        let result = await sequelize.query(triggers[key].procedure);
+
+        console.log(triggers[key].trigger);
+        result = await sequelize.query(triggers[key].trigger);
+    }
+};
+
+UpcomingFlight.createConstraints = async function (options) {
     const {constraints} = this.sqlCommands;
     const all_queries = [];
     for (type in constraints){
@@ -57,8 +68,8 @@ Aircraft.createConstraints = async function (options) {
     let queryResult;
     try {
         for (q of all_queries) {
-            queryResult = await sequelize.query(q);
             console.log(q);
+            queryResult = await sequelize.query(q);
         }
     } catch (error){
         console.log(error);
@@ -69,7 +80,7 @@ Aircraft.createConstraints = async function (options) {
 
 /*
 
-Aircraft.createTriggers = async function(options){
+UpcomingFlight.createTriggers = async function(options){
     const {triggers} = this.sqlCommands;
     Object.keys(triggers).map(async key=>{
 
@@ -82,16 +93,21 @@ Aircraft.createTriggers = async function(options){
 };
 */
 
-
-Aircraft.createAll = async function (options){
-    await this.createTable(options);
-    await this.createConstraints(options);
+UpcomingFlight.createAll = function (options){
+    // await this.createTable(options);
+    // await this.createConstraints(options);
     // await this.createTriggers(options);
+
+    return this.createTable(options).then(result=>{
+        return this.createConstraints(options);
+    }).then(result=>{
+        return this.createTriggers();
+    })
 };
 /* Set all method prototypes */
-// Aircraft.prototype.x = methods.x;
+// UpcomingFlight.prototype.x = methods.x;
 
-Aircraft.seedTable = async function (options) {
+UpcomingFlight.seedTable = async function (options) {
     for (record of this.seeds) {
         let keys = Object.keys(record);
         let fields = keys.map(key => queryWrappers.wrapField(key));
@@ -115,5 +131,4 @@ Aircraft.seedTable = async function (options) {
         })
     }
 };
-
-module.exports = Aircraft;
+module.exports = UpcomingFlight;

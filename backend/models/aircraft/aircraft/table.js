@@ -1,9 +1,8 @@
 module.exports = {
     create: `
             CREATE TABLE IF NOT EXISTS aircrafts (
-            id SERIAL PRIMARY KEY,
-            model_id INT,
-            no_of_flights INT NOT NULL,
+            model_id INT PRIMARY KEY,
+            no_of_aircrafts INT NOT NULL,
             date_of_purchase TIMESTAMP WITH TIME ZONE DEFAULT NOW()
             )
             `,
