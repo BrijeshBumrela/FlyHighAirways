@@ -202,7 +202,7 @@ class FlightBook extends  Component {
                       padding: "10px 85px"
                     }}
                   >
-                    There is limit of 25 kg luggage
+                    There is limit of 25 kg luggage per person
                   </Row>
                 </div>
               </Col>
@@ -238,7 +238,7 @@ class FlightBook extends  Component {
                     </div>
                   ) : (null)}
 
-                  
+
                 </div>
               </Col>
 

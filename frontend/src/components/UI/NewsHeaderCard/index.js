@@ -19,35 +19,44 @@ class NewsHeaderCard extends React.Component {
           style={{
             textAlign: "left",
             fontFamily: "Sans",
-            fontWeight: "bolder"
+            fontWeight: "bolder",
+            paddingTop: "100px",
+            paddingBottom: "30px",
+            paddingLeft: "60px",
+            paddingRight: "30px",
+            fontSize: "40px"
           }}
         >
           {this.props.title}
         </h1>
-        <Row gutter={16}>
-          {this.props.flightList.map((flight, index) => {
+        <Row gutter={40}>
+          {this.props.flightList.map((flight,index) => {
             return (
-              <Col span={6} key={index}>
-                <Card className="news-header-card">
-                  <NewsHeaderBackground
-                    thumbnail={thumbnail}
-                    imgUrl={
-                      flight.source == null ? `${flight.img}` : `${flight.img1}`
-                    }
-                  />
+              <div className="space" key={index}>
+                <Col span={6}>
+                  <Card className="news-header-card">
+                    <NewsHeaderBackground
+                      thumbnail={thumbnail}
+                      imgUrl={
+                        flight.source == null
+                          ? `${flight.img}`
+                          : `${flight.img1}`
+                      }
+                    />
 
-                  <NewsHeader
-                    title={
-                      flight.source == null
-                        ? `${flight.destination}`
-                        : `${flight.source} - ${flight.destination}`
-                    }
-                    author={author}
-                    date={date}
-                    tags={tags}
-                  />
-                </Card>
-              </Col>
+                    <NewsHeader
+                      title={
+                        flight.source == null
+                          ? `${flight.destination}`
+                          : `${flight.source} - ${flight.destination}`
+                      }
+                      author={author}
+                      date={date}
+                      tags={tags}
+                    />
+                  </Card>
+                </Col>
+              </div>
             );
           })}
         </Row>

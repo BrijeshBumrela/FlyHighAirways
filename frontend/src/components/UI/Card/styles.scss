@@ -7,14 +7,13 @@
   display: flex;
   flex-flow: column;
   background-color: #ecf0f1;
-  border-radius: 0.25rem;
+  border-radius: 0.8rem;
   margin: 1rem;
   user-select: none;
   transition: 0.25s;
-  
+
   &.float:hover {
     transform: translateY(-8px);
     box-shadow: 0 10px 10px -10px rgba(#7f8c8d, 1);
   }
 }
-

@@ -48,12 +48,7 @@ export default class CarouselComponent extends Component {
           }}
         />
         <div>
-          <Carousel
-            ref={node => (this.carousel = node)}
-            {...props}
-            autoplay
-            style={{ position: "absolute", height: "400px" }}
-          >
+          <Carousel ref={node => (this.carousel = node)} {...props} autoplay>
             <div className={classes.antCarousel}>
               <img
                 alt="<temporary>"
@@ -83,7 +78,7 @@ export default class CarouselComponent extends Component {
               Introducing daily, non-stop flights between Kolkata and Mumbai,
             </h5>
             <h5>W.E.F 5 June 2019.</h5>
-            <h5>Starting from 4590 Rs</h5>
+            <h5>Starting from Rs 4590. </h5>
             <button className={classes.but1}>Book Now</button>
           </div>
         </div>
@@ -106,30 +101,3 @@ export default class CarouselComponent extends Component {
     );
   }
 }
-
-/* <Card className="menu-bar">
-  <ComponentSlider
-    renderLeftArrow={renderLeftArrow}
-    renderRightArrow={renderRightArrow}
-  >
-    <div className="menu-item">
-      <Card.Grid style={gridStyle}>Content</Card.Grid>
-    </div>
-    <div className="menu-item">
-      <Card.Grid style={gridStyle}>Content</Card.Grid>
-    </div>
-    <div className="menu-item">
-      <Card.Grid style={gridStyle}>Content</Card.Grid>
-    </div>
-
-    <div className="menu-item">
-      <Card.Grid style={gridStyle}>Content</Card.Grid>
-    </div>
-    <div className="menu-item">
-      <Card.Grid style={gridStyle}>Content</Card.Grid>
-    </div>
-    <div className="menu-item">
-      <Card.Grid style={gridStyle}>Content</Card.Grid>
-    </div>
-  </ComponentSlider>
-</Card>; */

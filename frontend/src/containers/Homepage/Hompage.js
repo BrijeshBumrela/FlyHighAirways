@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import classes from "./homepage.module.css";
 import "font-awesome/css/font-awesome.css";
 import CarouselComponent from "../../components/CarouselCustom/CarouselCustom";
 import MenuBar from "../../components/HorizontalScrollBar/ScrollBar";
@@ -66,7 +66,7 @@ class HomePage extends Component {
     ];
 
     return (
-      <div>
+      <React.Fragment>
         <CarouselComponent {...this.props} />
         <div style={styles}>
           <MenuBar />
@@ -83,7 +83,7 @@ class HomePage extends Component {
         {/* <FlightForm /> */}
 
         {/* <Footer /> */}
-      </div>
+      </React.Fragment>
     );
   }
 }

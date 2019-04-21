@@ -31,11 +31,15 @@ const store = createStore(
 class App extends Component {
   state = {
     flightInfo: {
-      source: "",
-      destination: "",
-      date: ""
+        source: "",
+        destination: "",
+        date: ""
     },
-    selectedFlight: null
+    selectedFlight: null,
+    auth: {
+        tokenId: null,
+        name: null
+    }
   };
 
   componentDidMount() {
@@ -50,8 +54,15 @@ class App extends Component {
     this.setState({ selectedFlight: data });
   };
 
+  onAuthSubmit = data => {
+    console.log(data);
+  }
+
   render() {
-    console.log("[STATE]", this.state);
+
+
+    //*   This are components with props used only to pass in Route
+
 
     const HomePageWithProps = props => {
       return <HomePage formFill={this.onFormSubmit} />;
@@ -74,6 +85,18 @@ class App extends Component {
       );
     }
 
+    const AuthFormWithProps = props => {
+      return (
+        <Auth
+          onAuthSubmit={this.onAuthSubmit}
+        />
+      );
+    };
+
+
+
+    //* This is components with props 
+
     return (
       <React.Fragment>
         <Provider store={store}>
@@ -83,7 +106,7 @@ class App extends Component {
               <Route path="/" exact render={HomePageWithProps} />
               <Route path="/flights" render={FlightSearchWithProps} />
               <Route path="/book-flight" render={FlightFormWithProps} />
-              <Route path="/authenticate" component={Auth} />
+              <Route path="/authenticate" render={AuthFormWithProps} />
               <Route path="/checkIn" component={CheckIn} />
             </Switch>
             <Footer />
