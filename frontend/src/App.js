@@ -72,7 +72,7 @@ class App extends Component {
         const expirationTime = new Date(
           new Date().getTime() + response.data.expiresIn * 1000
         );
-        
+        console.log('yipeee');
         // localStorage.setItem("token", response.data.idToken);
         // localStorage.setItem("expirationTime", expirationTime);
         // localStorage.setItem("userId", response.data.localId);
