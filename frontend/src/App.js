@@ -104,6 +104,7 @@ class App extends Component {
         <FlightSearch
           flightInfo={this.state.flightInfo}
           flightSelect={this.onFlightSelect}
+          formFill={this.onFormSubmit}
         />
       );
     };

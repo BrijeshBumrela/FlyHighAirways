@@ -83,9 +83,12 @@ class flightForm extends Component {
             </div>
         );
 
-    const data = {
-        ...this.state.formData
-    }
+        const data = {
+            ...this.state.formData
+        }
+
+        // Checks from where this Form component is rendered
+        let homePageSearch = this.state.origin === 'search' ? false : true;
 
     return (
         <form className={classes.FormDiv} onSubmit={(e) => this.onSubmitHandler(e, data)}>
@@ -94,7 +97,7 @@ class flightForm extends Component {
                     <h6>Select Source: </h6>
                     <Select
                           showSearch
-                          style={{ width: 200, marginLeft:'20px' }}
+                          style={homePageSearch ? null : { width: 200, marginLeft:'20px' }}
                           placeholder="Source Airport"
                           optionFilterProp="children"
                           onSelect={cityName => this.onCitySelectHandler(cityName, 'source')}

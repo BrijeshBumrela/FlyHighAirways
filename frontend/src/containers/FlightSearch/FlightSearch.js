@@ -15,6 +15,7 @@ import { connect } from "react-redux";
 import classes from "./FlightSearch.module.css";
 
 import Paypal from "../../components/Paypal/Paypal";
+import FlightForm from "../../components/FlightForm/FlightForm";
 
 class FlightSearch extends Component {
   state = {
@@ -156,6 +157,10 @@ class FlightSearch extends Component {
 
     return (
       <React.Fragment>
+        <br /><br />
+        <Row type="flex">
+          <FlightForm origin="search" formFill={this.props.formFill} />
+        </Row>
         <Row type="flex" className={classes.FlightSearch}>
           <Col md={5}>
             <FlightFilter
