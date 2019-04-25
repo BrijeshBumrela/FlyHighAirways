@@ -24,13 +24,31 @@
     font-size: 1.7rem;
 }
 
-.FormDiv2 {
+.FormDiv {
     background: rgba(230, 189, 189, 0.7);
     padding: 1rem;
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
+
+.FormDivMain2 {
+    background: #2fd8e4;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.FormDiv2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.FormDiv2 > * {
+    margin: 0 1rem;
+}
+
 
 .SearchBtn {
     margin: 1rem 0;

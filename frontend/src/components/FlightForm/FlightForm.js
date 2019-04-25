@@ -91,13 +91,13 @@ class flightForm extends Component {
         let homePageSearch = this.props.origin === 'search' ? false : true;
         console.log(homePageSearch)
     return (
-        <form className={classes.FormDiv} onSubmit={(e) => this.onSubmitHandler(e, data)}>
+        <form className={homePageSearch ? classes.FormDiv : classes.FormDivMain2} onSubmit={(e) => this.onSubmitHandler(e, data)}>
             <div className={homePageSearch ? null : classes.FormDiv2}>   
                 <div className={homePageSearch ? classes.optionWrapper : classes.optionWrapper2}>
                     <h6>Select Source: </h6>
                     <Select
                           showSearch
-                          style={homePageSearch ? {width: '200px'} : { width: '200px', marginLeft:'20px' }}
+                          style={{ width: '200px', marginLeft:'20px' }}
                           placeholder="Source Airport"
                           optionFilterProp="children"
                           onSelect={cityName => this.onCitySelectHandler(cityName, 'source')}
@@ -117,7 +117,7 @@ class flightForm extends Component {
                     <h6>Select Destination: </h6>
                     <Select
                         showSearch
-                        style={{ width: '200px' }}
+                        style={{ width: '200px', marginLeft:'20px' }}
                         placeholder="Destination Airport"
                         optionFilterProp="children"
                         onSelect={cityName => this.onCitySelectHandler(cityName, 'destination')}
