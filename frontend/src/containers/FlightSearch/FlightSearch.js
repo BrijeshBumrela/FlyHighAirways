@@ -157,8 +157,8 @@ class FlightSearch extends Component {
 
     return (
       <React.Fragment>
-        <br /><br />
-        <Row type="flex">
+        <br /><br /><br /><br />
+        <Row>
           <FlightForm origin="search" formFill={this.props.formFill} />
         </Row>
         <Row type="flex" className={classes.FlightSearch}>

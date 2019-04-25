@@ -96,7 +96,7 @@ class App extends Component {
 
 
     const HomePageWithProps = props => {
-      return <HomePage formFill={this.onFormSubmit} />;
+      return <HomePage origin="homepage" formFill={this.onFormSubmit} />;
     };
 
     const FlightSearchWithProps = props => {

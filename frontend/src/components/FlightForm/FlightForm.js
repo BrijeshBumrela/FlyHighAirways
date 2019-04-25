@@ -88,16 +88,16 @@ class flightForm extends Component {
         }
 
         // Checks from where this Form component is rendered
-        let homePageSearch = this.state.origin === 'search' ? false : true;
-
+        let homePageSearch = this.props.origin === 'search' ? false : true;
+        console.log(homePageSearch)
     return (
         <form className={classes.FormDiv} onSubmit={(e) => this.onSubmitHandler(e, data)}>
-            <div>   
-                <div className={classes.optionWrapper}>
+            <div className={homePageSearch ? null : classes.FormDiv2}>   
+                <div className={homePageSearch ? classes.optionWrapper : classes.optionWrapper2}>
                     <h6>Select Source: </h6>
                     <Select
                           showSearch
-                          style={homePageSearch ? null : { width: 200, marginLeft:'20px' }}
+                          style={homePageSearch ? {width: '200px'} : { width: '200px', marginLeft:'20px' }}
                           placeholder="Source Airport"
                           optionFilterProp="children"
                           onSelect={cityName => this.onCitySelectHandler(cityName, 'source')}
@@ -113,11 +113,11 @@ class flightForm extends Component {
 
                 </div>
 
-                <div className={classes.optionWrapper}>
+                <div className={homePageSearch ? classes.optionWrapper : classes.optionWrapper2}>
                     <h6>Select Destination: </h6>
                     <Select
                         showSearch
-                        style={{ width: 200 }}
+                        style={{ width: '200px' }}
                         placeholder="Destination Airport"
                         optionFilterProp="children"
                         onSelect={cityName => this.onCitySelectHandler(cityName, 'destination')}
@@ -132,7 +132,7 @@ class flightForm extends Component {
                     </Select>
                 </div>
 
-                <div className={classes.dateWrapper}>
+                <div className={homePageSearch ? classes.dateWrapper : classes.dateWrapper2}>
                     <Input type="text" value={this.state.formData.time}/>
                     <Popover
                         content={popUpCalendar}
