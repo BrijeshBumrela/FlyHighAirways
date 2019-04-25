@@ -72,7 +72,6 @@ class App extends Component {
         const expirationTime = new Date(
           new Date().getTime() + response.data.expiresIn * 1000
         );
-        console.log(response.data);
 
         const authData = {
             idToken: response.data.idToken,
