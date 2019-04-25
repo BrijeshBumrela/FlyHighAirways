@@ -27,9 +27,6 @@
 .FormDiv {
     background: rgba(230, 189, 189, 0.7);
     padding: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
 }
 
 .FormDivMain2 {
