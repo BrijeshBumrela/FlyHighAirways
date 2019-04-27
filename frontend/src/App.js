@@ -59,6 +59,7 @@ class App extends Component {
 
   onLogout = () => {
     this.setState({ auth: null });
+    console.log('called?')
   }
 
   onAuthSubmit = data => {

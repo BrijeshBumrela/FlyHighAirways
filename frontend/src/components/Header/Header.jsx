@@ -85,12 +85,12 @@ class Navbar extends Component {
                 </Menu.Item>
                 <Menu.Item key="2">
                   {this.props.isAuth ? (
-                    <Button
+                    <input
                       className="nav-link"
                       onClick={this.props.onLogout}
                     >
                       LogOut
-                    </Button>
+                    </input>
                   ) : (
                     <NavLink className="nav-link" to="/flights">
                       Flights
