@@ -58,8 +58,7 @@ class Navbar extends Component {
   };
 
   render() {
-    console.log("AUTH from NAV", this.props.isAuth);
-
+    console.log('props inside Navbar', this.props);
     return (
       <nav className={classes.menuBar} style={{ transition: "1s" }}>
         <div className="container">
@@ -86,13 +85,12 @@ class Navbar extends Component {
                 </Menu.Item>
                 <Menu.Item key="2">
                   {this.props.isAuth ? (
-                    <NavLink
+                    <Button
                       className="nav-link"
-                      to="/logout"
-                      onClick={this.onLogoutHandler}
+                      onClick={this.props.onLogout}
                     >
                       LogOut
-                    </NavLink>
+                    </Button>
                   ) : (
                     <NavLink className="nav-link" to="/flights">
                       Flights
@@ -210,9 +208,9 @@ class Navbar extends Component {
 }
 
 const mapDispatchToProps = dispatch => {
-  return {
-    onLogout: () => dispatch(logout())
-  };
+    return {
+        onLogout: () => dispatch(logout())
+    };
 };
 
 export default withRouter(

@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { Icon, Input, Button, Row, Col } from "antd";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
-import axios from "axios";
-
+import { withRouter } from 'react-router';
 import classes from "./Auth.module.css";
 
 import * as actions from "../../store/actions/index";
@@ -99,8 +97,8 @@ class AuthenticateForm extends Component {
     data.auth.returnSecureToken = true;
     this.props.onAuthSubmit(data);
 
+    this.props.history.push('/');
 
-    // this.props.history.push("/");
   };
   // chennai, Indore, Chennai, Kolkata
   //chennai kokllata punnaei  deli indore
@@ -305,7 +303,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
+export default withRouter(connect(
   null,
   mapDispatchToProps
-)(AuthenticateForm);
+)(AuthenticateForm));

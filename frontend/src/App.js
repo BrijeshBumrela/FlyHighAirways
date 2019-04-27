@@ -57,8 +57,11 @@ class App extends Component {
     this.setState({ selectedFlight: data });
   };
 
+  onLogout = () => {
+    this.setState({ auth: null });
+  }
+
   onAuthSubmit = data => {
-    console.log(data);
 
     let url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=";
 
@@ -77,9 +80,7 @@ class App extends Component {
             idToken: response.data.idToken,
             email: response.data.email
         }
-
         this.setState({ auth: authData });
-
         // localStorage.setItem("token", response.data.idToken);
         // localStorage.setItem("expirationTime", expirationTime);
         // localStorage.setItem("userId", response.data.localId);
@@ -93,7 +94,7 @@ class App extends Component {
 
 
     //*   This are components with props used only to pass in Route
-
+    console.log('[STATE]', this.state);
 
     const HomePageWithProps = props => {
       return <HomePage origin="homepage" formFill={this.onFormSubmit} />;
@@ -128,12 +129,14 @@ class App extends Component {
 
 
     //* This is components with props 
-
     return (
       <React.Fragment>
         <Provider store={store}>
           <BrowserRouter>
-            <Navbar isAuth={this.props.isAuthenticated} />
+            <Navbar 
+                isAuth={this.state.auth["idToken"] || false} 
+                onLogout={this.onLogout}    
+            />
             <Switch>
               <Route path="/" exact render={HomePageWithProps} />
               <Route path="/flights" render={FlightSearchWithProps} />
