@@ -92,60 +92,60 @@ class App extends Component {
   render() {
 
 
-    //*   This are components with props used only to pass in Route
+      //*   This are components with props used only to pass in Route
 
 
-    const HomePageWithProps = props => {
-      return <HomePage origin="homepage" formFill={this.onFormSubmit} />;
-    };
+      const HomePageWithProps = props => {
+        return <HomePage origin="homepage" formFill={this.onFormSubmit} />;
+      };
 
-    const FlightSearchWithProps = props => {
+      const FlightSearchWithProps = props => {
+        return (
+          <FlightSearch
+            flightInfo={this.state.flightInfo}
+            flightSelect={this.onFlightSelect}
+            formFill={this.onFormSubmit}
+          />
+        );
+      };
+
+      const FlightFormWithProps = props => {
+        return (
+          <FlightBook
+            selectedFlight={this.state.selectedFlight}
+          />
+        );
+      }
+
+      const AuthFormWithProps = props => {
+        return (
+          <Auth
+            onAuthSubmit={this.onAuthSubmit}
+          />
+        );
+      };
+
+
+
+      //* This is components with props 
+
       return (
-        <FlightSearch
-          flightInfo={this.state.flightInfo}
-          flightSelect={this.onFlightSelect}
-          formFill={this.onFormSubmit}
-        />
+        <React.Fragment>
+          <Provider store={store}>
+            <BrowserRouter>
+              <Navbar isAuth={this.props.isAuthenticated} />
+              <Switch>
+                <Route path="/" exact render={HomePageWithProps} />
+                <Route path="/flights" render={FlightSearchWithProps} />
+                <Route path="/book-flight" render={FlightFormWithProps} />
+                <Route path="/authenticate" render={AuthFormWithProps} />
+                <Route path="/checkIn" component={CheckIn} />
+              </Switch>
+              <Footer />
+            </BrowserRouter>
+          </Provider>
+        </React.Fragment>
       );
-    };
-
-    const FlightFormWithProps = props => {
-      return (
-        <FlightBook
-          selectedFlight={this.state.selectedFlight}
-        />
-      );
-    }
-
-    const AuthFormWithProps = props => {
-      return (
-        <Auth
-          onAuthSubmit={this.onAuthSubmit}
-        />
-      );
-    };
-
-
-
-    //* This is components with props 
-
-    return (
-      <React.Fragment>
-        <Provider store={store}>
-          <BrowserRouter>
-            <Navbar isAuth={this.props.isAuthenticated} />
-            <Switch>
-              <Route path="/" exact render={HomePageWithProps} />
-              <Route path="/flights" render={FlightSearchWithProps} />
-              <Route path="/book-flight" render={FlightFormWithProps} />
-              <Route path="/authenticate" render={AuthFormWithProps} />
-              <Route path="/checkIn" component={CheckIn} />
-            </Switch>
-            <Footer />
-          </BrowserRouter>
-        </Provider>
-      </React.Fragment>
-    );
   }
 }
 
