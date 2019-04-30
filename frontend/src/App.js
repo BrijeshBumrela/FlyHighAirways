@@ -8,13 +8,21 @@ import { connect } from "react-redux";
 
 import { authCheckStatus } from "./store/actions/index";
 
-import FlightSearch from "./containers/FlightSearch/FlightSearch";
-import Auth from "./containers/Auth/Auth";
 import "antd/dist/antd.css";
 
+import FlightSearch from "./containers/FlightSearch/FlightSearch";
+import Auth from "./containers/Auth/Auth";
+import CheckIn from "./containers/CheckIn/CheckIn";
 import FlightBook from "./containers/FlightBook/FlightBook";
 import HomePage from "./containers/Homepage/Hompage";
 import Navbar from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+
+import { APIKEY } from "./Keys/GoogleApiKey";
+import axios from 'axios';
+
+// import Navbar from "./components/UI/Navbar/navbar";
+// import Navbar from "./components/Header/Header";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -24,23 +32,116 @@ const store = createStore(
 );
 
 class App extends Component {
+  state = {
+    flightInfo: {
+        source: "",
+        destination: "",
+        date: ""
+    },
+    selectedFlight: null,
+    auth: {
+        tokenId: null,
+        email: null
+    }
+  };
+
   componentDidMount() {
     this.props.autoSignUpHandler();
   }
 
+  onFormSubmit = data => {
+    this.setState({ flightInfo: data });
+  };
+
+  onFlightSelect = data => {
+    this.setState({ selectedFlight: data });
+  };
+
+  onAuthSubmit = data => {
+    console.log(data);
+
+    let url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=";
+
+    if (data.isSignUp) {
+      url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=";
+    }
+
+
+    axios.post(`${url}${APIKEY}`, data.auth)
+      .then(response => {
+        const expirationTime = new Date(
+          new Date().getTime() + response.data.expiresIn * 1000
+        );
+
+        const authData = {
+            idToken: response.data.idToken,
+            email: response.data.email
+        }
+
+        this.setState({ auth: authData });
+
+        // localStorage.setItem("token", response.data.idToken);
+        // localStorage.setItem("expirationTime", expirationTime);
+        // localStorage.setItem("userId", response.data.localId);
+      })
+      .catch(err => {
+        console.log(err.response);
+      });
+  }
+
   render() {
+
+
+    //*   This are components with props used only to pass in Route
+
+
+    const HomePageWithProps = props => {
+      return <HomePage origin="homepage" formFill={this.onFormSubmit} />;
+    };
+
+    const FlightSearchWithProps = props => {
+      return (
+        <FlightSearch
+          flightInfo={this.state.flightInfo}
+          flightSelect={this.onFlightSelect}
+          formFill={this.onFormSubmit}
+        />
+      );
+    };
+
+    const FlightFormWithProps = props => {
+      return (
+        <FlightBook
+          selectedFlight={this.state.selectedFlight}
+        />
+      );
+    }
+
+    const AuthFormWithProps = props => {
+      return (
+        <Auth
+          onAuthSubmit={this.onAuthSubmit}
+        />
+      );
+    };
+
+
+
+    //* This is components with props 
+
     return (
       <React.Fragment>
         <Provider store={store}>
           <BrowserRouter>
-            <Navbar />
-
+            <Navbar isAuth={this.props.isAuthenticated} />
             <Switch>
-              <Route path="/" exact component={HomePage} />
-              <Route path="/flights" component={FlightSearch} />
-              <Route path="/book-flight" component={FlightBook} />
-              <Route path="/authenticate" component={Auth} />
+              <Route path="/" exact render={HomePageWithProps} />
+              <Route path="/flights" render={FlightSearchWithProps} />
+              <Route path="/book-flight" render={FlightFormWithProps} />
+              <Route path="/authenticate" render={AuthFormWithProps} />
+              <Route path="/checkIn" component={CheckIn} />
             </Switch>
+            <Footer />
           </BrowserRouter>
         </Provider>
       </React.Fragment>
@@ -54,9 +155,15 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.token !== null
+  };
+};
+
 export default withRouter(
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )(App)
 );

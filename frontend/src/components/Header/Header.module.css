@@ -1,9 +1,25 @@
 .menuBar {
   padding: 0 20px;
   /* border-bottom: solid 1px #e8e8e8; */
-  overflow: auto;
-  box-shadow: 0 0 30px #f3f1f1;
+  overflow: hidden;
+
+  /* box-shadow: 0 0 30px #f3f1f1; */
+
+  /* for overlay */
+  position: fixed;
+  display: block;
+  height: 68px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  cursor: pointer;
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  background: var(--navbar-background-color);
+  font-weight: bolder;
 }
+
 .logo {
   width: 150px;
   float: left;

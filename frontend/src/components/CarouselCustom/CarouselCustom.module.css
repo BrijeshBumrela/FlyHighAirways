@@ -4,14 +4,37 @@
   color: white;
   max-height: 500px;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .childDiv {
   position: absolute;
   top: 10%;
   left: 10%;
+  cursor: pointer;
 }
 .antCarousel {
   height: 500px;
   overflow: hidden;
+  cursor: pointer;
+}
+
+.rightChild {
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  font-weight: bolder;
+  text-align: center;
+  font-style: oblique;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+
+  z-index: 1000;
+  font-size: 2rem;
+}
+.but1 {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bolder;
+  margin-top: 2rem;
+  color: black;
+  cursor: pointer;
 }
