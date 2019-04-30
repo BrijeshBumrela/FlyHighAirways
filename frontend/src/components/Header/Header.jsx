@@ -84,18 +84,9 @@ class Navbar extends Component {
                   </NavLink>
                 </Menu.Item>
                 <Menu.Item key="2">
-                  {this.props.isAuth ? (
-                    <input
-                      className="nav-link"
-                      onClick={this.props.onLogout}
-                    >
-                      LogOut
-                    </input>
-                  ) : (
                     <NavLink className="nav-link" to="/flights">
                       Flights
                     </NavLink>
-                  )}
                 </Menu.Item>
 
                 <SubMenu title={<span>Blogs</span>}>
@@ -109,7 +100,11 @@ class Navbar extends Component {
                   </MenuItemGroup>
                 </SubMenu>
                 <Menu.Item key="alipay">
-                  <NavLink to="/authenticate">Login</NavLink>
+                  {
+                    !this.props.isAuth ? 
+                    <NavLink to="/authenticate">Login</NavLink> :
+                    <NavLink className="nav-link" onClick={this.props.onLogout} to="/">LogOut</NavLink>
+                  }
                 </Menu.Item>
               </Menu>
             </div>

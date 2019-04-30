@@ -10,6 +10,8 @@ import { authCheckStatus } from "./store/actions/index";
 
 import "antd/dist/antd.css";
 
+import { Alert } from 'antd';
+
 import FlightSearch from "./containers/FlightSearch/FlightSearch";
 import Auth from "./containers/Auth/Auth";
 import CheckIn from "./containers/CheckIn/CheckIn";
@@ -38,6 +40,7 @@ class App extends Component {
         destination: "",
         date: ""
     },
+    flightFormError: null,
     selectedFlight: null,
     auth: {
         tokenId: null,
@@ -49,7 +52,11 @@ class App extends Component {
     this.props.autoSignUpHandler();
   }
 
-  onFormSubmit = data => {
+  onFormSubmit = (data, isError, errorString) => {
+    if (isError) {
+        this.setState({ flightFormError: errorString });
+        return;
+    }
     this.setState({ flightInfo: data });
   };
 
@@ -59,7 +66,6 @@ class App extends Component {
 
   onLogout = () => {
     this.setState({ auth: null });
-    console.log('called?')
   }
 
   onAuthSubmit = data => {
@@ -93,8 +99,7 @@ class App extends Component {
 
   render() {
 
-
-    //*   This are components with props used only to pass in Route
+    //*   This are components with props used to pass in Route
     console.log('[STATE]', this.state);
 
     const HomePageWithProps = props => {
@@ -128,7 +133,7 @@ class App extends Component {
     };
 
 
-
+    console.log('error?', this.state.flightFormError);
     //* This is components with props 
     return (
       <React.Fragment>
@@ -138,6 +143,7 @@ class App extends Component {
                 isAuth={this.state.auth["idToken"] || false} 
                 onLogout={this.onLogout}    
             />
+            
             <Switch>
               <Route path="/" exact render={HomePageWithProps} />
               <Route path="/flights" render={FlightSearchWithProps} />

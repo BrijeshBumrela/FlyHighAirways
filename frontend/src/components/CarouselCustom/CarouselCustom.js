@@ -82,9 +82,9 @@ export default class CarouselComponent extends Component {
             <button className={classes.but1}>Book Now</button>
           </div>
         </div>
-        <h1 className={classes.childDiv}>
-          <FlightForm {...this.props}/>
-        </h1>
+        <div className={classes.childDiv} style={{paddingTop: '4rem'}}>
+          <FlightForm {...this.props} />
+        </div>
         <Icon
           type="right-circle"
           theme="filled"
