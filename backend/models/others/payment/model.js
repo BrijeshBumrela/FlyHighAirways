@@ -11,11 +11,23 @@ City.init({
         allowNull: false,
         primaryKey: true
     },
-    name: {
+    referenceString: {
         type: Sequelize.STRING
     },
-    short_form: {
-        type: Sequelize.STRING
+    userId: {
+        type: Sequelize.ID
+    },
+    amount:{
+        type:Sequelize.INTEGER
+    },
+    checked:{
+        type:Sequelize.BOOLEAN
+    },
+    refund:{
+        type:Sequelize.BOOLEAN
+    },
+    timestamp:{
+        type:Sequelize.DATE
     }
 }, {sequelize, underscored: true, timestamps:false});
 

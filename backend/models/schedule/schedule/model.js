@@ -11,7 +11,19 @@ Schedule.init({
         allowNull: false,
         primaryKey: true
     },
-}, {sequelize, underscored:true});
+    departure:{
+        type:Sequelize.DATE
+    },
+    aircraftId:{
+        type:Sequelize.INTEGER
+    },
+    source:{
+        type:Sequelize.INTEGER
+    },
+    destination:{
+        type:Sequelize.INTEGER
+    }
+}, {sequelize, underscored:true, timestamps:false});
 
 // Associations
 

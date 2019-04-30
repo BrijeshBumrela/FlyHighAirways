@@ -11,7 +11,29 @@ AircraftModel.init({
         allowNull: false,
         primaryKey: true
     },
-}, {sequelize, underscored:true});
+    manufacturerName:{
+        type: Sequelize.STRING,
+    },
+    modelName:{
+        type: Sequelize.STRING,
+
+    },
+    noOfSeats:{
+        type: Sequelize.INTEGER
+    },
+    name:{
+        type: Sequelize.STRING
+    },
+    maxWeight:{
+        type: Sequelize.FLOAT
+    },
+    manufacturedDate:{
+        type:Sequelize.DATE
+    },
+    maintenanceDate:{
+        type: Sequelize.DATE
+    }
+}, {sequelize, underscored:true, timestamps:false});
 
 // Associations
 
