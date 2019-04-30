@@ -5,7 +5,7 @@ import { Form, Modal, Button } from "antd";
 import Paypal from "../../components/Paypal/Paypal";
 
 import classes from "./FlightBook.module.css";
-import CatInputs from "../../components/Form/CatInputs";
+import DynamicForm from "../../components/Form/CatInputs";
 
 const { SubMenu } = Menu;
 
@@ -179,9 +179,13 @@ class FlightBook extends Component {
                         isFlightSelected={[this.props.selectedFlight, this.state.counts]}  
                       /> */}
 
-                      <CatInputs
+                      <DynamicForm
                         onSubmit={this.showModal}
                         onAdd={this.handleClick}
+                        isFlightSelected={[
+                          this.props.selectedFlight,
+                          this.state.counts
+                        ]}
                       />
                     </Col>
                   </Row>
