@@ -2,3 +2,19 @@
     height: 100vh;
 }
 
+.location {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.pricebox {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+}
+
+.hr {
+    background: blue;
+    height: 3px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

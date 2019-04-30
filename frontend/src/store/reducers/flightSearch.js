@@ -1,20 +1,19 @@
 const initialState = {
-    selectedFlightValues : {
-        source: '',
-        destination: '',
-        time: ''
-    }
+    source: '',
+    destination: '',
+    time: ''
 };
 
 const reducer = ( state = initialState, action ) => {
     switch(action.type) {
         case 'ADD_FLIGHT_FORM':
-            const flightData = { ...action.flightData };
 
-            return {
-                ...state,
-                selectedFlightValues: flightData
+            const temp = {
+                source: action.flightData.source,
+                destination: action.flightData.destination,
+                time: action.flightData.time
             }
+            return temp;
         default:
             return state;
     }

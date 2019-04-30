@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-// import { Row, Col, Button, Layout, Sider } from "antd";
-import { Layout, Menu, Icon } from "antd";
-// import Form from "../../components/Form/form";
+import { Layout, Menu, Icon, Row, Col, Avatar } from "antd";
 import DynamicFieldSet from "../../components/Form/dynamic";
-import { Form } from "antd";
+import { Form, Modal, Button } from "antd";
+import Paypal from "../../components/Paypal/Paypal";
+
+import classes from './FlightBook.module.css';
+
 const { SubMenu } = Menu;
 
 const { Content, Footer, Sider } = Layout;
@@ -14,95 +16,237 @@ const WrappedDynamicFieldSet = Form.create({ name: "dynamic_form_item" })(
 
 // ReactDOM.render(, mountNode);
 
-class FlightBook extends Component {
-  state = {};
+class FlightBook extends  Component {
+  constructor(props) {
+    super(props);
+
+    this.handler = this.handler.bind(this);
+    // this.state = {
+    //   messageShown: false,
+    //   id: -1 // initialize new state property with a value
+    // };
+  }
+
+  state = { 
+    counts: 0,
+    baseFare: 4500,
+    luggage: 500,
+    gst: 18,
+    visible: false
+  };
+
+  componentDidMount() {
+    if (this.props.selectedFlight) {
+      this.setState({ baseFare: this.props.selectedFlight.economy.fare })
+    }
+  }
+
+  totalPriceCalculate = () => {
+      let sum = 0;
+      sum += this.state.counts * this.state.baseFare;
+      sum += this.state.luggage;
+      const sumWithoutGST = sum * this.state.gst / 100;
+      sum += sum * this.state.gst/100;
+      return [sum, sumWithoutGST];
+  }
+
+  handler(id) {
+    this.setState({
+      messageShown: true,
+      id: id
+    });
+  }
+
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  }
+
+  handleOk = (e) => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  }
+
+  handleCancel = (e) => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  }
+
+  handleClick = e => {
+    console.log(e);
+    this.setState({
+      counts: e
+    });
+  };
+
   render() {
     return (
-      <Layout>
-        {/* <Header className="header">
-          <div className="logo" />
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={["1"]}
-            style={{ lineHeight: "64px" }}
-          >
-            <Menu.Item key="1">nav 1</Menu.Item>
-            <Menu.Item key="2">nav 2</Menu.Item>
-            <Menu.Item key="3">nav 3</Menu.Item>
-          </Menu>
-        </Header> */}
-        <Content style={{ padding: "0 50px" }}>
-          {/* <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
-          </Breadcrumb> */}
+      <React.Fragment>
 
-          <Layout style={{ padding: "24px 0", background: "#fff" }}>
-            <Content style={{ padding: "0 24px", minHeight: 280 }}>
-              {/* <Form /> */}
-              {/* <Form>
-                {" "} */}
-              <WrappedDynamicFieldSet />
-              {/* <DynamicFieldSet form={Form} /> */}
-              {/* </Form> */}
-            </Content>
-            <Sider width={400} style={{ background: "#fff" }}>
-              <Menu
-                mode="inline"
-                defaultSelectedKeys={["1"]}
-                defaultOpenKeys={["sub1"]}
-                style={{ height: "100%" }}
+        {/* Modal */}
+        <div>
+          <Modal
+            title="Basic Modal"
+            visible={this.state.visible}
+            onOk={this.handleOk}
+            onCancel={this.handleCancel}
+          >
+
+            <h1>Your Total Amount is {this.totalPriceCalculate()[0]}</h1>
+            <Paypal
+                toPay={this.totalPriceCalculate()[0]}
+                transactionError={err => this.transactionError(err)}
+                transactionCancelled={data => this.transactionCancelled(data)}
+                transactionSuccess={payment => this.transactionSuccess(payment)}
+            />
+          </Modal>
+        </div>
+
+
+        <Row
+          style={{
+            width: "80%",
+            margin: "auto",
+            paddingTop: "38px"
+          }}
+        >
+          <Content
+          // style={{ padding: "0 50px" }}
+          >
+            <Row
+            // style={{ padding: "24px 0", background: "rgb(240, 242, 245)" }}
+            >
+              <Col
+                lg={19}
+                sm={14}
+                style={{
+                  padding: "0 24px",
+                  minHeight: 280,
+                  maxWidth: "75%",
+                  borderRight: "1px solid #ebedf0"
+
+                  // background: "rgb(240, 242, 245)"
+                }}
               >
-                <SubMenu
-                  key="sub1"
-                  title={
-                    <span>
-                      <Icon type="user" />
-                      subnav 1
-                    </span>
-                  }
+                <div
+                // style={{ border: " 1px solid #ebedf0", background: "white" }}
                 >
-                  <Menu.Item key="1">option1</Menu.Item>
-                  <Menu.Item key="2">option2</Menu.Item>
-                  <Menu.Item key="3">option3</Menu.Item>
-                  <Menu.Item key="4">option4</Menu.Item>
-                </SubMenu>
-                <SubMenu
-                  key="sub2"
-                  title={
-                    <span>
-                      <Icon type="laptop" />
-                      subnav 2
-                    </span>
-                  }
+                  <Row
+                    style={{
+                      borderBottom: "1px solid #ebedf0",
+                      padding: "10px"
+                    }}
+                  >
+                    <Col sm={2}>
+                      <div>
+                        <Avatar size={64} icon="user" />
+                      </div>
+                    </Col>
+                    <Col>
+                      <h1
+                        style={{
+                          padding: "16px",
+                          fontSize: "22px",
+                          paddingLeft: "70px"
+                        }}
+                      >
+                        Aaquib Niaz
+                      </h1>
+                    </Col>
+                  </Row>
+
+                  <Row
+                    style={{
+                      borderBottom: "1px solid #ebedf0",
+                      padding: "10px"
+                    }}
+                  >
+                    <Col
+                      sm={24}
+                      lg={20}
+                      // sm={24}
+                      // xs={24}
+                      style={{
+                        padding: "15px 85px"
+                      }}
+                    >
+                      <WrappedDynamicFieldSet 
+                        onAdd={this.handleClick} 
+                        onSubmit={this.showModal}
+                        isFlightSelected={[this.props.selectedFlight, this.state.counts]}  
+                      />
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <h1
+                        style={{
+                          padding: "16px",
+                          fontSize: "22px",
+                          paddingLeft: "70px"
+                        }}
+                      >
+                        <Icon type="shopping-cart" />
+                        &nbsp;&nbsp;Add Aditional Baggage
+                      </h1>
+                    </Col>
+                  </Row>
+                  <Row
+                    style={{
+                      borderBottom: "1px solid #ebedf0",
+                      padding: "10px 85px"
+                    }}
+                  >
+                    There is limit of 25 kg luggage per person
+                  </Row>
+                </div>
+              </Col>
+              <Col lg={6} style={{ background: "#fff", padding: "0 24px" }}>
+                <div
+                  style={{
+                    background: "black",
+                    color: "white",
+                    fontSize: "19px",
+                    textAlign: "center"
+                  }}
                 >
-                  <Menu.Item key="5">option5</Menu.Item>
-                  <Menu.Item key="6">option6</Menu.Item>
-                  <Menu.Item key="7">option7</Menu.Item>
-                  <Menu.Item key="8">option8</Menu.Item>
-                </SubMenu>
-                <SubMenu
-                  key="sub3"
-                  title={
-                    <span>
-                      <Icon type="notification" />
-                      subnav 3
-                    </span>
-                  }
-                >
-                  <Menu.Item key="9">option9</Menu.Item>
-                  <Menu.Item key="10">option10</Menu.Item>
-                  <Menu.Item key="11">option11</Menu.Item>
-                  <Menu.Item key="12">option12</Menu.Item>
-                </SubMenu>
-              </Menu>
-            </Sider>
-          </Layout>
-        </Content>
-        <Footer style={{ textAlign: "center" }}>FlyHigh Airways ©2018</Footer>
-      </Layout>
+                  Pricing Summary
+                </div>
+                <div style={{ padding: "10px" }}>
+                  <div className={classes.location}>
+                    <h1>{this.props.selectedFlight ? this.props.selectedFlight.source : 'Select'}</h1>
+                    <h1>{this.props.selectedFlight ? 'TO' : 'The'}</h1>
+                    <h1>{this.props.selectedFlight ? this.props.selectedFlight.destination : 'Locations'}</h1>
+                  </div>
+                  
+                  { this.props.selectedFlight ? (
+                    <div className={classes.pricebox}>
+                      Base Fare = Rs <span>
+                          <b>{this.state.counts === 0 ? 0 : this.state.counts * this.state.baseFare}</b>
+                      </span>
+                      <br />
+                      Luggage Charge = Rs <b>{this.state.luggage}</b>
+                      <br />
+                      GST = Rs <b>{this.totalPriceCalculate()[1]}</b>
+                      <div className={classes.hr}>&nbsp;</div>
+                      Total Fare= Rs <b>{this.totalPriceCalculate()[0]}</b>
+                    </div>
+                  ) : (null)}
+
+
+                </div>
+              </Col>
+
+              
+            </Row>
+          </Content>
+        </Row>
+      </React.Fragment>
     );
   }
 }
