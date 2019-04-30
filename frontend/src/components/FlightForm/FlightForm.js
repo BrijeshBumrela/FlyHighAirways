@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import { connect } from "react-redux";
-
+import { withRouter } from 'react-router'
 import { Select, Popover, Button, Calendar, Input } from "antd";
 
 import classes from './FlightForm.module.css';
@@ -14,7 +14,7 @@ class flightForm extends Component {
         formData: {
             source: "",
             destination: "",
-            time: ""
+            date: ""
         },
         validity: {
             source: false,
@@ -60,37 +60,44 @@ class flightForm extends Component {
         this.setState({ formData: updatedFormData, validity: updatedValidity });
     };
 
-  onSubmitHandler = (event) => {
-      event.preventDefault();
+    onSubmitHandler = (event, data) => {
+        event.preventDefault();
 
-      if (!(this.state.validity.time && this.state.validity.source && this.state.validity.destination)){
-          console.log('error');
-          return;  
-      }
+        if (!(this.state.validity.time && this.state.validity.source && this.state.validity.destination)){
+            console.log('error');
+            return;  
+        }
 
-      this.props.onFlightFormAdded(this.state.formData);
-  };
+        // this.props.onFlightFormAdded(this.state.formData);
+        this.props.formFill(data)
+        this.props.history.push('/flights');
+    };
 
   render() {
-    const popUpCalendar = (
-      <div style={{ width: 300, border: "1px solid #d9d9d9", borderRadius: 4 }}>
-        <Calendar
-          fullscreen={false}
-          onSelect={date => this.onDateSelectHandler(date)}
-        />
-      </div>
-    );
+        const popUpCalendar = (
+            <div style={{ width: 300, border: "1px solid #d9d9d9", borderRadius: 4 }}>
+                <Calendar
+                    fullscreen={false}
+                    onSelect={date => this.onDateSelectHandler(date)}
+                />
+            </div>
+        );
 
-    console.log(this.state.formData);
+        const data = {
+            ...this.state.formData
+        }
 
+        // Checks from where this Form component is rendered
+        let homePageSearch = this.props.origin === 'search' ? false : true;
+        console.log(homePageSearch)
     return (
-        <form onSubmit={e => this.onSubmitHandler(e)}>
-            <div>   
-                <div className={classes.optionWrapper}>
-
+        <form className={homePageSearch ? classes.FormDiv : classes.FormDivMain2} onSubmit={(e) => this.onSubmitHandler(e, data)}>
+            <div className={homePageSearch ? null : classes.FormDiv2}>   
+                <div className={homePageSearch ? classes.optionWrapper : classes.optionWrapper2}>
+                    <h6>Select Source: </h6>
                     <Select
                           showSearch
-                          style={{ width: 200 }}
+                          style={{ width: '200px', marginLeft:'20px' }}
                           placeholder="Source Airport"
                           optionFilterProp="children"
                           onSelect={cityName => this.onCitySelectHandler(cityName, 'source')}
@@ -106,10 +113,11 @@ class flightForm extends Component {
 
                 </div>
 
-                <div className={classes.optionWrapper}>
+                <div className={homePageSearch ? classes.optionWrapper : classes.optionWrapper2}>
+                    <h6>Select Destination: </h6>
                     <Select
                         showSearch
-                        style={{ width: 200 }}
+                        style={{ width: '200px', marginLeft:'20px' }}
                         placeholder="Destination Airport"
                         optionFilterProp="children"
                         onSelect={cityName => this.onCitySelectHandler(cityName, 'destination')}
@@ -124,7 +132,7 @@ class flightForm extends Component {
                     </Select>
                 </div>
 
-                <div className={classes.dateWrapper}>
+                <div className={homePageSearch ? classes.dateWrapper : classes.dateWrapper2}>
                     <Input type="text" value={this.state.formData.time}/>
                     <Popover
                         content={popUpCalendar}
@@ -132,20 +140,28 @@ class flightForm extends Component {
                         trigger="click"
                         visible={this.state.calendarPopUp}
                     >
-                        <Button type="primary" onClick={this.onVisibleHandler}>Select A Date</Button>
+                        <Button 
+                            type="primary" 
+                            onClick={this.onVisibleHandler}
+                            style={{ marginLeft: '20px' }}                        
+                        >
+                            Select A Date
+                        </Button>
                     </Popover>
                 </div>
 
                 
             </div>
 
-            <Button 
-                type="primary" 
-                htmlType="submit"
-                onClick={(e) => this.onSubmitHandler(e)}    
-            >
-                Search Flights
-            </Button>
+            <div className={classes.SearchBtn}>
+                <Button 
+                    type="primary" 
+                    htmlType="submit"
+                    size="large"
+                >
+                    Search Flights
+                </Button>
+            </div>
         </form>
     );
   }
@@ -153,12 +169,11 @@ class flightForm extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFlightFormAdded: flightData =>
-      dispatch({ type: "ADD_FLIGHT_FORM", flightData })
+    onFlightFormAdded: flightData => dispatch({ type: "ADD_FLIGHT_FORM", flightData })
   };
 };
 
-export default connect(
+export default withRouter(connect(
   null,
   mapDispatchToProps
-)(flightForm);
+)(flightForm));

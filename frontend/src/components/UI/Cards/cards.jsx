@@ -19,7 +19,7 @@ class Cards extends Component {
               bordered="true"
               style={{ with: 240 }}
               cover={
-                <div className={classes.container}>
+                <div className={[classes.container, classes.zoom].join(" ")}>
                   <img
                     src="https://scoutmytrip.com/blog/wp-content/uploads/2018/04/Places-to-visit-in-Darjeeling-Featured.jpg"
                     alt="Avatar"

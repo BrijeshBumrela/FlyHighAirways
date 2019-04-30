@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 
 import PayPalExpressBtn from 'react-paypal-express-checkout';
+import { withRouter } from 'react-router-dom';
 
-export default class Paypal extends Component {
+class Paypal extends Component {
     render() {
 
         const onSuccess = (payment) => {
             console.log(JSON.stringify(payment));
+            this.props.history.push('/')
         }
 
         const onCancel = (data) => {
@@ -19,7 +21,8 @@ export default class Paypal extends Component {
 
         let env = 'sandbox';
         let currency = 'USD';
-        let total = 1.3;
+        let total = parseInt(this.props.toPay * 0.01368);
+        console.log(total);
 
         const client = {
             sandbox: 'AeCP7XjbY68kPoHkF4cqS2LWBZ83t1wSFRy6jbEdbGFG4c_m3qI6j_qozn84D8xpTN3ML6opD6XanSgO',
@@ -47,3 +50,6 @@ export default class Paypal extends Component {
         )
     }
 }
+
+
+export default withRouter(Paypal)
