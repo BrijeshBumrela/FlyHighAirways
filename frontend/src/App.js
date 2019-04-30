@@ -19,10 +19,10 @@ import Navbar from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 
 import { APIKEY } from "./Keys/GoogleApiKey";
-import axios from 'axios';
+import axios from "axios";
+import DashBoard from "./containers/DashBoard/DashBoard";
 
 // import Navbar from "./components/UI/Navbar/navbar";
-// import Navbar from "./components/Header/Header";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -34,14 +34,14 @@ const store = createStore(
 class App extends Component {
   state = {
     flightInfo: {
-        source: "",
-        destination: "",
-        date: ""
+      source: "",
+      destination: "",
+      date: ""
     },
     selectedFlight: null,
     auth: {
-        tokenId: null,
-        email: null
+      tokenId: null,
+      email: null
     }
   };
 
@@ -60,23 +60,25 @@ class App extends Component {
   onAuthSubmit = data => {
     console.log(data);
 
-    let url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=";
+    let url =
+      "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=";
 
     if (data.isSignUp) {
-      url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=";
+      url =
+        "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=";
     }
 
-
-    axios.post(`${url}${APIKEY}`, data.auth)
+    axios
+      .post(`${url}${APIKEY}`, data.auth)
       .then(response => {
         const expirationTime = new Date(
           new Date().getTime() + response.data.expiresIn * 1000
         );
 
         const authData = {
-            idToken: response.data.idToken,
-            email: response.data.email
-        }
+          idToken: response.data.idToken,
+          email: response.data.email
+        };
 
         this.setState({ auth: authData });
 
@@ -87,13 +89,12 @@ class App extends Component {
       .catch(err => {
         console.log(err.response);
       });
-  }
+  };
 
   render() {
 
 
       //*   This are components with props used only to pass in Route
-
 
       const HomePageWithProps = props => {
         return <HomePage origin="homepage" formFill={this.onFormSubmit} />;
@@ -140,6 +141,7 @@ class App extends Component {
                 <Route path="/book-flight" render={FlightFormWithProps} />
                 <Route path="/authenticate" render={AuthFormWithProps} />
                 <Route path="/checkIn" component={CheckIn} />
+                <Route path="/dashboard" component={DashBoard} />
               </Switch>
               <Footer />
             </BrowserRouter>
