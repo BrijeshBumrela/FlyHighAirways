@@ -119,6 +119,7 @@ class FlightBook extends  Component {
           // style={{ padding: "0 50px" }}
           >
             <Row
+            style={{ marginTop: '5rem' }}
             // style={{ padding: "24px 0", background: "rgb(240, 242, 245)" }}
             >
               <Col
