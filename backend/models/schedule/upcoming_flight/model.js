@@ -1,18 +1,21 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../../../utils/database/connect');
 
-class FlightLog extends Sequelize.Model {
+class UpcomingFlight extends Sequelize.Model {
 }
 
-FlightLog.init({
+UpcomingFlight.init({
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
+    scheduleId:{
+        type:Sequelize.INTEGER
+    },
     flightNo:{
-        type: Sequelize.INTEGER
+        type:Sequelize.INTEGER
     },
     aircraftId:{
         type:Sequelize.INTEGER
@@ -24,10 +27,16 @@ FlightLog.init({
         type:Sequelize.INTEGER
     },
     startTime:{
-        type:Sequelize.INTEGER
+        type:Sequelize.DATE
     },
     endTime:{
-        type:Sequelize.INTEGER
+        type:Sequelize.DATE
+    },
+    pilot:{
+        type:Sequelize.ARRAY(Sequelize.INTEGER)
+    },
+    crew:{
+        type:Sequelize.ARRAY(Sequelize.INTEGER)
     }
 }, {sequelize, underscored:true, timestamps:false});
 
@@ -36,5 +45,5 @@ FlightLog.init({
 //export
 
 
-module.exports = FlightLog;
+module.exports = UpcomingFlight;
 

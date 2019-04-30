@@ -3,7 +3,7 @@ module.exports = {
             CREATE TABLE IF NOT EXISTS cities (
             id SERIAL PRIMARY KEY,
             name VARCHAR(50) NOT NULL,
-            short_form VARCHAR(5) NOT NULL,
+            short_form VARCHAR(5) NOT NULL
             )
             `,
     exists: `

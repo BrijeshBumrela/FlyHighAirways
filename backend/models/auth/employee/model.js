@@ -16,7 +16,7 @@ Employee.init({
         allowNull:true
     },
 
-}, {sequelize, underscored:true});
+}, {sequelize, underscored:true, timestamps:false});
 
 // Associations
 Employee.belongsTo(Employee, {foreignKey:'supervisor'});

@@ -6,7 +6,7 @@ const constraints = require('./constraints');
 const triggers = require('./triggers');
 const procedures = require('./procedures');
 const methods = require('./methods');
-
+const seeds = require('./seeds');
 
 User.sqlCommands = {
     table: table,
@@ -15,6 +15,7 @@ User.sqlCommands = {
     procedures: procedures,
 };
 
+User.seeds = seeds;
 User.createTable = async function (options) {
     const {table} = this.sqlCommands;
     const force = (options && options.force) || false;
@@ -83,4 +84,28 @@ User.createAll = async function (options){
 /* Set all method prototypes */
 // User.prototype.x = methods.x;
 
+User.seedTable = async function (options) {
+    for (record of this.seeds) {
+        let keys = Object.keys(record);
+        let fields = keys.map(key => queryWrappers.wrapField(key));
+        fieldsString = fields.join(',');
+
+        let values = keys.map(key => {
+            let val = record[key];
+            if (typeof (val) === "string") return queryWrappers.wrapValue(val);
+            else return val;
+        });
+
+        valuesString = values.join(',');
+
+        insertQuery = `INSERT INTO ${this.getTableName()} (${fieldsString}) VALUES (${valuesString})`;
+        console.log(insertQuery);
+        await sequelize.query(insertQuery).then(result=>{
+
+        }).catch(err=>{
+            console.log(err);
+            console.log(`Insert Failed for fields: ${fieldsString} values: ${valuesString}`);
+        })
+    }
+};
 module.exports = User;

@@ -1,12 +1,12 @@
 module.exports = {
     unique: {
-        email:`
-                  ALTER TABLE cities
+        name:`
+                  ALTER TABLE payments
                   ADD CONSTRAINT unique_name
                   UNIQUE(name)
                   `,
-        email:`
-                  ALTER TABLE cities
+        short_form:`
+                  ALTER TABLE payments
                   ADD CONSTRAINT unique_short_form
                   UNIQUE(short_form)
                   `

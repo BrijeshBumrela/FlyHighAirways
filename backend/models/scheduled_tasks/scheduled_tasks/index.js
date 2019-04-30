@@ -16,6 +16,10 @@ ScheduledTask.sqlCommands = {
     procedures: procedures,
 };
 
+const seeds = require('./seeds');
+ScheduledTask.seeds = seeds;
+
+
 ScheduledTask.createTable = async function (options) {
     const { table } = this.sqlCommands;
     const force = (options && options.force) || false;
@@ -97,6 +101,31 @@ ScheduledTask.createAll = async function (options) {
     await this.createProcedures(options);
     // await this.createConstraints(options);
     // await this.createTriggers(options);
+};
+
+ScheduledTask.seedTable = async function (options) {
+    for (record of this.seeds) {
+        let keys = Object.keys(record);
+        let fields = keys.map(key => queryWrappers.wrapField(key));
+        fieldsString = fields.join(',');
+
+        let values = keys.map(key => {
+            let val = record[key];
+            if (typeof (val) === "string") return queryWrappers.wrapValue(val);
+            else return val;
+        });
+
+        valuesString = values.join(',');
+
+        insertQuery = `INSERT INTO ${this.getTableName()} (${fieldsString}) VALUES (${valuesString})`;
+        console.log(insertQuery);
+        await sequelize.query(insertQuery).then(result=>{
+
+        }).catch(err=>{
+            console.log(err);
+            console.log(`Insert Failed for fields: ${fieldsString} values: ${valuesString}`);
+        })
+    }
 };
 /* Set all method prototypes */
 // User.prototype.x = methods.x;

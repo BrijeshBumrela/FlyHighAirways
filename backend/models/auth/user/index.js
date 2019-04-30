@@ -1,4 +1,6 @@
+
 const sequelize = require('../../../utils/database/connect');
+const queryWrappers = require('../../../utils/query-wrappers');
 
 const User = require('./model');
 const table = require('./table');
@@ -7,13 +9,15 @@ const triggers = require('./triggers');
 const procedures = require('./procedures');
 const methods = require('./methods');
 
-
 User.sqlCommands = {
     table: table,
     constraints: constraints,
     triggers: triggers,
     procedures: procedures,
 };
+
+const seeds = require('./seeds');
+User.seeds = seeds;
 
 User.createTable = async function (options) {
     const {table} = this.sqlCommands;
@@ -65,14 +69,15 @@ User.createConstraints = async function (options) {
 
 User.createTriggers = async function(options){
     const {triggers} = this.sqlCommands;
-    Object.keys(triggers).map(async key=>{
 
-        console.log(triggers[key].procedure);
-        let result = await sequelize.query(triggers[key].procedure);
+    let keys = Object.keys(triggers);
+    for(key of keys) {
+            console.log(triggers[key].procedure);
+            let result = await sequelize.query(triggers[key].procedure);
 
-        console.log(triggers[key].trigger);
-        result = await sequelize.query(triggers[key].trigger);
-    });
+            console.log(triggers[key].trigger);
+            result = await sequelize.query(triggers[key].trigger);
+    }
 };
 
 User.createAll = async function (options){
@@ -83,4 +88,28 @@ User.createAll = async function (options){
 /* Set all method prototypes */
 // User.prototype.x = methods.x;
 
+User.seedTable = async function (options) {
+    for (record of this.seeds) {
+        let keys = Object.keys(record);
+        let fields = keys.map(key => queryWrappers.wrapField(key));
+        fieldsString = fields.join(',');
+
+        let values = keys.map(key => {
+            let val = record[key];
+            if (typeof (val) === "string") return queryWrappers.wrapValue(val);
+            else return val;
+        });
+
+        valuesString = values.join(',');
+
+        insertQuery = `INSERT INTO ${this.getTableName()} (${fieldsString}) VALUES (${valuesString})`;
+        console.log(insertQuery);
+        await sequelize.query(insertQuery).then(result=>{
+
+        }).catch(err=>{
+            console.log(err);
+            console.log(`Insert Failed for fields: ${fieldsString} values: ${valuesString}`);
+        })
+    }
+};
 module.exports = User;
