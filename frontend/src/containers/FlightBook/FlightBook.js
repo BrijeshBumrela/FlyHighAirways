@@ -1,21 +1,14 @@
 import React, { Component } from "react";
 import { Layout, Menu, Icon, Row, Col, Avatar } from "antd";
-import DynamicFieldSet from "../../components/Form/dynamic";
 import { Form, Modal, Button } from "antd";
 import Paypal from "../../components/Paypal/Paypal";
 
 import classes from "./FlightBook.module.css";
-import DynamicForm from "../../components/Form/CatInputs";
+import DynamicForm from "../../components/Form/DynamicForm";
 
 const { SubMenu } = Menu;
 
 const { Content, Footer, Sider } = Layout;
-
-const WrappedDynamicFieldSet = Form.create({ name: "dynamic_form_item" })(
-  DynamicFieldSet
-);
-
-// ReactDOM.render(, mountNode);
 
 class FlightBook extends Component {
   constructor(props) {

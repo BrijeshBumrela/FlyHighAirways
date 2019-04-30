@@ -8,7 +8,7 @@ class DynamicForm extends React.Component {
     super();
     this.state = {
       name: "",
-      shareholders: [{ name: "" }]
+      Passengers: [{ name: "" }]
     };
   }
 
@@ -16,13 +16,13 @@ class DynamicForm extends React.Component {
     this.setState({ name: evt.target.value });
   };
 
-  handleShareholderNameChange = idx => evt => {
-    const newShareholders = this.state.shareholders.map((shareholder, sidx) => {
-      if (idx !== sidx) return shareholder;
-      return { ...shareholder, name: evt.target.value };
+  handlePassengerNameChange = idx => evt => {
+    const newPassengers = this.state.Passengers.map((Passenger, sidx) => {
+      if (idx !== sidx) return Passenger;
+      return { ...Passenger, name: evt.target.value };
     });
 
-    this.setState({ shareholders: newShareholders });
+    this.setState({ Passengers: newPassengers });
   };
 
   handleSubmit = e => {
@@ -30,50 +30,43 @@ class DynamicForm extends React.Component {
 
     this.props.onSubmit();
 
-    const { name, shareholders } = this.state;
+    const { name, Passengers } = this.state;
     // alert(`Incorporated: ${name} with ${shareholders.length} shareholders`);
   };
 
-  handleAddShareholder = () => {
+  handleAddPassenger = () => {
     this.setState({
-      shareholders: this.state.shareholders.concat([{ name: "" }])
+      Passengers: this.state.Passengers.concat([{ name: "" }])
     });
-    this.props.onAdd(this.state.shareholders.length);
+    this.props.onAdd(this.state.Passengers.length);
   };
 
-  handleRemoveShareholder = idx => () => {
+  handleRemovePassenger = idx => () => {
     this.setState({
-      shareholders: this.state.shareholders.filter((s, sidx) => idx !== sidx)
+      Passengers: this.state.Passengers.filter((s, sidx) => idx !== sidx)
     });
-    this.props.onAdd(this.state.shareholders.length);
+    this.props.onAdd(this.state.Passengers.length);
   };
 
   render() {
-    console.log(this.state.shareholders.length);
+    console.log(this.state.Passengers[0].name);
+
     return (
       <form onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          placeholder="Company name, e.g. Magic Everywhere LLC"
-          value={this.state.name}
-          onChange={this.handleNameChange}
-          style={{ backgroundColor: "white" }}
-        />
+        <h4>Passengers</h4>
 
-        <h4>Shareholders</h4>
-
-        {this.state.shareholders.map((shareholder, idx) => (
+        {this.state.Passengers.map((Passenger, idx) => (
           <div className="shareholder">
             <input
               type="text"
-              placeholder={`Shareholder #${idx + 1} name`}
-              value={shareholder.name}
-              onChange={this.handleShareholderNameChange(idx)}
+              placeholder={`Passenger #${idx + 1} name`}
+              value={Passenger.name}
+              onChange={this.handlePassengerNameChange(idx)}
               style={{ backgroundColor: "white" }}
             />
             <button
               type="button"
-              onClick={this.handleRemoveShareholder(idx)}
+              onClick={this.handleRemovePassenger(idx)}
               className="small"
             >
               -
@@ -82,10 +75,10 @@ class DynamicForm extends React.Component {
         ))}
         <button
           type="button"
-          onClick={this.handleAddShareholder}
+          onClick={this.handleAddPassenger}
           className="small"
         >
-          Add Shareholder
+          Add Passenger
         </button>
         <button
           type="primary"

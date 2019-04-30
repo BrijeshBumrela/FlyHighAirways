@@ -1,10 +1,6 @@
-import React, { Component } from "react";
-import { Layout, Menu, Card, Icon, Tree } from "antd";
-import EditableCell from "./Form_expandable";
-import EditableTable from "./Form_expandable";
+import React from "react";
+import { Layout, Menu, Icon } from "antd";
 
-const { Meta } = Card;
-const { TreeNode } = Tree;
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 const DashBoard = props => {
@@ -72,7 +68,6 @@ const DashBoard = props => {
             }}
           >
             Content
-            <EditableTable />
           </Content>
         </Layout>
       </Layout>
