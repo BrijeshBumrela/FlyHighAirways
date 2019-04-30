@@ -78,11 +78,6 @@ class Navbar extends Component {
                   backgroundColor: "transparent"
                 }}
               >
-                <Menu.Item key="1">
-                  <NavLink className="nav-link" to="/checkIn">
-                    CheckIN
-                  </NavLink>
-                </Menu.Item>
                 <Menu.Item key="2">
                     <NavLink className="nav-link" to="/flights">
                       Flights

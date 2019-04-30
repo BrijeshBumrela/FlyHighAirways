@@ -122,6 +122,15 @@ class App extends Component {
       );
     }
 
+    const CheckInWithProps = props => {
+      return (
+        <CheckIn
+          auth={this.state.auth}
+          selectedFlight={this.state.selectedFlight}
+        />
+      );
+    }
+
     const AuthFormWithProps = props => {
       return (
         <Auth
@@ -147,7 +156,7 @@ class App extends Component {
               <Route path="/flights" render={FlightSearchWithProps} />
               <Route path="/book-flight" render={FlightFormWithProps} />
               <Route path="/authenticate" render={AuthFormWithProps} />
-              <Route path="/checkIn" component={CheckIn} />
+              <Route path="/checkin" render={CheckInWithProps} />
             </Switch>
             <Footer />
           </BrowserRouter>
