@@ -2,13 +2,15 @@ module.exports = {
     create: `
             CREATE TABLE IF NOT EXISTS upcoming_flights (
             id SERIAL PRIMARY KEY,
-            schedule_id INT NOT NULL,
-            flight_no INT NOT NULL,
+            schedule_id INT,
+            flight_no SERIAL,
             aircraft_id INT NOT NULL,
             source INT NOT NULL,
             destination INT NOT NULL,
-            start_time TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-            end_time TIMESTAMP WITH TIME ZONE,
+            start_date DATE NOT NULL,
+            end_date DATE NOT NULL,
+            start_time TIME WITH TIME ZONE DEFAULT NOW(),
+            end_time TIME WITH TIME ZONE DEFAULT NOW(),
             pilot INT ARRAY,
             crew INT ARRAY            
             )

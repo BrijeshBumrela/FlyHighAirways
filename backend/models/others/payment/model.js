@@ -1,10 +1,10 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../../../utils/database/connect');
 
-class City extends Sequelize.Model {
+class Payment extends Sequelize.Model {
 }
 
-City.init({
+Payment.init({
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -15,7 +15,7 @@ City.init({
         type: Sequelize.STRING
     },
     userId: {
-        type: Sequelize.ID
+        type: Sequelize.INTEGER
     },
     amount:{
         type:Sequelize.INTEGER
@@ -28,6 +28,9 @@ City.init({
     },
     timestamp:{
         type:Sequelize.DATE
+    },
+    remarks:{
+        type:Sequelize.STRING
     }
 }, {sequelize, underscored: true, timestamps:false});
 
@@ -36,5 +39,5 @@ City.init({
 //export
 
 
-module.exports = City;
+module.exports = Payment;
 

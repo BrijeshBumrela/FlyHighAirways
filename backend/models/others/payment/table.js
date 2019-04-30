@@ -6,7 +6,8 @@ module.exports = {
             user_id INT NOT NULL,
             amount BIGINT NOT NULL,
             checked BOOLEAN DEFAULT FALSE,
-            refund BOOLEAN DEFAULT FALSE
+            refund BOOLEAN DEFAULT FALSE,
+            remarks VARCHAR(250)
             )
             `,
     exists: `

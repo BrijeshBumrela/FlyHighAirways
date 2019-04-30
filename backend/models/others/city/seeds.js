@@ -1,3 +1,26 @@
 module.exports = [
-
+    {
+        name:'Mumbai',
+        short_form:'BOM'
+    },
+    {
+        name:'Delhi',
+        short_form:'DEL'
+    },
+    {
+        name:'Chennai',
+        short_form:'MAA'
+    },
+    {
+        name:'Banglore',
+        short_form:'BGL'
+    },
+    {
+        name:'Hyderabad',
+        short_form:'HYD'
+    },
+    {
+        name:'Pune',
+        short_form:'PUN'
+    },
 ];

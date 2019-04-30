@@ -12,7 +12,10 @@ Schedule.init({
         primaryKey: true
     },
     departure:{
-        type:Sequelize.DATE
+        type:Sequelize.TIME
+    },
+    arrival:{
+        type:Sequelize.TIME
     },
     aircraftId:{
         type:Sequelize.INTEGER
