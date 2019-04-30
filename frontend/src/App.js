@@ -105,6 +105,7 @@ class App extends Component {
     const FlightSearchWithProps = props => {
       return (
         <FlightSearch
+          auth={this.state.auth}
           flightInfo={this.state.flightInfo}
           flightSelect={this.onFlightSelect}
           formFill={this.onFormSubmit}
