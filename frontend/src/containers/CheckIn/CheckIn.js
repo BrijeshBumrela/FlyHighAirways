@@ -57,7 +57,35 @@ class checkIn extends Component {
         ]
     }
 
+    arrangeSeats = () => {
+        // * List of List of seats
+        let seatList = [];
+
+        // * Inner List (Made 0 after rowLengthCounter)
+
+        let miniList = [];
+        let rowLengthCounter = 0;
+        const rowLength = 6;
+        for (let i = 0; i < this.state.seats.length; i++) {
+            if (rowLengthCounter === rowLength) {
+                seatList.push(miniList);
+                rowLengthCounter = 0;
+                miniList = [];
+            }
+            // Last Iteration
+            if (i === this.state.seats.length - 1) {
+                seatList.push(miniList);
+            }
+
+            rowLengthCounter += 1;
+            miniList.push(this.state.seats[i]);
+        }
+    }
+
     render() {
+
+        
+
 
         return (  
             <div className={classes.Page}>
@@ -82,11 +110,11 @@ class checkIn extends Component {
                 <div className={classes.Reference}>
                     <div className={classes.BlockInfo}>
                         <Seat color="#FF8C00" className={classes.RefBlock}/>
-                        <div>AVAILABLE - ECONOMY</div>
+                        <div>AVAILABLE</div>
                     </div>
                     <div className={classes.BlockInfo}>
                         <Seat color="#00BFFF" className={classes.RefBlock}/> 
-                        <div>AVAILABLE - BUSINESS</div>
+                        <div>AVAILABLE - SPECIAL</div>
                     </div>
                     <div className={classes.BlockInfo}>
                         <Seat color="#4169E1" className={classes.RefBlock}/>
