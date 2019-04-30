@@ -81,20 +81,19 @@ class AuthenticateForm extends Component {
     // );
 
     let data = {
-      auth: {
-
-      }
+      auth: {}
     };
     data.isSignUp = this.state.isSignUp;
 
     for (const formElement in this.state.authForm) {
-      if ( this.state.authForm[formElement].valid === false ) {
-        alert('form can\'t be submitted!');
+      if (this.state.authForm[formElement].valid === false) {
+        alert("form can't be submitted!");
         return;
       }
       data.auth[formElement] = this.state.authForm[formElement].value;
     }
     data.auth.returnSecureToken = true;
+
     this.props.onAuthSubmit(data);
 
     this.props.history.push('/');
@@ -104,30 +103,28 @@ class AuthenticateForm extends Component {
   //chennai kokllata punnaei  deli indore
 
   componentDidMount() {
+    const flight = {
+      source: "Indore",
+      destination: "Chennai",
+      start_time: "08:00",
+      end_time: "10:05",
+      date: "22/04/2019",
+      logo: "some 2",
+      business: {
+        fare: 3956,
+        seats_remaining: 0
+      },
+      economy: {
+        fare: 4963,
+        seats_remaining: 6
+      },
+      nonStop: true
+    };
 
-      const flight = {
-          source: 'Indore',
-          destination: 'Chennai',
-          start_time: '08:00',
-          end_time: '10:05',
-          date: '22/04/2019',
-          logo: 'some 2',
-          business: {
-              fare: 3956,
-              seats_remaining: 0
-          },
-          economy: {
-              fare: 4963,
-              seats_remaining: 6
-          },
-          nonStop: true
-      }
-
-      // axios.post('https://flyhighairways-2cfb4.firebaseio.com/flight.json', flight)
-      //     .then(res => console.log(res))
-      //     .catch(err => console.log('there was an ', err));
+    // axios.post('https://flyhighairways-2cfb4.firebaseio.com/flight.json', flight)
+    //     .then(res => console.log(res))
+    //     .catch(err => console.log('there was an ', err));
   }
-
 
   switchAuthModeHandler = () => {
     this.setState(prevState => {
@@ -200,17 +197,17 @@ class AuthenticateForm extends Component {
   };
 
   inputChangedHandler = (event, inputIdentifier) => {
-    const updatedForm = { ...this.state.authForm };
-    const updatedFormElement = { ...updatedForm[inputIdentifier] };
-    updatedFormElement.value = event.target.value;
-    updatedForm[inputIdentifier] = updatedFormElement;
-    updatedForm[inputIdentifier].valid = this.checkValidation(
-      event.target.value,
-      updatedForm[inputIdentifier].validation
-    );
-    updatedForm[inputIdentifier].touched = true;
+      const updatedForm = { ...this.state.authForm };
+      const updatedFormElement = { ...updatedForm[inputIdentifier] };
+      updatedFormElement.value = event.target.value;
+      updatedForm[inputIdentifier] = updatedFormElement;
+      updatedForm[inputIdentifier].valid = this.checkValidation(
+        event.target.value,
+        updatedForm[inputIdentifier].validation
+      );
+      updatedForm[inputIdentifier].touched = true;
 
-    this.setState({ authForm: updatedForm });
+      this.setState({ authForm: updatedForm });
   };
 
   render() {
@@ -256,7 +253,7 @@ class AuthenticateForm extends Component {
             <Button
               htmlType="submit"
               size="default"
-              style={{ backgroundColor: "#6A5ACD", border: "none" }}
+              style={{ backgroundColor: "#bdc3c7", border: "none" }}
               block
               shape="round"
             >

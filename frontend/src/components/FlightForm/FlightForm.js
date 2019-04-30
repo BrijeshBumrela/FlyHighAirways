@@ -62,6 +62,41 @@ class flightForm extends Component {
         this.setState({ formData: updatedFormData, validity: updatedValidity });
     };
 
+    // Utility function to check if date is valid (After current time)
+    checkDateValidation = (date) => {
+        const currentDate = new Date();        
+
+        const selectedDate = date.split('/');
+        let updatedDate = [];
+        selectedDate.forEach(element => {
+            updatedDate.push(parseInt(element));
+        });
+
+        let validation = true;
+        
+        if (updatedDate[2] < currentDate.getUTCFullYear()) {
+            validation = false;
+            return validation;
+        }
+
+        else if (updatedDate[2] === currentDate.getUTCFullYear()) {
+            console.log('itha');
+            if (updatedDate[0] < currentDate.getUTCMonth() + 1) {
+                validation = false;
+                return validation;
+            }
+            else if (updatedDate[0] === currentDate.getUTCMonth() + 1) {
+                if (updatedDate[1] < currentDate.getUTCDate()) {
+                    validation = false;
+                    return validation;
+                }
+            }
+            console.log('[LEVEL 2]', updatedDate[1], currentDate.getUTCMonth() + 1)
+        }
+        console.log(typeof updatedDate[2]);
+        return validation;
+    };
+
     onSubmitHandler = (event, data) => {
         event.preventDefault();
 
@@ -87,9 +122,9 @@ class flightForm extends Component {
         if (isError) {
             return;
         }
-        // this.props.onFlightFormAdded(this.state.formData);
-        this.props.formFill(data)
-        this.props.history.push('/flights');
+        this.props.formFill(data);
+
+        // this.props.history.push('/flights');
     };
 
   render() {
@@ -169,7 +204,7 @@ class flightForm extends Component {
                             <Button 
                                 type="primary" 
                                 onClick={this.onVisibleHandler}
-                                style={{ marginLeft: '20px' }}                        
+                                style={{ marginLeft: '20px', marginTop: '0px' }}                        
                             >
                                 Select A Date
                             </Button>
@@ -181,6 +216,7 @@ class flightForm extends Component {
 
                 <div className={classes.SearchBtn}>
                     <Button 
+                        style={{marginTop: '0px'}}
                         type="primary" 
                         htmlType="submit"
                         size="large"

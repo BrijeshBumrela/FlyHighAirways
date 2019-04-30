@@ -1,22 +1,16 @@
 import React, { Component } from "react";
 import { Layout, Menu, Icon, Row, Col, Avatar } from "antd";
-import DynamicFieldSet from "../../components/Form/dynamic";
 import { Form, Modal, Button } from "antd";
 import Paypal from "../../components/Paypal/Paypal";
 
-import classes from './FlightBook.module.css';
+import classes from "./FlightBook.module.css";
+import DynamicForm from "../../components/Form/DynamicForm";
 
 const { SubMenu } = Menu;
 
 const { Content, Footer, Sider } = Layout;
 
-const WrappedDynamicFieldSet = Form.create({ name: "dynamic_form_item" })(
-  DynamicFieldSet
-);
-
-// ReactDOM.render(, mountNode);
-
-class FlightBook extends  Component {
+class FlightBook extends Component {
   constructor(props) {
     super(props);
 
@@ -38,18 +32,18 @@ class FlightBook extends  Component {
 
   componentDidMount() {
     if (this.props.selectedFlight) {
-      this.setState({ baseFare: this.props.selectedFlight.economy.fare })
+      this.setState({ baseFare: this.props.selectedFlight.economy.fare });
     }
   }
 
   totalPriceCalculate = () => {
-      let sum = 0;
-      sum += this.state.counts * this.state.baseFare;
-      sum += this.state.luggage;
-      const sumWithoutGST = sum * this.state.gst / 100;
-      sum += sum * this.state.gst/100;
-      return [sum, sumWithoutGST];
-  }
+    let sum = 0;
+    sum += this.state.counts * this.state.baseFare;
+    sum += this.state.luggage;
+    const sumWithoutGST = (sum * this.state.gst) / 100;
+    sum += (sum * this.state.gst) / 100;
+    return [sum, sumWithoutGST];
+  };
 
   handler(id) {
     this.setState({
@@ -60,23 +54,23 @@ class FlightBook extends  Component {
 
   showModal = () => {
     this.setState({
-      visible: true,
+      visible: true
     });
-  }
+  };
 
-  handleOk = (e) => {
+  handleOk = e => {
     console.log(e);
     this.setState({
-      visible: false,
+      visible: false
     });
-  }
+  };
 
-  handleCancel = (e) => {
+  handleCancel = e => {
     console.log(e);
     this.setState({
-      visible: false,
+      visible: false
     });
-  }
+  };
 
   handleClick = e => {
     console.log(e);
@@ -88,7 +82,6 @@ class FlightBook extends  Component {
   render() {
     return (
       <React.Fragment>
-
         {/* Modal */}
         <div>
           <Modal
@@ -97,17 +90,15 @@ class FlightBook extends  Component {
             onOk={this.handleOk}
             onCancel={this.handleCancel}
           >
-
             <h1>Your Total Amount is {this.totalPriceCalculate()[0]}</h1>
             <Paypal
-                toPay={this.totalPriceCalculate()[0]}
-                transactionError={err => this.transactionError(err)}
-                transactionCancelled={data => this.transactionCancelled(data)}
-                transactionSuccess={payment => this.transactionSuccess(payment)}
+              toPay={this.totalPriceCalculate()[0]}
+              transactionError={err => this.transactionError(err)}
+              transactionCancelled={data => this.transactionCancelled(data)}
+              transactionSuccess={payment => this.transactionSuccess(payment)}
             />
           </Modal>
         </div>
-
 
         <Row
           style={{
@@ -177,10 +168,20 @@ class FlightBook extends  Component {
                         padding: "15px 85px"
                       }}
                     >
-                      <WrappedDynamicFieldSet 
+                      {/* <WrappedDynamicFieldSet 
                         onAdd={this.handleClick} 
                         onSubmit={this.showModal}
                         isFlightSelected={[this.props.selectedFlight, this.state.counts]}  
+                      /> */}
+
+                      <DynamicForm
+                        onSubmit={this.showModal}
+                        onAdd={this.handleClick}
+                        isFlightSelected={[
+                          this.props.selectedFlight,
+                          this.state.counts,
+                          this.props.auth
+                        ]}
                       />
                     </Col>
                   </Row>
@@ -223,15 +224,28 @@ class FlightBook extends  Component {
                 </div>
                 <div style={{ padding: "10px" }}>
                   <div className={classes.location}>
-                    <h1>{this.props.selectedFlight ? this.props.selectedFlight.source : 'Select'}</h1>
-                    <h1>{this.props.selectedFlight ? 'TO' : 'The'}</h1>
-                    <h1>{this.props.selectedFlight ? this.props.selectedFlight.destination : 'Locations'}</h1>
+                    <h1>
+                      {this.props.selectedFlight
+                        ? this.props.selectedFlight.source
+                        : "Select"}
+                    </h1>
+                    <h1>{this.props.selectedFlight ? "TO" : "The"}</h1>
+                    <h1>
+                      {this.props.selectedFlight
+                        ? this.props.selectedFlight.destination
+                        : "Locations"}
+                    </h1>
                   </div>
-                  
-                  { this.props.selectedFlight ? (
+
+                  {this.props.selectedFlight ? (
                     <div className={classes.pricebox}>
-                      Base Fare = Rs <span>
-                          <b>{this.state.counts === 0 ? 0 : this.state.counts * this.state.baseFare}</b>
+                      Base Fare = Rs{" "}
+                      <span>
+                        <b>
+                          {this.state.counts === 0
+                            ? 0
+                            : this.state.counts * this.state.baseFare}
+                        </b>
                       </span>
                       <br />
                       Luggage Charge = Rs <b>{this.state.luggage}</b>
@@ -240,13 +254,9 @@ class FlightBook extends  Component {
                       <div className={classes.hr}>&nbsp;</div>
                       Total Fare= Rs <b>{this.totalPriceCalculate()[0]}</b>
                     </div>
-                  ) : (null)}
-
-
+                  ) : null}
                 </div>
               </Col>
-
-              
             </Row>
           </Content>
         </Row>

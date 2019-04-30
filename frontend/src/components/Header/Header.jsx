@@ -7,7 +7,6 @@ import { withRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { logout } from "../../store/actions/index";
-import styles from "./Header.module.css";
 
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
@@ -58,7 +57,6 @@ class Navbar extends Component {
   };
 
   render() {
-    console.log('props inside Navbar', this.props);
     return (
       <nav className={classes.menuBar} style={{ transition: "1s" }}>
         <div className="container">

@@ -10,8 +10,6 @@ import { authCheckStatus } from "./store/actions/index";
 
 import "antd/dist/antd.css";
 
-import { Alert } from 'antd';
-
 import FlightSearch from "./containers/FlightSearch/FlightSearch";
 import Auth from "./containers/Auth/Auth";
 import CheckIn from "./containers/CheckIn/CheckIn";
@@ -21,10 +19,10 @@ import Navbar from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 
 import { APIKEY } from "./Keys/GoogleApiKey";
-import axios from 'axios';
+import axios from "axios";
+import DashBoard from "./containers/DashBoard/DashBoard";
 
 // import Navbar from "./components/UI/Navbar/navbar";
-// import Navbar from "./components/Header/Header";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -36,15 +34,14 @@ const store = createStore(
 class App extends Component {
   state = {
     flightInfo: {
-        source: "",
-        destination: "",
-        date: ""
+      source: "",
+      destination: "",
+      date: ""
     },
-    flightFormError: null,
     selectedFlight: null,
     auth: {
-        tokenId: null,
-        email: null
+      tokenId: null,
+      email: null
     }
   };
 
@@ -52,17 +49,13 @@ class App extends Component {
     this.props.autoSignUpHandler();
   }
 
-  onFormSubmit = (data) => {
+  onFormSubmit = data => {
     this.setState({ flightInfo: data });
   };
 
   onFlightSelect = data => {
     this.setState({ selectedFlight: data });
   };
-
-  onLogout = () => {
-    this.setState({ auth: null });
-  }
 
   onAuthSubmit = data => {
 
@@ -72,7 +65,6 @@ class App extends Component {
       url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=";
     }
 
-
     axios.post(`${url}${APIKEY}`, data.auth)
       .then(response => {
         const expirationTime = new Date(
@@ -80,10 +72,12 @@ class App extends Component {
         );
 
         const authData = {
-            idToken: response.data.idToken,
-            email: response.data.email
-        }
+          idToken: response.data.idToken,
+          email: response.data.email
+        };
+        console.log('authdata', authData);
         this.setState({ auth: authData });
+
         // localStorage.setItem("token", response.data.idToken);
         // localStorage.setItem("expirationTime", expirationTime);
         // localStorage.setItem("userId", response.data.localId);
@@ -91,72 +85,53 @@ class App extends Component {
       .catch(err => {
         console.log(err.response);
       });
-  }
+  };
 
   render() {
-
-    //*   This are components with props used to pass in Route
-    console.log('[STATE]', this.state);
+    //*   This are components with props used only to pass in Route
 
     const HomePageWithProps = props => {
       return <HomePage origin="homepage" formFill={this.onFormSubmit} />;
     };
 
-    const FlightSearchWithProps = props => {
-      return (
-        <FlightSearch
-          auth={this.state.auth}
-          flightInfo={this.state.flightInfo}
-          flightSelect={this.onFlightSelect}
-          formFill={this.onFormSubmit}
-        />
-      );
-    };
+      const FlightSearchWithProps = props => {
+        return (
+          <FlightSearch
+            auth={this.state.auth}
+            flightInfo={this.state.flightInfo}
+            flightSelect={this.onFlightSelect}
+            formFill={this.onFormSubmit}
+          />
+        );
+      };
 
     const FlightFormWithProps = props => {
       return (
         <FlightBook
-          auth={this.state.auth}
           selectedFlight={this.state.selectedFlight}
-        />
-      );
-    }
-
-    const CheckInWithProps = props => {
-      return (
-        <CheckIn
           auth={this.state.auth}
-          selectedFlight={this.state.selectedFlight}
-        />
-      );
-    }
-
-    const AuthFormWithProps = props => {
-      return (
-        <Auth
-          onAuthSubmit={this.onAuthSubmit}
         />
       );
     };
 
+    const AuthFormWithProps = props => {
+      return <Auth onAuthSubmit={this.onAuthSubmit} />;
+    };
 
-    console.log('error?', this.state.flightFormError);
-    //* This is components with props 
+    //* This is components with props
+
     return (
       <React.Fragment>
         <Provider store={store}>
           <BrowserRouter>
-            <Navbar 
-                isAuth={this.state.auth["idToken"] || false} 
-                onLogout={this.onLogout}    
-            />
-            
+            <Navbar isAuth={this.state.auth.email} />
             <Switch>
               <Route path="/" exact render={HomePageWithProps} />
               <Route path="/flights" render={FlightSearchWithProps} />
               <Route path="/book-flight" render={FlightFormWithProps} />
               <Route path="/authenticate" render={AuthFormWithProps} />
-              <Route path="/checkin" render={CheckInWithProps} />
+              <Route path="/checkIn" component={CheckIn} />
+              <Route path="/dashboard" component={DashBoard} />
             </Switch>
             <Footer />
           </BrowserRouter>
