@@ -4,6 +4,8 @@ const sequelizeErrors = require('../utils/sequelize-errors');
 const parseError = require('../utils/parse-error');
 const {validationResult} = require('express-validator/check');
 const Schedule = require("../models/schedule/schedule")
+const City = require("../models/others/city/model.js")
+
 
 
 exports.getAllFlights = (req, res, next) => {
@@ -13,6 +15,7 @@ exports.getAllFlights = (req, res, next) => {
         )
     .catch(err => {
         // console.log(err);
+        return next(err)
         }
     );
 }
@@ -26,6 +29,19 @@ exports.getFlightsBySourceAndDestination = (req, res, next) => {
     })
     .catch(err => {
         // console.log(err);
-        }
+        return next(err)
+    }
+    );
+}
+
+exports.getAllCities = (req, res, next) => {
+    City.findAll()
+    .then(cities => {
+        return res.status(200).json({cities: cities}) 
+    })
+    .catch(err => {
+        // console.log(err);
+        return next(err)
+    }
     );
 }

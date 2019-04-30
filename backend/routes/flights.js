@@ -21,4 +21,10 @@ router.post(
     flightControllers.getFlightsBySourceAndDestination
 );
 
-
+router.post(
+    '/get_all_cities',
+    [
+        bodyValidator('cities').not().isEmpty(),
+    ],
+    flightControllers.getAllCities
+);
