@@ -52,11 +52,7 @@ class App extends Component {
     this.props.autoSignUpHandler();
   }
 
-  onFormSubmit = (data, isError, errorString) => {
-    if (isError) {
-        this.setState({ flightFormError: errorString });
-        return;
-    }
+  onFormSubmit = (data) => {
     this.setState({ flightInfo: data });
   };
 

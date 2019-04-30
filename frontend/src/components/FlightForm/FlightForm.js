@@ -84,9 +84,11 @@ class flightForm extends Component {
         }
 
         this.setState({ flightFormError: errorString });
-
+        if (isError) {
+            return;
+        }
         // this.props.onFlightFormAdded(this.state.formData);
-        this.props.formFill(data, isError, errorString)
+        this.props.formFill(data)
         this.props.history.push('/flights');
     };
 
@@ -112,7 +114,7 @@ class flightForm extends Component {
         <React.Fragment>
             {
                 this.state.flightFormError ?
-                <Alert showIcon message={this.state.flightFormError ? this.state.flightFormError : null} type="warning"/> :
+                <Alert banner message={this.state.flightFormError ? this.state.flightFormError : null} type="warning"/> :
                 null
             }
             <form className={homePageSearch ? classes.FormDiv : classes.FormDivMain2} onSubmit={(e) => this.onSubmitHandler(e, data)}>
