@@ -28,11 +28,12 @@ class FlightBook extends  Component {
   }
 
   state = { 
-    counts: 0,
-    baseFare: 4500,
-    luggage: 500,
-    gst: 18,
-    visible: false
+      counts: 0,
+      baseFare: 4500,
+      luggage: 500,
+      gst: 18,
+      visible: false,
+      passengers: []
   };
 
   componentDidMount() {
@@ -207,6 +208,8 @@ class FlightBook extends  Component {
                   </Row>
                 </div>
               </Col>
+
+              
               <Col lg={6} style={{ background: "#fff", padding: "0 24px" }}>
                 <div
                   style={{
