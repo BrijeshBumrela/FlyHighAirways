@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Card } from "antd";
+import { Card, Button } from "antd";
 import { Row, Col } from "antd";
 import classes from "./Cards.module.css";
+import { NavLink } from "react-router-dom";
 const tabList = [
   {
     key: "Booking1",
@@ -23,8 +24,13 @@ const contentList = {
         style={{ float: "right" }}
         className={[classes.stamp, classes.isApproved].join(" ")}
       >
-        Completed
+        Scheduled
       </div>
+      <Button style={{ fontSize: "17px" }}>
+        <NavLink className="nav-link" to="/checkIn">
+          Check In
+        </NavLink>
+      </Button>
     </div>
   ),
   Booking2: (
@@ -36,13 +42,18 @@ const contentList = {
         style={{ float: "right" }}
         className={[classes.stamp, classes.isApproved].join(" ")}
       >
-        Cancelled
+        Scheduled
       </div>
+      <Button style={{ fontSize: "17px" }}>
+        <NavLink className="nav-link" to="/checkIn">
+          Check In
+        </NavLink>
+      </Button>
     </div>
   )
 };
 
-class Cards extends Component {
+class Cards1 extends Component {
   constructor(props) {
     super(props);
   }
@@ -56,11 +67,6 @@ class Cards extends Component {
 
     return (
       <React.Fragment>
-        <Row gutter={40}>
-          {this.props.flightList.map((flight, index) => {
-            return <div key={index} />;
-          })}
-        </Row>
         <div>
           <Card
             style={{ width: "50%", height: "40%" }}
@@ -79,4 +85,4 @@ class Cards extends Component {
   }
 }
 
-export default Cards;
+export default Cards1;
