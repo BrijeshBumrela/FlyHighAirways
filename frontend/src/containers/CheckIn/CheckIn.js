@@ -113,18 +113,17 @@ class checkIn extends Component {
                     </div>
 
                 </div>
-
                 <div className={classes.Reference}>
                     <div className={classes.BlockInfo}>
-                        <Seat color="#FF8C00" className={classes.RefBlock}/>
+                        <Seat isBooked={false} special={false} className={classes.RefBlock}/>
                         <div>AVAILABLE</div>
                     </div>
                     <div className={classes.BlockInfo}>
-                        <Seat color="#00BFFF" className={classes.RefBlock}/> 
+                        <Seat isBooked={false} special={true} className={classes.RefBlock}/> 
                         <div>AVAILABLE - SPECIAL</div>
                     </div>
                     <div className={classes.BlockInfo}>
-                        <Seat color="#4169E1" className={classes.RefBlock}/>
+                        <Seat isBooked={true} special={false} className={classes.RefBlock}/>
                         <div>FILLED</div>
                     </div>
                 </div>
