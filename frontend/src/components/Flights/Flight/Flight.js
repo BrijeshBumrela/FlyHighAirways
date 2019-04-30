@@ -12,8 +12,6 @@ class Flight extends  Component {
 
     render() {
 
-        console.log('this.props.auth', this.props.auth);
-
         return (
             <Row type="flex" className={classes.Flight}>
                 <Col lg={12}>

@@ -54,15 +54,30 @@ class checkIn extends Component {
                 special: false,
                 is_booked: false
             },
+            {
+                seat_number: '2D',
+                special: true,
+                is_booked: false
+            },
+            {
+                seat_number: '2E',
+                special: false,
+                is_booked: true
+            },
+            {
+                seat_number: '2F',
+                special: false,
+                is_booked: false
+            }
         ]
     }
 
-    arrangeSeats = () => {
+    render() {
+
         // * List of List of seats
         let seatList = [];
 
         // * Inner List (Made 0 after rowLengthCounter)
-
         let miniList = [];
         let rowLengthCounter = 0;
         const rowLength = 6;
@@ -80,11 +95,8 @@ class checkIn extends Component {
             rowLengthCounter += 1;
             miniList.push(this.state.seats[i]);
         }
-    }
 
-    render() {
 
-        
 
 
         return (  
@@ -95,14 +107,9 @@ class checkIn extends Component {
                     </div>
 
                     <div className={classes.Body}>
-                        <SeatRow />
-                        <SeatRow />
-                        <SeatRow />
-                        <SeatRow />
-                        <SeatRow />
-                        <SeatRow />
-                        <SeatRow />
-                        <SeatRow />
+                        {
+                            seatList.map((seat, index) => <SeatRow key={index} seat={seat}/>)
+                        }
                     </div>
 
                 </div>
