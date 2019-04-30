@@ -109,7 +109,12 @@ class App extends Component {
     };
 
     const FlightFormWithProps = props => {
-      return <FlightBook selectedFlight={this.state.selectedFlight} />;
+      return (
+        <FlightBook
+          selectedFlight={this.state.selectedFlight}
+          auth={this.state.auth}
+        />
+      );
     };
 
     const AuthFormWithProps = props => {

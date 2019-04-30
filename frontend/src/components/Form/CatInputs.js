@@ -93,7 +93,8 @@ class DynamicForm extends React.Component {
           disabled={
             !(
               this.props.isFlightSelected[0] !== null &&
-              this.props.isFlightSelected[1] > 0
+              this.props.isFlightSelected[1] > 0 &&
+              this.props.isFlightSelected[2].email !== null
             )
           }
         >

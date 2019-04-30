@@ -184,7 +184,8 @@ class FlightBook extends Component {
                         onAdd={this.handleClick}
                         isFlightSelected={[
                           this.props.selectedFlight,
-                          this.state.counts
+                          this.state.counts,
+                          this.props.auth
                         ]}
                       />
                     </Col>
