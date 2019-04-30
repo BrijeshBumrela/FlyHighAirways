@@ -253,7 +253,7 @@ class AuthenticateForm extends Component {
             <Button
               htmlType="submit"
               size="default"
-              style={{ backgroundColor: "#6A5ACD", border: "none" }}
+              style={{ backgroundColor: "#bdc3c7", border: "none" }}
               block
               shape="round"
             >
