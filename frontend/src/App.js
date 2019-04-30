@@ -20,6 +20,7 @@ import Footer from "./components/Footer/Footer";
 
 import { APIKEY } from "./Keys/GoogleApiKey";
 import axios from "axios";
+import DashBoard from "./containers/DashBoard/DashBoard";
 
 // import Navbar from "./components/UI/Navbar/navbar";
 
@@ -128,6 +129,7 @@ class App extends Component {
               <Route path="/book-flight" render={FlightFormWithProps} />
               <Route path="/authenticate" render={AuthFormWithProps} />
               <Route path="/checkIn" component={CheckIn} />
+              <Route path="/dashboard" component={DashBoard} />
             </Switch>
             <Footer />
           </BrowserRouter>
