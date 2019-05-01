@@ -22,7 +22,7 @@ OutstandingToken.init({
         type:Sequelize.DATE,
         allowNull:false
     }
-}, {sequelize, underscored:true});
+}, {sequelize, underscored:true, timestamps:false});
 
 // Associations
 OutstandingToken.belongsTo(User);

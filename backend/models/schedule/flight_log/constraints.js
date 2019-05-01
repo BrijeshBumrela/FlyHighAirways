@@ -15,12 +15,12 @@ module.exports = {
                     ALTER TABLE ${tableName}
                     ADD CONSTRAINT ${tableName}check_different_source_destination
                     CHECK ( source <> destination )
-                    `,
-        start_end_time: `
-                    ALTER TABLE ${tableName}
-                    ADD CONSTRAINT ${tableName}check_different_start_end_time
-                    CHECK (start_time != end_time)
-                    `,
+                    `
+        // start_end_time: `
+        //             ALTER TABLE ${tableName}
+        //             ADD CONSTRAINT ${tableName}check_different_start_end_time
+        //             CHECK (start_time != end_time)
+        //             `,
         // start_time != end_time because flights can start at night and reach next day.
 
     },

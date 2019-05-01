@@ -2,7 +2,8 @@ module.exports = {
     create: `
             CREATE TABLE IF NOT EXISTS schedules (
             id SERIAL PRIMARY KEY,
-            departure TIME,
+            departure TIME WITH TIME ZONE,
+            arrival TIME WITH TIME ZONE,
             aircraft_id INT NOT NULL,
             source INT NOT NULL,
             destination INT NOT NULL

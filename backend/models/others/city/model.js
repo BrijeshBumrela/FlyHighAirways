@@ -11,7 +11,13 @@ City.init({
         allowNull: false,
         primaryKey: true
     },
-}, {sequelize, underscored:true});
+    name: {
+        type: Sequelize.STRING
+    },
+    short_form: {
+        type: Sequelize.STRING
+    }
+}, {sequelize, underscored: true, timestamps:false});
 
 // Associations
 

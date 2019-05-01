@@ -5,13 +5,20 @@ class Aircraft extends Sequelize.Model {
 }
 
 Aircraft.init({
-    id: {
+    modelId: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
-}, {sequelize, underscored:true, tableName:'aircrafts'});
+    noOfAircrafts:{
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+    dateOfPurchase:{
+        type: Sequelize.DATE
+    }
+}, {sequelize, underscored:true, tableName:'aircrafts', timestamps:false});
 
 // Associations
 

@@ -1,6 +1,6 @@
 const sequelize = require('../../../utils/database/connect');
 
-const City = require('./model');
+const Payment = require('./model');
 const table = require('./table');
 const constraints = require('./constraints');
 // const triggers = require('./triggers');
@@ -8,7 +8,8 @@ const constraints = require('./constraints');
 const methods = require('./methods');
 const queryWrappers = require('../../../utils/query-wrappers');
 
-City.sqlCommands = {
+
+Payment.sqlCommands = {
     table: table,
     constraints: constraints,
     // triggers: triggers,
@@ -16,10 +17,10 @@ City.sqlCommands = {
 };
 
 const seeds = require('./seeds');
-City.seeds = seeds;
+Payment.seeds = seeds;
 
 
-City.createTable = async function (options) {
+Payment.createTable = async function (options) {
     const {table} = this.sqlCommands;
     const force = (options && options.force) || false;
     let queryResult;
@@ -46,7 +47,7 @@ City.createTable = async function (options) {
     }
 };
 
-City.createConstraints = async function (options) {
+Payment.createConstraints = async function (options) {
     const {constraints} = this.sqlCommands;
     const all_queries = [];
     for (type in constraints){
@@ -68,7 +69,7 @@ City.createConstraints = async function (options) {
 
 /*
 
-City.createTriggers = async function(options){
+Payment.createTriggers = async function(options){
     const {triggers} = this.sqlCommands;
     Object.keys(triggers).map(async key=>{
 
@@ -81,13 +82,13 @@ City.createTriggers = async function(options){
 };
 */
 
-City.createAll = async function (options){
+Payment.createAll = async function (options){
     await this.createTable(options);
     await this.createConstraints(options);
     // await this.createTriggers(options);
 };
 
-City.seedTable = async function (options) {
+Payment.seedTable = async function (options) {
     for (record of this.seeds) {
         let keys = Object.keys(record);
         let fields = keys.map(key => queryWrappers.wrapField(key));
@@ -112,6 +113,6 @@ City.seedTable = async function (options) {
     }
 };
 /* Set all method prototypes */
-// City.prototype.x = methods.x;
+// Payment.prototype.x = methods.x;
 
-module.exports = City;
+module.exports = Payment;

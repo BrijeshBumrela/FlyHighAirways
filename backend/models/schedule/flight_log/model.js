@@ -11,7 +11,31 @@ FlightLog.init({
         allowNull: false,
         primaryKey: true
     },
-}, {sequelize, underscored:true});
+    flightNo:{
+        type: Sequelize.INTEGER
+    },
+    aircraftId:{
+        type:Sequelize.INTEGER
+    },
+    source:{
+        type:Sequelize.INTEGER
+    },
+    destination:{
+        type:Sequelize.INTEGER
+    },
+    startDate:{
+        type:Sequelize.DATEONLY
+    },
+    endDate:{
+        type:Sequelize.DATEONLY
+    },
+    startTime:{
+        type:Sequelize.TIME
+    },
+    endTime:{
+        type:Sequelize.TIME
+    }
+}, {sequelize, underscored:true, timestamps:false});
 
 // Associations
 
