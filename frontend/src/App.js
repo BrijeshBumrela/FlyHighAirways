@@ -58,18 +58,14 @@ class App extends Component {
   };
 
   onAuthSubmit = data => {
-    console.log(data);
 
-    let url =
-      "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=";
+    let url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=";
 
     if (data.isSignUp) {
-      url =
-        "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=";
+      url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=";
     }
 
-    axios
-      .post(`${url}${APIKEY}`, data.auth)
+    axios.post(`${url}${APIKEY}`, data.auth)
       .then(response => {
         const expirationTime = new Date(
           new Date().getTime() + response.data.expiresIn * 1000
@@ -79,7 +75,7 @@ class App extends Component {
           idToken: response.data.idToken,
           email: response.data.email
         };
-
+        console.log('authdata', authData);
         this.setState({ auth: authData });
 
         // localStorage.setItem("token", response.data.idToken);
@@ -92,17 +88,16 @@ class App extends Component {
   };
 
   render() {
+    //*   This are components with props used only to pass in Route
 
-
-      //*   This are components with props used only to pass in Route
-
-      const HomePageWithProps = props => {
-        return <HomePage origin="homepage" formFill={this.onFormSubmit} />;
-      };
+    const HomePageWithProps = props => {
+      return <HomePage origin="homepage" formFill={this.onFormSubmit} />;
+    };
 
       const FlightSearchWithProps = props => {
         return (
           <FlightSearch
+            auth={this.state.auth}
             flightInfo={this.state.flightInfo}
             flightSelect={this.onFlightSelect}
             formFill={this.onFormSubmit}
@@ -110,44 +105,44 @@ class App extends Component {
         );
       };
 
-      const FlightFormWithProps = props => {
-        return (
-          <FlightBook
-            selectedFlight={this.state.selectedFlight}
-          />
-        );
-      }
-
-      const AuthFormWithProps = props => {
-        return (
-          <Auth
-            onAuthSubmit={this.onAuthSubmit}
-          />
-        );
-      };
-
-
-
-      //* This is components with props 
-
+    const FlightFormWithProps = props => {
       return (
-        <React.Fragment>
-          <Provider store={store}>
-            <BrowserRouter>
-              <Navbar isAuth={this.props.isAuthenticated} />
-              <Switch>
-                <Route path="/" exact render={HomePageWithProps} />
-                <Route path="/flights" render={FlightSearchWithProps} />
-                <Route path="/book-flight" render={FlightFormWithProps} />
-                <Route path="/authenticate" render={AuthFormWithProps} />
-                <Route path="/checkIn" component={CheckIn} />
-                <Route path="/dashboard" component={DashBoard} />
-              </Switch>
-              <Footer />
-            </BrowserRouter>
-          </Provider>
-        </React.Fragment>
+        <FlightBook
+          selectedFlight={this.state.selectedFlight}
+          auth={this.state.auth}
+        />
       );
+    };
+
+    const AuthFormWithProps = props => {
+      return <Auth onAuthSubmit={this.onAuthSubmit} />;
+    };
+
+    const onLogout = props => {
+
+      this.setState({ auth: null })
+    }
+
+    //* This is components with props
+
+    return (
+      <React.Fragment>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Navbar isAuth={this.state.auth.email} onLogout={this.onLogout}/>
+            <Switch>
+              <Route path="/" exact render={HomePageWithProps} />
+              <Route path="/flights" render={FlightSearchWithProps} />
+              <Route path="/book-flight" render={FlightFormWithProps} />
+              <Route path="/authenticate" render={AuthFormWithProps} />
+              <Route path="/checkIn" component={CheckIn} />
+              <Route path="/dashboard" component={DashBoard} />
+            </Switch>
+            <Footer />
+          </BrowserRouter>
+        </Provider>
+      </React.Fragment>
+    );
   }
 }
 

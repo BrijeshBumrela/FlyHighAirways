@@ -95,10 +95,11 @@ class AuthenticateForm extends Component {
       data.auth[formElement] = this.state.authForm[formElement].value;
     }
     data.auth.returnSecureToken = true;
+
     this.props.onAuthSubmit(data);
     this.props.history.replace("/");
 
-    // this.props.history.push("/");
+    this.props.history.push("/");
   };
   // chennai, Indore, Chennai, Kolkata
   //chennai kokllata punnaei  deli indore

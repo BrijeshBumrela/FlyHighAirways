@@ -62,25 +62,25 @@ class DynamicForm extends React.Component {
         { name: "", age: "", email: "", sex: "" }
       ])
     });
-    this.props.onAdd(this.state.Passengers.length);
+    this.props.onAdd(this.state.Passengers.length + 1);
   };
 
   handleRemovePassenger = idx => () => {
     this.setState({
       Passengers: this.state.Passengers.filter((s, sidx) => idx !== sidx)
     });
-    this.props.onAdd(this.state.Passengers.length);
+    this.props.onAdd(this.state.Passengers.length - 1);
   };
 
   render() {
-    console.log(this.state.Passengers);
+    // console.log(this.state.Passengers);
 
     return (
       <form onSubmit={this.handleSubmit}>
         <h4>Passengers</h4>
 
         {this.state.Passengers.map((Passenger, idx) => (
-          <div className="shareholder">
+          <div className="shareholder" key={idx}>
             <input
               type="text"
               placeholder={`Passenger #${idx + 1} name`}

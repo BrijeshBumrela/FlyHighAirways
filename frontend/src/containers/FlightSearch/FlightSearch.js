@@ -141,6 +141,7 @@ class FlightSearch extends Component {
       flightList = flightListArray.map((flight, index) => {
         return (
           <Flights
+            auth={this.props.auth}
             key={index}
             startTime={flight.start_time}
             endTime={flight.end_time}
