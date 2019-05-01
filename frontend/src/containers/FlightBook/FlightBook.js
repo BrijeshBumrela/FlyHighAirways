@@ -37,6 +37,9 @@ class FlightBook extends Component {
   }
 
   totalPriceCalculate = () => {
+    if (this.state.counts === 0) {
+      return [0, 0];
+    }
     let sum = 0;
     sum += this.state.counts * this.state.baseFare;
     sum += this.state.luggage;
