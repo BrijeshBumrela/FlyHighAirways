@@ -91,9 +91,9 @@ exports.getSeats = async (req, res, next) => {
         for (let no of [1, 2, 3, 4, 5, 6]) {
             let curSeat = row.toString() + no.toString()
             if (onlySeats.indexOf(curSeat) !== -1) {
-                retSeatList.push({seat_no: curSeat, is_booked: true})
+                retSeatList.push({seat_no: curSeat, is_booked: true, special:(no===1 || no===6)})
             } else {
-                retSeatList.push({seat_no: curSeat, is_booked: false})
+                retSeatList.push({seat_no: curSeat, is_booked: false, special:(no===1 || no===6)})
 
             }
         }
