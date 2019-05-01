@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Icon, Input, Button, Row, Col } from "antd";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import axios from "axios";
 
 import classes from "./Auth.module.css";
@@ -96,6 +96,7 @@ class AuthenticateForm extends Component {
     }
     data.auth.returnSecureToken = true;
     this.props.onAuthSubmit(data);
+    this.props.history.replace("/");
 
     // this.props.history.push("/");
   };
@@ -300,7 +301,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(AuthenticateForm);
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(AuthenticateForm)
+);

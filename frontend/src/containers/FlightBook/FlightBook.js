@@ -51,7 +51,8 @@ class FlightBook extends Component {
     });
   }
 
-  showModal = () => {
+  showModal = Passengers => {
+    console.log(Passengers);
     this.setState({
       visible: true
     });

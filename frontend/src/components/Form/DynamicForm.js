@@ -50,7 +50,7 @@ class DynamicForm extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    this.props.onSubmit();
+    this.props.onSubmit(this.state.Passengers);
 
     const { name, Passengers } = this.state;
     // alert(`Incorporated: ${name} with ${shareholders.length} shareholders`);
