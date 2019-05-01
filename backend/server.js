@@ -26,6 +26,7 @@ app.use((req, res, next) => {
 
 app.use('/auth', routes.auth);
 
+app.use('/flights',routes.flights);
 app.use('/book', routes.booking);
 
 /* error Route */

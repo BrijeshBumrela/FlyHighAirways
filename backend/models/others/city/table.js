@@ -1,8 +1,8 @@
 module.exports = {
     create: `
             CREATE TABLE IF NOT EXISTS cities (
-            id SERIAL PRIMARY KEY,
-            name VARCHAR(50) NOT NULL,
+            id SERIAL,
+            name VARCHAR(50) PRIMARY KEY,
             short_form VARCHAR(5) NOT NULL
             )
             `,

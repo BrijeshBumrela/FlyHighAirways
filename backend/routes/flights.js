@@ -2,6 +2,7 @@ const express = require('express');
 const {body: bodyValidator} = require('express-validator/check');
 const router = express.Router();
 const flightControllers = require('../controllers/flights')
+const authMiddleWare = require('../middlewares/auth');
 
 router.post(
     '/get_all_flights',
@@ -46,3 +47,6 @@ router.post(
     ],
     flightControllers.getSeats
 );
+
+
+module.exports = router;

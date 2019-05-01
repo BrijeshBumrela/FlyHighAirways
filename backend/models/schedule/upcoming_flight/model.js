@@ -21,10 +21,10 @@ UpcomingFlight.init({
         type:Sequelize.INTEGER
     },
     source:{
-        type:Sequelize.INTEGER
+        type:Sequelize.STRING
     },
     destination:{
-        type:Sequelize.INTEGER
+        type:Sequelize.STRING
     },
     startDate:{
         type:Sequelize.DATEONLY

@@ -5,8 +5,8 @@ module.exports = {
             departure TIME WITH TIME ZONE,
             arrival TIME WITH TIME ZONE,
             aircraft_id INT NOT NULL,
-            source INT NOT NULL,
-            destination INT NOT NULL
+            source VARCHAR(100) NOT NULL,
+            destination VARCHAR(100) NOT NULL
             )
             `,
     exists: `

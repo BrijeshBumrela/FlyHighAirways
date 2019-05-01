@@ -87,6 +87,7 @@ FlightBooking.createBookedSeatsTable = async function (options){
                             CREATE TABLE IF NOT EXISTS booked_seats (
                             id SERIAL PRIMARY KEY,
                             booking_id INT,
+                            flight_no INT,
                             seat_no VARCHAR(10)
                             )
                             
