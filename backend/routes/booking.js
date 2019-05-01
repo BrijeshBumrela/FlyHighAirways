@@ -26,4 +26,13 @@ router.post(
     authMiddleWare,bookingControllers.bookFlight
 );
 
+router.post(
+    '/book-seat',
+    [
+        bodyValidator('bookingNumber').not().isEmpty(),
+        bodyValidator('passengerName').not().isEmpty().isString(),
+        bodyValidator('seat').not().isEmpty().isString()
+    ],
+    authMiddleWare, bookingControllers.bookSeats
+);
 module.exports = router;

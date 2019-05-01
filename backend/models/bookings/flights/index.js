@@ -81,9 +81,25 @@ FlightBooking.createTriggers = async function(options){
 };
 */
 
+FlightBooking.createBookedSeatsTable = async function (options){
+    const Query =   `
+                            DROP TABLE IF EXISTS booked_seats;
+                            CREATE TABLE IF NOT EXISTS booked_seats (
+                            id SERIAL PRIMARY KEY,
+                            booking_id INT,
+                            seat_no VARCHAR(10)
+                            )
+                            
+                        `;
+    console.log(Query);
+
+    await sequelize.query(Query);
+};
+
 FlightBooking.createAll = async function (options){
     await this.createTable(options);
     await this.createConstraints(options);
+    await this.createBookedSeatsTable(options);
     // await this.createTriggers(options);
 };
 /* Set all method prototypes */

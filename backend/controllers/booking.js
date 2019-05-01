@@ -6,6 +6,8 @@ const moment = require('moment');
 const {validationResult} = require('express-validator/check');
 const models = require('../models');
 
+
+
 const validatePassengerDetails = async passenger => {
     const err = new Error("Validation Failed for passenger");
     err.statusCode = 422;
@@ -53,6 +55,42 @@ const validateAllPassengerDetails = async (passengers,next) => {
     } catch (err) {
         throw err;
     }
+};
+
+exports.bookSeats = async (req,res,next)=>{
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        const err = new Error("Validation Failed!");
+        err.statusCode = 422;
+        err.data = errors.array();
+        return next(err);
+    }
+
+    const {bookingNumber,passengerName, seat} = req.body;
+
+    const booking = await models.bookings.FlightBooking.findOne({where:{id:bookingNumber}});
+    if(!booking){
+        const err = new Error("Booking does not exist");
+        err.statusCode = 422;
+        return next(err);
+    }
+    // console.log(booking);
+    for (let pass_in in booking.passengers){
+
+        if(booking.passengers[pass_in].fullName === passengerName){
+            console.log(booking.passengers[pass_in]);
+
+            booking.passengers[pass_in].seat = seat;
+            console.log(booking.passengers[pass_in]);
+            console.log(booking.passengers)
+            await models.bookings.FlightBooking.update({passengers:booking.passengers}, {where:{id:booking.id}});
+            query = `insert into booked_seats(booking_id, seat_no) values (${booking.id}, ${queryWrappers.wrapValue(seat)})`;
+            await sequelize.query(query);
+            break
+        }
+    }
+
+    return res.status(201).json({"booked":"Seat booked"})
 };
 
 exports.makePayment = async (req,res,next)=>{
@@ -138,10 +176,7 @@ exports.bookFlight = async (req, res, next) => {
         const modifiedPassengers = passengers.map(pass=> {
             return {...pass,
                 "status":"confirmed",
-                "seat":{
-                    "row":null,
-                    "number":null
-                }
+                "seat":null
             }
         });
 
@@ -154,6 +189,7 @@ exports.bookFlight = async (req, res, next) => {
        pnrNo:'FH' + flight.flightNo.toString() + parseInt(new Date() * 1).toString()
     });
     // console.log(flight);
+
     paymentInstance.checked = true;
     await paymentInstance.save();
     return res.status(201).json({"status":"booking_confirmed","passengers":booking.passengers})
