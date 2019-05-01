@@ -10,16 +10,17 @@ const models = require('../models');
 
 exports.getAllFlights = (req, res, next) => {
     Schedule.findAll().then(flights => {
-        newFlights = flights.map(obj=>{
-            return {
-                id:obj.id,
-                start_time:obj.departure,
-                end_time:obj.end_time,
-                source:obj.source,
-                destination:obj.destination
-            }
-        });
-        return res.status(200).json({flights: flights});
+            newFlights = flights.map(obj => {
+                return {
+                    id: obj.id,
+                    start_time: obj.departure,
+                    end_time: obj.end_time,
+                    source: obj.source,
+                    destination: obj.destination,
+                    price: obj.price,
+                }
+            });
+            return res.status(200).json({flights: flights});
         }
     )
         .catch(err => {
@@ -78,24 +79,25 @@ exports.getSeats = async (req, res, next) => {
         return next(err);
     }
 
-    query = `select * from booked_seats where flight_no=2`;
+    const {flightNo} = req.body;
+
+    query = `select * from booked_seats where flight_no=${flightNo}`;
     const seats = await sequelize.query(query);
-    let onlySeats = seats[0].map(obj=>obj.seat_no);
+    let onlySeats = seats[0].map(obj => obj.seat_no);
     console.log(onlySeats)
 
     const retSeatList = [];
-    for (let row of ['A','B','C','D','E', 'F', 'G', 'H', 'I', 'J']){
-            for(let no of [1,2,3,4,5,6]){
-                let curSeat = row.toString() + no.toString()
-                if (onlySeats.indexOf(curSeat)!==-1){
-                    retSeatList.push({seat_no:curSeat, is_booked:true})
-                }
-                else{
-                    retSeatList.push({seat_no:curSeat, is_booked:false})
+    for (let row of ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']) {
+        for (let no of [1, 2, 3, 4, 5, 6]) {
+            let curSeat = row.toString() + no.toString()
+            if (onlySeats.indexOf(curSeat) !== -1) {
+                retSeatList.push({seat_no: curSeat, is_booked: true, special:(no===1 || no===6)})
+            } else {
+                retSeatList.push({seat_no: curSeat, is_booked: false, special:(no===1 || no===6)})
 
-                }
             }
+        }
     }
 
-    return res.status(200).json({"seats":retSeatList});
+    return res.status(200).json({"seats": retSeatList});
 };

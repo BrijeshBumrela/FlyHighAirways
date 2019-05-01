@@ -21,18 +21,18 @@ class FlightSearch extends Component {
   state = {
     loading: true,
     flights: [
-        {
-            flight_id: 1,
-            date: "21/04/2019",
-            source: "Kolkata",
-            destination: "Mumbai",
-            economy: {
-              fare: 4563,
-              seats_remaining: 3
-            },
-            start_time: "03:45",
-            end_time: "05:00"
-        }
+      {
+        flight_id: 1,
+        date: "21/04/2019",
+        source: "Kolkata",
+        destination: "Mumbai",
+        economy: {
+          fare: 4563,
+          seats_remaining: 3
+        },
+        start_time: "03:45",
+        end_time: "05:00"
+      }
     ],
 
     filterInfo: {
@@ -131,23 +131,22 @@ class FlightSearch extends Component {
   };
 
   componentDidMount() {
-    // axios
-    //   .get("https://flyhighairways-2cfb4.firebaseio.com/flight.json")
-    //   .then(res => {
-    //     this.setState({ loading: false, flights: res.data });
-    //   })
-    //   .catch(err => console.log("there was an ", err));
+    axios
+      .get("localhost:5000/flights")
+      .then(res => {
+        this.setState({ loading: false, flights: res.data });
+      })
+      .catch(err => console.log("there was an ", err));
 
     setTimeout(() => {
-      this.setState({ loading: false })
-    }, 500)
-
+      this.setState({ loading: false });
+    }, 500);
   }
 
   render() {
     let flights = null;
     console.log(this.state);
-    if (this.state.flights != null) flights = this.state.flights
+    if (this.state.flights != null) flights = this.state.flights;
 
     let flightList = <CustomSkeleton />;
     let flightListArray = [];
@@ -179,7 +178,10 @@ class FlightSearch extends Component {
 
     return (
       <React.Fragment>
-        <br /><br /><br /><br />
+        <br />
+        <br />
+        <br />
+        <br />
         <Row>
           <FlightForm origin="search" formFill={this.props.formFill} />
         </Row>
@@ -193,9 +195,7 @@ class FlightSearch extends Component {
             />
           </Col>
           <Col md={19}>
-              <div style={{ height: '80vh', overflow:'auto' }}>
-                {flightList}
-              </div>
+            <div style={{ height: "80vh", overflow: "auto" }}>{flightList}</div>
           </Col>
         </Row>
       </React.Fragment>

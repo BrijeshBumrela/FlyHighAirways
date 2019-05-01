@@ -9,6 +9,7 @@ module.exports = {
             destination VARCHAR(100) NOT NULL,
             start_date DATE NOT NULL,
             end_date DATE NOT NULL,
+            price BIGINT,
             start_time TIME WITH TIME ZONE DEFAULT NOW(),
             end_time TIME WITH TIME ZONE DEFAULT NOW(),
             pilot INT ARRAY,

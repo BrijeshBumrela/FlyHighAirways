@@ -25,6 +25,9 @@ Schedule.init({
     },
     destination:{
         type:Sequelize.STRING
+    },
+    price:{
+        type:Sequelize.INTEGER
     }
 }, {sequelize, underscored:true, timestamps:false});
 
