@@ -178,7 +178,7 @@ class flightForm extends Component {
               >
                 <Option value="chennai">Chennai</Option>
                 <Option value="kolkata">Kolkata</Option>
-                <Option value="mumbai">Mumbai</Option>
+                <Option value="bombay">Bombay</Option>
                 <Option value="pune">Pune</Option>
                 <Option value="indore">Indore</Option>
                 <Option value="delhi">Delhi</Option>

@@ -67,10 +67,10 @@ class DashBoard extends Component {
     ];
     const bookedFlights = [
       {
-        source: "Lucknow",
-        destination: "Patna",
+        source: "Delhi",
+        destination: "Mumbai",
         Date: "20th July, 2019",
-        departureTime: "13:50 IST"
+        departureTime: "00:00 IST"
       },
       {
         source: "CHENNAI1",
