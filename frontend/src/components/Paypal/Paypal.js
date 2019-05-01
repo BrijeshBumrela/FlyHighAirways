@@ -3,12 +3,43 @@ import React, { Component } from 'react'
 import PayPalExpressBtn from 'react-paypal-express-checkout';
 import { withRouter } from 'react-router-dom';
 
+import axios from 'axios';
+
 class Paypal extends Component {
     render() {
 
+
+        const makeid = (length) => {
+            var result           = '';
+            var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var charactersLength = characters.length;
+            for ( var i = 0; i < length; i++ ) {
+               result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            return result;
+        }
+         
+
         const onSuccess = (payment) => {
-            console.log(JSON.stringify(payment));
-            console.log('props from paypal', this.props)
+
+            const makePaymentData = {
+                referenceString: makeid(8),
+                amount: parseInt(this.props.toPay)
+            }
+
+            console.log(this.props.bookingData.auth.idToken);
+            console.log('makePaymentData', makePaymentData);
+            axios.post('http://localhost:5000/book/make-payment', makePaymentData, {
+                headers: {
+                    // 'Authorization': `Bearer ${this.props.bookingData.auth.idToken}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => {
+                console.log(res);
+                // axios.post('localhost:5000/book')
+            })
+
             this.props.history.push('/')
         }
 
