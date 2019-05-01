@@ -97,10 +97,27 @@ FlightBooking.createBookedSeatsTable = async function (options){
     await sequelize.query(Query);
 };
 
+FlightBooking.createPassengerView = async function (options){
+    query = `
+            CREATE MATERIALIZED VIEW passengers
+            AS
+            SELECT email AS booker_email, F.flight_no, F.id AS booking_id,
+            passengers->0->>'fullName' AS passenger_name,
+            passengers->0->>'age' AS passenger_age,
+            passengers->0->>'gender' AS passenger_gender,
+            passengers->0->>'seat' AS passenger_seat
+            from flight_bookings AS F INNER JOIN upcoming_flights AS U ON F.flight_no=U.flight_no INNER JOIN users ON F.booker=users.id
+            WITH DATA;
+
+            `;
+    console.log(query);
+    await sequelize.query(query);
+}
 FlightBooking.createAll = async function (options){
     await this.createTable(options);
     await this.createConstraints(options);
     await this.createBookedSeatsTable(options);
+    await this.createPassengerView(options)
     // await this.createTriggers(options);
 };
 /* Set all method prototypes */
