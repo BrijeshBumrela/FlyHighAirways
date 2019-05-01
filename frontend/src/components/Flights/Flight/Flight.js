@@ -11,6 +11,7 @@ class Flight extends  Component {
     }
 
     render() {
+
         return (
             <Row type="flex" className={classes.Flight}>
                 <Col lg={12}>
@@ -29,16 +30,10 @@ class Flight extends  Component {
                         </div>
                     </div>
                 </Col>
-                <Col lg={4}>
+                <Col lg={8}>
                     <div className={classes.Class}>
                         <h4 className={classes.RemainingSeats}>{this.props.economy.seats_remaining} seats remaining</h4>
                         <h4>INR <span className={classes.ClassPrice}>{this.props.economy.fare}</span></h4>
-                    </div>
-                </Col>
-                <Col lg={4}>
-                    <div className={classes.Class}>
-                        <h4 className={classes.RemainingSeats}>{this.props.business.seats_remaining} seats remaining</h4>
-                        <h4>INR <span className={classes.ClassPrice}>{this.props.business.fare}</span></h4>
                     </div>
                 </Col>
                 <Col lg={4}>
@@ -46,6 +41,7 @@ class Flight extends  Component {
                         <Button 
                             type="primary"
                             onClick={() => this.onFlightSelectHandler()}
+                            disabled={this.props.auth.email ? false : true}
                         >Book Now</Button>
                     </div>
                 </Col>

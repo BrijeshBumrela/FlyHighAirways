@@ -2,95 +2,79 @@ import React, { Component } from "react";
 import { Card } from "antd";
 import { Row, Col } from "antd";
 import classes from "./Cards.module.css";
+const tabList = [
+  {
+    key: "Booking1",
+    tab: "Booking1"
+  },
+  {
+    key: "Booking2",
+    tab: "Booking2"
+  }
+];
+
+const contentList = {
+  Booking1: (
+    <div style={{ fontSize: "20px", fontWeight: "bolder" }}>
+      <p>Delhi - Mumbai</p>
+      <p> Date : 20 March, 2018 </p>
+      <p>Departure Time : 13:50 IST</p>
+      <div
+        style={{ float: "right" }}
+        className={[classes.stamp, classes.isApproved].join(" ")}
+      >
+        Completed
+      </div>
+    </div>
+  ),
+  Booking2: (
+    <div style={{ fontSize: "20px", fontWeight: "bolder" }}>
+      <p>Kolkata - Chennai</p>
+      <p> Date : 24 March, 2017 </p>
+      <p>Departure Time : 9:35 IST</p>
+      <div
+        style={{ float: "right" }}
+        className={[classes.stamp, classes.isApproved].join(" ")}
+      >
+        Cancelled
+      </div>
+    </div>
+  )
+};
+
 class Cards extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+  }
+  state = { key: "Booking1" };
+  onTabChange = (key, type) => {
+    console.log(key, type);
+    this.setState({ [type]: key });
+  };
   render() {
     const { Meta } = Card;
 
     return (
-      <div className={classes.card1}>
-        <h1 style={{ textAlign: "left", fontFamily: "Sans" }}>
-          Travel with our Airlines
-        </h1>
-        <Row gutter={16}>
-          <Col span={6}>
-            <Card
-              hoverable="true"
-              bordered="true"
-              style={{ with: 240 }}
-              cover={
-                <div className={[classes.container, classes.zoom].join(" ")}>
-                  <img
-                    src="https://scoutmytrip.com/blog/wp-content/uploads/2018/04/Places-to-visit-in-Darjeeling-Featured.jpg"
-                    alt="Avatar"
-                    className={classes.image}
-                  />
-                  <div className={classes.overlay} />
-                </div>
-              }
-            >
-              <Meta title="Darjeeling" style={{ fontFamily: "sans" }} />
-            </Card>
-          </Col>
-          <Col span={6}>
-            <Card
-              hoverable="true"
-              bordered="true"
-              style={{ with: 240 }}
-              cover={
-                <div className={classes.container}>
-                  <img
-                    src="https://i.pinimg.com/originals/71/41/ff/7141fff9e2dfc82f159c9496dac3747b.jpg"
-                    alt="Avatar"
-                    className={classes.image}
-                  />
-                  <div className={classes.overlay} />
-                </div>
-              }
-            >
-              <Meta title="Jaipur" style={{ fontFamily: "sans" }} />
-            </Card>
-          </Col>
-          <Col span={6}>
-            <Card
-              hoverable="true"
-              bordered="true"
-              style={{ with: 240 }}
-              cover={
-                <div className={classes.container}>
-                  <img
-                    src="https://scoutmytrip.com/blog/wp-content/uploads/2018/05/Hill-stations-in-India-Featured.jpg"
-                    alt="Avatar"
-                    className={classes.image}
-                  />
-                  <div className={classes.overlay} />
-                </div>
-              }
-            >
-              <Meta title="Shillong" style={{ fontFamily: "sans" }} />
-            </Card>
-          </Col>
-          <Col span={6}>
-            <Card
-              hoverable="true"
-              bordered="true"
-              style={{ with: 240 }}
-              cover={
-                <div className={classes.container}>
-                  <img
-                    src="http://alldatmatterz.com/img/article/764/%E0%A4%95%E0%A5%81%E0%A4%B2%E0%A5%8D%E0%A4%B2%E0%A5%82%20%E0%A4%AE%E0%A4%A8%E0%A4%BE%E0%A4%B2%E0%A5%80.jpg"
-                    alt="Avatar"
-                    className={classes.image}
-                  />
-                  <div className={classes.overlay} />
-                </div>
-              }
-            >
-              <Meta title="Manali" style={{ fontFamily: "sans" }} />
-            </Card>
-          </Col>
+      <React.Fragment>
+        <Row gutter={40}>
+          {this.props.flightList.map((flight, index) => {
+            return <div key={index} />;
+          })}
         </Row>
-      </div>
+        <div>
+          <Card
+            style={{ width: "50%", height: "40%" }}
+            tabList={tabList}
+            extra={<a href="#">More</a>}
+            activeTabKey={this.state.key}
+            onTabChange={key => {
+              this.onTabChange(key, "key");
+            }}
+          >
+            {contentList[this.state.key]}
+          </Card>
+        </div>
+      </React.Fragment>
     );
   }
 }

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Carousel, Icon } from "antd";
 import FlightForm from "../FlightForm/FlightForm";
 import classes from "./CarouselCustom.module.css";
-import button from "./../UI/button/button";
+import { Button } from "antd";
 
 export default class CarouselComponent extends Component {
   constructor(props) {
@@ -79,12 +79,12 @@ export default class CarouselComponent extends Component {
             </h5>
             <h5>W.E.F 5 June 2019.</h5>
             <h5>Starting from Rs 4590. </h5>
-            <button className={classes.but1}>Book Now</button>
+            <Button>Book Now</Button>
           </div>
         </div>
-        <h1 className={classes.childDiv}>
-          <FlightForm {...this.props}/>
-        </h1>
+        <div className={classes.childDiv} style={{paddingTop: '4rem'}}>
+          <FlightForm {...this.props} />
+        </div>
         <Icon
           type="right-circle"
           theme="filled"

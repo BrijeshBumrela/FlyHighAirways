@@ -7,7 +7,6 @@ import { withRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { logout } from "../../store/actions/index";
-import styles from "./Header.module.css";
 
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
@@ -58,8 +57,6 @@ class Navbar extends Component {
   };
 
   render() {
-    console.log("AUTH from NAV", this.props.isAuth);
-
     return (
       <nav className={classes.menuBar} style={{ transition: "1s" }}>
         <div className="container">
@@ -79,39 +76,25 @@ class Navbar extends Component {
                   backgroundColor: "transparent"
                 }}
               >
-                <Menu.Item key="1">
-                  <NavLink className="nav-link" to="/checkIn">
-                    CheckIN
-                  </NavLink>
-                </Menu.Item>
                 <Menu.Item key="2">
-                  {this.props.isAuth ? (
-                    <NavLink
-                      className="nav-link"
-                      to="/logout"
-                      onClick={this.onLogoutHandler}
-                    >
-                      LogOut
-                    </NavLink>
-                  ) : (
                     <NavLink className="nav-link" to="/flights">
                       Flights
                     </NavLink>
-                  )}
                 </Menu.Item>
 
-                <SubMenu title={<span>Blogs</span>}>
-                  <MenuItemGroup title="Item 1">
-                    <Menu.Item key="setting:1">Option 1</Menu.Item>
-                    <Menu.Item key="setting:2">Option 2</Menu.Item>
-                  </MenuItemGroup>
-                  <MenuItemGroup title="Item 2">
-                    <Menu.Item key="setting:3">Option 3</Menu.Item>
-                    <Menu.Item key="setting:4">Option 4</Menu.Item>
-                  </MenuItemGroup>
-                </SubMenu>
+                <Menu.Item key="dashboard">
+                  {
+                    this.props.isAuth ? 
+                    <NavLink to="/dashboard">Dashboard</NavLink> :
+                    null
+                  }
+                </Menu.Item>
                 <Menu.Item key="alipay">
-                  <NavLink to="/authenticate">Login</NavLink>
+                  {
+                    !this.props.isAuth ? 
+                    <NavLink to="/authenticate">Login</NavLink> :
+                    <NavLink className="nav-link" onClick={this.props.onLogout} to="/">LogOut</NavLink>
+                  }
                 </Menu.Item>
               </Menu>
             </div>
@@ -126,24 +109,7 @@ class Navbar extends Component {
                   backgroundColor: "transparent"
                 }}
               >
-                <SubMenu
-                  style={{ float: "right" }}
-                  title={
-                    <span>
-                      <Icon type="setting" />
-                      Navigation Three - Submenu
-                    </span>
-                  }
-                >
-                  <MenuItemGroup title="Item 1">
-                    <Menu.Item key="setting:1">Option 1</Menu.Item>
-                    <Menu.Item key="setting:2">Option 2</Menu.Item>
-                  </MenuItemGroup>
-                  <MenuItemGroup title="Item 2">
-                    <Menu.Item key="setting:3">Option 3</Menu.Item>
-                    <Menu.Item key="setting:4">Option 4</Menu.Item>
-                  </MenuItemGroup>
-                </SubMenu>
+                
               </Menu>
             </div>
             <Button
@@ -210,9 +176,9 @@ class Navbar extends Component {
 }
 
 const mapDispatchToProps = dispatch => {
-  return {
-    onLogout: () => dispatch(logout())
-  };
+    return {
+        onLogout: () => dispatch(logout())
+    };
 };
 
 export default withRouter(

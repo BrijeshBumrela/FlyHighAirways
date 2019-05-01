@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Icon, Input, Button, Row, Col } from "antd";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import axios from "axios";
 
 import classes from "./Auth.module.css";
@@ -95,9 +95,11 @@ class AuthenticateForm extends Component {
       data.auth[formElement] = this.state.authForm[formElement].value;
     }
     data.auth.returnSecureToken = true;
-    this.props.onAuthSubmit(data);
 
-    // this.props.history.push("/");
+    this.props.onAuthSubmit(data);
+    this.props.history.replace("/");
+
+    this.props.history.push("/");
   };
   // chennai, Indore, Chennai, Kolkata
   //chennai kokllata punnaei  deli indore
@@ -261,15 +263,37 @@ class AuthenticateForm extends Component {
             </Button>
           </div>
         </form>
-
+        {this.state.isSignUp ? (
+          <div>
+            <h3
+              style={{
+                paddingTop: "2rem",
+                paddingLeft: "4.5rem",
+                fontWeight: "bold"
+              }}
+            >
+              Already have an Account ?
+            </h3>
+          </div>
+        ) : (
+          <div>
+            <h3
+              style={{
+                paddingTop: "2rem",
+                paddingLeft: "5rem",
+                fontWeight: "bold"
+              }}
+            >
+              Don't Have an Account ?
+            </h3>
+          </div>
+        )}
         <Button
-          size="small"
+          size="large"
           className={classes.switchBtn}
           onClick={this.switchAuthModeHandler}
         >
-          {this.state.isSignUp
-            ? "Click Here To LogIn"
-            : "Click Here To Sign Up"}
+          {this.state.isSignUp ? "LogIn" : "Click Here To Sign Up"}
         </Button>
       </div>
     );
@@ -300,7 +324,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(AuthenticateForm);
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(AuthenticateForm)
+);
