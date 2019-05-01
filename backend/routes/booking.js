@@ -36,3 +36,4 @@ router.post(
     authMiddleWare, bookingControllers.bookSeats
 );
 module.exports = router;
+

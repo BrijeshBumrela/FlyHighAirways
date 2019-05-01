@@ -38,3 +38,11 @@ router.post(
     authMiddleWare, flightControllers.getBookingsByUser
 );
 
+
+router.post(
+    '/get_seats',
+    [
+        bodyValidator('flightNo').not().isEmpty(),
+    ],
+    flightControllers.getSeats
+);
