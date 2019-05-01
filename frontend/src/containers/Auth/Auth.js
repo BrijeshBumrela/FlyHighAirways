@@ -293,7 +293,7 @@ class AuthenticateForm extends Component {
           className={classes.switchBtn}
           onClick={this.switchAuthModeHandler}
         >
-          {this.state.isSignUp ? "LogIn" : "Click Here To Sign Up"}
+          {this.state.isSignUp ? "LogIn" : "Sign Up"}
         </Button>
       </div>
     );

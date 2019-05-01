@@ -20,7 +20,20 @@ import FlightForm from "../../components/FlightForm/FlightForm";
 class FlightSearch extends Component {
   state = {
     loading: true,
-    flights: null,
+    flights: [
+        {
+            flight_id: 1,
+            date: "21/04/2019",
+            source: "Kolkata",
+            destination: "Mumbai",
+            economy: {
+              fare: 4563,
+              seats_remaining: 3
+            },
+            start_time: "03:45",
+            end_time: "05:00"
+        }
+    ],
 
     filterInfo: {
       flightType: 3,
@@ -78,13 +91,13 @@ class FlightSearch extends Component {
   };
 
   filterFlights = filterInfo => {
-    const { flights } = this.state;
+    // const { flights } = this.state;
 
-    let flightArray = [];
+    let flightArray = this.state.flights;
 
-    for (let flight in flights) {
-      flightArray.push(flights[flight]);
-    }
+    // for (let flight in flights) {
+    //   flightArray.push(flights[flight]);
+    // }
 
     // Fliter by location
     flightArray = this.filterByLocation(flightArray, this.props.flightInfo);
@@ -118,16 +131,23 @@ class FlightSearch extends Component {
   };
 
   componentDidMount() {
-    axios
-      .get("https://flyhighairways-2cfb4.firebaseio.com/flight.json")
-      .then(res => {
-        this.setState({ loading: false, flights: res.data });
-      })
-      .catch(err => console.log("there was an ", err));
+    // axios
+    //   .get("https://flyhighairways-2cfb4.firebaseio.com/flight.json")
+    //   .then(res => {
+    //     this.setState({ loading: false, flights: res.data });
+    //   })
+    //   .catch(err => console.log("there was an ", err));
+
+    setTimeout(() => {
+      this.setState({ loading: false })
+    }, 500)
+
   }
 
   render() {
-    const { flights } = this.state;
+    let flights = null;
+    console.log(this.state);
+    if (this.state.flights != null) flights = this.state.flights
 
     let flightList = <CustomSkeleton />;
     let flightListArray = [];
@@ -151,6 +171,7 @@ class FlightSearch extends Component {
             source={flight.source}
             destination={flight.destination}
             onFlightSelect={this.props.flightSelect}
+            id={flight.flight_id}
           />
         );
       });

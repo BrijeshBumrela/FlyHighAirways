@@ -54,6 +54,7 @@ class App extends Component {
   };
 
   onFlightSelect = data => {
+    console.log(data);
     this.setState({ selectedFlight: data });
   };
 

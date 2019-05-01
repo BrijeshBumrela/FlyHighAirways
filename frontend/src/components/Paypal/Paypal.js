@@ -8,6 +8,7 @@ class Paypal extends Component {
 
         const onSuccess = (payment) => {
             console.log(JSON.stringify(payment));
+            console.log('props from paypal', this.props)
             this.props.history.push('/')
         }
 

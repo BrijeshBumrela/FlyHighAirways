@@ -56,16 +56,7 @@ class FlightBook extends Component {
   }
 
   showModal = Passengers => {
-    let BookingData = {
-      "Selected Flight": this.props.selectedFlight,
-      "Passengers List": Passengers,
-      token: this.props.auth.idToken
-    };
-    console.log(BookingData);
-
-    this.setState({
-      visible: true
-    });
+    this.setState({ passengers: Passengers, visible: true })
   };
 
   handleOk = e => {
@@ -90,6 +81,9 @@ class FlightBook extends Component {
   };
 
   render() {
+
+    console.log('flight book props', this.props.selectedFlight)
+
     return (
       <React.Fragment>
         {/* Modal */}
@@ -107,6 +101,8 @@ class FlightBook extends Component {
               transactionError={err => this.transactionError(err)}
               transactionCancelled={data => this.transactionCancelled(data)}
               transactionSuccess={payment => this.transactionSuccess(payment)}
+              bookingData={this.props.selectedFlight}
+              token={this.props.auth.idToken}
             />
           </Modal>
         </div>

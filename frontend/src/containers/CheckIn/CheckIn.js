@@ -81,7 +81,6 @@ class checkIn extends Component {
     }
 
     showModalCustom = (isBooked, isSpecial) => {
-        console.log(isBooked, isSpecial);
         if (isBooked) {
             alert('This place is already booked');
             return;
@@ -89,7 +88,7 @@ class checkIn extends Component {
         if (isSpecial) {
             this.setState({ priceToPay: 300 }, this.showModal);
         }
-        if (isSpecial) {
+        else {
             this.setState({ priceToPay: 0 }, this.showModal);
         }
     }

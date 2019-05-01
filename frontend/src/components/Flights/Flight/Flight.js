@@ -41,7 +41,7 @@ class Flight extends  Component {
                         <Button 
                             type="primary"
                             onClick={() => this.onFlightSelectHandler()}
-                            disabled={this.props.auth.email ? false : true}
+                            disabled={this.props.auth.email || this.props.economy.seats_remaining <= 0 ? false : true}
                         >Book Now</Button>
                     </div>
                 </Col>
