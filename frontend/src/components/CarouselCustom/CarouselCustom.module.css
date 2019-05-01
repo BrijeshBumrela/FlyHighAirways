@@ -26,8 +26,7 @@
   font-weight: bolder;
   text-align: center;
   font-style: oblique;
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-
+  font-family: Arial, Helvetica, sans-serif;
   z-index: 1000;
   font-size: 2rem;
 }

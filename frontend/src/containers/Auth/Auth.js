@@ -261,15 +261,37 @@ class AuthenticateForm extends Component {
             </Button>
           </div>
         </form>
-
+        {this.state.isSignUp ? (
+          <div>
+            <h3
+              style={{
+                paddingTop: "2rem",
+                paddingLeft: "4.5rem",
+                fontWeight: "bold"
+              }}
+            >
+              Already have an Account ?
+            </h3>
+          </div>
+        ) : (
+          <div>
+            <h3
+              style={{
+                paddingTop: "2rem",
+                paddingLeft: "5rem",
+                fontWeight: "bold"
+              }}
+            >
+              Don't Have an Account ?
+            </h3>
+          </div>
+        )}
         <Button
           size="small"
           className={classes.switchBtn}
           onClick={this.switchAuthModeHandler}
         >
-          {this.state.isSignUp
-            ? "Click Here To LogIn"
-            : "Click Here To Sign Up"}
+          {this.state.isSignUp ? "LogIn" : "Click Here To Sign Up"}
         </Button>
       </div>
     );
