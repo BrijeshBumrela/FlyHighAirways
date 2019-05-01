@@ -56,7 +56,13 @@ class FlightBook extends Component {
   }
 
   showModal = Passengers => {
-    console.log(Passengers);
+    let BookingData = {
+      "Selected Flight": this.props.selectedFlight,
+      "Passengers List": Passengers,
+      token: this.props.auth.idToken
+    };
+    console.log(BookingData);
+
     this.setState({
       visible: true
     });
