@@ -94,48 +94,6 @@ class DashBoard extends Component {
     return (
       <Layout style={{ marginTop: "75px" }}>
         <Layout>
-          <Sider width={200} style={{ background: "#fff" }}>
-            <Menu
-              mode="inline"
-              defaultSelectedKeys={["1"]}
-              defaultOpenKeys={["sub1"]}
-              style={{ height: "100%", borderRight: 0 }}
-            >
-              <SubMenu
-                key="sub1"
-                title={
-                  <span>
-                    <Icon type="user" />
-                    subnav 1
-                  </span>
-                }
-              >
-                <Menu.Item key="1">option1</Menu.Item>
-              </SubMenu>
-              <SubMenu
-                title={
-                  <span>
-                    <Icon type="laptop" />
-                    subnav 2
-                  </span>
-                }
-                key="sub2"
-              >
-                <Menu.Item key="5">option5</Menu.Item>
-              </SubMenu>
-              <SubMenu
-                key="sub3"
-                title={
-                  <span>
-                    <Icon type="notification" />
-                    subnav 3
-                  </span>
-                }
-              >
-                <Menu.Item key="9">option9</Menu.Item>
-              </SubMenu>
-            </Menu>
-          </Sider>
           <Layout style={{ padding: "10px 24px 24px" }}>
             <Content
               style={{
@@ -149,7 +107,7 @@ class DashBoard extends Component {
                 <List
                   dataSource={[
                     {
-                      name: "Wilson"
+                      name: "Hello, Wilson"
                     }
                   ]}
                   bordered
@@ -181,8 +139,22 @@ class DashBoard extends Component {
                   onClose={this.onClose}
                   visible={this.state.visible}
                 >
-                  <p style={{ ...pStyle, marginBottom: 24 }}>User Profile</p>
-                  <p style={pStyle}>Personal</p>
+                  <p
+                    style={{
+                      ...pStyle,
+                      marginBottom: 24,
+                      fontSize: "25px",
+                      fontWeight: "bold"
+                    }}
+                  >
+                    User Profile
+                  </p>
+                  <Divider />
+                  <p
+                    style={{ ...pStyle, fontSize: "20px", fontWeight: "bold" }}
+                  >
+                    Personal
+                  </p>
                   <Row>
                     <Col span={12}>
                       <DescriptionItem

@@ -21,13 +21,13 @@ class FlightBook extends Component {
     // };
   }
 
-  state = { 
-      counts: 0,
-      baseFare: 4500,
-      luggage: 500,
-      gst: 18,
-      visible: false,
-      passengers: []
+  state = {
+    counts: 1,
+    baseFare: 4500,
+    luggage: 500,
+    gst: 18,
+    visible: false,
+    passengers: []
   };
 
   componentDidMount() {
@@ -37,6 +37,9 @@ class FlightBook extends Component {
   }
 
   totalPriceCalculate = () => {
+    if (this.state.counts === 0) {
+      return [0, 0];
+    }
     let sum = 0;
     sum += this.state.counts * this.state.baseFare;
     sum += this.state.luggage;
@@ -52,7 +55,8 @@ class FlightBook extends Component {
     });
   }
 
-  showModal = () => {
+  showModal = Passengers => {
+    console.log(Passengers);
     this.setState({
       visible: true
     });
@@ -90,9 +94,9 @@ class FlightBook extends Component {
             onOk={this.handleOk}
             onCancel={this.handleCancel}
           >
-            <h1 >Your Total Amount is {this.totalPriceCalculate()[0]}</h1>
+            <h1>Your Total Amount is {this.totalPriceCalculate()[0]}</h1>
             <Paypal
-              style={{marginTop: '20px'}}
+              style={{ marginTop: "20px" }}
               toPay={this.totalPriceCalculate()[0]}
               transactionError={err => this.transactionError(err)}
               transactionCancelled={data => this.transactionCancelled(data)}
@@ -112,8 +116,8 @@ class FlightBook extends Component {
           // style={{ padding: "0 50px" }}
           >
             <Row
-            style={{ marginTop: '5rem' }}
-            // style={{ padding: "24px 0", background: "rgb(240, 242, 245)" }}
+              style={{ marginTop: "5rem" }}
+              // style={{ padding: "24px 0", background: "rgb(240, 242, 245)" }}
             >
               <Col
                 lg={19}
@@ -213,7 +217,6 @@ class FlightBook extends Component {
                 </div>
               </Col>
 
-              
               <Col lg={6} style={{ background: "#fff", padding: "0 24px" }}>
                 <div
                   style={{

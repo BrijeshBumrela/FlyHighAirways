@@ -52,7 +52,7 @@ class DynamicForm extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    this.props.onSubmit();
+    this.props.onSubmit(this.state.Passengers);
 
     const { name, Passengers } = this.state;
     // alert(`Incorporated: ${name} with ${shareholders.length} shareholders`);
@@ -64,18 +64,18 @@ class DynamicForm extends React.Component {
         { name: "", age: "", email: "", sex: "" }
       ])
     });
-    this.props.onAdd(this.state.Passengers.length);
+    this.props.onAdd(this.state.Passengers.length + 1);
   };
 
   handleRemovePassenger = idx => () => {
     this.setState({
       Passengers: this.state.Passengers.filter((s, sidx) => idx !== sidx)
     });
-    this.props.onAdd(this.state.Passengers.length);
+    this.props.onAdd(this.state.Passengers.length - 1);
   };
 
   render() {
-    console.log(this.state.Passengers);
+    // console.log(this.state.Passengers);
 
     return (
       <form onSubmit={this.handleSubmit}>

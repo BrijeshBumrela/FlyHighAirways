@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Icon, Input, Button, Row, Col } from "antd";
 import { connect } from "react-redux";
-import { withRouter } from 'react-router';
+import { withRouter } from "react-router-dom";
+import axios from "axios";
+
 import classes from "./Auth.module.css";
 
 import * as actions from "../../store/actions/index";
@@ -95,9 +97,9 @@ class AuthenticateForm extends Component {
     data.auth.returnSecureToken = true;
 
     this.props.onAuthSubmit(data);
+    this.props.history.replace("/");
 
-    this.props.history.push('/');
-
+    this.props.history.push("/");
   };
   // chennai, Indore, Chennai, Kolkata
   //chennai kokllata punnaei  deli indore
@@ -197,17 +199,17 @@ class AuthenticateForm extends Component {
   };
 
   inputChangedHandler = (event, inputIdentifier) => {
-      const updatedForm = { ...this.state.authForm };
-      const updatedFormElement = { ...updatedForm[inputIdentifier] };
-      updatedFormElement.value = event.target.value;
-      updatedForm[inputIdentifier] = updatedFormElement;
-      updatedForm[inputIdentifier].valid = this.checkValidation(
-        event.target.value,
-        updatedForm[inputIdentifier].validation
-      );
-      updatedForm[inputIdentifier].touched = true;
+    const updatedForm = { ...this.state.authForm };
+    const updatedFormElement = { ...updatedForm[inputIdentifier] };
+    updatedFormElement.value = event.target.value;
+    updatedForm[inputIdentifier] = updatedFormElement;
+    updatedForm[inputIdentifier].valid = this.checkValidation(
+      event.target.value,
+      updatedForm[inputIdentifier].validation
+    );
+    updatedForm[inputIdentifier].touched = true;
 
-      this.setState({ authForm: updatedForm });
+    this.setState({ authForm: updatedForm });
   };
 
   render() {
@@ -261,15 +263,37 @@ class AuthenticateForm extends Component {
             </Button>
           </div>
         </form>
-
+        {this.state.isSignUp ? (
+          <div>
+            <h3
+              style={{
+                paddingTop: "2rem",
+                paddingLeft: "4.5rem",
+                fontWeight: "bold"
+              }}
+            >
+              Already have an Account ?
+            </h3>
+          </div>
+        ) : (
+          <div>
+            <h3
+              style={{
+                paddingTop: "2rem",
+                paddingLeft: "5rem",
+                fontWeight: "bold"
+              }}
+            >
+              Don't Have an Account ?
+            </h3>
+          </div>
+        )}
         <Button
           size="small"
           className={classes.switchBtn}
           onClick={this.switchAuthModeHandler}
         >
-          {this.state.isSignUp
-            ? "Click Here To LogIn"
-            : "Click Here To Sign Up"}
+          {this.state.isSignUp ? "LogIn" : "Click Here To Sign Up"}
         </Button>
       </div>
     );
@@ -300,7 +324,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(connect(
-  null,
-  mapDispatchToProps
-)(AuthenticateForm));
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(AuthenticateForm)
+);
