@@ -28,3 +28,13 @@ router.post(
     ],
     flightControllers.getAllCities
 );
+
+router.post(
+    '/get_bookings_by_user',
+    [
+        bodyValidator('id').not().isEmpty(),
+    ],
+
+    authMiddleWare, flightControllers.getBookingsByUser
+);
+
