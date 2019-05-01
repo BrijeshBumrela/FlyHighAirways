@@ -30,16 +30,10 @@ class Flight extends  Component {
                         </div>
                     </div>
                 </Col>
-                <Col lg={4}>
+                <Col lg={8}>
                     <div className={classes.Class}>
                         <h4 className={classes.RemainingSeats}>{this.props.economy.seats_remaining} seats remaining</h4>
                         <h4>INR <span className={classes.ClassPrice}>{this.props.economy.fare}</span></h4>
-                    </div>
-                </Col>
-                <Col lg={4}>
-                    <div className={classes.Class}>
-                        <h4 className={classes.RemainingSeats}>{this.props.business.seats_remaining} seats remaining</h4>
-                        <h4>INR <span className={classes.ClassPrice}>{this.props.business.fare}</span></h4>
                     </div>
                 </Col>
                 <Col lg={4}>

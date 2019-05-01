@@ -20,7 +20,7 @@ const seat = (props) => {
         <span 
             className={classes.Seat} 
             style={{backgroundColor}}
-            onClick={props.onClick}    
+            onClick={() => props.onClick(props.isBooked, props.special)}    
         >
             {props.name}
         </span>

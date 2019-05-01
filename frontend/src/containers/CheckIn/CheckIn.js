@@ -14,6 +14,7 @@ import Seat from '../../components/SeatRow/Seat/Seat';
 class checkIn extends Component {
 
     state = {
+        priceToPay: 0,
         visible: false,
         seats: [
             {
@@ -79,6 +80,20 @@ class checkIn extends Component {
         ]
     }
 
+    showModalCustom = (isBooked, isSpecial) => {
+        console.log(isBooked, isSpecial);
+        if (isBooked) {
+            alert('This place is already booked');
+            return;
+        }
+        if (isSpecial) {
+            this.setState({ priceToPay: 300 }, this.showModal);
+        }
+        if (isSpecial) {
+            this.setState({ priceToPay: 0 }, this.showModal);
+        }
+    }
+
     showModal = () => {
         this.setState({
           visible: true
@@ -137,7 +152,7 @@ class checkIn extends Component {
                         onOk={this.handleOk}
                         onCancel={this.handleCancel}
                     >
-                        <h1>Your Total Amount is 300</h1>
+                        <h1>Your Total Amount is {this.state.priceToPay}</h1>
                         <Paypal
                             toPay={300}
                             transactionError={err => this.transactionError(err)}
@@ -155,7 +170,7 @@ class checkIn extends Component {
 
                         <div className={classes.Body}>
                             {
-                                seatList.map((seat, index) => <SeatRow onClick={this.showModal} key={index} seat={seat}/>)
+                                seatList.map((seat, index) => <SeatRow onClick={this.showModalCustom} key={index} seat={seat}/>)
                             }
                         </div>
 
