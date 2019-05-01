@@ -218,8 +218,11 @@ class AuthenticateForm extends Component {
     // LOGIN FORM
     let form = (
       <div className={classes.container}>
-        <h4 className={classes.FormText}>Login TO Proceed</h4>
-
+        {this.state.isSignUp ? (
+          <h4 className={classes.FormText}>Sign Up To Proceed</h4>
+        ) : (
+          <h4 className={classes.FormText}>Login To Proceed</h4>
+        )}
         <form onSubmit={e => this.authHandler(e)}>
           <div className={classes.formDiv}>
             <Input

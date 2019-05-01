@@ -6,6 +6,7 @@ import MenuBar from "../../components/HorizontalScrollBar/ScrollBar";
 import Footer from "../../components/Footer/Footer";
 import Cards from "../../components/UI/Cards/cards";
 import NewsHeaderCard from "../../components/UI/NewsHeaderCard";
+import { Divider } from "antd";
 
 const styles = {
   fontFamily: "sans-serif",
@@ -70,11 +71,18 @@ class HomePage extends Component {
         <CarouselComponent {...this.props} />
         <div style={styles}>
           <MenuBar />
-
+          <br />
+          <br />
+          <br />
+          <Divider />
           <NewsHeaderCard
             title="Travel with our Airlines"
             flightList={destinations}
           />
+          <br />
+          <br />
+          <br />
+          <Divider />
           <NewsHeaderCard title="Popular Flights" flightList={popularFlights} />
         </div>
 

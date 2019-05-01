@@ -4,110 +4,118 @@ import { Row, Col } from "antd";
 import "./footer.css";
 function Footer() {
   return (
-    <footer id="footer" className="dark">
+    <footer
+      id="footer"
+      className="dark"
+      style={{
+        backgroundImage: "linear-gradient(to left, #74ebd5, #ACB6E5)",
+        WebkitTextFillColor: "black"
+      }}
+    >
       <div className="footer-wrap">
         <Row>
           <Col lg={4} sm={24} xs={24}>
             <div className="footer-center">
-              <h2>G2</h2>
+              <h1 style={{ WebkitTextFillColor: "black" }}>Get to know us</h1>
               <div>
-                <a target="_blank " href="/">
-                  Abc
+                <a
+                  target="_blank "
+                  href="/"
+                  style={{ WebkitTextFillColor: "black" }}
+                >
+                  About Us
                 </a>
               </div>
               <div>
-                <a target="_blank " href="/">
-                  API Abc
+                <a
+                  target="_blank "
+                  href="/"
+                  style={{ WebkitTextFillColor: "black" }}
+                >
+                  Information
                 </a>
               </div>
               <div>
-                <a href="/">Abc</a>
-              </div>
-            </div>
-          </Col>
-          <Col lg={4} sm={24} xs={24}>
-            <div className="footer-center">
-              <h2>G6</h2>
-              <div>
-                <a href="/">Abc</a>
-              </div>
-              <div>
-                <a target="_blank" rel="noopener" href="/">
-                  API Abc
-                </a>
-              </div>
-              <div>
-                <a target="_blank" rel="noopener" href="/">
-                  Abc
+                <a href="/" style={{ WebkitTextFillColor: "black" }}>
+                  Destinations
                 </a>
               </div>
             </div>
           </Col>
           <Col lg={4} sm={24} xs={24}>
             <div className="footer-center">
-              <h2>F2</h2>
+              <h1 style={{ WebkitTextFillColor: "black" }}>Services</h1>
               <div>
-                <a href="/">Abc</a>
-              </div>
-              <div>
-                <a target="_blank" rel="noopener" href="/">
-                  API Abc
+                <a href="/" style={{ WebkitTextFillColor: "black" }}>
+                  Flight Schedule
                 </a>
               </div>
               <div>
-                <a target="_blank" rel="noopener" href="/">
-                  Abc
+                <a
+                  target="_blank"
+                  rel="noopener"
+                  href="/"
+                  style={{ WebkitTextFillColor: "black" }}
+                >
+                  Web-Checkin
+                </a>
+              </div>
+              <div>
+                <a
+                  target="_blank"
+                  rel="noopener"
+                  href="/"
+                  style={{ WebkitTextFillColor: "black" }}
+                >
+                  Flights
                 </a>
               </div>
             </div>
           </Col>
           <Col lg={4} sm={24} xs={24}>
             <div className="footer-center">
-              <h2>Abc</h2>
+              <h1 style={{ WebkitTextFillColor: "black" }}>
+                Create An Account
+              </h1>
               <div>
-                <a href="/">Abc</a>
-              </div>
-              <div>
-                <a target="_blank" rel="noopener" href="/">
-                  Abc
+                <a href="/" style={{ WebkitTextFillColor: "black" }}>
+                  Signup
                 </a>
               </div>
               <div>
-                <a target="_blank" rel="noopener" href="/">
-                  Abc
+                <a
+                  target="_blank"
+                  rel="noopener"
+                  href="/"
+                  style={{ WebkitTextFillColor: "black" }}
+                >
+                  Profile
                 </a>
               </div>
               <div>
-                <a target="_blank" rel="noopener" href="/">
-                  Abc
+                <a
+                  target="_blank"
+                  rel="noopener"
+                  href="/"
+                  style={{ WebkitTextFillColor: "black" }}
+                >
+                  Logout
                 </a>
               </div>
             </div>
           </Col>
+
           <Col lg={8} sm={24} xs={24}>
             <div className="footer-center">
-              <h2>Abc</h2>
+              <h1 style={{ WebkitTextFillColor: "black" }}>FlyHighways</h1>
               <div>
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
                   href="http://ant.design/"
                 >
-                  Ant Design
+                  Come Visit Us
                 </a>
-                <span> - </span>
-                <span>Abc UI Abc</span>
-              </div>
-              <div>
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://eggjs.org/"
-                >
-                  Egg
-                </a>
-                <span> - </span>
-                <span>Abc Node Web Abc</span>
               </div>
             </div>
           </Col>
@@ -129,20 +137,11 @@ function Footer() {
               rel="noopener noreferrer"
               target="_blank"
             >
-              Abc ICP
+              FlyHighways
             </a>
           </span>
-          <span style={{ marginRight: 24 }}>
-            <a
-              href="https://render.alipay.com/p/f/fd-izto3cem/index.html"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Abc
-            </a>
-          </span>
-          <span style={{ marginRight: 12 }}>ICP Abc B2-2-100257</span>
-          <span style={{ marginRight: 12 }}>Copyright © Abc</span>
+
+          <span style={{ marginRight: 12 }}>Copyright © Flyhighways</span>
         </Col>
       </Row>
     </footer>
