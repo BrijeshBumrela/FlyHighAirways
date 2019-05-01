@@ -108,6 +108,7 @@ FlightBooking.createPassengerView = async function (options){
             passengers->0->>'seat' AS passenger_seat
             from flight_bookings AS F INNER JOIN upcoming_flights AS U ON F.flight_no=U.flight_no INNER JOIN users ON F.booker=users.id
             WITH DATA;
+            CREATE UNIQUE INDEX booking_id ON passengers (booking_id);
 
             `;
     console.log(query);
