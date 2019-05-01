@@ -1,26 +1,46 @@
 module.exports = [
     {
-        name:'Mumbai',
-        short_form:'BOM'
-    },
-    {
         name:'Delhi',
         short_form:'DEL'
+    },
+    {
+        name:'Bombay',
+        short_form:'BOM'
     },
     {
         name:'Chennai',
         short_form:'MAA'
     },
     {
-        name:'Banglore',
-        short_form:'BGL'
+        name:'Kolkata',
+        short_form:'KOL'
     },
     {
-        name:'Hyderabad',
-        short_form:'HYD'
+        name:'Lucknow',
+        short_form:'LKW'
     },
     {
-        name:'Pune',
-        short_form:'PUN'
+        name:'Patna',
+        short_form:'PTN'
+    },
+    {
+        name:'Haryana',
+        short_form:'HRY'
+    },
+    {
+        name:'Jharkhand',
+        short_form:'JHK'
+    },
+    {
+        name:'Goa',
+        short_form:'GOA'
+    },
+    {
+        name:'Gowhati',
+        short_form:'GWH'
+    },
+    {
+        name:'Kerela',
+        short_form:'KRL'
     },
 ];

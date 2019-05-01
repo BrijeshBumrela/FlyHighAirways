@@ -6,12 +6,12 @@ module.exports = {
                     CHECK (no_of_aircrafts > -1)
                 `
     },
-    fk:{
-        model_id:   `
-                    ALTER TABLE aircrafts
-                    ADD CONSTRAINT foreign_key_aircraft_model
-                    FOREIGN KEY (model_id) REFERENCES aircraft_models 
-                    ON DELETE RESTRICT
-                    `
-    }
+    // fk:{
+    //     model_id:   `
+    //                 ALTER TABLE aircrafts
+    //                 ADD CONSTRAINT foreign_key_aircraft_model
+    //                 FOREIGN KEY (model_id) REFERENCES aircraft_models
+    //                 ON DELETE RESTRICT
+    //                 `
+    // }
 };
