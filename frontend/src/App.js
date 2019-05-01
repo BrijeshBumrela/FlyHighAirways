@@ -59,23 +59,26 @@ class App extends Component {
 
   onAuthSubmit = data => {
 
-    let url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=";
+    // let url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=";
+
+    let url = "http://localhost:5000/auth/login"
 
     if (data.isSignUp) {
-      url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=";
+      // url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=";
+
+      url = "http://localhost:5000/auth/register"
     }
 
-    axios.post(`${url}${APIKEY}`, data.auth)
+    axios.post(`${url}`, data.auth)
       .then(response => {
         const expirationTime = new Date(
           new Date().getTime() + response.data.expiresIn * 1000
         );
 
         const authData = {
-          idToken: response.data.idToken,
-          email: response.data.email
+          idToken: response.data.tokens.access,
+          email: data.auth.email
         };
-        console.log('authdata', authData);
         this.setState({ auth: authData });
 
         // localStorage.setItem("token", response.data.idToken);
