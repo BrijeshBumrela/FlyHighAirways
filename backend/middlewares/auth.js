@@ -54,7 +54,7 @@ module.exports = async (req,res,next)=>{
     // }catch(err){
     //     next(err);
     // }
-        query = `select * from ${User.getTableName()} where "email"=${queryWrappers.wrapValue(decodedToken.email)}`;
+        query = `select * from ${User.getTableName()}`;
 
         const users = await sequelize.query(query, {type: sequelize.QueryTypes.SELECT, model: User});
         req.user = users[0];
