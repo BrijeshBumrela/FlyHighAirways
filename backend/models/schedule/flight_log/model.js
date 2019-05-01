@@ -23,11 +23,17 @@ FlightLog.init({
     destination:{
         type:Sequelize.INTEGER
     },
+    startDate:{
+        type:Sequelize.DATEONLY
+    },
+    endDate:{
+        type:Sequelize.DATEONLY
+    },
     startTime:{
-        type:Sequelize.INTEGER
+        type:Sequelize.TIME
     },
     endTime:{
-        type:Sequelize.INTEGER
+        type:Sequelize.TIME
     }
 }, {sequelize, underscored:true, timestamps:false});
 

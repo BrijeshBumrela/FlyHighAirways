@@ -2,14 +2,17 @@ module.exports = {
     unique: {
         name:`
                   ALTER TABLE payments
-                  ADD CONSTRAINT unique_name
-                  UNIQUE(name)
+                  ADD CONSTRAINT payments_unique_reference_string
+                  UNIQUE(reference_string)
                   `,
-        short_form:`
-                  ALTER TABLE payments
-                  ADD CONSTRAINT unique_short_form
-                  UNIQUE(short_form)
-                  `
     },
+    fk:{
+        user_id:`
+                    ALTER TABLE payments
+                    ADD CONSTRAINT payments_fk_user
+                    FOREIGN KEY (user_id) REFERENCES users
+                    ON DELETE CASCADE
+                `
+    }
     
-}
+};

@@ -1,6 +1,6 @@
 const sequelize = require('../../../utils/database/connect');
 
-const City = require('./model');
+const FlightBooking = require('./model');
 const table = require('./table');
 const constraints = require('./constraints');
 // const triggers = require('./triggers');
@@ -8,7 +8,8 @@ const constraints = require('./constraints');
 const methods = require('./methods');
 const queryWrappers = require('../../../utils/query-wrappers');
 
-City.sqlCommands = {
+
+FlightBooking.sqlCommands = {
     table: table,
     constraints: constraints,
     // triggers: triggers,
@@ -16,10 +17,9 @@ City.sqlCommands = {
 };
 
 const seeds = require('./seeds');
-City.seeds = seeds;
+FlightBooking.seeds = seeds;
 
-
-City.createTable = async function (options) {
+FlightBooking.createTable = async function (options) {
     const {table} = this.sqlCommands;
     const force = (options && options.force) || false;
     let queryResult;
@@ -46,7 +46,7 @@ City.createTable = async function (options) {
     }
 };
 
-City.createConstraints = async function (options) {
+FlightBooking.createConstraints = async function (options) {
     const {constraints} = this.sqlCommands;
     const all_queries = [];
     for (type in constraints){
@@ -56,8 +56,8 @@ City.createConstraints = async function (options) {
     let queryResult;
     try {
         for (q of all_queries) {
-            queryResult = await sequelize.query(q);
             console.log(q);
+            queryResult = await sequelize.query(q);
         }
     } catch (error){
         console.log(error);
@@ -68,7 +68,7 @@ City.createConstraints = async function (options) {
 
 /*
 
-City.createTriggers = async function(options){
+FlightBooking.createTriggers = async function(options){
     const {triggers} = this.sqlCommands;
     Object.keys(triggers).map(async key=>{
 
@@ -81,13 +81,31 @@ City.createTriggers = async function(options){
 };
 */
 
-City.createAll = async function (options){
-    await this.createTable(options);
-    await this.createConstraints(options);
-    // await this.createTriggers(options);
+FlightBooking.createBookedSeatsTable = async function (options){
+    const Query =   `
+                            DROP TABLE IF EXISTS booked_seats;
+                            CREATE TABLE IF NOT EXISTS booked_seats (
+                            id SERIAL PRIMARY KEY,
+                            booking_id INT,
+                            seat_no VARCHAR(10)
+                            )
+                            
+                        `;
+    console.log(Query);
+
+    await sequelize.query(Query);
 };
 
-City.seedTable = async function (options) {
+FlightBooking.createAll = async function (options){
+    await this.createTable(options);
+    await this.createConstraints(options);
+    await this.createBookedSeatsTable(options);
+    // await this.createTriggers(options);
+};
+/* Set all method prototypes */
+// FlightBooking.prototype.x = methods.x;
+
+FlightBooking.seedTable = async function (options) {
     for (record of this.seeds) {
         let keys = Object.keys(record);
         let fields = keys.map(key => queryWrappers.wrapField(key));
@@ -111,7 +129,4 @@ City.seedTable = async function (options) {
         })
     }
 };
-/* Set all method prototypes */
-// City.prototype.x = methods.x;
-
-module.exports = City;
+module.exports = FlightBooking;

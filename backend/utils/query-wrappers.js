@@ -6,6 +6,10 @@ const wrapValue = (value) =>{
         throw new TypeError("Attempted to wrap non string value into db string.")
     }
 
+    if (value[0]==='['){
+        // array. dont wrap
+        return `ARRAY ${value}`
+    }
     return `'${value}'`
 };
 

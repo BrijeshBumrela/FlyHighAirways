@@ -1,13 +1,15 @@
 module.exports = {
     create: `
             CREATE TABLE IF NOT EXISTS flight_logs (
-            id SERIAL PRIMARY KEY,
+            id INT PRIMARY KEY,
             flight_no INT NOT NULL,
             aircraft_id INT NOT NULL,
             source INT NOT NULL,
             destination INT NOT NULL,
-            start_time TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-            end_time TIMESTAMP WITH TIME ZONE
+            start_date DATE,
+            end_date DATE,
+            start_time TIME WITH TIME ZONE DEFAULT NOW(),
+            end_time TIME WITH TIME ZONE
             )
             `,
     exists: `

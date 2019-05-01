@@ -26,11 +26,17 @@ UpcomingFlight.init({
     destination:{
         type:Sequelize.INTEGER
     },
+    startDate:{
+        type:Sequelize.DATEONLY
+    },
+    endDate:{
+        type:Sequelize.DATEONLY
+    },
     startTime:{
-        type:Sequelize.DATE
+        type:Sequelize.TIME
     },
     endTime:{
-        type:Sequelize.DATE
+        type:Sequelize.TIME
     },
     pilot:{
         type:Sequelize.ARRAY(Sequelize.INTEGER)

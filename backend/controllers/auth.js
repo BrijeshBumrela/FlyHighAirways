@@ -97,7 +97,7 @@ exports.login = async (req, res, next) => {
             email: user.email,
             type: "access",
             keywoard: "Bearer"
-        }, serverSecret, {expiresIn: 60 * 15});
+        }, serverSecret, {expiresIn: 60 * 60*24*5});
 
 
         const outstandingRefreshToken = parseInt(new Date() * user.id / 100000000);
@@ -133,7 +133,7 @@ exports.login = async (req, res, next) => {
                 console.log(err);
             });
         });
-        res.status(200).json({tokens: {access: accessToken, refresh: refreshToken}})
+        res.status(200).json({tokens: {access: accessToken, refresh: refreshToken, email:user.email}})
     } catch (err) {
         next(err);
     }
