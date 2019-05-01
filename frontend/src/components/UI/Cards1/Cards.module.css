@@ -62,8 +62,8 @@
   mix-blend-mode: multiply;
 }
 .isApproved {
-  color: #810c16;
-  border: 0.5rem solid #990a0a;
+  color: #0a9928;
+  border: 0.5rem solid #0a9928;
   -webkit-mask-position: 13rem 6rem;
   transform: rotate(-14deg);
   border-radius: 0;

@@ -27,10 +27,10 @@ class NewsHeaderCard extends React.Component {
             fontSize: "40px"
           }}
         >
-          {this.props.title}
+          {title}
         </h1>
         <Row gutter={40}>
-          {this.props.flightList.map((flight,index) => {
+          {this.props.flightList.map((flight, index) => {
             return (
               <div className="space" key={index}>
                 <Col span={6}>
