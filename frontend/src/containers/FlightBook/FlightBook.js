@@ -21,12 +21,13 @@ class FlightBook extends Component {
     // };
   }
 
-  state = {
-    counts: 0,
-    baseFare: 4500,
-    luggage: 500,
-    gst: 18,
-    visible: false
+  state = { 
+      counts: 0,
+      baseFare: 4500,
+      luggage: 500,
+      gst: 18,
+      visible: false,
+      passengers: []
   };
 
   componentDidMount() {
@@ -89,8 +90,9 @@ class FlightBook extends Component {
             onOk={this.handleOk}
             onCancel={this.handleCancel}
           >
-            <h1>Your Total Amount is {this.totalPriceCalculate()[0]}</h1>
+            <h1 >Your Total Amount is {this.totalPriceCalculate()[0]}</h1>
             <Paypal
+              style={{marginTop: '20px'}}
               toPay={this.totalPriceCalculate()[0]}
               transactionError={err => this.transactionError(err)}
               transactionCancelled={data => this.transactionCancelled(data)}
@@ -110,6 +112,7 @@ class FlightBook extends Component {
           // style={{ padding: "0 50px" }}
           >
             <Row
+            style={{ marginTop: '5rem' }}
             // style={{ padding: "24px 0", background: "rgb(240, 242, 245)" }}
             >
               <Col
@@ -207,6 +210,8 @@ class FlightBook extends Component {
                   </Row>
                 </div>
               </Col>
+
+              
               <Col lg={6} style={{ background: "#fff", padding: "0 24px" }}>
                 <div
                   style={{

@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { Icon, Input, Button, Row, Col } from "antd";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
-import axios from "axios";
-
+import { withRouter } from 'react-router';
 import classes from "./Auth.module.css";
 
 import * as actions from "../../store/actions/index";
@@ -95,9 +93,11 @@ class AuthenticateForm extends Component {
       data.auth[formElement] = this.state.authForm[formElement].value;
     }
     data.auth.returnSecureToken = true;
+
     this.props.onAuthSubmit(data);
 
-    // this.props.history.push("/");
+    this.props.history.push('/');
+
   };
   // chennai, Indore, Chennai, Kolkata
   //chennai kokllata punnaei  deli indore
@@ -197,17 +197,17 @@ class AuthenticateForm extends Component {
   };
 
   inputChangedHandler = (event, inputIdentifier) => {
-    const updatedForm = { ...this.state.authForm };
-    const updatedFormElement = { ...updatedForm[inputIdentifier] };
-    updatedFormElement.value = event.target.value;
-    updatedForm[inputIdentifier] = updatedFormElement;
-    updatedForm[inputIdentifier].valid = this.checkValidation(
-      event.target.value,
-      updatedForm[inputIdentifier].validation
-    );
-    updatedForm[inputIdentifier].touched = true;
+      const updatedForm = { ...this.state.authForm };
+      const updatedFormElement = { ...updatedForm[inputIdentifier] };
+      updatedFormElement.value = event.target.value;
+      updatedForm[inputIdentifier] = updatedFormElement;
+      updatedForm[inputIdentifier].valid = this.checkValidation(
+        event.target.value,
+        updatedForm[inputIdentifier].validation
+      );
+      updatedForm[inputIdentifier].touched = true;
 
-    this.setState({ authForm: updatedForm });
+      this.setState({ authForm: updatedForm });
   };
 
   render() {
@@ -300,7 +300,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
+export default withRouter(connect(
   null,
   mapDispatchToProps
-)(AuthenticateForm);
+)(AuthenticateForm));

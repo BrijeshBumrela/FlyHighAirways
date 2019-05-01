@@ -56,7 +56,7 @@ class DynamicForm extends React.Component {
         <h4>Passengers</h4>
 
         {this.state.Passengers.map((Passenger, idx) => (
-          <div className="shareholder">
+          <div className="shareholder" key={idx}>
             <input
               type="text"
               placeholder={`Passenger #${idx + 1} name`}
