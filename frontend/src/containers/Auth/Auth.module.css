@@ -34,6 +34,7 @@
   width: 85%;
   height: 100%;
   margin: auto;
+  /* padding-left: 13rem; */
   background-image: linear-gradient(to right, #076585, #fff);
   box-shadow: -4px 9px 19px -3px rgba(0, 0, 0, 0.75);
 }
@@ -41,7 +42,8 @@
 .BigDiv {
   height: 100vh;
   width: 100%;
-  padding: 2rem;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
   background-image: linear-gradient(to right top, #fff, #8e8e91);
 }
 
@@ -59,7 +61,7 @@
   width: 60%;
   margin-left: 20%;
   margin-top: 2rem;
-  background-color: #516369;
+  background-color: #179ec7;
 }
 
 .planeImg {
