@@ -21,7 +21,7 @@ class Cards1 extends Component {
     let contentList = {};
     const ListFligts = flights_.map(
       (booking, index) =>
-        (contentList[`Booking${index + 1}`] = (
+        (contentList[`Booking ${index + 1}`] = (
           <div style={{ fontSize: "20px", fontWeight: "bolder" }}>
             <p>
               {booking.source} - {booking.destination}
@@ -45,8 +45,8 @@ class Cards1 extends Component {
     let tabList = [];
     for (var i = 0; i < flights_.length; i++) {
       tabList.push({
-        key: `Booking${i + 1}`,
-        tab: `Booking${i + 1}`
+        key: `Booking ${i + 1}`,
+        tab: `Booking ${i + 1}`
       });
     }
 
