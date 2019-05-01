@@ -6,6 +6,7 @@ module.exports = {
             arrival TIME WITH TIME ZONE,
             aircraft_id INT NOT NULL,
             source VARCHAR(100) NOT NULL,
+            price BIGINT,
             destination VARCHAR(100) NOT NULL
             )
             `,

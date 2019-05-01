@@ -38,6 +38,9 @@ UpcomingFlight.init({
     endTime:{
         type:Sequelize.TIME
     },
+    price:{
+        type:Sequelize.INTEGER
+    },
     pilot:{
         type:Sequelize.ARRAY(Sequelize.INTEGER)
     },

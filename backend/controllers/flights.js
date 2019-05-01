@@ -16,7 +16,8 @@ exports.getAllFlights = (req, res, next) => {
                 start_time:obj.departure,
                 end_time:obj.end_time,
                 source:obj.source,
-                destination:obj.destination
+                destination:obj.destination,
+                price: obj.price,
             }
         });
         return res.status(200).json({flights: flights});
