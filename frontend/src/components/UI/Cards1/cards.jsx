@@ -3,55 +3,8 @@ import { Card, Button } from "antd";
 import { Row, Col } from "antd";
 import classes from "./Cards.module.css";
 import { NavLink } from "react-router-dom";
-const tabList = [
-  {
-    key: "Booking1",
-    tab: "Booking1"
-  },
-  {
-    key: "Booking2",
-    tab: "Booking2"
-  }
-];
-
-const contentList = {
-  Booking1: (
-    <div style={{ fontSize: "20px", fontWeight: "bolder" }}>
-      <p>Delhi - Mumbai</p>
-      <p> Date : 20 March, 2018 </p>
-      <p>Departure Time : 13:50 IST</p>
-      <div
-        style={{ float: "right" }}
-        className={[classes.stamp, classes.isApproved].join(" ")}
-      >
-        Scheduled
-      </div>
-      <Button style={{ fontSize: "17px" }}>
-        <NavLink className="nav-link" to="/checkIn">
-          Check In
-        </NavLink>
-      </Button>
-    </div>
-  ),
-  Booking2: (
-    <div style={{ fontSize: "20px", fontWeight: "bolder" }}>
-      <p>Kolkata - Chennai</p>
-      <p> Date : 24 March, 2017 </p>
-      <p>Departure Time : 9:35 IST</p>
-      <div
-        style={{ float: "right" }}
-        className={[classes.stamp, classes.isApproved].join(" ")}
-      >
-        Scheduled
-      </div>
-      <Button style={{ fontSize: "17px" }}>
-        <NavLink className="nav-link" to="/checkIn">
-          Check In
-        </NavLink>
-      </Button>
-    </div>
-  )
-};
+import flights from "../../Flights/Flights";
+import { func, object, string } from "prop-types";
 
 class Cards1 extends Component {
   constructor(props) {
@@ -63,8 +16,42 @@ class Cards1 extends Component {
     this.setState({ [type]: key });
   };
   render() {
-    const { Meta } = Card;
+    const flights_ = this.props.flightList;
 
+    let contentList = {};
+    const ListFligts = flights_.map(
+      (booking, index) =>
+        (contentList[`Booking ${index + 1}`] = (
+          <div style={{ fontSize: "20px", fontWeight: "bolder" }}>
+            <p>
+              {booking.source} - {booking.destination}
+            </p>
+            <p> Date : {booking.Date} </p>
+            <p>Departure Time : {booking.departureTime}</p>
+            <div
+              style={{ float: "right" }}
+              className={[classes.stamp, classes.isApproved].join(" ")}
+            >
+              Scheduled
+            </div>
+            <Button style={{ fontSize: "17px" }}>
+              <NavLink className="nav-link" to="/checkIn">
+                Check In
+              </NavLink>
+            </Button>
+          </div>
+        ))
+    );
+    let tabList = [];
+    for (var i = 0; i < flights_.length; i++) {
+      tabList.push({
+        key: `Booking ${i + 1}`,
+        tab: `Booking ${i + 1}`
+      });
+    }
+
+    const { Meta } = Card;
+    console.log(this.props.flightList);
     return (
       <React.Fragment>
         <div>

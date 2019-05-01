@@ -58,18 +58,14 @@ class App extends Component {
   };
 
   onAuthSubmit = data => {
-    console.log(data);
 
-    let url =
-      "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=";
+    let url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=";
 
     if (data.isSignUp) {
-      url =
-        "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=";
+      url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=";
     }
 
-    axios
-      .post(`${url}${APIKEY}`, data.auth)
+    axios.post(`${url}${APIKEY}`, data.auth)
       .then(response => {
         const expirationTime = new Date(
           new Date().getTime() + response.data.expiresIn * 1000
@@ -79,7 +75,7 @@ class App extends Component {
           idToken: response.data.idToken,
           email: response.data.email
         };
-
+        console.log('authdata', authData);
         this.setState({ auth: authData });
 
         // localStorage.setItem("token", response.data.idToken);
@@ -98,15 +94,16 @@ class App extends Component {
       return <HomePage origin="homepage" formFill={this.onFormSubmit} />;
     };
 
-    const FlightSearchWithProps = props => {
-      return (
-        <FlightSearch
-          flightInfo={this.state.flightInfo}
-          flightSelect={this.onFlightSelect}
-          formFill={this.onFormSubmit}
-        />
-      );
-    };
+      const FlightSearchWithProps = props => {
+        return (
+          <FlightSearch
+            auth={this.state.auth}
+            flightInfo={this.state.flightInfo}
+            flightSelect={this.onFlightSelect}
+            formFill={this.onFormSubmit}
+          />
+        );
+      };
 
     const FlightFormWithProps = props => {
       return (
@@ -121,13 +118,18 @@ class App extends Component {
       return <Auth onAuthSubmit={this.onAuthSubmit} />;
     };
 
+    const onLogout = props => {
+
+      this.setState({ auth: null })
+    }
+
     //* This is components with props
 
     return (
       <React.Fragment>
         <Provider store={store}>
           <BrowserRouter>
-            <Navbar isAuth={this.props.isAuthenticated} />
+            <Navbar isAuth={this.state.auth.email} onLogout={this.onLogout}/>
             <Switch>
               <Route path="/" exact render={HomePageWithProps} />
               <Route path="/flights" render={FlightSearchWithProps} />

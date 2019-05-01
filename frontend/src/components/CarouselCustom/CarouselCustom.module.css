@@ -12,6 +12,7 @@
   top: 10%;
   left: 10%;
   cursor: pointer;
+  font-size: 1.6rem;
 }
 .antCarousel {
   height: 500px;

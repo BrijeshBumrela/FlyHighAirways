@@ -11,6 +11,7 @@ class Flight extends  Component {
     }
 
     render() {
+
         return (
             <Row type="flex" className={classes.Flight}>
                 <Col lg={12}>
@@ -46,6 +47,7 @@ class Flight extends  Component {
                         <Button 
                             type="primary"
                             onClick={() => this.onFlightSelectHandler()}
+                            disabled={this.props.auth.email ? false : true}
                         >Book Now</Button>
                     </div>
                 </Col>
