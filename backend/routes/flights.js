@@ -28,3 +28,12 @@ router.post(
     ],
     flightControllers.getAllCities
 );
+
+
+router.post(
+    '/get_seats',
+    [
+        bodyValidator('flightNo').not().isEmpty(),
+    ],
+    flightControllers.getSeats
+);

@@ -5,7 +5,7 @@ const parseError = require('../utils/parse-error');
 const {validationResult} = require('express-validator/check');
 const Schedule = require("../models/schedule/schedule")
 const City = require("../models/others/city/model.js")
-
+const models = require('../models')
 
 
 exports.getAllFlights = (req, res, next) => {
@@ -45,3 +45,16 @@ exports.getAllCities = (req, res, next) => {
     }
     );
 }
+
+exports.getSeats = (req, res, next) =>{
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        const err = new Error("Validation Failed!");
+        err.statusCode = 422;
+        err.data = errors.array();
+        return next(err);
+    }
+
+    const seats = models;
+};
