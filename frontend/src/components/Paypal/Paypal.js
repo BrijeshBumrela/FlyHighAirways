@@ -37,7 +37,13 @@ class Paypal extends Component {
             })
             .then(res => {
                 console.log(res);
-                // axios.post('localhost:5000/book')
+
+                const flightData = {
+                    flightNumber: this.props.bookingData.id,
+                    passengers: this.props.passengers
+                }
+
+                axios.post('localhost:5000/book/book-flight', )
             })
 
             this.props.history.push('/')

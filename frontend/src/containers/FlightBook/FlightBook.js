@@ -103,6 +103,7 @@ class FlightBook extends Component {
               transactionSuccess={payment => this.transactionSuccess(payment)}
               bookingData={this.props.selectedFlight}
               token={this.props.auth.idToken}
+              passengers={this.state.passengers}
             />
           </Modal>
         </div>
