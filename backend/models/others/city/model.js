@@ -9,10 +9,11 @@ City.init({
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
-        primaryKey: true
+
     },
     name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        primaryKey:true
     },
     short_form: {
         type: Sequelize.STRING

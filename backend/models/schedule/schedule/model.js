@@ -21,10 +21,10 @@ Schedule.init({
         type:Sequelize.INTEGER
     },
     source:{
-        type:Sequelize.INTEGER
+        type:Sequelize.STRING
     },
     destination:{
-        type:Sequelize.INTEGER
+        type:Sequelize.STRING
     }
 }, {sequelize, underscored:true, timestamps:false});
 

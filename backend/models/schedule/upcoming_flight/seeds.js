@@ -2,8 +2,8 @@ module.exports = [
     {
         schedule_id:1,
         aircraft_id:1,
-        source:1,
-        destination:2,
+        source:"Mumbai",
+        destination:"Delhi",
         start_date:'03 May 2019',
         end_date:'03 May 2019 ',
         start_time:'6:30',
