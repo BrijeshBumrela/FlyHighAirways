@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 
 import "./style.css";
 
+import { Button } from 'antd';
+
 class DynamicForm extends React.Component {
   constructor() {
     super();
@@ -83,21 +85,21 @@ class DynamicForm extends React.Component {
           <div className="shareholder" key={idx}>
             <input
               type="text"
-              placeholder={`Passenger #${idx + 1} name`}
+              placeholder={`#${idx + 1} name`}
               value={Passenger.name}
               onChange={this.handlePassengerNameChange(idx)}
               style={{ backgroundColor: "white" }}
             />
             <input
               type="text"
-              placeholder={`Passenger #${idx + 1} Email`}
+              placeholder={`#${idx + 1} Email`}
               value={Passenger.email}
               onChange={this.handlePassengerEmailChange(idx)}
               style={{ backgroundColor: "white" }}
             />
             <input
               type="number"
-              placeholder={`Passenger #${idx + 1} age`}
+              placeholder={`#${idx + 1} age`}
               value={Passenger.age}
               onChange={this.handlePassengerAgeChange(idx)}
               style={{ backgroundColor: "white" }}
@@ -118,7 +120,7 @@ class DynamicForm extends React.Component {
         >
           Add Passenger
         </button>
-        <button
+        <Button
           type="primary"
           htmlType="submit"
           disabled={
@@ -130,7 +132,7 @@ class DynamicForm extends React.Component {
           }
         >
           Submit
-        </button>
+        </Button>
       </form>
     );
   }
