@@ -17,10 +17,13 @@ exports.getAllFlights = (req, res, next) => {
                     end_time: obj.end_time,
                     source: obj.source,
                     destination: obj.destination,
-                    price: obj.price,
+                    economy: {
+                        fare: obj.price,
+                        seats_remaining: 15
+                    }
                 }
             });
-            return res.status(200).json({flights: flights});
+            return res.status(200).json({flights: newFlights});
         }
     )
         .catch(err => {

@@ -22,7 +22,7 @@ class FlightSearch extends Component {
     loading: true,
     flights: [
       {
-        flight_id: 1,
+        id: 1,
         date: "21/04/2019",
         source: "Kolkata",
         destination: "Mumbai",
@@ -132,9 +132,10 @@ class FlightSearch extends Component {
 
   componentDidMount() {
     axios
-      .get("localhost:5000/flights")
+      .post("http://localhost:5000/flights/get_all_flights")
       .then(res => {
-        this.setState({ loading: false, flights: res.data });
+        console.log(res);
+        this.setState({ loading: false, flights: res.data.flights });
       })
       .catch(err => console.log("there was an ", err));
 

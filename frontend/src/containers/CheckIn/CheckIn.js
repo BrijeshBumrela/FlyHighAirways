@@ -10,75 +10,29 @@ import classes from './CheckIn.module.css';
 
 import SeatRow from '../../components/SeatRow/SeatRow';
 import Seat from '../../components/SeatRow/Seat/Seat';
+import axios from 'axios';
 
 class checkIn extends Component {
 
     state = {
         priceToPay: 0,
         visible: false,
-        seats: [
-            {
-                seat_number: '1A',
-                special: true,
-                is_booked: false
-            },
-            {
-                seat_number: '1B',
-                special: false,
-                is_booked: true
-            },
-            {
-                seat_number: '1C',
-                special: false,
-                is_booked: true
-            },
-            {
-                seat_number: '1D',
-                special: false,
-                is_booked: false
-            },
-            {
-                seat_number: '1E',
-                special: false,
-                is_booked: false
-            },
-            {
-                seat_number: '1F',
-                special: true,
-                is_booked: false
-            },
-            {
-                seat_number: '2A',
-                special: true,
-                is_booked: false
-            },
-            {
-                seat_number: '2B',
-                special: false,
-                is_booked: true
-            },
-            {
-                seat_number: '2C',
-                special: false,
-                is_booked: false
-            },
-            {
-                seat_number: '2D',
-                special: true,
-                is_booked: false
-            },
-            {
-                seat_number: '2E',
-                special: false,
-                is_booked: true
-            },
-            {
-                seat_number: '2F',
-                special: false,
-                is_booked: false
-            }
-        ]
+        seats: []
     }
+
+    componentDidMount() {
+        axios.post("http://localhost:5000/flights/get_seats/" , { flightNo: 1}, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => {
+            res.data.seats[3].is_booked = true; 
+            res.data.seats[8].is_booked = true;
+            res.data.seats[21].is_booked = true;
+            this.setState({ seats: res.data.seats.slice(0, 42) });
+        });
+    }   
 
     showModalCustom = (isBooked, isSpecial) => {
         if (isBooked) {
@@ -89,7 +43,7 @@ class checkIn extends Component {
             this.setState({ priceToPay: 300 }, this.showModal);
         }
         else {
-            this.setState({ priceToPay: 0 }, this.showModal);
+            this.setState({ priceToPay: 100 }, this.showModal);
         }
     }
 
