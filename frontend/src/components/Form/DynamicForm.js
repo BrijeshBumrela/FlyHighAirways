@@ -8,12 +8,18 @@ class DynamicForm extends React.Component {
     super();
     this.state = {
       name: "",
-      Passengers: [{ name: "" }]
+      Passengers: [{ name: "", age: "", email: "", sex: "" }]
     };
   }
 
   handleNameChange = evt => {
     this.setState({ name: evt.target.value });
+  };
+  handleEmailChange = evt => {
+    this.setState({ email: evt.target.value });
+  };
+  handleAgeChange = evt => {
+    this.setState({ age: evt.target.value });
   };
 
   handlePassengerNameChange = idx => evt => {
@@ -25,6 +31,22 @@ class DynamicForm extends React.Component {
     this.setState({ Passengers: newPassengers });
   };
 
+  handlePassengerEmailChange = idx => evt => {
+    const newPassengers = this.state.Passengers.map((Passenger, sidx) => {
+      if (idx !== sidx) return Passenger;
+      return { ...Passenger, email: evt.target.value };
+    });
+
+    this.setState({ Passengers: newPassengers });
+  };
+  handlePassengerAgeChange = idx => evt => {
+    const newPassengers = this.state.Passengers.map((Passenger, sidx) => {
+      if (idx !== sidx) return Passenger;
+      return { ...Passenger, age: evt.target.value };
+    });
+
+    this.setState({ Passengers: newPassengers });
+  };
   handleSubmit = e => {
     e.preventDefault();
 
@@ -36,7 +58,9 @@ class DynamicForm extends React.Component {
 
   handleAddPassenger = () => {
     this.setState({
-      Passengers: this.state.Passengers.concat([{ name: "" }])
+      Passengers: this.state.Passengers.concat([
+        { name: "", age: "", email: "", sex: "" }
+      ])
     });
     this.props.onAdd(this.state.Passengers.length);
   };
@@ -49,7 +73,7 @@ class DynamicForm extends React.Component {
   };
 
   render() {
-    console.log(this.state.Passengers[0].name);
+    console.log(this.state.Passengers);
 
     return (
       <form onSubmit={this.handleSubmit}>
@@ -62,6 +86,20 @@ class DynamicForm extends React.Component {
               placeholder={`Passenger #${idx + 1} name`}
               value={Passenger.name}
               onChange={this.handlePassengerNameChange(idx)}
+              style={{ backgroundColor: "white" }}
+            />
+            <input
+              type="text"
+              placeholder={`Passenger #${idx + 1} Email`}
+              value={Passenger.email}
+              onChange={this.handlePassengerEmailChange(idx)}
+              style={{ backgroundColor: "white" }}
+            />
+            <input
+              type="number"
+              placeholder={`Passenger #${idx + 1} age`}
+              value={Passenger.age}
+              onChange={this.handlePassengerAgeChange(idx)}
               style={{ backgroundColor: "white" }}
             />
             <button

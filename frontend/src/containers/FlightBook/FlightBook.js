@@ -165,9 +165,11 @@ class FlightBook extends Component {
                       lg={20}
                       // sm={24}
                       // xs={24}
-                      style={{
-                        padding: "15px 85px"
-                      }}
+                      style={
+                        {
+                          // padding: "15px 85px"
+                        }
+                      }
                     >
                       {/* <WrappedDynamicFieldSet 
                         onAdd={this.handleClick} 
