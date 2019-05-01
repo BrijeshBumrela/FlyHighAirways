@@ -55,8 +55,22 @@ class FlightBook extends Component {
     });
   }
 
-  showModal = Passengers => {
-    this.setState({ passengers: Passengers, visible: true })
+  showModal = passengers => {
+
+    console.log('former', passengers)
+
+    const newPassengers = [];
+
+    for (let passenger of passengers) {
+        const tempPassenger = {
+          fullName: passenger.name,
+          age: parseInt(passenger.age),
+          gender: 'M'
+        }
+        newPassengers.push(tempPassenger);
+    }
+
+    this.setState({ passengers: newPassengers, visible: true })
   };
 
   handleOk = e => {
@@ -82,7 +96,6 @@ class FlightBook extends Component {
 
   render() {
 
-    console.log('flight book props', this.props.selectedFlight)
 
     return (
       <React.Fragment>

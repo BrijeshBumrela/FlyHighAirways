@@ -27,8 +27,7 @@ class Paypal extends Component {
                 amount: parseInt(this.props.toPay)
             }
 
-            console.log(this.props.bookingData.auth.idToken);
-            console.log('makePaymentData', makePaymentData);
+
             axios.post('http://localhost:5000/book/make-payment', makePaymentData, {
                 headers: {
                     // 'Authorization': `Bearer ${this.props.bookingData.auth.idToken}`,
@@ -36,14 +35,27 @@ class Paypal extends Component {
                 }
             })
             .then(res => {
-                console.log(res);
 
                 const flightData = {
                     flightNumber: this.props.bookingData.id,
-                    passengers: this.props.passengers
+                    passengers: this.props.passengers,
+                    paymentReferenceKey: makePaymentData.referenceString,
+                    date: '2019-05-06'
                 }
 
-                axios.post('localhost:5000/book/book-flight', )
+                console.log(this.props.passengers);
+
+                axios.post('http://localhost:5000/book/book-flight', flightData, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(res => {
+                    console.log('book flight response',res.data);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
             })
 
             this.props.history.push('/')

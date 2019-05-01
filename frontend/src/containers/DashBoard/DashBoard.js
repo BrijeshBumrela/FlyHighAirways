@@ -107,7 +107,7 @@ class DashBoard extends Component {
                 <List
                   dataSource={[
                     {
-                      name: "Hello, Wilson"
+                      name: "Hello, User"
                     }
                   ]}
                   bordered
@@ -159,13 +159,13 @@ class DashBoard extends Component {
                     <Col span={12}>
                       <DescriptionItem
                         title="Full Name"
-                        content="wilson Patro"
+                        content="User Patro"
                       />{" "}
                     </Col>
                     <Col span={12}>
                       <DescriptionItem
                         title="Account"
-                        content="ronytowilson3097@gmail.com.com"
+                        content="tempuser3@gmail.com"
                       />
                     </Col>
                   </Row>
@@ -190,7 +190,7 @@ class DashBoard extends Component {
                     <Col span={12}>
                       <DescriptionItem
                         title="Email"
-                        content="ronytowilson3097@gmail.com"
+                        content="tempuser3@gmail.com"
                       />
                     </Col>
                     <Col span={12}>

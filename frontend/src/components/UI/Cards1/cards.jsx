@@ -44,7 +44,7 @@ class Cards1 extends Component {
               </div>
               <div style={{ padding: "5px", float: "left" }}>
                 <Button style={{ fontSize: "17px" }}>
-                  <NavLink className="nav-link">Cancel</NavLink>
+                  <NavLink to="/" className="nav-link">Cancel</NavLink>
                 </Button>
               </div>
             </React.Fragment>
