@@ -289,7 +289,7 @@ class AuthenticateForm extends Component {
           </div>
         )}
         <Button
-          size="small"
+          size="large"
           className={classes.switchBtn}
           onClick={this.switchAuthModeHandler}
         >
