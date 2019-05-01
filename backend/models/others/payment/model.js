@@ -18,12 +18,12 @@ Payment.init({
         type: Sequelize.INTEGER
     },
     amount:{
-        type:Sequelize.INTEGER
+        type:Sequelize.DOUBLE
     },
     checked:{
         type:Sequelize.BOOLEAN
     },
-    refund:{
+    refunded:{
         type:Sequelize.BOOLEAN
     },
     timestamp:{

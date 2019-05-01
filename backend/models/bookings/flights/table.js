@@ -3,7 +3,7 @@ module.exports = {
             CREATE TABLE IF NOT EXISTS flight_bookings (
             id SERIAL PRIMARY KEY,
             booker INT NOT NULL,
-            pnr_no SERIAL,
+            pnr_no VARCHAR(300),
             flight_no INT NOT NULL,
             amount DOUBLE PRECISION NOT NULL,
             status VARCHAR(20) NOT NULL,

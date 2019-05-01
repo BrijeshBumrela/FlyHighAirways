@@ -4,10 +4,11 @@ module.exports = {
             id SERIAL PRIMARY KEY,
             reference_string VARCHAR(50) NOT NULL,
             user_id INT NOT NULL,
-            amount BIGINT NOT NULL,
+            amount DOUBLE PRECISION NOT NULL,
             checked BOOLEAN DEFAULT FALSE,
-            refund BOOLEAN DEFAULT FALSE,
-            remarks VARCHAR(250)
+            refunded BOOLEAN DEFAULT FALSE,
+            remarks VARCHAR(250),
+            timestamp TIMESTAMP WITH TIME ZONE DEFAULT NOW()
             )
             `,
     exists: `

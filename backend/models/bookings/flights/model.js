@@ -12,14 +12,14 @@ FlightBooking.init({
         primaryKey: true
     },
     booker:{
-      type:Sequelize.INTEGER,
+      type:Sequelize.STRING,
     },
-    pnr_no:{
+    pnrNo:{
       type: Sequelize.INTEGER,
       // autoIncrement:true,
       allowNull:false
     },
-    flight_no:{
+    flightNo:{
         type:Sequelize.INTEGER
     },
     passengers:{
