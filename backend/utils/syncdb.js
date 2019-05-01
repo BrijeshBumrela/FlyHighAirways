@@ -23,10 +23,13 @@ const orderedModels = [
     models.aircraft.Aircraft,
 
     models.others.City,
+    models.others.Payment,
 
     models.schedule.Schedule,
     models.schedule.FlightLog,
-    models.schedule.UpcomingFlight
+    models.schedule.UpcomingFlight,
+
+    models.bookings.FlightBooking
 
 ];
 

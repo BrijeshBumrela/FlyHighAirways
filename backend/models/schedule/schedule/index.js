@@ -6,6 +6,7 @@ const constraints = require('./constraints');
 // const triggers = require('./triggers');
 // const procedures = require('./procedures');
 const methods = require('./methods');
+const queryWrappers = require('../../../utils/query-wrappers');
 
 
 Schedule.sqlCommands = {
