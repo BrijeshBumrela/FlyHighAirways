@@ -34,11 +34,20 @@ class Cards1 extends Component {
             >
               Scheduled
             </div>
-            <Button style={{ fontSize: "17px" }}>
-              <NavLink className="nav-link" to="/checkIn">
-                Check In
-              </NavLink>
-            </Button>
+            <React.Fragment>
+              <div style={{ padding: "5px", float: "left" }}>
+                <Button style={{ fontSize: "17px" }}>
+                  <NavLink className="nav-link" to="/checkIn">
+                    Check In
+                  </NavLink>
+                </Button>
+              </div>
+              <div style={{ padding: "5px", float: "left" }}>
+                <Button style={{ fontSize: "17px" }}>
+                  <NavLink className="nav-link">Cancel</NavLink>
+                </Button>
+              </div>
+            </React.Fragment>
           </div>
         ))
     );

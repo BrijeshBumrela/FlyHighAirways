@@ -9,19 +9,19 @@ function Footer() {
         <Row>
           <Col lg={4} sm={24} xs={24}>
             <div className={classes.footerCenter}>
-              <h2>G2</h2>
+              <h2>Get to Know Us</h2>
               <div>
                 <a target="_blank " href="#">
-                  Abc
+                  About Us
                 </a>
               </div>
               <div>
                 <a target="_blank " href="#">
-                  API Abc
+                  Destinations
                 </a>
               </div>
               <div>
-                <a href="#">Abc</a>
+                <a href="#">FAQ's</a>
               </div>
             </div>
           </Col>
