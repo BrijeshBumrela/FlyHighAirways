@@ -19,7 +19,7 @@ exports.getAllFlights = (req, res, next) => {
                     destination: obj.destination,
                     economy: {
                         fare: obj.price,
-                        seats_remaining: 15
+                        seats_remaining: 45
                     }
                 }
             });
